@@ -8,11 +8,7 @@ nothing to install ;)
 ## Usage
 
 ```xcode
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+xcrun build
 ```
 
 ## Contributing
