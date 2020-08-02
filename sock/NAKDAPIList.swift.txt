@@ -1,0 +1,33 @@
+//
+//  NAKDAPIList.swift
+//  sock
+//
+//  Created by Maarten Wittop Koning on 01/07/2020.
+//  Copyright © 2020 Olivier Wittop Koning. All rights reserved.
+
+import Foundation
+import Combine
+// vorige naam =NAAPIList niew naam =NAKDAPIList
+//{"img_url":"https://www.na-kd.com/resize/globalassets/nakd_flounce_thong_1013-000546-0002_01k.jpg?ref=5E7DD931BF&width=640","naam":"Flounce Thong","prijs":"7.95","url":"https://www.na-kd.com/nl"}
+
+struct NAKDAPIList: Decodable {
+    var results: [NAListEntry]
+    
+}
+
+struct NAListEntry :Decodable, Identifiable {
+    var id = UUID()
+    var img_url: String
+    var name: String
+    var prijs: String
+    var url : String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "982489489"
+        case img_url = "url"
+        case name = "Message"
+        case prijs = "SearchCriteria"
+        case url = "Results"
+    }
+    
+}
