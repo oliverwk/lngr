@@ -1,0 +1,7 @@
+name = "nkd_worker"
+type = "webpack"
+account_id = "cbb724b116816ca5057c13ed6d29d8a2"
+workers_dev = true
+route = ""
+zone_id = ""
+webpack_config = "webpack.config.js"

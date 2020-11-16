@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "name": "nkd_worker",
+  "version": "1.0.0",
+  "description": "A template for kick starting a Cloudflare Workers project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write '**/*.{js,css,json,md}'"
+  },
+  "author": "oliverwk <30601311+oliverwk@users.noreply.github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "jssoup": "0.0.12",
+    "webpack": "^5.4.0"
+  }
+}
