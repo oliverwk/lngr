@@ -1,6 +1,6 @@
 {
   "name": "nkd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a package for discovering nakd lingerie",
   "main": "index..js",
   "scripts": {
