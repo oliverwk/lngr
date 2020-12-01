@@ -28,7 +28,7 @@ import nkd from 'nkd';
 ```
 ##  Usage
 
-NOTE: The documentation below is up-to-date with node version 15.1 and may change in the future.
+NOTE: The documentation below is up-to-date with node 15.1
 ### JSON
 
 ```js
