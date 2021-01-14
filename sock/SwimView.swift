@@ -15,26 +15,23 @@ struct SwimView: View {
     @State private var showModal = false
     var body: some View {
         NavigationView {
-            
             VStack{
-            List(fetcher.movies) { movie in
+            List(fetcher.SwimWear) { movie in
                 NavigationLink(destination:
-                    VStack{ ModalView(img1:  movie.img_url.replacingOccurrences(of: "01j", with: "02i"), img:  movie.img_url.replacingOccurrences(of: "01j", with: "04k"), img_sec:  movie.img_url
-                    , name: movie.naam)}
+                    VStack{ ModalView(img1:  movie.img_url.replacingOccurrences(of: "01j", with: "02i"), img:  movie.img_url_sec, img_sec:  movie.img_url
+                        , name: movie.naam, price: movie.prijs )}
                     
                 ) {
                 VStack () {
                     URLImage(URL(string: movie.img_url)!, placeholder: Image("String"), content:  {
                        $0.image
                        .resizable()
-                       .aspectRatio(contentMode: .fill)
+                       .aspectRatio(contentMode: .fit)
                        .clipped()
+                       .padding(10)
                        .cornerRadius(20)
-                       .frame(width: 350.0, height: 350.0)
+                       .frame(width: 350.0, height: 510.0)
                    })
-                    //.onTapGesture {
-                    //    self.showModal.toggle()
-                      //             }
                    .cornerRadius(20)
                     .shadow(radius: 11)
                     .overlay(Text(movie.naam)
@@ -42,21 +39,17 @@ struct SwimView: View {
                         .fontWeight(.heavy)
                         .shadow(radius: 11)
                         .foregroundColor(Color.white))
+                        .autocapitalization(.sentences)
                    .overlay(Text(movie.prijs)
                         .font(.title)
-                    .padding(.bottom, 15.0)
+                    .padding(.bottom, 25.0)
                     .multilineTextAlignment(.center)
                     .shadow(radius: 11)
-                        .foregroundColor(Color.gray)
+                    .foregroundColor(.secondary)
                     .frame(maxHeight: .infinity, alignment: .bottom))
-                        
-                        
-                    .sheet(isPresented: self.$showModal) {
-                        Text(movie.img_url)
-                    }
-          
+                    .navigationBarTitle(Text("SwimWear"))
                 }
-            }.navigationBarTitle(Text("Slips"))
+            }
         }
     }
 }
@@ -64,7 +57,7 @@ struct SwimView: View {
 
 public class MovieFetcher: ObservableObject {
 
-    @Published var movies = [Linegerie]()
+    @Published var SwimWear = [Linegerie]()
     
     init(){
         load()
@@ -78,7 +71,7 @@ public class MovieFetcher: ObservableObject {
                 if let d = data {
                     let decodedLists = try JSONDecoder().decode([Linegerie].self, from: d)
                     DispatchQueue.main.async {
-                        self.movies = decodedLists
+                        self.SwimWear = decodedLists
                     }
                 }else {
                     print("No Data")
@@ -97,11 +90,13 @@ struct Linegerie: Codable, Identifiable {
     public var naam: String
     public var prijs: String
     public var img_url: String
+    public var img_url_sec: String
     
     enum CodingKeys: String, CodingKey {
            case naam = "naam"
            case prijs = "prijs"
            case img_url = "img_url"
+           case img_url_sec = "img_url_sec"
     }
 }
 

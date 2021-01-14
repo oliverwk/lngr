@@ -14,6 +14,21 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>MakeUppercase.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>lngr_shortcut.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>lngr_shortcutUI.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>ollen.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +43,24 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>E61DA79024AC83BD00079376</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E61DA7A624AC83CC00079376</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E61DA7B124AC83CC00079376</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

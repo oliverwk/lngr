@@ -19,16 +19,15 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.entertainment</string>
+	<string>public.app-category.lifestyle</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSFaceIDUsageDescription</key>
-	<string>For Face ID</string>
 	<key>NSSiriUsageDescription</key>
 	<string>"The app wil send nothing to siri"</string>
 	<key>NSUserActivityTypes</key>
 	<array>
-		<string>GetCheapestIntent</string>
+		<string>GetcheapestIntent</string>
+		<string>MakeUppercaseIntent</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

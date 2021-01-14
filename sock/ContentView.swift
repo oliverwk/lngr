@@ -10,6 +10,7 @@
 import Combine
 import SwiftUI
 
+
 struct ContentView: View {
     @State private var selection = 0
 
@@ -17,7 +18,7 @@ struct ContentView: View {
 
     var body: some View {
         TabView(selection: $selection){
-                SwimView()
+                 Lingerie()
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
@@ -26,7 +27,7 @@ struct ContentView: View {
                 }
                 .tag(0)
 
-        Lingerie()
+            SwimView()
            .tabItem {
                VStack {
                    Image(systemName: "rectangle.3.offgrid")

@@ -11,11 +11,10 @@ struct Lingerie: View {
         NavigationView {
             VStack{
             List(fetcher.movies) { movie in
-                
                 ZStack {
                     NavigationLink(destination:
-                        VStack{ ModalView(img1:  movie.img_url.replacingOccurrences(of: "01j", with: "02i"), img:  movie.img_url.replacingOccurrences(of: "01j", with: "04k"), img_sec:  movie.img_url
-                            , name: movie.naam)}
+                        VStack{ ModalView(img1:  movie.img_url.replacingOccurrences(of: "01j", with: "02i"), img:  movie.img_url_sec, img_sec:  movie.img_url
+                            , name: movie.naam, price: movie.prijs)}
                     ) {
                             VStack {
                             ZStack () {
@@ -25,10 +24,10 @@ struct Lingerie: View {
                                .aspectRatio(contentMode: .fit)
                                .clipped()
                                .cornerRadius(20)
-                                .frame(width: 345.0, height: 510.0)
+                               .frame(width: 345.0, height: 525.0)
                            })
                            .cornerRadius(20)
-                            .shadow(radius: 11)
+                            .shadow(radius: 5)
                             .overlay(Text(movie.naam)
                                 .font(.largeTitle)
                                 .fontWeight(.heavy)
@@ -36,17 +35,14 @@ struct Lingerie: View {
                                 .foregroundColor(Color.white))
                            .overlay(Text(movie.prijs)
                                 .font(.title)
-                            .multilineTextAlignment(.center)
-                            .shadow(radius: 11)
-                                .foregroundColor(Color.gray)
-                            .frame(maxHeight: .infinity, alignment: .bottom))
-
-                  EmptyView()
-                             .buttonStyle(PlainButtonStyle())
+                                .padding(.bottom, 25.0)
+                                 .shadow(radius: 11)
+                                .foregroundColor(.secondary)
+                                .frame(maxHeight: .infinity, alignment: .bottom))
                             }
                         }
-                    }.navigationBarTitle(Text("Slips"))
-                }
+                    }
+                }.navigationBarTitle(Text("Lingerie"))
         }
     }
 }
@@ -88,12 +84,14 @@ struct Movie: Codable, Identifiable {
     public var naam: String
     public var prijs: String
     public var img_url: String
+    public var img_url_sec: String
 
     
     enum CodingKeys: String, CodingKey {
            case naam = "naam"
            case prijs = "prijs"
            case img_url = "img_url"
+           case img_url_sec = "img_url_sec"
            
     }
 }

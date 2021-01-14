@@ -16,9 +16,19 @@
 		E61DA7AC24AC83CC00079376 /* sockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61DA7AB24AC83CC00079376 /* sockTests.swift */; };
 		E61DA7B724AC83CC00079376 /* sockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61DA7B624AC83CC00079376 /* sockUITests.swift */; };
 		E68FBCA324CC9BD6007F2802 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68FBCA224CC9BD6007F2802 /* ModalView.swift */; };
-		E6A8E15724AC9CB70068108E /* NetworkingManager.swift.txt in Sources */ = {isa = PBXBuildFile; fileRef = E6A8E15624AC9CB70068108E /* NetworkingManager.swift.txt */; };
-		E6A8E15924ACB3C00068108E /* NAKDAPIList.swift.txt in Sources */ = {isa = PBXBuildFile; fileRef = E6A8E15824ACB3C00068108E /* NAKDAPIList.swift.txt */; };
-		E6A9FE3024CAFF79004E4E48 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = E6A9FE2F24CAFF79004E4E48 /* URLImage */; };
+		E6A9FE3024CAFF79004E4E48 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = E6A9FE2F24CAFF79004E4E48 /* URLImage */; settings = {ATTRIBUTES = (Required, ); }; };
+		E6E98C8924EFEB5B00D15996 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E98C8824EFEB5B00D15996 /* IntentHandler.swift */; };
+		E6E98C9224EFEB5B00D15996 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E98C9124EFEB5B00D15996 /* IntentsUI.framework */; };
+		E6E98C9524EFEB5B00D15996 /* IntentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E98C9424EFEB5B00D15996 /* IntentViewController.swift */; };
+		E6E98C9824EFEB5B00D15996 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E98C9624EFEB5B00D15996 /* MainInterface.storyboard */; };
+		E6E98C9C24EFEB5B00D15996 /* lngr_shortcutUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6E98C8F24EFEB5B00D15996 /* lngr_shortcutUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E6E98C9F24EFEB5B00D15996 /* MakeUppercase.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6E98C8624EFEB5A00D15996 /* MakeUppercase.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E6E98CA724EFEB6B00D15996 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E98C8824EFEB5B00D15996 /* IntentHandler.swift */; };
+		E6E98CA924EFEC0B00D15996 /* MakeUppercase.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E6E98CA824EFEC0B00D15996 /* MakeUppercase.intentdefinition */; };
+		E6E98CAA24EFEC0B00D15996 /* MakeUppercase.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E6E98CA824EFEC0B00D15996 /* MakeUppercase.intentdefinition */; };
+		E6E98CAC24EFED8D00D15996 /* makeUppercaseHandelr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E98CAB24EFED8D00D15996 /* makeUppercaseHandelr.swift */; };
+		E6E98CAD24EFED8D00D15996 /* makeUppercaseHandelr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E98CAB24EFED8D00D15996 /* makeUppercaseHandelr.swift */; };
+		E6EC2E4825ADB2CC000A2732 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6EC2E4725ADB2CC000A2732 /* temp.swift */; };
 		E6F9BBED24CC4301005DBA61 /* Lingerie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9BBEC24CC4301005DBA61 /* Lingerie.swift */; };
 		E6F9BBEF24CC43AC005DBA61 /* SwimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F9BBEE24CC43AC005DBA61 /* SwimView.swift */; };
 /* End PBXBuildFile section */
@@ -38,15 +48,31 @@
 			remoteGlobalIDString = E61DA79024AC83BD00079376;
 			remoteInfo = sock;
 		};
+		E6E98C9A24EFEB5B00D15996 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E61DA78924AC83BD00079376 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6E98C8E24EFEB5B00D15996;
+			remoteInfo = lngr_shortcutUI;
+		};
+		E6E98C9D24EFEB5B00D15996 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E61DA78924AC83BD00079376 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6E98C8524EFEB5A00D15996;
+			remoteInfo = lngr_shortcut;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E6A8E17E24AD09210068108E /* Embed App Extensions */ = {
+		E6E98CA624EFEB5B00D15996 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				E6E98C9C24EFEB5B00D15996 /* lngr_shortcutUI.appex in Embed App Extensions */,
+				E6E98C9F24EFEB5B00D15996 /* MakeUppercase.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,9 +95,17 @@
 		E61DA7B624AC83CC00079376 /* sockUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sockUITests.swift; sourceTree = "<group>"; };
 		E61DA7B824AC83CC00079376 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E68FBCA224CC9BD6007F2802 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
-		E6A8E15624AC9CB70068108E /* NetworkingManager.swift.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = NetworkingManager.swift.txt; sourceTree = "<group>"; };
-		E6A8E15824ACB3C00068108E /* NAKDAPIList.swift.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = NAKDAPIList.swift.txt; sourceTree = "<group>"; };
-		E6BE9CDF24CC13E1002E7DF3 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		E6E98C8624EFEB5A00D15996 /* MakeUppercase.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MakeUppercase.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6E98C8824EFEB5B00D15996 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		E6E98C8A24EFEB5B00D15996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6E98C8F24EFEB5B00D15996 /* lngr_shortcutUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = lngr_shortcutUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6E98C9124EFEB5B00D15996 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		E6E98C9424EFEB5B00D15996 /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
+		E6E98C9724EFEB5B00D15996 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		E6E98C9924EFEB5B00D15996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6E98CA824EFEC0B00D15996 /* MakeUppercase.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = MakeUppercase.intentdefinition; sourceTree = "<group>"; };
+		E6E98CAB24EFED8D00D15996 /* makeUppercaseHandelr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = makeUppercaseHandelr.swift; sourceTree = "<group>"; };
+		E6EC2E4725ADB2CC000A2732 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
 		E6F121CB24D2A4A800752F76 /* lngr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = lngr.entitlements; sourceTree = "<group>"; };
 		E6F9BBEC24CC4301005DBA61 /* Lingerie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lingerie.swift; sourceTree = "<group>"; };
 		E6F9BBEE24CC43AC005DBA61 /* SwimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwimView.swift; sourceTree = "<group>"; };
@@ -100,6 +134,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6E98C8324EFEB5A00D15996 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E98C8C24EFEB5B00D15996 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6E98C9224EFEB5B00D15996 /* IntentsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -109,7 +158,9 @@
 				E61DA79324AC83BD00079376 /* sock */,
 				E61DA7AA24AC83CC00079376 /* sockTests */,
 				E61DA7B524AC83CC00079376 /* sockUITests */,
-				E6BE9CDE24CC13E1002E7DF3 /* Frameworks */,
+				E6E98C8724EFEB5A00D15996 /* MakeUppercase */,
+				E6E98C9324EFEB5B00D15996 /* lngr_shortcutUI */,
+				E6E98C9024EFEB5B00D15996 /* Frameworks */,
 				E61DA79224AC83BD00079376 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -120,6 +171,8 @@
 				E61DA79124AC83BD00079376 /* lngr.app */,
 				E61DA7A724AC83CC00079376 /* sockTests.xctest */,
 				E61DA7B224AC83CC00079376 /* sockUITests.xctest */,
+				E6E98C8624EFEB5A00D15996 /* MakeUppercase.appex */,
+				E6E98C8F24EFEB5B00D15996 /* lngr_shortcutUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,12 +183,11 @@
 				E6F121CB24D2A4A800752F76 /* lngr.entitlements */,
 				E61DA79424AC83BD00079376 /* AppDelegate.swift */,
 				E61DA79624AC83BD00079376 /* SceneDelegate.swift */,
-				E6A8E15824ACB3C00068108E /* NAKDAPIList.swift.txt */,
-				E6A8E15624AC9CB70068108E /* NetworkingManager.swift.txt */,
 				E68FBCA224CC9BD6007F2802 /* ModalView.swift */,
 				E6F9BBEE24CC43AC005DBA61 /* SwimView.swift */,
 				E61DA79824AC83BD00079376 /* ContentView.swift */,
 				E6F9BBEC24CC4301005DBA61 /* Lingerie.swift */,
+				E6EC2E4725ADB2CC000A2732 /* temp.swift */,
 				E61DA79A24AC83CB00079376 /* Assets.xcassets */,
 				E61DA79F24AC83CB00079376 /* LaunchScreen.storyboard */,
 				E61DA7A224AC83CB00079376 /* Info.plist */,
@@ -170,12 +222,33 @@
 			path = sockUITests;
 			sourceTree = "<group>";
 		};
-		E6BE9CDE24CC13E1002E7DF3 /* Frameworks */ = {
+		E6E98C8724EFEB5A00D15996 /* MakeUppercase */ = {
 			isa = PBXGroup;
 			children = (
-				E6BE9CDF24CC13E1002E7DF3 /* IntentsUI.framework */,
+				E6E98C8824EFEB5B00D15996 /* IntentHandler.swift */,
+				E6E98C8A24EFEB5B00D15996 /* Info.plist */,
+				E6E98CA824EFEC0B00D15996 /* MakeUppercase.intentdefinition */,
+				E6E98CAB24EFED8D00D15996 /* makeUppercaseHandelr.swift */,
+			);
+			path = MakeUppercase;
+			sourceTree = "<group>";
+		};
+		E6E98C9024EFEB5B00D15996 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6E98C9124EFEB5B00D15996 /* IntentsUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6E98C9324EFEB5B00D15996 /* lngr_shortcutUI */ = {
+			isa = PBXGroup;
+			children = (
+				E6E98C9424EFEB5B00D15996 /* IntentViewController.swift */,
+				E6E98C9624EFEB5B00D15996 /* MainInterface.storyboard */,
+				E6E98C9924EFEB5B00D15996 /* Info.plist */,
+			);
+			path = lngr_shortcutUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,11 +261,13 @@
 				E61DA78D24AC83BD00079376 /* Sources */,
 				E61DA78E24AC83BD00079376 /* Frameworks */,
 				E61DA78F24AC83BD00079376 /* Resources */,
-				E6A8E17E24AD09210068108E /* Embed App Extensions */,
+				E6E98CA624EFEB5B00D15996 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E6E98C9B24EFEB5B00D15996 /* PBXTargetDependency */,
+				E6E98C9E24EFEB5B00D15996 /* PBXTargetDependency */,
 			);
 			name = sock;
 			packageProductDependencies = (
@@ -238,6 +313,40 @@
 			productReference = E61DA7B224AC83CC00079376 /* sockUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		E6E98C8524EFEB5A00D15996 /* MakeUppercase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6E98CA324EFEB5B00D15996 /* Build configuration list for PBXNativeTarget "MakeUppercase" */;
+			buildPhases = (
+				E6E98C8224EFEB5A00D15996 /* Sources */,
+				E6E98C8324EFEB5A00D15996 /* Frameworks */,
+				E6E98C8424EFEB5A00D15996 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MakeUppercase;
+			productName = lngr_shortcut;
+			productReference = E6E98C8624EFEB5A00D15996 /* MakeUppercase.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E6E98C8E24EFEB5B00D15996 /* lngr_shortcutUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6E98CA024EFEB5B00D15996 /* Build configuration list for PBXNativeTarget "lngr_shortcutUI" */;
+			buildPhases = (
+				E6E98C8B24EFEB5B00D15996 /* Sources */,
+				E6E98C8C24EFEB5B00D15996 /* Frameworks */,
+				E6E98C8D24EFEB5B00D15996 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lngr_shortcutUI;
+			productName = lngr_shortcutUI;
+			productReference = E6E98C8F24EFEB5B00D15996 /* lngr_shortcutUI.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -258,6 +367,12 @@
 					E61DA7B124AC83CC00079376 = {
 						CreatedOnToolsVersion = 11.4.1;
 						TestTargetID = E61DA79024AC83BD00079376;
+					};
+					E6E98C8524EFEB5A00D15996 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					E6E98C8E24EFEB5B00D15996 = {
+						CreatedOnToolsVersion = 11.6;
 					};
 				};
 			};
@@ -280,6 +395,8 @@
 				E61DA79024AC83BD00079376 /* sock */,
 				E61DA7A624AC83CC00079376 /* sockTests */,
 				E61DA7B124AC83CC00079376 /* sockUITests */,
+				E6E98C8524EFEB5A00D15996 /* MakeUppercase */,
+				E6E98C8E24EFEB5B00D15996 /* lngr_shortcutUI */,
 			);
 		};
 /* End PBXProject section */
@@ -309,6 +426,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6E98C8424EFEB5A00D15996 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E98C8D24EFEB5B00D15996 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6E98C9824EFEB5B00D15996 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -317,13 +449,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6F9BBED24CC4301005DBA61 /* Lingerie.swift in Sources */,
-				E6A8E15924ACB3C00068108E /* NAKDAPIList.swift.txt in Sources */,
+				E6E98CA724EFEB6B00D15996 /* IntentHandler.swift in Sources */,
+				E6E98CAC24EFED8D00D15996 /* makeUppercaseHandelr.swift in Sources */,
 				E68FBCA324CC9BD6007F2802 /* ModalView.swift in Sources */,
 				E61DA79524AC83BD00079376 /* AppDelegate.swift in Sources */,
+				E6E98CA924EFEC0B00D15996 /* MakeUppercase.intentdefinition in Sources */,
 				E6F9BBEF24CC43AC005DBA61 /* SwimView.swift in Sources */,
 				E61DA79724AC83BD00079376 /* SceneDelegate.swift in Sources */,
 				E61DA79924AC83BD00079376 /* ContentView.swift in Sources */,
-				E6A8E15724AC9CB70068108E /* NetworkingManager.swift.txt in Sources */,
+				E6EC2E4825ADB2CC000A2732 /* temp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +477,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6E98C8224EFEB5A00D15996 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6E98C8924EFEB5B00D15996 /* IntentHandler.swift in Sources */,
+				E6E98CAD24EFED8D00D15996 /* makeUppercaseHandelr.swift in Sources */,
+				E6E98CAA24EFEC0B00D15996 /* MakeUppercase.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E98C8B24EFEB5B00D15996 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6E98C9524EFEB5B00D15996 /* IntentViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -356,6 +508,16 @@
 			target = E61DA79024AC83BD00079376 /* sock */;
 			targetProxy = E61DA7B324AC83CC00079376 /* PBXContainerItemProxy */;
 		};
+		E6E98C9B24EFEB5B00D15996 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6E98C8E24EFEB5B00D15996 /* lngr_shortcutUI */;
+			targetProxy = E6E98C9A24EFEB5B00D15996 /* PBXContainerItemProxy */;
+		};
+		E6E98C9E24EFEB5B00D15996 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6E98C8524EFEB5A00D15996 /* MakeUppercase */;
+			targetProxy = E6E98C9D24EFEB5B00D15996 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -365,6 +527,14 @@
 				E61DA7A024AC83CB00079376 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E6E98C9624EFEB5B00D15996 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6E98C9724EFEB5B00D15996 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -420,13 +590,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -474,12 +645,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -495,14 +667,15 @@
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = sock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.sock;
 				PRODUCT_NAME = lngr;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -519,14 +692,15 @@
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = sock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.sock;
 				PRODUCT_NAME = lngr;
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -616,6 +790,84 @@
 			};
 			name = Release;
 		};
+		E6E98CA124EFEB5B00D15996 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = lngr_shortcutUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.wittopkoning.sock.lngr-shortcutUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E6E98CA224EFEB5B00D15996 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = lngr_shortcutUI/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.wittopkoning.sock.lngr-shortcutUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E6E98CA424EFEB5B00D15996 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = MakeUppercase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.sock.MakeUppercase;
+				PRODUCT_NAME = MakeUppercase;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E6E98CA524EFEB5B00D15996 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = MakeUppercase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.sock.MakeUppercase;
+				PRODUCT_NAME = MakeUppercase;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -655,6 +907,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E6E98CA024EFEB5B00D15996 /* Build configuration list for PBXNativeTarget "lngr_shortcutUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6E98CA124EFEB5B00D15996 /* Debug */,
+				E6E98CA224EFEB5B00D15996 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6E98CA324EFEB5B00D15996 /* Build configuration list for PBXNativeTarget "MakeUppercase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6E98CA424EFEB5B00D15996 /* Debug */,
+				E6E98CA524EFEB5B00D15996 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -662,8 +932,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
