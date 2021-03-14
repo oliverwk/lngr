@@ -1,0 +1,43 @@
+//
+//  ContentView.swift
+//  Shared
+//
+//  Created by Maarten Wittop Koning on 04/03/2021.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        Text("Hello, world!")
+            .padding()
+        VStack {
+        ZStack () {
+            RemoteImage(url: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg")
+           .aspectRatio(contentMode: .fit)
+           .clipped()
+           .cornerRadius(20)
+           .frame(width: 345.0, height: 525.0)
+       .cornerRadius(20)
+        .shadow(radius: 5)
+        .overlay(Text("Klassiek Katoenen String")
+            .font(.largeTitle)
+            .fontWeight(.heavy)
+            .shadow(radius: 11)
+            .foregroundColor(Color.white))
+       .overlay(Text("5.95")
+            .font(.title)
+            .padding(.bottom, 25.0)
+             .shadow(radius: 11)
+            .foregroundColor(.secondary)
+            .frame(maxHeight: .infinity, alignment: .bottom))
+        }
+    }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}

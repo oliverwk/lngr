@@ -1,0 +1,124 @@
+//
+//  LinkView.swift
+//  lngr
+//
+//  Created by Olivier Wittop Koning on 05/03/2021.
+//
+
+import SwiftUI
+import Combine
+
+class Index: ObservableObject {
+    @Published var i: Int = 1
+    
+    func add() {
+        if self.i + 1 >= 3 {
+            DispatchQueue.main.async {
+                self.i = 0
+                print(self.i)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.i += 1
+                print(self.i)
+            }
+        }
+    }
+}
+struct LinkView: View {
+    let lingerie: Lingerie
+    @ObservedObject private var index = Index()
+    var body: some View {
+        VStack {
+            LinkRemoteImage(imageUrls: lingerie.imageUrls)
+                .aspectRatio(contentMode: .fit)
+                .clipped()
+                .cornerRadius(5)
+                .padding(10)
+                .onTapGesture {
+                    index.add()
+                }
+            Text(String(lingerie.prijs))
+                .padding(.bottom, 10.0)
+                .foregroundColor(.secondary)
+        }.navigationBarTitle(Text(lingerie.naam), displayMode: .inline)
+    }
+}
+
+struct LinkView_Previews: PreviewProvider {
+    static var previews: some View {
+        LinkView(lingerie: Lingerie(naam: "Klassiek Katoenen String", prijs: 69.95, img_url:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg", img_url_sec:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg",imageUrls: [
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg?width=640",
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
+        ]))
+        .preferredColorScheme(.light)
+        .previewDevice("iPhone 8")
+        
+    }
+}
+
+
+struct LinkRemoteImage: View {
+    
+    private enum LoadState {
+        case loading, success, failure
+    }
+    
+    private class Loader: ObservableObject {
+        var data = Data()
+        var state = LoadState.loading
+        
+        init(url: String) {
+            guard let parsedURL = URL(string: url) else {
+                fatalError("Invalid URL: \(url)")
+            }
+            
+            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
+                if let data = data, data.count > 0 {
+                    self.data = data
+                    self.state = .success
+                } else {
+                    self.state = .failure
+                }
+                
+                DispatchQueue.main.async {
+                    self.objectWillChange.send()
+                }
+            }.resume()
+        }
+    }
+    
+    @StateObject private var loader: Loader
+    @State private var index = Index()
+    var loading: Image
+    var failure: Image
+    
+    var body: some View {
+        selectImage()
+            .resizable()
+    }
+    
+    init(imageUrls: [String]) {
+        var theUrl = imageUrls[index.i]
+        _loader = StateObject(wrappedValue: Loader(url: theUrl))
+        self.loading = Image("04k")
+        self.failure = Image(systemName: "multiply.circle")
+    }
+    
+    private func selectImage() -> Image {
+        switch loader.state {
+        case .loading:
+            return loading
+        case .failure:
+            return failure
+        default:
+            if let image = UIImage(data: loader.data) {
+                return Image(uiImage: image)
+            } else {
+                return failure
+            }
+        }
+    }
+}
