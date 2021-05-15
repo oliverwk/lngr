@@ -13,26 +13,26 @@
 		E6077B8925F175CD00F6F951 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6077B7425F175B800F6F951 /* ContentView.swift */; };
 		E6077B8A25F175CD00F6F951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6077B7525F175CC00F6F951 /* Assets.xcassets */; };
 		E6077B8B25F175CD00F6F951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6077B7525F175CC00F6F951 /* Assets.xcassets */; };
-		E6160A372650585D003E23AD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D525F3D5D200C9DD32 /* WidgetKit.framework */; };
-		E6160A382650585D003E23AD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D725F3D5D200C9DD32 /* SwiftUI.framework */; };
-		E6160A3B2650585D003E23AD /* vacinnWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6160A3A2650585D003E23AD /* vacinnWidget.swift */; };
-		E6160A3D26505879003E23AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6160A3C26505879003E23AD /* Assets.xcassets */; };
-		E6160A4126505879003E23AD /* vacinnWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6160A362650585D003E23AD /* vacinnWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E64DD17325F1843C00284803 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* RemoteImage.swift */; };
 		E64DD17425F1843C00284803 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* RemoteImage.swift */; };
 		E64DD18E25F22A1000284803 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LinkView.swift */; };
 		E64DD18F25F22A1000284803 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LinkView.swift */; };
+		E6B52B81265061BC006DAB5C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D525F3D5D200C9DD32 /* WidgetKit.framework */; };
+		E6B52B82265061BC006DAB5C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D725F3D5D200C9DD32 /* SwiftUI.framework */; };
+		E6B52B85265061BD006DAB5C /* rivmWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B52B84265061BD006DAB5C /* rivmWidget.swift */; };
+		E6B52B87265061C7006DAB5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6B52B86265061C7006DAB5C /* Assets.xcassets */; };
+		E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6D2A15425F373100007EC2D /* Lingeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D2A15325F373100007EC2D /* Lingeries.swift */; };
 		E6D2A15525F373100007EC2D /* Lingeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D2A15325F373100007EC2D /* Lingeries.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E6160A3F26505879003E23AD /* PBXContainerItemProxy */ = {
+		E6B52B89265061C7006DAB5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E6077B6E25F175B800F6F951 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E6160A352650585D003E23AD;
-			remoteInfo = vacinnWidgetExtension;
+			remoteGlobalIDString = E6B52B7F265061BC006DAB5C;
+			remoteInfo = rivmWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -43,7 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E6160A4126505879003E23AD /* vacinnWidgetExtension.appex in Embed App Extensions */,
+				E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,16 +59,16 @@
 		E6077B8225F175CD00F6F951 /* lngr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lngr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6077B8425F175CD00F6F951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6077B8525F175CD00F6F951 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		E6160A362650585D003E23AD /* vacinnWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = vacinnWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6160A3A2650585D003E23AD /* vacinnWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vacinnWidget.swift; sourceTree = "<group>"; };
-		E6160A3C26505879003E23AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E6160A3E26505879003E23AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* RemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		E68170D525F3D5D200C9DD32 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E68170D725F3D5D200C9DD32 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		E68B5E95260490F700385A7E /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		E68B5EB32604912800385A7E /* IntentHandler.swift.old */ = {isa = PBXFileReference; lastKnownFileType = text; path = IntentHandler.swift.old; sourceTree = "<group>"; };
+		E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = rivmWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6B52B84265061BD006DAB5C /* rivmWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rivmWidget.swift; sourceTree = "<group>"; };
+		E6B52B86265061C7006DAB5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E6B52B88265061C7006DAB5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6D2A15325F373100007EC2D /* Lingeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lingeries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,12 +87,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6160A332650585D003E23AD /* Frameworks */ = {
+		E6B52B7D265061BC006DAB5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6160A382650585D003E23AD /* SwiftUI.framework in Frameworks */,
-				E6160A372650585D003E23AD /* WidgetKit.framework in Frameworks */,
+				E6B52B82265061BC006DAB5C /* SwiftUI.framework in Frameworks */,
+				E6B52B81265061BC006DAB5C /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +105,7 @@
 				E6077B7225F175B800F6F951 /* Shared */,
 				E6077B7C25F175CD00F6F951 /* iOS */,
 				E6077B8325F175CD00F6F951 /* macOS */,
-				E6160A392650585D003E23AD /* vacinnWidget */,
+				E6B52B83265061BD006DAB5C /* rivmWidget */,
 				E68170D425F3D5D200C9DD32 /* Frameworks */,
 				E6077B7B25F175CD00F6F951 /* Products */,
 			);
@@ -130,7 +130,7 @@
 			children = (
 				E6077B7A25F175CD00F6F951 /* lngr.app */,
 				E6077B8225F175CD00F6F951 /* lngr.app */,
-				E6160A362650585D003E23AD /* vacinnWidgetExtension.appex */,
+				E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,16 +152,6 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		E6160A392650585D003E23AD /* vacinnWidget */ = {
-			isa = PBXGroup;
-			children = (
-				E6160A3A2650585D003E23AD /* vacinnWidget.swift */,
-				E6160A3C26505879003E23AD /* Assets.xcassets */,
-				E6160A3E26505879003E23AD /* Info.plist */,
-			);
-			path = vacinnWidget;
-			sourceTree = "<group>";
-		};
 		E68170D425F3D5D200C9DD32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +160,16 @@
 				E68B5E95260490F700385A7E /* Intents.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6B52B83265061BD006DAB5C /* rivmWidget */ = {
+			isa = PBXGroup;
+			children = (
+				E6B52B84265061BD006DAB5C /* rivmWidget.swift */,
+				E6B52B86265061C7006DAB5C /* Assets.xcassets */,
+				E6B52B88265061C7006DAB5C /* Info.plist */,
+			);
+			path = rivmWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +187,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E6160A4026505879003E23AD /* PBXTargetDependency */,
+				E6B52B8A265061C7006DAB5C /* PBXTargetDependency */,
 			);
 			name = "lngr (iOS)";
 			productName = "lngr (iOS)";
@@ -211,21 +211,21 @@
 			productReference = E6077B8225F175CD00F6F951 /* lngr.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E6160A352650585D003E23AD /* vacinnWidgetExtension */ = {
+		E6B52B7F265061BC006DAB5C /* rivmWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6160A4426505879003E23AD /* Build configuration list for PBXNativeTarget "vacinnWidgetExtension" */;
+			buildConfigurationList = E6B52B8C265061C7006DAB5C /* Build configuration list for PBXNativeTarget "rivmWidgetExtension" */;
 			buildPhases = (
-				E6160A322650585D003E23AD /* Sources */,
-				E6160A332650585D003E23AD /* Frameworks */,
-				E6160A342650585D003E23AD /* Resources */,
+				E6B52B7C265061BC006DAB5C /* Sources */,
+				E6B52B7D265061BC006DAB5C /* Frameworks */,
+				E6B52B7E265061BC006DAB5C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = vacinnWidgetExtension;
-			productName = vacinnWidgetExtension;
-			productReference = E6160A362650585D003E23AD /* vacinnWidgetExtension.appex */;
+			name = rivmWidgetExtension;
+			productName = rivmWidgetExtension;
+			productReference = E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -243,7 +243,7 @@
 					E6077B8125F175CD00F6F951 = {
 						CreatedOnToolsVersion = 12.3;
 					};
-					E6160A352650585D003E23AD = {
+					E6B52B7F265061BC006DAB5C = {
 						CreatedOnToolsVersion = 12.5;
 					};
 				};
@@ -263,7 +263,7 @@
 			targets = (
 				E6077B7925F175CC00F6F951 /* lngr (iOS) */,
 				E6077B8125F175CD00F6F951 /* lngr (macOS) */,
-				E6160A352650585D003E23AD /* vacinnWidgetExtension */,
+				E6B52B7F265061BC006DAB5C /* rivmWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -285,11 +285,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6160A342650585D003E23AD /* Resources */ = {
+		E6B52B7E265061BC006DAB5C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6160A3D26505879003E23AD /* Assets.xcassets in Resources */,
+				E6B52B87265061C7006DAB5C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,21 +320,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E6160A322650585D003E23AD /* Sources */ = {
+		E6B52B7C265061BC006DAB5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6160A3B2650585D003E23AD /* vacinnWidget.swift in Sources */,
+				E6B52B85265061BD006DAB5C /* rivmWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E6160A4026505879003E23AD /* PBXTargetDependency */ = {
+		E6B52B8A265061C7006DAB5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E6160A352650585D003E23AD /* vacinnWidgetExtension */;
-			targetProxy = E6160A3F26505879003E23AD /* PBXContainerItemProxy */;
+			target = E6B52B7F265061BC006DAB5C /* rivmWidgetExtension */;
+			targetProxy = E6B52B89265061C7006DAB5C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -549,21 +549,21 @@
 			};
 			name = Release;
 		};
-		E6160A4226505879003E23AD /* Debug */ = {
+		E6B52B8D265061C7006DAB5C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
-				INFOPLIST_FILE = vacinnWidget/Info.plist;
+				INFOPLIST_FILE = rivmWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.vacinnWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.rivmWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -572,21 +572,21 @@
 			};
 			name = Debug;
 		};
-		E6160A4326505879003E23AD /* Release */ = {
+		E6B52B8E265061C7006DAB5C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
-				INFOPLIST_FILE = vacinnWidget/Info.plist;
+				INFOPLIST_FILE = rivmWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.vacinnWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.rivmWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -626,11 +626,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6160A4426505879003E23AD /* Build configuration list for PBXNativeTarget "vacinnWidgetExtension" */ = {
+		E6B52B8C265061C7006DAB5C /* Build configuration list for PBXNativeTarget "rivmWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E6160A4226505879003E23AD /* Debug */,
-				E6160A4326505879003E23AD /* Release */,
+				E6B52B8D265061C7006DAB5C /* Debug */,
+				E6B52B8E265061C7006DAB5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
