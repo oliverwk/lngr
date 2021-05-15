@@ -1,8 +1,8 @@
 //
-//  Lingeries.swift
+//  lngr-old.swift
 //  lngr
 //
-//  Created by Olivier Wittop Koning on 05/03/2021.
+//  Created by Olivier Wittop Koning on 21/04/2021.
 //
 
 import SwiftUI
@@ -19,7 +19,6 @@ struct Lingeries: View {
         self.title = title
         _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!) )
     }
-    
     let locale = Locale.current
     
     var body: some View {
@@ -51,7 +50,6 @@ struct Lingeries: View {
             }.navigationBarTitle(Text(title))
         }.navigationViewStyle(StackNavigationViewStyle())
     }
-    
 }
 
 
@@ -79,7 +77,6 @@ public class LingerieFetcher: ObservableObject {
                 self.simpleError()
                 print("Error while decoding the json", error)
             }
-            
         }.resume()
     }
 }

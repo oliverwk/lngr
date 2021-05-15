@@ -8,8 +8,6 @@
 import SwiftUI
 import Combine
 
-
-
 struct LinkView: View {
     let lingerie: Lingerie
     let locale = Locale.current
@@ -28,49 +26,62 @@ struct LinkView: View {
                 .cornerRadius(5)
                 .padding(10)
                 .animation(.easeInOut)
-                .onTapGesture {
-                    ImageFetcher.index += 1
-                    ImageFetcher.load()
-                }
+                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                            .onEnded({ value in
+                                if value.translation.width < 0 {
+                                    // left
+                                    ImageFetcher.index -= 1
+                                    ImageFetcher.load()
+                                } else if value.translation.width > 0 {
+                                    // right
+                                    ImageFetcher.index += 1
+                                    ImageFetcher.load()
+                                } else {
+                                    ImageFetcher.index += 1
+                                    ImageFetcher.load()
+                                }
+                            }))
             Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                 .padding(.bottom, 10.0)
                 .foregroundColor(.secondary)
         }.navigationBarTitle(Text(lingerie.naam), displayMode: .inline)
     }
-}
-
-public class ImageFetchers: ObservableObject {
-    @Published var index: Int = 1
-    @Published var images: Image = Image("04k")
-    var TheImageUrls: [String]
     
-    public func 🚫() {
-        let genarator = UINotificationFeedbackGenerator()
-        genarator.notificationOccurred(.error)
-    }
-    
-    init(ImageUrls: [String]) {
-        self.TheImageUrls = ImageUrls
-        load()
-    }
-    
-    func load() {
-        if self.index >= TheImageUrls.count {
-                self.index = 0
+    public class ImageFetchers: ObservableObject {
+        @Published var index: Int = 1
+        @Published var images: Image = Image("04k")
+        var TheImageUrls: [String]
+        
+        public func 🚫() {
+            let genarator = UINotificationFeedbackGenerator()
+            genarator.notificationOccurred(.error)
         }
-        //print("\(self.index) >= \(TheImageUrls.count):", self.index >= TheImageUrls.count)
-        URLSession.shared.dataTask(with: URL(string: self.TheImageUrls[index])! ) {(data, response, error) in
-            if let image = UIImage(data: data!) {
-                DispatchQueue.main.async {
-                    self.images = Image(uiImage: image)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.🚫()
-                    self.images = Image(systemName: "multiply.circle")
-                }
+        
+        init(ImageUrls: [String]) {
+            self.TheImageUrls = ImageUrls
+            load()
+        }
+        
+        func load() {
+            if self.index >= TheImageUrls.count {
+                self.index = 0
+            } else if self.index <= -1 {
+                self.index = TheImageUrls.count - 1
             }
-        }.resume()
+            print("\(self.index) >= \(TheImageUrls.count):", self.index >= TheImageUrls.count)
+            URLSession.shared.dataTask(with: URL(string: self.TheImageUrls[index])! ) {(data, response, error) in
+                if let image = UIImage(data: data!) {
+                    DispatchQueue.main.async {
+                        self.images = Image(uiImage: image)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.🚫()
+                        self.images = Image(systemName: "multiply.circle")
+                    }
+                }
+            }.resume()
+        }
     }
 }
 
