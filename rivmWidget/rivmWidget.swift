@@ -85,13 +85,11 @@ div[color=\\"data.primary\\"]
             var components = DateComponents()
             components.hour = 15
             components.minute = 25
-            let drieUur = Calendar.current.date(from: components)
+            let drieUur = Calendar.current.date(from: components)!
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)
             print("TheVacinn:", theVacinn)
             entries.append(entry)
-            let timeline = Timeline(entries: entries, policy: .after(drieUur))
-            
-            //let timeline = Timeline(entries: entries, policy: .after(date: Date))
+            let timeline = Timeline(entries: entries, policy: .after(drieUur ?? Date())
             completion(timeline)
         }
     }
@@ -121,7 +119,7 @@ struct vacinnWidget: Widget {
             vacinnWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("vacinn watcher")
-        .description("Watch your lingerie right from your homescreen with the new lngr widget.")
+        .description("Watch the vacinns from your homescreen with the new vacinn widget.")
         .supportedFamilies([.systemSmall])
     }
 }
@@ -130,6 +128,6 @@ struct vacinnWidget_Previews: PreviewProvider {
     static var previews: some View {
         vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn: OneVacinn))
             .previewContext(WidgetPreviewContext(family: .systemSmall)).preferredColorScheme(.light)
-            .previewDevice("iPhone 8")
+            .previewDevice("iPhone 7")
     }
 }
