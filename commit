@@ -1,5 +1,5 @@
 git add .
-git commit -m "Added widgets"
+git commit -m "Added widgets at"
 git branch -M main
 git remote add origin https://github.com/oliverwk/lngr.git
 git push -u origin main

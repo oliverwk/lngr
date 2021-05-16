@@ -1,0 +1,48 @@
+//
+//  lngrApp.swift
+//  Shared
+//
+//  Created by Maarten Wittop Koning on 04/03/2021.
+//
+
+import SwiftUI
+@main
+struct Quick_ActionsApp: App {
+    @Environment(\.scenePhase) var phase
+    
+    var body: some Scene {
+        WindowGroup {
+            ListView()
+        }
+        .onChange(of: phase) { (newPhase) in
+            switch newPhase {
+            case .active :
+                print("App in active")
+            case .inactive:
+                 print("App is inactive")
+            case .background:
+                print("App in Back ground")
+                addQuickActions() // add quick action when app is going to background
+            @unknown default:
+                print("default")
+            }
+        }
+    }
+   
+    func addQuickActions() {
+        UIApplication.shared.shortcutItems = [
+            UIApplicationShortcutItem(type: "Call", localizedTitle: "Call"),
+            UIApplicationShortcutItem(type: "Chat", localizedTitle: "Chat"),
+            UIApplicationShortcutItem(type: "Status", localizedTitle: "Status"),
+            UIApplicationShortcutItem(type: "Contacts", localizedTitle: "Contacts"),
+        ]
+    }
+}
+@main
+struct lngrApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}

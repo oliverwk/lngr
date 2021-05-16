@@ -89,7 +89,7 @@ div[color=\\"data.primary\\"]
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)
             print("TheVacinn:", theVacinn)
             entries.append(entry)
-            let timeline = Timeline(entries: entries, policy: .after(drieUur ?? Date()))
+            let timeline = Timeline(entries: entries, policy: .after(drieUur))
             completion(timeline)
         }
     }
