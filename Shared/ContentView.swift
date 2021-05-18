@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  sock
 //
-//  Created by Maarten Wittop Koning on 09/05/2020.
+//  Created by Olivier Wittop Koning on 09/05/2020.
 //  Copyright © 2020 Olivier Wittop Koning. All rights reserved.
 //
 

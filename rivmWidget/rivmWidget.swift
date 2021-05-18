@@ -9,6 +9,11 @@
 import WidgetKit
 import SwiftUI
 import Combine
+import os.log
+let logger = Logger(
+    subsystem: "nl.wittopkoning.lngr.rivmWidget",
+    category: "rivmWidget"
+)
 
 let OneVacinn = Vacinn(result: Selector(res: ["0","0","0"]))
 
@@ -42,7 +47,7 @@ div[color=\\"data.primary\\"]
             
             //Parsing the json here
             guard error == nil, let content = data else {
-                print("[ERROR] Error getting data from API")
+                logger.fault("[ERROR] Error getting data from API")
                 let response = OneVacinn
                 completion?(response)
                 return
@@ -50,21 +55,21 @@ div[color=\\"data.primary\\"]
             let str = String(decoding: content, as: UTF8.self)
             let json = str.replacingOccurrences(of: theSelctor, with: "vacs")
             let jsonData: Data =  Data(json.utf8)
-            print("[LOG] Parsing json from the data \(json as Any)")
+            logger.debug("[LOG] Parsing json from the data \(json as Any)")
             
             let lngrApiResponse: Vacinn
             do {
                 lngrApiResponse = try JSONDecoder().decode(Vacinn.self, from: jsonData)
-                print("[LOG] Parsing json from data")
+                logger.fault("[LOG] Parsing json from data")
             } catch {
-                print("[ERROR] Error parsing json from data")
+                logger.fault("[ERROR] Error parsing json from data")
                 let response = OneVacinn
                 completion?(response)
                 return
             }
             completion?(lngrApiResponse)
         }
-        print("[LOG] Making the network requests")
+        logger.info("[LOG] Making the network requests")
         task.resume()
     }
     
@@ -78,7 +83,7 @@ div[color=\\"data.primary\\"]
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        print("[LOG] Making the timeline")
+        logger.info("[LOG] Making the timeline")
         Provider.getTheData() { theVacinn in
             var entries: [VacinnEntry] = []
             var entry: VacinnEntry
@@ -87,7 +92,7 @@ div[color=\\"data.primary\\"]
             components.minute = 25
             let drieUur = Calendar.current.date(from: components)!
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)
-            print("TheVacinn:", theVacinn)
+            logger.debug("TheVacinn:", theVacinn)
             entries.append(entry)
             let timeline = Timeline(entries: entries, policy: .after(drieUur))
             completion(timeline)
@@ -113,12 +118,12 @@ struct vacinnWidgetEntryView : View {
 
 @main
 struct vacinnWidget: Widget {
-    let kind: String = "vacinnWidget"
+    let kind: String = "rivmWidget"
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             vacinnWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("vacinn watcher")
+        .configurationDisplayName("Vacinn Watcher")
         .description("Watch the vacinns from your homescreen with the new vacinn widget.")
         .supportedFamilies([.systemSmall])
     }

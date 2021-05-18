@@ -54,6 +54,10 @@ struct Lingeries: View {
 
 
 public class LingerieFetcher: ObservableObject {
+    private let logger = Logger(
+        subsystem: "nl.wittopkoning.lngr",
+        category: "LingerieFetcher"
+    )
     @Published var lingeries = [Lingerie]()
     
     public func simpleError() {
@@ -69,20 +73,25 @@ public class LingerieFetcher: ObservableObject {
                     DispatchQueue.main.async {
                         self.lingeries = decodedLists
                     }
+                    let defaults = UserDefaults.standard
+                    if let savedLingerie = defaults.object(forKey: "id") as? [String] {
+                        lingeriez = savedLingerie
+                    }
+                    logger.notice("savedLingerie:", savedLingerie)
                 } else {
                     self.simpleError()
-                    print("No Data")
+                    logger.error("[ERROR] Er was geen data met het laden een url: \(String(Url)) en met response: \(response) Met de error: \(error)")
                 }
             } catch {
                 self.simpleError()
-                print("Error while decoding the json", error)
+                logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(String(Url)) en met response: \(response) en met data \(data) Met de error: \(error)")
             }
         }.resume()
     }
 }
 
 struct Lingerie: Codable, Identifiable {
-    public var id = UUID()
+    public var id = String
     public var naam: String
     public var prijs: Double
     public var img_url: String
@@ -91,8 +100,9 @@ struct Lingerie: Codable, Identifiable {
     
     
     enum CodingKeys: String, CodingKey {
-        case naam = "naam"
-        case prijs = "prijs"
+        case id
+        case naam
+        case prijs
         case img_url = "img_url"
         case img_url_sec = "img_url_sec"
         case imageUrls = "imageUrls"

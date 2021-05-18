@@ -13,11 +13,16 @@ struct RemoteImage: View {
     }
     
     private class Loader: ObservableObject {
+        private let logger = Logger(
+            subsystem: "nl.wittopkoning.lngr",
+            category: "Loader"
+        )
         var data = Data()
         var state = LoadState.loading
         
         init(url: String) {
             guard let parsedURL = URL(string: url) else {
+                logger.fault("[Fatal] Invalid URL: \(url)")
                 fatalError("Invalid URL: \(url)")
             }
             
@@ -26,6 +31,7 @@ struct RemoteImage: View {
                     self.data = data
                     self.state = .success
                 } else {
+                    logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url) en met response: \(response) Met de error: \(error)")
                     self.state = .failure
                 }
                 

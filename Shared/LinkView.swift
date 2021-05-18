@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import os.log
 
 struct LinkView: View {
     let lingerie: Lingerie
@@ -48,6 +49,10 @@ struct LinkView: View {
     }
     
     public class ImageFetchers: ObservableObject {
+        private let logger = Logger(
+            subsystem: "nl.wittopkoning.lngr",
+            category: "ImageFetchers"
+        )
         @Published var index: Int = 1
         @Published var images: Image = Image("04k")
         var TheImageUrls: [String]
@@ -68,13 +73,14 @@ struct LinkView: View {
             } else if self.index <= -1 {
                 self.index = TheImageUrls.count - 1
             }
-            print("\(self.index) >= \(TheImageUrls.count):", self.index >= TheImageUrls.count)
+            logger.info("\(self.index) >= \(TheImageUrls.count):\(self.index >= TheImageUrls.count)")
             URLSession.shared.dataTask(with: URL(string: self.TheImageUrls[index])! ) {(data, response, error) in
                 if let image = UIImage(data: data!) {
                     DispatchQueue.main.async {
                         self.images = Image(uiImage: image)
                     }
                 } else {
+                    logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[index]) en met response: \(response) Met de error: \(error)")
                     DispatchQueue.main.async {
                         self.🚫()
                         self.images = Image(systemName: "multiply.circle")
@@ -94,6 +100,6 @@ struct LinkView_Previews: PreviewProvider {
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
         ]))
         .preferredColorScheme(.light)
-        .previewDevice("iPhone 8")
+        .previewDevice("iPhone 7")
     }
 }
