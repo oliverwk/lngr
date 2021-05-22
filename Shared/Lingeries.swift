@@ -74,17 +74,17 @@ public class LingerieFetcher: ObservableObject {
         attributeSet.contentDescription = "De \(lingerie.naam) kost \(lingerie.prijs)"
 
         let item = CSSearchableItem(uniqueIdentifier: lingerie.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
-        CSSearchableIndex.default().indexSearchableItems(lingerie.id) { error in
+        CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
-                logger.error("[ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
+                self.logger.error("[ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
             } else {
-                logger.notice("Search item successfully indexed! \(lingerie, privacy: .public)")
+                self.logger.notice("Search item successfully indexed! \(lingerie, privacy: .public)")
             }
         }
     }
     
     init(Url: URL) {
-        URLSession.shared.dataTask(with: Url) {(data, response, error) in
+        URLSession.shared.dataTask(with: self.Url) {(data, response, error) in
             do {
                 if let d = data {
                     let decodedLists = try JSONDecoder().decode([Lingerie].self, from: d)
@@ -96,14 +96,14 @@ public class LingerieFetcher: ObservableObject {
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
                     }
-                    logger.notice("savedLingerie: \(savedLingerie, privacy: .public)")
+                    self.logger.notice("savedLingerie: \(lingeriez, privacy: .public)")
                 } else {
                     self.simpleError()
-                    logger.error("[ERROR] Er was geen data met het laden een url: \(String(Url)) en met response: \(response, privacy: .public) Met de error: \(error)")
+                    self.logger.error("[ERROR] Er was geen data met het laden een url: \(self.Url, privacy: .public) en met response: \(response as! NSObject, privacy: .public) Met de error: \(error as! NSObject, privacy: .public)")
                 }
             } catch {
                 self.simpleError()
-                logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(String(Url)) en met response: \(response, privacy: .public) en met data \(data) Met de error: \(error)")
+                self.logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(self.Url, privacy: .public) en met response: \(response as! NSObject, privacy: .public) en met data \(data as! NSObject, privacy: .public) Met de error: \(error as! NSObject, privacy: .public)")
             }
         }.resume()
     }

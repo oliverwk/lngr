@@ -31,7 +31,7 @@ struct lngrApp: App {
             if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                 var i = 0
                 for lngr in savedLingerie {
-                    if id == lngr.id {
+                    if lngr == id {
                         self.logger.notice("Found \(id, privacy: .public) for index \(i, privacy: .public)")
                         break
                     }
