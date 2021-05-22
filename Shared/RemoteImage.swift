@@ -22,7 +22,7 @@ struct RemoteImage: View {
         
         init(url: String) {
             guard let parsedURL = URL(string: url) else {
-                logger.fault("[Fatal] Invalid URL: \(url)")
+                logger.fault("[Fatal] Invalid URL: \(url, privacy: .public)")
                 fatalError("Invalid URL: \(url)")
             }
             
@@ -31,7 +31,7 @@ struct RemoteImage: View {
                     self.data = data
                     self.state = .success
                 } else {
-                    logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url) en met response: \(response) Met de error: \(error)")
+                    logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error, privacy: .public)")
                     self.state = .failure
                 }
                 

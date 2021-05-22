@@ -75,9 +75,9 @@ public class LingerieFetcher: ObservableObject {
         let item = CSSearchableItem(uniqueIdentifier: lingerie.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems(lingerie.id) { error in
             if let error = error {
-                logger.error("[ERROR] Er was indexing error: \(error.localizedDescription)")
+                logger.error("[ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
             } else {
-                logger.notice("Search item successfully indexed! \(lingerie)")
+                logger.notice("Search item successfully indexed! \(lingerie, privacy: .public)")
             }
         }
     }
@@ -94,14 +94,14 @@ public class LingerieFetcher: ObservableObject {
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
                     }
-                    logger.notice("savedLingerie: \(savedLingerie)")
+                    logger.notice("savedLingerie: \(savedLingerie, privacy: .public)")
                 } else {
                     self.simpleError()
-                    logger.error("[ERROR] Er was geen data met het laden een url: \(String(Url)) en met response: \(response) Met de error: \(error)")
+                    logger.error("[ERROR] Er was geen data met het laden een url: \(String(Url)) en met response: \(response, privacy: .public) Met de error: \(error)")
                 }
             } catch {
                 self.simpleError()
-                logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(String(Url)) en met response: \(response) en met data \(data) Met de error: \(error)")
+                logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(String(Url)) en met response: \(response, privacy: .public) en met data \(data) Met de error: \(error)")
             }
         }.resume()
     }

@@ -43,7 +43,7 @@ div[color=\\"data.primary\\"]
         let urlString = "https://web.scraper.workers.dev/?url=https://coronadashboard.government.nl/landelijk/vaccinaties&selector=div%5Bcolor=%22data.primary%22%5D&pretty=true"
         let url: URL = URL(string: urlString)!
         let urlRequest = URLRequest(url: url)
-        logger.info("[LOG] Getting the Data from: \(urlString)")
+        logger.info("[LOG] Getting the Data from: \(urlString, privacy: .public)")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
 
             //Parsing the json here
@@ -87,13 +87,13 @@ div[color=\\"data.primary\\"]
         logger.info("[LOG] Making the timeline")
         var entries: [VacinnEntry] = []
         Provider.getTheData() { theVacinn in
-            logger.info("[LOG] Got the Data: \(theVacinn)")
+            logger.info("[LOG] Got the Data: \(theVacinn, privacy: .public)")
             var entry: VacinnEntry
             var components = DateComponents()
             components.hour = 15
             components.minute = 25
             let drieUur = Calendar.current.date(from: components)!
-            logger.debug("[LOG] Adding the widget at: \(drieUur)")
+            logger.debug("[LOG] Adding the widget at: \(drieUur, privacy: .public)")
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)
             entries.append(entry)
             let timeline = Timeline(entries: entries, policy: .after(drieUur))

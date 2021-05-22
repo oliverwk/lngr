@@ -28,7 +28,7 @@ struct lngrApp: App {
                 var i = 0
                 for lngr in savedLingerie {
                     if id == lngr.id {
-                        logger.notice("Found \(id) for index \(i)")
+                        logger.notice("Found \(id, privacy: .public) for index \(i, privacy: .public)")
                         break
                     }
                     i += 1
