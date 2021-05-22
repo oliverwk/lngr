@@ -89,7 +89,7 @@ div[color=\\"data.primary\\"]
         logger.info("[LOG] Making the timeline")
         var entries: [VacinnEntry] = []
         Provider.getTheData() { theVacinn in
-            logger.info("[LOG] Got the Data: \(theVacinn.description, privacy: .public)")
+            logger.info("[LOG] Got the Data: \(theVacinn, privacy: .public)")
             var entry: VacinnEntry
             var components = DateComponents()
             components.hour = 15
