@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import os.log
 
 @main
 struct lngrApp: App {

@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import CoreSpotlight
 import MobileCoreServices
+import os.log
 
 struct Lingeries: View {
     let Url: String

@@ -10,6 +10,7 @@ import WidgetKit
 import SwiftUI
 import Combine
 import os.log
+
 let logger = Logger(
     subsystem: "nl.wittopkoning.lngr.rivmWidget",
     category: "rivmWidget"

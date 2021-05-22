@@ -9,6 +9,7 @@
 import Intents
 import Foundation
 import os.log
+
 let logger = Logger(
     subsystem: "nl.wittopkoning.lngr.GetCheapest",
     category: "LngrIntent"
