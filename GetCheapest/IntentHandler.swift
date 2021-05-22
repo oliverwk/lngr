@@ -33,12 +33,25 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
     public func resolveSort(for intent: GetCheapestIntent, with completion: @escaping (LingeriesResolutionResult) -> Void) {
         // Each parameter is an optional. We can do any neccessary validations at this stage and throw errors if required
         if let sort = intent.sort {
-            logger.notice("Setting sort: \(sort, privacy: .public)")
-            completion(LingeriesResolutionResult.success(resolvedValue: sort))
+            var theSort: String {
+                     switch sort {
+                      case Lingeries.slip:
+                          return "slip"
+                     case Lingeries.bra:
+                          return "bra"
+                      case Lingeries.body:
+                          return "body"
+                      default:
+                          return "unknown"
+                 }
+            }
+            //theSort
+            logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
+            completion(LingeriesResolutionResult.success(with: sort))
         } else {
             let sort: Lingeries = .slip
             logger.notice("Setting sort: .slip, bacause intent sort was empty")
-            completion(LingeriesResolutionResult.success(resolvedValue: sort))
+            completion(LingeriesResolutionResult.success(with: sort))
         }
     }
 }
