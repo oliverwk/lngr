@@ -33,7 +33,7 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
     public func resolveSort(for intent: GetCheapestIntent, with completion: @escaping (LingeriesResolutionResult) -> Void) {
         let sort: Lingeries = .slip
         logger.notice("Setting sort: .slip")
-        completion(LingeriesResolutionResult.succes(resolvedValue: sort))
+        completion(sort)
     }
 }
         
