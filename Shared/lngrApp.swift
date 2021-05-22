@@ -7,6 +7,8 @@
 
 import SwiftUI
 import os.log
+import CoreSpotlight
+import MobileCoreServices
 
 @main
 struct lngrApp: App {
@@ -23,13 +25,14 @@ struct lngrApp: App {
     }
     
     func handleSpotlight(_ userActivity: NSUserActivity) {
+        let defaults = UserDefaults.standard
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
-            logger.notice("Found identifier \(id)")
+            self.logger.notice("Found identifier \(id)")
             if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                 var i = 0
                 for lngr in savedLingerie {
                     if id == lngr.id {
-                        logger.notice("Found \(id, privacy: .public) for index \(i, privacy: .public)")
+                        self.logger.notice("Found \(id, privacy: .public) for index \(i, privacy: .public)")
                         break
                     }
                     i += 1

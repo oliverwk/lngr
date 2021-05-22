@@ -92,6 +92,7 @@ public class LingerieFetcher: ObservableObject {
                         self.lingeries = decodedLists
                     }
                     let defaults = UserDefaults.standard
+                    var lingeriez: [String]
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
                     }
@@ -109,7 +110,7 @@ public class LingerieFetcher: ObservableObject {
 }
 
 struct Lingerie: Codable, Identifiable {
-    public var id = String
+    public var id: String
     public var naam: String
     public var prijs: Double
     public var img_url: String

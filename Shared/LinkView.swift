@@ -68,19 +68,20 @@ struct LinkView: View {
         }
         
         func load() {
+            //if self.index >= self.TheImageUrls.count {
             if self.index >= TheImageUrls.count {
                 self.index = 0
             } else if self.index <= -1 {
                 self.index = TheImageUrls.count - 1
             }
-            logger.info("\(self.index, privacy: .public) >= \(TheImageUrls.count, privacy: .public):\(self.index >= TheImageUrls.count, privacy: .public)")
-            URLSession.shared.dataTask(with: URL(string: self.TheImageUrls[index])! ) {(data, response, error) in
+            self.logger.info("\(self.index, privacy: .public) >= \(self.TheImageUrls.count, privacy: .public):\(self.index >= self.TheImageUrls.count, privacy: .public)")
+            URLSession.shared.dataTask(with: URL(string: self.TheImageUrls[self.index])! ) {(data, response, error) in
                 if let image = UIImage(data: data!) {
                     DispatchQueue.main.async {
                         self.images = Image(uiImage: image)
                     }
                 } else {
-                    logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[index], privacy: .public) en met response: \(response) Met de error: \(error)")
+                    self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) en met response: \(response as! NSObject) Met de error: \(error)")
                     DispatchQueue.main.async {
                         self.🚫()
                         self.images = Image(systemName: "multiply.circle")
