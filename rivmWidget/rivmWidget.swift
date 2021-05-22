@@ -56,7 +56,9 @@ div[color=\\"data.primary\\"]
             let str = String(decoding: content, as: UTF8.self)
             let json = str.replacingOccurrences(of: theSelctor, with: "vacs")
             let jsonData: Data =  Data(json.utf8)
-            logger.debug("[LOG] Parsing json from the data \(json as Any)")
+            //as! NSObject
+            //description
+            logger.debug("[LOG] Parsing json from the data \(json.description)")
 
             let lngrApiResponse: Vacinn
             do {
@@ -87,7 +89,7 @@ div[color=\\"data.primary\\"]
         logger.info("[LOG] Making the timeline")
         var entries: [VacinnEntry] = []
         Provider.getTheData() { theVacinn in
-            logger.info("[LOG] Got the Data: \(theVacinn, privacy: .public)")
+            logger.info("[LOG] Got the Data: \(theVacinn.description, privacy: .public)")
             var entry: VacinnEntry
             var components = DateComponents()
             components.hour = 15
