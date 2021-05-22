@@ -25,6 +25,12 @@ struct Vacinn: Codable {
     }
 }
 
+extension Vacinn: CustomStringConvertible {
+    var description: String {
+        return "{ result: \(result) }"
+    }
+}
+
 struct Selector: Codable {
     public var res: [String]
 
@@ -33,6 +39,11 @@ struct Selector: Codable {
     }
 }
 
+extension Selector: CustomStringConvertible {
+    var description: String {
+        return "res: [\(res)]"
+    }
+}
 
 
 struct Provider: TimelineProvider {
