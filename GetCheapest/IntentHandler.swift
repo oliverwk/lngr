@@ -32,7 +32,24 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
     
     public func resolveSort(for intent: GetCheapestIntent, with completion: @escaping (LingeriesResolutionResult) -> Void) {
         // Each parameter is an optional. We can do any neccessary validations at this stage and throw errors if required
-        if let sort = intent.sort {
+        let sort = intent.sort
+        switch intent.sort {
+            case Lingeries.slip:
+                logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
+                completion(LingeriesResolutionResult.success(with: sort))
+            case Lingeries.bra:
+                logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
+                completion(LingeriesResolutionResult.success(with: sort))
+            case Lingeries.body:
+                logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
+                completion(LingeriesResolutionResult.success(with: sort))
+            default:
+                let sort: Lingeries = .slip
+                logger.notice("Setting sort: .slip, bacause intent sort was empty")
+                completion(LingeriesResolutionResult.success(with: sort))
+        }
+        
+        /*if let sort = intent.sort {
             var theSort: String {
                      switch sort {
                       case Lingeries.slip:
@@ -45,14 +62,14 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
                           return "unknown"
                  }
             }
-            //theSort
+            // theSort
             logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
             completion(LingeriesResolutionResult.success(with: sort))
         } else {
             let sort: Lingeries = .slip
             logger.notice("Setting sort: .slip, bacause intent sort was empty")
             completion(LingeriesResolutionResult.success(with: sort))
-        }
+        }*/
     }
 }
         
