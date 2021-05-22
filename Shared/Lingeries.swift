@@ -78,13 +78,13 @@ public class LingerieFetcher: ObservableObject {
             if let error = error {
                 self.logger.error("[ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
             } else {
-                self.logger.notice("Search item successfully indexed! \(lingerie, privacy: .public)")
+                self.logger.notice("Search item successfully indexed! \(lingerie.description, privacy: .public)")
             }
         }
     }
     
     init(Url: URL) {
-        URLSession.shared.dataTask(with: self.Url) {(data, response, error) in
+        URLSession.shared.dataTask(with: Url) {(data, response, error) in
             do {
                 if let d = data {
                     let decodedLists = try JSONDecoder().decode([Lingerie].self, from: d)
