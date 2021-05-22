@@ -1,2 +1,2 @@
-build:
-     xcodebuild -scheme lngr\ \(iOS\) build
+build: lngr.xcodeproj
+	xcodebuild -allowProvisioningUpdates -scheme "lngr (iOS)" build

@@ -7,7 +7,8 @@
 
 import SwiftUI
 import Combine
-
+import CoreSpotlight
+import MobileCoreServices
 
 struct Lingeries: View {
     let Url: String
@@ -63,6 +64,22 @@ public class LingerieFetcher: ObservableObject {
     public func simpleError() {
         let genarator = UINotificationFeedbackGenerator()
         genarator.notificationOccurred(.error)
+    }
+    public func index(index: Int) {
+        let lingerie = self.lingeries[index]
+
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+        attributeSet.title = lingerie.naam
+        attributeSet.contentDescription = "De \(lingerie.naam) kost \(lingerie.prijs)"
+
+        let item = CSSearchableItem(uniqueIdentifier: lingerie.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
+        CSSearchableIndex.default().indexSearchableItems(lingerie.id) { error in
+            if let error = error {
+                logger.error("[ERROR] Er was indexing error: \(error.localizedDescription)")
+            } else {
+                logger.notice("Search item successfully indexed!", lingerie)
+            }
+        }
     }
     
     init(Url: URL) {

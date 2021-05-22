@@ -19,7 +19,7 @@ let OneVacinn = Vacinn(result: Selector(res: ["0","0","0"]))
 
 struct Vacinn: Codable {
     public var result: Selector
-    
+
     enum CodingKeys: String, CodingKey {
         case result = "result"
     }
@@ -27,7 +27,7 @@ struct Vacinn: Codable {
 
 struct Selector: Codable {
     public var res: [String]
-    
+
     enum CodingKeys: String, CodingKey {
         case res = "vacs"
     }
@@ -43,8 +43,9 @@ div[color=\\"data.primary\\"]
         let urlString = "https://web.scraper.workers.dev/?url=https://coronadashboard.government.nl/landelijk/vaccinaties&selector=div%5Bcolor=%22data.primary%22%5D&pretty=true"
         let url: URL = URL(string: urlString)!
         let urlRequest = URLRequest(url: url)
+        logger.info("[LOG] Getting the Data from: \(urlString)")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
-            
+
             //Parsing the json here
             guard error == nil, let content = data else {
                 logger.fault("[ERROR] Error getting data from API")
@@ -56,7 +57,7 @@ div[color=\\"data.primary\\"]
             let json = str.replacingOccurrences(of: theSelctor, with: "vacs")
             let jsonData: Data =  Data(json.utf8)
             logger.debug("[LOG] Parsing json from the data \(json as Any)")
-            
+
             let lngrApiResponse: Vacinn
             do {
                 lngrApiResponse = try JSONDecoder().decode(Vacinn.self, from: jsonData)
@@ -72,27 +73,28 @@ div[color=\\"data.primary\\"]
         logger.info("[LOG] Making the network requests")
         task.resume()
     }
-    
+
     func placeholder(in context: Context) -> VacinnEntry {
         VacinnEntry(date: Date(), vacinn: OneVacinn)
     }
-    
+
     func getSnapshot(in context: Context, completion: @escaping (VacinnEntry) -> ()) {
         let entry = VacinnEntry(date: Date(), vacinn: OneVacinn)
         completion(entry)
     }
-    
+
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         logger.info("[LOG] Making the timeline")
+        var entries: [VacinnEntry] = []
         Provider.getTheData() { theVacinn in
-            var entries: [VacinnEntry] = []
+            logger.info("[LOG] Got the Data: \(theVacinn)")
             var entry: VacinnEntry
             var components = DateComponents()
             components.hour = 15
             components.minute = 25
             let drieUur = Calendar.current.date(from: components)!
+            logger.debug("[LOG] Adding the widget at: \(drieUur)")
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)
-            logger.debug("TheVacinn:", theVacinn)
             entries.append(entry)
             let timeline = Timeline(entries: entries, policy: .after(drieUur))
             completion(timeline)
@@ -107,7 +109,7 @@ struct VacinnEntry: TimelineEntry {
 
 struct vacinnWidgetEntryView : View {
     var entry: Provider.Entry
-    
+
     var body: some View {
         Text(String(entry.vacinn.result.res[1]).replacingOccurrences(of: ",", with: "."))
             .font(.title)
