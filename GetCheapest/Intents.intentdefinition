@@ -27,13 +27,13 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>value</string>
+					<string>slip</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>SX0mgU</string>
 					<key>INEnumValueIndex</key>
 					<integer>1</integer>
 					<key>INEnumValueName</key>
-					<string>value</string>
+					<string>slip</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -44,6 +44,19 @@
 					<integer>2</integer>
 					<key>INEnumValueName</key>
 					<string>bra</string>
+					<key>INEnumValueSynonyms</key>
+					<array>
+						<dict>
+							<key>INEnumValueSynonymPronunciationHint</key>
+							<string>beha</string>
+							<key>INEnumValueSynonymPronunciationHintID</key>
+							<string>xo1A9z</string>
+							<key>INEnumValueSynonymSynonym</key>
+							<string>bh</string>
+							<key>INEnumValueSynonymSynonymID</key>
+							<string>Ng03c8</string>
+						</dict>
+					</array>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>

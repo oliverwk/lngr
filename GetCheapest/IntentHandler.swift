@@ -23,11 +23,18 @@ class IntentHandler: INExtension {
 }
 
 public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
-    func handle(intent: GetCheapestIntent, completion: @escaping (GetCheapestIntentResponse) -> Void) {
-        logger.debug("CheapestIntentHandler:", intent)
-        logger.notice("CheapestIntentHandler:", intent.sort)
+    public func handle(intent: GetCheapestIntent, completion: @escaping (GetCheapestIntentResponse) -> Void) {
+        logger.debug("CheapestIntentHandler: \(intent)")
+        logger.notice("CheapestIntentHandler: \(intent.sort)")
         //TODO: hier een switch case ding doen
-        completion(GetCheapestIntentResponse.success(succes: "Een string"))
+        let sort: Lingeries = .slip
+        completion(GetCheapestIntentResponse.success(sort: sort))
+    }
+    
+    public func resolveSort(for intent: GetCheapestIntent, with completion: @escaping (LingeriesResolutionResult) -> Void) {
+        let sort: Lingeries = .slip
+        logger.notice("Setting sort: \(sort)")
+        completion(LingeriesResolutionResult.succes(resolvedValue: sort))
     }
 }
         

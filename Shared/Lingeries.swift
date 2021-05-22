@@ -77,7 +77,7 @@ public class LingerieFetcher: ObservableObject {
             if let error = error {
                 logger.error("[ERROR] Er was indexing error: \(error.localizedDescription)")
             } else {
-                logger.notice("Search item successfully indexed!", lingerie)
+                logger.notice("Search item successfully indexed! \(lingerie)")
             }
         }
     }
@@ -94,7 +94,7 @@ public class LingerieFetcher: ObservableObject {
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
                     }
-                    logger.notice("savedLingerie:", savedLingerie)
+                    logger.notice("savedLingerie: \(savedLingerie)")
                 } else {
                     self.simpleError()
                     logger.error("[ERROR] Er was geen data met het laden een url: \(String(Url)) en met response: \(response) Met de error: \(error)")
