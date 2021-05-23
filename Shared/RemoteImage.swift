@@ -33,9 +33,9 @@ struct RemoteImage: View {
                     self.state = .success
                 } else {
                     if let response = response as? HTTPURLResponse {
-                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error?.localizedDescription, privacy: .public)")
+                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error?.localizedDescription as! NSObject, privacy: .public)")
                     } else {
-                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url, privacy: .public) Met de error: \(error?.localizedDescription, privacy: .public)")
+                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url, privacy: .public) Met de error: \(error?.localizedDescription as! NSObject, privacy: .public)")
                     }
                     self.state = .failure
                 }
