@@ -82,9 +82,10 @@ struct LinkView: View {
                     }
                 } else {
                     if let response = response as? HTTPURLResponse {
-                        self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) en met response: \(response) Met de error: \(error?.localizedDescription)")
+                        self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) en met response: \(response) Met de error: \(error?.localizedDescription as? NSObject)")
                     } else {
-                        self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) Met de error: \(error?.localizedDescription)")
+                        self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) Met de error: \(error?.localizedDescription as? NSObject)")
+                        //as? NSObject weg halen ????!
                     }
                     DispatchQueue.main.async {
                         self.🚫()
