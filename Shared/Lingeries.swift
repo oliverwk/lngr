@@ -95,8 +95,9 @@ public class LingerieFetcher: ObservableObject {
                     var lingeriez: [String]
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
+                        self.logger.notice("savedLingerie: \(lingeriez, privacy: .public)")
                     }
-                    self.logger.notice("savedLingerie: \(lingeriez, privacy: .public)")
+                    
                 } else if let error = error {
                     self.simpleError()
                     if let response = response as? HTTPURLResponse {
