@@ -81,7 +81,11 @@ struct LinkView: View {
                         self.images = Image(uiImage: image)
                     }
                 } else {
-                    self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) en met response: \(response as! NSObject) Met de error: \(error.localizedDescription)")
+                    if let response = response as? HTTPURLResponse {
+                        self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) en met response: \(response) Met de error: \(error?.localizedDescription)")
+                    } else {
+                        self.logger.error("[ERROR] Er was een error met het laden een afbeelding url: \(self.TheImageUrls[self.index], privacy: .public) Met de error: \(error?.localizedDescription)")
+                    }
                     DispatchQueue.main.async {
                         self.🚫()
                         self.images = Image(systemName: "multiply.circle")

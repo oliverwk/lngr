@@ -97,13 +97,21 @@ public class LingerieFetcher: ObservableObject {
                         lingeriez = savedLingerie
                     }
                     self.logger.notice("savedLingerie: \(lingeriez, privacy: .public)")
-                } else {
+                } else if let error = error {
                     self.simpleError()
-                    self.logger.error("[ERROR] Er was geen data met het laden een url: \(self.Url, privacy: .public) en met response: \(response as! NSObject, privacy: .public) Met de error: \(error as! NSObject, privacy: .public)")
+                    if let response = response as? HTTPURLResponse {
+                        self.logger.error("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                    } else {
+                        self.logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                    }
                 }
             } catch {
                 self.simpleError()
-                self.logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(self.Url, privacy: .public) en met response: \(response as! NSObject, privacy: .public) en met data \(data as! NSObject, privacy: .public) Met de error: \(error as! NSObject, privacy: .public)")
+                if let response = response as? HTTPURLResponse {
+                    self.logger.error("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                } else {
+                    self.logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) met data \(data as! NSObject, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                }
             }
         }.resume()
     }
@@ -125,5 +133,10 @@ struct Lingerie: Codable, Identifiable {
         case img_url = "img_url"
         case img_url_sec = "img_url_sec"
         case imageUrls = "imageUrls"
+    }
+}
+extension Lingerie: CustomStringConvertible {
+    var description: String {
+        return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls) }"
     }
 }
