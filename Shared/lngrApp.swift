@@ -27,12 +27,12 @@ struct lngrApp: App {
     func handleSpotlight(_ userActivity: NSUserActivity) {
         let defaults = UserDefaults.standard
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
-            self.logger.notice("Found identifier \(id)")
+            self.logger.notice("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
             if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                 var i = 0
                 for lngr in savedLingerie {
                     if lngr == id {
-                        self.logger.notice("Found \(id, privacy: .public) for index \(i, privacy: .public)")
+                        self.logger.notice("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
                         break
                     }
                     i += 1

@@ -76,9 +76,9 @@ public class LingerieFetcher: ObservableObject {
         let item = CSSearchableItem(uniqueIdentifier: lingerie.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
-                self.logger.error("[ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
+                self.logger.error("[SPOTLIGHT] [ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
             } else {
-                self.logger.notice("Search item successfully indexed! \(lingerie.description, privacy: .public)")
+                self.logger.notice("[SPOTLIGHT] Search item successfully indexed! \(lingerie.description, privacy: .public)")
             }
         }
     }
@@ -95,7 +95,7 @@ public class LingerieFetcher: ObservableObject {
                     var lingeriez: [String]
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
-                        self.logger.notice("savedLingerie: \(lingeriez, privacy: .public)")
+                        self.logger.notice("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
                     }
                     
                 } else if let error = error {

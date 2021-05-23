@@ -88,6 +88,10 @@
 			<string>download</string>
 			<key>INIntentConfigurable</key>
 			<true/>
+			<key>INIntentDefaultImageName</key>
+			<string>String</string>
+			<key>INIntentDescription</key>
+			<string>Get the cheapest lngr</string>
 			<key>INIntentDescriptionID</key>
 			<string>i3DYKo</string>
 			<key>INIntentInput</key>
@@ -145,6 +149,11 @@
 					<string>Lingeries</string>
 					<key>INIntentParameterEnumTypeNamespace</key>
 					<string>pD4TDI</string>
+					<key>INIntentParameterMetadata</key>
+					<dict>
+						<key>INIntentParameterMetadataDefaultValue</key>
+						<string>slip</string>
+					</dict>
 					<key>INIntentParameterName</key>
 					<string>sort</string>
 					<key>INIntentParameterPromptDialogs</key>
@@ -188,6 +197,19 @@
 					<integer>2</integer>
 					<key>INIntentParameterType</key>
 					<string>Integer</string>
+					<key>INIntentParameterUnsupportedReasons</key>
+					<array>
+						<dict>
+							<key>INIntentParameterUnsupportedReasonCode</key>
+							<string>NoFound</string>
+							<key>INIntentParameterUnsupportedReasonCustom</key>
+							<true/>
+							<key>INIntentParameterUnsupportedReasonFormatString</key>
+							<string>Sorry we didn't have ${sort} indexed</string>
+							<key>INIntentParameterUnsupportedReasonFormatStringID</key>
+							<string>0SAgVu</string>
+						</dict>
+					</array>
 				</dict>
 			</array>
 			<key>INIntentResponse</key>

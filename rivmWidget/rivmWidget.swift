@@ -70,7 +70,7 @@ div[color=\\"data.primary\\"]
             let jsonData: Data =  Data(json.utf8)
             //as! NSObject
             //description
-            logger.debug("[LOG] Parsing json from the data \(json.description)")
+            logger.debug("[LOG] Parsing json from the data \(json.description, privacy: .public)")
 
             let lngrApiResponse: Vacinn
             do {
