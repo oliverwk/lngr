@@ -9,7 +9,7 @@
 import WidgetKit
 import SwiftUI
 import Combine
-import os.log
+import os
 
 let logger = Logger(
     subsystem: "nl.wittopkoning.lngr.rivmWidget",

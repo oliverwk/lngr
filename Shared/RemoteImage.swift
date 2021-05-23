@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import os.log
+import os
 
 struct RemoteImage: View {
     private enum LoadState {

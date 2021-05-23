@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import os.log
+import os
 
 struct LinkView: View {
     let lingerie: Lingerie

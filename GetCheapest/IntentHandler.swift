@@ -8,7 +8,7 @@
 
 import Intents
 import Foundation
-import os.log
+import os
 
 let logger = Logger(
     subsystem: "nl.wittopkoning.lngr.GetCheapest",
@@ -31,7 +31,7 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
         completion(GetCheapestIntentResponse.success(sort: sort))
     }
     
-    public func resolveSort(for intent: GetCheapestIntent, with completion: @escaping (LingeriesResolutionResult) -> Void) {
+    public func resolveSort(intent: GetCheapestIntent, completion: @escaping (LingeriesResolutionResult) -> Void) {
         // Each parameter is an optional. We can do any neccessary validations at this stage and throw errors if required
         let sort = intent.sort
         switch intent.sort {

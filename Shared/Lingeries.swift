@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import CoreSpotlight
 import MobileCoreServices
-import os.log
+import os
 
 struct Lingeries: View {
     let Url: String
@@ -78,7 +78,7 @@ public class LingerieFetcher: ObservableObject {
             if let error = error {
                 self.logger.error("[SPOTLIGHT] [ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
             } else {
-                self.logger.notice("[SPOTLIGHT] Search item successfully indexed! \(lingerie.description, privacy: .public)")
+                self.logger.log("[SPOTLIGHT] Search item successfully indexed! \(lingerie.description, privacy: .public)")
             }
         }
     }
@@ -95,13 +95,13 @@ public class LingerieFetcher: ObservableObject {
                     var lingeriez: [String]
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
-                        self.logger.notice("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
+                        self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
                     }
                     
                 } else if let error = error {
                     self.simpleError()
                     if let response = response as? HTTPURLResponse {
-                        self.logger.error("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                     } else {
                         self.logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                     }
@@ -118,14 +118,16 @@ public class LingerieFetcher: ObservableObject {
     }
 }
 
-struct Lingerie: Codable, Identifiable {
+struct Lingerie: Codable, Identifiable, CustomStringConvertible {
     public var id: String
     public var naam: String
     public var prijs: Double
     public var img_url: String
     public var img_url_sec: String
     public var imageUrls: [String]
-    
+    public var description: String {
+        return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls) }"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -134,10 +136,5 @@ struct Lingerie: Codable, Identifiable {
         case img_url = "img_url"
         case img_url_sec = "img_url_sec"
         case imageUrls = "imageUrls"
-    }
-}
-extension Lingerie: CustomStringConvertible {
-    var description: String {
-        return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls) }"
     }
 }
