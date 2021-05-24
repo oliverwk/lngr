@@ -201,7 +201,7 @@
 					<array>
 						<dict>
 							<key>INIntentParameterUnsupportedReasonCode</key>
-							<string>NoFound</string>
+							<string>notFound</string>
 							<key>INIntentParameterUnsupportedReasonCustom</key>
 							<true/>
 							<key>INIntentParameterUnsupportedReasonFormatString</key>
@@ -218,11 +218,11 @@
 				<array>
 					<dict>
 						<key>INIntentResponseCodeConciseFormatString</key>
-						<string>${sort}</string>
+						<string>De ${sort} is het goedkoopst</string>
 						<key>INIntentResponseCodeConciseFormatStringID</key>
 						<string>cFLgRf</string>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>${sort}</string>
+						<string>De ${sort} is het goedkoopst</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>G6FBtp</string>
 						<key>INIntentResponseCodeName</key>
@@ -241,6 +241,18 @@
 						<string>omAdhR</string>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
+					</dict>
+					<dict>
+						<key>INIntentResponseCodeConciseFormatString</key>
+						<string>sorry we didn't find ${sort}</string>
+						<key>INIntentResponseCodeConciseFormatStringID</key>
+						<string>bkootV</string>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>sorry we didn't find ${sort}</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>BK1Hog</string>
+						<key>INIntentResponseCodeName</key>
+						<string>noFound</string>
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
