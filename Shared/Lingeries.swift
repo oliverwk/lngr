@@ -56,7 +56,7 @@ struct Lingeries: View {
 
 
 public class LingerieFetcher: ObservableObject {
-    private let logger = Logger(
+    let logger = Logger(
         subsystem: "nl.wittopkoning.lngr",
         category: "LingerieFetcher"
     )
@@ -68,7 +68,7 @@ public class LingerieFetcher: ObservableObject {
     }
     public func index(index: Int) {
         let lingerie = self.lingeries[index]
-
+        self.logger.log("[SPOTLIGHT] indexing \(index, privacy: .public): \(lingerie.description, privacy: .public)")
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         attributeSet.title = lingerie.naam
         attributeSet.contentDescription = "De \(lingerie.naam) kost \(lingerie.prijs)"
@@ -84,6 +84,7 @@ public class LingerieFetcher: ObservableObject {
     }
     
     init(Url: URL) {
+        self.logger.log("Making request with: \(Url.absoluteString, privacy: .public)")
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
             do {
                 if let d = data {
@@ -96,6 +97,9 @@ public class LingerieFetcher: ObservableObject {
                     if let savedLingerie = defaults.object(forKey: "id") as? [String] {
                         lingeriez = savedLingerie
                         self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
+                        for i in  0...self.lingeries.count - 1 {
+                            index(index: i)
+                        }
                     }
                     
                 } else if let error = error {

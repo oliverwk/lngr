@@ -94,8 +94,6 @@
 			<string>Get the cheapest lngr</string>
 			<key>INIntentDescriptionID</key>
 			<string>i3DYKo</string>
-			<key>INIntentInput</key>
-			<string>sort</string>
 			<key>INIntentKeyParameter</key>
 			<string>sort</string>
 			<key>INIntentLastParameterTag</key>
@@ -252,7 +250,7 @@
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>BK1Hog</string>
 						<key>INIntentResponseCodeName</key>
-						<string>noFound</string>
+						<string>notFound</string>
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
