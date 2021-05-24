@@ -32,7 +32,7 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
     }
     
     public func resolveSort(intent: GetCheapestIntent, completion: @escaping (LingeriesResolutionResult) -> Void) {
-        // Each parameter is an optional. We can do any neccessary validations at this stage and throw errors if required
+
         let sort = intent.sort
         switch intent.sort {
             case Lingeries.slip:
@@ -71,6 +71,10 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
             logger.notice("Setting sort: .slip, bacause intent sort was empty")
             completion(LingeriesResolutionResult.success(with: sort))
         }*/
+    }
+    func confirm(intent: GetCheapestIntent, completion: @escaping (GetCheapestIntentResponse) -> Void) {
+        let sort: Lingeries = .slip
+        completion(GetCheapestIntentResponse.success(sort: sort))
     }
 }
         
