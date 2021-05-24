@@ -98,7 +98,7 @@ public class LingerieFetcher: ObservableObject {
                         lingeriez = savedLingerie
                         self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
                         for i in  0...self.lingeries.count - 1 {
-                            index(index: i)
+                            self.index(index: i)
                         }
                     }
                     
