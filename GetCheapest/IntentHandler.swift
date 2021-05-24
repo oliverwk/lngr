@@ -37,17 +37,17 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
         switch intent.sort {
             case Lingeries.slip:
                 logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(LingeriesResolutionResult.success(with: sort))
+                completion(GetCheapestSortResolutionResult.success(with: sort))
             case Lingeries.bra:
                 logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(LingeriesResolutionResult.success(with: sort))
+                completion(GetCheapestSortResolutionResult.success(with: sort))
             case Lingeries.body:
                 logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(LingeriesResolutionResult.success(with: sort))
+                completion(GetCheapestSortResolutionResult.success(with: sort))
             default:
                 let sort: Lingeries = .slip
                 logger.notice("Setting sort: .slip, bacause intent sort was empty")
-                completion(LingeriesResolutionResult.success(with: sort))
+                completion(GetCheapestSortResolutionResult.success(with: sort))
                 //completion(GetCheapestSortResolutionResult.unsupported(reason: .notFound))
         }
         
