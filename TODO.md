@@ -2,6 +2,9 @@
 # lngr
 - [x] Add loggin to widget
 - [x] Add loggin to main app "So we can see in the console app"
-- [x] Add Handoff
-- [x] Add MultipeerConnectivity
+- [] Add Handoff
+- [] Add MultipeerConnectivity
+- [] Add chacing to network reqeusts
+- [] Add low data mode optie
+- [] Add a settings bundle
 - [] Misschien nog tijd toevoegen aan widget

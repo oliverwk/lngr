@@ -98,24 +98,27 @@ public class LingerieFetcher: ObservableObject {
                         lingeriez = savedLingerie
                         self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
                         for i in  0...self.lingeries.count - 1 {
+                            self.logger.log("[SPOTLIGHT] indexing i: \(i, privacy: .public)")
                             self.index(index: i)
                         }
+                    } else {
+                        self.logger.error("[SPOTLIGHT] failed to save lingeriez:")
                     }
                     
                 } else if let error = error {
                     self.simpleError()
                     if let response = response as? HTTPURLResponse {
-                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) \n Met de error: \(error.localizedDescription, privacy: .public)")
                     } else {
-                        self.logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                        self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                     }
                 }
             } catch {
                 self.simpleError()
                 if let response = response as? HTTPURLResponse {
-                    self.logger.error("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                    self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                 } else {
-                    self.logger.error("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) met data \(data as! NSObject, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                    self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) met data \(data as! NSObject, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                 }
             }
         }.resume()
