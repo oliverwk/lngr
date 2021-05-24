@@ -31,23 +31,23 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
         completion(GetCheapestIntentResponse.success(sort: sort))
     }
     
-    public func resolveSort(intent: GetCheapestIntent, completion: @escaping (GetCheapestSortResolutionResult) -> Void) {
+    public func resolveSort(for intent: GetCheapestIntent, with completion: @escaping (GetCheapestSortResolutionResult) -> Void) {
 
         let sort = intent.sort
         switch intent.sort {
             case Lingeries.slip:
                 logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(GetCheapestSortResolutionResult.success(with: sort))
+                completion(LingeriesResolutionResult.success(with: sort))
             case Lingeries.bra:
                 logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(GetCheapestSortResolutionResult.success(with: sort))
+                completion(LingeriesResolutionResult.success(with: sort))
             case Lingeries.body:
                 logger.notice("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(GetCheapestSortResolutionResult.success(with: sort))
+                completion(LingeriesResolutionResult.success(with: sort))
             default:
                 let sort: Lingeries = .slip
                 logger.notice("Setting sort: .slip, bacause intent sort was empty")
-                completion(GetCheapestSortResolutionResult.success(with: sort))
+                completion(LingeriesResolutionResult.success(with: sort))
                 //completion(GetCheapestSortResolutionResult.unsupported(reason: .notFound))
         }
         
@@ -73,7 +73,7 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
             completion(LingeriesResolutionResult.success(with: sort))
         }*/
     }
-    func confirm(intent: GetCheapestIntent, completion: @escaping (GetCheapestIntentResponse) -> Void) {
+    public func confirm(intent: GetCheapestIntent, completion: @escaping (GetCheapestIntentResponse) -> Void) {
         let sort: Lingeries = .slip
         completion(GetCheapestIntentResponse.success(sort: sort))
     }
