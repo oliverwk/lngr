@@ -24,21 +24,22 @@ class IntentHandler: INExtension {
 }
 
 public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
-    logger.log("Beginning to handle GetCheapestIntentHandler")
-    
+//    logger.log("Beginning to handle GetCheapestIntentHandler")
+//    Dit nog in init doen
+
     public func handle(intent: GetCheapestIntent, completion: @escaping (GetCheapestIntentResponse) -> Void) {
         logger.log("CheapestIntentHandler: \(intent, privacy: .public)")
         let sort = intent.sort
         switch sort {
             case Lingeries.slip:
                 logger.log("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(GetCheapestIntentResponse.success(with: sort))
+                completion(GetCheapestIntentResponse.success(sort: sort))
             case Lingeries.bra:
                 logger.log("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(GetCheapestIntentResponse.success(with: sort))
+                completion(GetCheapestIntentResponse.success(sort: sort))
             case Lingeries.body:
                 logger.log("Setting sort: \(sort.rawValue, privacy: .public)")
-                completion(GetCheapestIntentResponse.success(with: sort))
+                completion(GetCheapestIntentResponse.success(sort: sort))
             default:
                 logger.log("Setting sort: .notFound, bacause intent sort was empty")
                 //completion(GetCheapestIntentResponse.success(with: sort))

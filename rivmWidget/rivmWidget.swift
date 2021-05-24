@@ -55,7 +55,7 @@ div[color=\\"data.primary\\"]
         let urlString = "https://web.scraper.workers.dev/?url=https://coronadashboard.government.nl/landelijk/vaccinaties&selector=div%5Bcolor=%22data.primary%22%5D&pretty=true"
         let url: URL = URL(string: urlString)!
         let urlRequest = URLRequest(url: url)
-        logger.info("[LOG] Getting the Data from: \(urlString, privacy: .public)")
+        logger.log("[LOG] Getting the Data from: \(urlString, privacy: .public)")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
 
             //Parsing the json here
@@ -70,12 +70,12 @@ div[color=\\"data.primary\\"]
             let jsonData: Data =  Data(json.utf8)
             //as! NSObject
             //description
-            logger.debug("[LOG] Parsing json from the data \(json.description, privacy: .public)")
+            logger.log("[LOG] Parsing json from the data \(json, privacy: .public)")
 
             let lngrApiResponse: Vacinn
             do {
                 lngrApiResponse = try JSONDecoder().decode(Vacinn.self, from: jsonData)
-                logger.fault("[LOG] Parsing json from data")
+                logger.log("[LOG] Parsing json from data")
             } catch {
                 logger.fault("[ERROR] Error parsing json from data")
                 let response = OneVacinn
@@ -105,7 +105,7 @@ div[color=\\"data.primary\\"]
             var entry: VacinnEntry
             var components = DateComponents()
             components.hour = 15
-            components.minute = 25
+            components.minute = 45
             let drieUur = Calendar.current.date(from: components)!
             logger.debug("[LOG] Adding the widget at: \(drieUur, privacy: .public)")
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)
