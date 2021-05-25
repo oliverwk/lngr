@@ -24,14 +24,9 @@ struct lngrApp: App {
                 .onOpenURL { url in
                     guard url.scheme == "vacinn-widget" else { return }
                     self.logger.log("Opening: \"https://coronadashboard.government.nl/landelijk/vaccinaties\" beacuse the url scheme was: \(url.scheme ?? "No scheme?!", privacy: .public)")
-                    if let theUrl = URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties") {
-                        UIApplication.shared.open(theUrl)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                            self.logger.error("Stoping the app")
-                            if url.scheme == "vacinn-widget" {
-                                self.logger.error("app stoped here")
-                               //exit(0);
-                            }
+                    if url.scheme == "vacinn-widget" {
+                        if let theUrl = URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties") {
+                            UIApplication.shared.open(theUrl)
                         }
                     }
                 }
