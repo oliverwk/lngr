@@ -22,9 +22,8 @@ struct lngrApp: App {
             ContentView()
                 .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
                 .onOpenURL { url in
-                    guard url.scheme == "vacinn-widget" else { return }
-                    self.logger.log("Opening: \"https://coronadashboard.government.nl/landelijk/vaccinaties\" beacuse the url scheme was: vacinn-widget")
                     if url.scheme == "vacinn-widget" {
+                        self.logger.log("Opening: \"https://coronadashboard.government.nl/landelijk/vaccinaties\" beacuse the url scheme was: vacinn-widget")
                         if let theUrl = URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties") {
                             UIApplication.shared.open(theUrl)
                         }
