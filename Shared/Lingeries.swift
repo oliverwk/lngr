@@ -95,7 +95,8 @@ public class LingerieFetcher: ObservableObject {
                     let defaults = UserDefaults.standard
                     var lingeriez: [Lingerie]
                     do {
-                        if let savedLingerie = defaults.object(forKey: "id") as? [Lingerie] {
+                        //                                                   as? 
+                        if let savedLingerie = defaults.object(forKey: "id") as [Lingerie] {
                             lingeriez = savedLingerie
                             self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
                             for i in  0...self.lingeries.count - 1 {
@@ -106,7 +107,7 @@ public class LingerieFetcher: ObservableObject {
                             self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error?.localizedDescription as! NSObject)")
                         }
                     } catch {
-                        self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error?.localizedDescription as! NSObject)")
+                        self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error.localizedDescription as! NSObject)")
                     }
                 } else if let error = error {
                     self.simpleError()
