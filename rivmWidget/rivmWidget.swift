@@ -125,10 +125,12 @@ struct vacinnWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(String(entry.vacinn.result.res[1]).replacingOccurrences(of: ",", with: "."))
-            .font(.title)
-            .fontWeight(.heavy)
-            .foregroundColor(Color.black)
+        ZStack {
+            Text(String(entry.vacinn.result.res[1]).replacingOccurrences(of: ",", with: "."))
+                .font(.title)
+                .fontWeight(.heavy)
+                .foregroundColor(Color.black)
+        }.widgetURL(URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties")!)
     }
 }
 
@@ -142,7 +144,6 @@ struct vacinnWidget: Widget {
         .configurationDisplayName("Vacinn Watcher")
         .description("Watch the vacinns from your homescreen with the new vacinn widget.")
         .supportedFamilies([.systemSmall])
-        .widgetURL(URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties")!)
     }
 }
 
