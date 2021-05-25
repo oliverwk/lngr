@@ -103,10 +103,10 @@ public class LingerieFetcher: ObservableObject {
                                 self.index(index: i)
                             }
                         } else {
-                            self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error?.localizedDescription)")
+                            self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error?.localizedDescription!)")
                         }
                     } catch {
-                        self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error?.localizedDescription)")
+                        self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error?.localizedDescription!)")
                     }
                 } else if let error = error {
                     self.simpleError()
