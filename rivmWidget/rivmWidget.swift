@@ -142,6 +142,7 @@ struct vacinnWidget: Widget {
         .configurationDisplayName("Vacinn Watcher")
         .description("Watch the vacinns from your homescreen with the new vacinn widget.")
         .supportedFamilies([.systemSmall])
+        .widgetURL(URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties")!)
     }
 }
 
