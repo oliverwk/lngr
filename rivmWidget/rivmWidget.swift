@@ -20,7 +20,7 @@ let OneVacinn = Vacinn(result: Selector(res: ["0","0","0"]))
 
 struct Vacinn: Codable {
     public var result: Selector
-
+    
     enum CodingKeys: String, CodingKey {
         case result = "result"
     }
@@ -34,7 +34,7 @@ extension Vacinn: CustomStringConvertible {
 
 struct Selector: Codable {
     public var res: [String]
-
+    
     enum CodingKeys: String, CodingKey {
         case res = "vacs"
     }
@@ -57,7 +57,7 @@ div[color=\\"data.primary\\"]
         let urlRequest = URLRequest(url: url)
         logger.log("[LOG] Getting the Data from: \(urlString, privacy: .public)")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
-
+            
             //Parsing the json here
             guard error == nil, let content = data else {
                 logger.fault("[ERROR] Error getting data from API")
@@ -71,7 +71,7 @@ div[color=\\"data.primary\\"]
             //as! NSObject
             //description
             logger.log("[LOG] Parsing json from the data \(json, privacy: .public)")
-
+            
             let lngrApiResponse: Vacinn
             do {
                 lngrApiResponse = try JSONDecoder().decode(Vacinn.self, from: jsonData)
@@ -87,16 +87,16 @@ div[color=\\"data.primary\\"]
         logger.info("[LOG] Making the network requests")
         task.resume()
     }
-
+    
     func placeholder(in context: Context) -> VacinnEntry {
         VacinnEntry(date: Date(), vacinn: OneVacinn)
     }
-
+    
     func getSnapshot(in context: Context, completion: @escaping (VacinnEntry) -> ()) {
         let entry = VacinnEntry(date: Date(), vacinn: OneVacinn)
         completion(entry)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         logger.info("[LOG] Making the timeline")
         var entries: [VacinnEntry] = []
@@ -123,14 +123,13 @@ struct VacinnEntry: TimelineEntry {
 
 struct vacinnWidgetEntryView : View {
     var entry: Provider.Entry
-
+    
     var body: some View {
-        ZStack {
-            Text(String(entry.vacinn.result.res[1]).replacingOccurrences(of: ",", with: "."))
-                .font(.title)
-                .fontWeight(.heavy)
-                .foregroundColor(Color.black)
-        }.widgetURL(URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties")!)
+        Text(String(entry.vacinn.result.res[1]).replacingOccurrences(of: ",", with: "."))
+            .font(.title)
+            .fontWeight(.heavy)
+            .foregroundColor(Color.black)
+            .widgetURL(URL(string: "vacinn-widget://")!)
     }
 }
 

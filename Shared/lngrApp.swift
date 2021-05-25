@@ -5,10 +5,10 @@
 //  Created by Olivier Wittop Koning on 04/03/2021.
 //
 
+import MobileCoreServices
+import CoreSpotlight
 import SwiftUI
 import os
-import CoreSpotlight
-import MobileCoreServices
 
 @main
 struct lngrApp: App {
@@ -21,6 +21,10 @@ struct lngrApp: App {
         WindowGroup {
             ContentView()
                 .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
+                .onOpenURL({ url in
+                    guard url.scheme == "vacinn-widget" else { return }
+                    openURL(URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties")!)
+                })
         }
     }
     
