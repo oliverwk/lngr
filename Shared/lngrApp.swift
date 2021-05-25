@@ -29,7 +29,8 @@ struct lngrApp: App {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                             self.logger.error("Stoping the app")
                             if url.scheme == "vacinn-widget" {
-                                exit(0);
+                                self.logger.error("app stoped here")
+                               //exit(0);
                             }
                         }
                     }
