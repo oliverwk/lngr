@@ -94,17 +94,20 @@ public class LingerieFetcher: ObservableObject {
                     }
                     let defaults = UserDefaults.standard
                     var lingeriez: [Lingerie]
-                    if let savedLingerie = defaults.object(forKey: "id") as? [Lingerie] {
-                        lingeriez = savedLingerie
-                        self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
-                        for i in  0...self.lingeries.count - 1 {
-                            self.logger.log("[SPOTLIGHT] indexing i: \(i, privacy: .public)")
-                            self.index(index: i)
+                    do {
+                        if let savedLingerie = defaults.object(forKey: "id") as [Lingerie] {
+                            lingeriez = savedLingerie
+                            self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
+                            for i in  0...self.lingeries.count - 1 {
+                                self.logger.log("[SPOTLIGHT] indexing i: \(i, privacy: .public)")
+                                self.index(index: i)
+                            }
+                        } else {
+                            self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error)")
                         }
-                    } else {
-                        self.logger.error("[SPOTLIGHT] failed to save lingeriez:")
+                    } catch {
+                        self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error)")
                     }
-                    
                 } else if let error = error {
                     self.simpleError()
                     if let response = response as? HTTPURLResponse {
