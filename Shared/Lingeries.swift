@@ -94,7 +94,7 @@ public class LingerieFetcher: ObservableObject {
                     }
                     let defaults = UserDefaults.standard
                     var lingeriez: [String]
-                    if let savedLingerie = defaults.object(forKey: "id") as? [String] {
+                    if let savedLingerie = defaults.object(forKey: "id") as? [Lingerie] {
                         lingeriez = savedLingerie
                         self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
                         for i in  0...self.lingeries.count - 1 {
