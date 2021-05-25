@@ -23,7 +23,9 @@ struct lngrApp: App {
                 .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
                 .onOpenURL { url in
                     guard url.scheme == "vacinn-widget" else { return }
-                    openURL(URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties")!)
+                    if let theUrl = URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties") {
+                        UIApplication.shared.open(theUrl)
+                    }
                 }
         }
     }
