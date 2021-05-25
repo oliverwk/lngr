@@ -39,7 +39,7 @@ struct lngrApp: App {
             self.logger.notice("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
             if let savedLingerie = defaults.object(forKey: "id") as? [Lingerie] {
                 var i = 0
-                self.logger.notice("[SPOTLIGHT] Is savedLingerie an array: \(savedLingerie[0], privacy: .public), hopelijk is dit een id: \(savedLingerie[0].d, privacy: .public)")
+                self.logger.notice("[SPOTLIGHT] Is savedLingerie an array: \(savedLingerie[0], privacy: .public), hopelijk is dit een id: \(savedLingerie[0].id, privacy: .public)")
                 for lngr in savedLingerie {
                     if lngr.id == id {
                         self.logger.notice("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
