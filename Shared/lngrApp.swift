@@ -23,11 +23,13 @@ struct lngrApp: App {
                 .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
                 .onOpenURL { url in
                     guard url.scheme == "vacinn-widget" else { return }
-                    self.logger.log("Opening: \"https://coronadashboard.government.nl/landelijk/vaccinaties\" beacuse the url scheme was: \(url.scheme, privacy: .public)")
+                    self.logger.log("Opening: \"https://coronadashboard.government.nl/landelijk/vaccinaties\" beacuse the url scheme was: \(url.scheme!, privacy: .public)")                    
                     if let theUrl = URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties") {
                         UIApplication.shared.open(theUrl)
                         if url.scheme == "vacinn-widget" {
-                            exit(0);
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                exit(0);
+                            }
                         }
                     }
                 }
