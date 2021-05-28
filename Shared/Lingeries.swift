@@ -15,14 +15,14 @@ struct Lingeries: View {
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
-    
+
     init(Url: String, title: String) {
         self.Url = Url
         self.title = title
         _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!) )
     }
     let locale = Locale.current
-    
+
     var body: some View {
         NavigationView {
             List {
@@ -61,11 +61,12 @@ public class LingerieFetcher: ObservableObject {
         category: "LingerieFetcher"
     )
     @Published var lingeries = [Lingerie]()
-    
+
     public func simpleError() {
         let genarator = UINotificationFeedbackGenerator()
         genarator.notificationOccurred(.error)
     }
+
     public func index(index: Int) {
         let lingerie = self.lingeries[index]
         self.logger.log("[SPOTLIGHT] indexing \(index, privacy: .public): \(lingerie.description, privacy: .public)")
@@ -82,7 +83,7 @@ public class LingerieFetcher: ObservableObject {
             }
         }
     }
-    
+
     init(Url: URL) {
         self.logger.log("Making request with: \(Url.absoluteString, privacy: .public)")
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
@@ -93,8 +94,10 @@ public class LingerieFetcher: ObservableObject {
                         self.lingeries = decodedLists
                     }
                     let defaults = UserDefaults.standard
+                    self.logger.log("Getting things from userDefaults")
                     var lingeriez: [Lingerie]
                     do {
+			// Dit vind hij wrs niet zo leuk met booting
                         if let savedLingerie = defaults.object(forKey: "id") as? [Lingerie] {
                             lingeriez = savedLingerie
                             self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
@@ -138,7 +141,7 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible {
     public var description: String {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls) }"
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case naam

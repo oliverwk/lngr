@@ -33,6 +33,7 @@ struct lngrApp: App {
     }
     
     func handleSpotlight(_ userActivity: NSUserActivity) {
+        self.logger.log("[SPOTLIGHT] Opend a spotlight link")
         let defaults = UserDefaults.standard
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
             self.logger.notice("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
