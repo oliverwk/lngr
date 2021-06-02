@@ -7,9 +7,11 @@
 
 import SwiftUI
 import Combine
+import Foundation
 import CoreSpotlight
 import MobileCoreServices
 import os
+
 
 struct Lingeries: View {
     let Url: String
