@@ -37,7 +37,25 @@ struct lngrApp: App {
         let defaults = UserDefaults.standard
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
             self.logger.notice("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
-            if let savedLingerie = defaults.object(forKey: "lngrs") as? [Lingerie] {
+            do {
+                if let lngrrAsData = UserDefaults.standard.object(forKey: "lngrs") as? Data {
+                    if let savedLingerie = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [Lingerie.self], from: lngrrAsData) {
+                        var i = 0
+                        self.logger.log("[SPOTLIGHT] Is savedLingerie an array: \(savedLingerie[0], privacy: .public), hopelijk is dit een id: \(savedLingerie[0].id, privacy: .public)")
+                        for lngr in savedLingerie {
+                            if lngr.id == id {
+                                self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
+                                break
+                            }
+                            i += 1
+                        }
+                    }
+                }
+            } catch (let error) {
+                    self.logger.log("Failed to convert lngr to Data : \(error.localizedDescription)")
+            }
+            
+            /*if let savedLingerie = defaults.object(forKey: "lngrs") as? [Lingerie] {
                 var i = 0
                 self.logger.log("[SPOTLIGHT] Is savedLingerie an array: \(savedLingerie[0], privacy: .public), hopelijk is dit een id: \(savedLingerie[0].id, privacy: .public)")
                 for lngr in savedLingerie {
@@ -47,7 +65,7 @@ struct lngrApp: App {
                     }
                     i += 1
                 }
-            }
+            }*/
         }
     }
 }
