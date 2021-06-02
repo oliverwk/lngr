@@ -45,7 +45,7 @@ struct lngrApp: App {
                         for lngr in loadedLngr {
                             if lngr.id == id {
                                 self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
-                                self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) with name \(loadedLngr[i].name, privacy: .public)")
+                                self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) with name \(loadedLngr[i].naam, privacy: .public)")
                                 break
                             }
                             i += 1
