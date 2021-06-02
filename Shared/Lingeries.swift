@@ -105,15 +105,6 @@ public class LingerieFetcher: ObservableObject {
                         self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as! NSObject)")
                     }
                     
-                    /*do {
-                        // Dit vind hij wrs niet zo leuk met booting
-                        self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
-                        defaults.set(decodedLists, forKey: "lngrs")
-                        self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists, privacy: .public)")
-                    } catch {
-                     self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as! NSObject)")
-                    }*/
-                    
                     self.logger.log("[SPOTLIGHT] Setting in spotlight")
                     for i in  0...self.lingeries.count - 1 {
                         self.logger.log("[SPOTLIGHT] indexing i: \(i, privacy: .public)")
