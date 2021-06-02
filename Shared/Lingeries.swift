@@ -94,22 +94,18 @@ public class LingerieFetcher: ObservableObject {
                         self.lingeries = decodedLists
                     }
                     let defaults = UserDefaults.standard
-                    self.logger.log("Getting things from userDefaults")
-                    var lingeriez: [Lingerie]
                     do {
-			// Dit vind hij wrs niet zo leuk met booting
-                        if let savedLingerie = defaults.object(forKey: "id") as? [Lingerie] {
-                            lingeriez = savedLingerie
-                            self.logger.log("[SPOTLIGHT] savedLingerie: \(lingeriez, privacy: .public)")
-                            for i in  0...self.lingeries.count - 1 {
-                                self.logger.log("[SPOTLIGHT] indexing i: \(i, privacy: .public)")
-                                self.index(index: i)
-                            }
-                        } else {
-                            self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error?.localizedDescription as! NSObject)")
-                        }
+                        // Dit vind hij wrs niet zo leuk met booting
+                        self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
+                        defaults.set(decodedLists, forKey: "lngrs")
+                        self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists, privacy: .public)")
                     } catch {
-                        self.logger.error("[SPOTLIGHT] failed to save lingeriez: \(error.localizedDescription as! NSObject)")
+                        self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as! NSObject)")
+                    }
+                    self.logger.log("[SPOTLIGHT] Setting in spotlight")
+                    for i in  0...self.lingeries.count - 1 {
+                        self.logger.log("[SPOTLIGHT] indexing i: \(i, privacy: .public)")
+                        self.index(index: i)
                     }
                 } else if let error = error {
                     self.simpleError()
