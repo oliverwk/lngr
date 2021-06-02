@@ -15,14 +15,14 @@ struct Lingeries: View {
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
-
+    
     init(Url: String, title: String) {
         self.Url = Url
         self.title = title
         _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!) )
     }
     let locale = Locale.current
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -61,19 +61,19 @@ public class LingerieFetcher: ObservableObject {
         category: "LingerieFetcher"
     )
     @Published var lingeries = [Lingerie]()
-
+    
     public func simpleError() {
         let genarator = UINotificationFeedbackGenerator()
         genarator.notificationOccurred(.error)
     }
-
+    
     public func index(index: Int) {
         let lingerie = self.lingeries[index]
         self.logger.log("[SPOTLIGHT] indexing \(index, privacy: .public): \(lingerie.description, privacy: .public)")
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         attributeSet.title = lingerie.naam
         attributeSet.contentDescription = "De \(lingerie.naam) kost \(lingerie.prijs)"
-
+        
         let item = CSSearchableItem(uniqueIdentifier: lingerie.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
@@ -83,7 +83,7 @@ public class LingerieFetcher: ObservableObject {
             }
         }
     }
-
+    
     init(Url: URL) {
         self.logger.log("Making request with: \(Url.absoluteString, privacy: .public)")
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
@@ -98,7 +98,16 @@ public class LingerieFetcher: ObservableObject {
                         self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
                         let encoder = JSONEncoder()
                         if let encoded = try? encoder.encode(self.lingeries) {
-                            defaults.set(encoded, forKey: "lngrs")
+                            if let savedHash = defaults.object(forKey: "lngrsHash") as? String {
+                                let hashed = SHA256.hash(data: encoded)
+                                let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
+                                if savedHash == TheHash {
+                                    self.logger.log("[SPOTLIGHT] data was the same: \(savedHash, privacy: .public) == \(TheHash, privacy: .public)")
+                                } else {
+                                    defaults.set(encoded, forKey: "lngrs")
+                                    defaults.set(TheHash, forKey: "lngrsHash")
+                                }
+                            }
                         }
                         self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists, privacy: .public)")
                     } catch {
@@ -140,7 +149,7 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible {
     public var description: String {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls) }"
     }
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case naam
