@@ -96,9 +96,10 @@ public class LingerieFetcher: ObservableObject {
                     let defaults = UserDefaults.standard
                     do {
                         self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
-                        let lngrAsData = try NSKeyedArchiver.archivedData(withRootObject: self.lingeries, requiringSecureCoding: true)
-                        UserDefaults.standard.set(lngrAsData, forKey: "lngrs")
-                        UserDefaults.standard.synchronize()
+                        let encoder = JSONEncoder()
+                        if let encoded = try? encoder.encode(self.lingeries) {
+                            defaults.set(encoded, forKey: "lngrs")
+                        }
                         self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists, privacy: .public)")
                     } catch {
                         self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as! NSObject)")
