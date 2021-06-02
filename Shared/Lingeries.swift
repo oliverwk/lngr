@@ -73,7 +73,8 @@ public class LingerieFetcher: ObservableObject {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         attributeSet.title = lingerie.naam
         attributeSet.contentDescription = "De \(lingerie.naam) kost \(lingerie.prijs)"
-        
+        attributeSet.thumbnailURL = URL(string: lingerie.img_url)!
+
         let item = CSSearchableItem(uniqueIdentifier: lingerie.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
