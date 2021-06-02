@@ -39,8 +39,7 @@ struct lngrApp: App {
             self.logger.notice("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
             do {
                 if let savedlngr = defaults.object(forKey: "lngrs") as? Data {
-                    let decoder = JSONDecoder()
-                    if let loadedLngr = try? decoder.decode([Lingerie.self], from: savedlngr) {
+                    if let loadedLngr = try? JSONDecoder().decode([Lingerie].self, from: savedlngr) {
                         var i = 0
                         self.logger.log("[SPOTLIGHT] Is loadedLngr an array: \(loadedLngr[0], privacy: .public), hopelijk is dit een id: \(loadedLngr[0].id, privacy: .public)")
                         for lngr in loadedLngr {
