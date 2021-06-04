@@ -38,7 +38,7 @@ struct ContentView: View {
                 .tag(1)
         }.blur(radius: blurRadius)
         .onAppear(perform: {
-            let reason = "Go to lngr"
+            let reason = "Authenticate to go to lngr"
             authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
 
                 if success {
