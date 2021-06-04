@@ -42,13 +42,11 @@ struct ContentView: View {
             authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
 
                 if success {
-                    // Move to the main thread because a state update triggers UI changes.
                     DispatchQueue.main.async {
                         self.blurRadius = 0.0
                     }
                 } else {
                     print(error?.localizedDescription ?? "Failed to authenticate")
-
                     // Fall back to a asking for username and password.
                     // ...
                 }
