@@ -14,12 +14,19 @@ let logger = Logger(
     subsystem: "nl.wittopkoning.lngr.GetCheapest",
     category: "LngrIntent"
 )
+
 class IntentHandler: INExtension {
     override func handler(for intent: INIntent) -> Any {
+        logger.log("Beginning to handle GetCheapestIntentHandler")
+        print("Handleing: \((intent as! GetCheapestIntent).value(forKey: "sort") ?? "theSort")")
+       
         // This is the default implementation.  If you want different objects to handle different intents,
         // you can override this and return the handler you want for that particular intent.
         // let intent = IntentHelper.getCheapestIntent(for: sort)
-        return self
+        guard intent is GetCheapestIntent else {
+                  fatalError("Unhandled intent type: \(intent)")
+        }
+        return GetCheapestIntentHandler()
     }
 }
 
@@ -51,7 +58,8 @@ public class GetCheapestIntentHandler: NSObject, GetCheapestIntentHandling {
     }
     
     public func resolveSort(for intent: GetCheapestIntent, with completion: @escaping (GetCheapestSortResolutionResult) -> Void) {
-
+        logger.log("CheapestIntentHandler: \(intent, privacy: .public)")
+        
         let sort = intent.sort
         switch intent.sort {
             case Lingeries.slip:
