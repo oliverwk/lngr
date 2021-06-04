@@ -69,20 +69,19 @@ public class LingerieFetcher: ObservableObject {
         genarator.notificationOccurred(.error)
     }
     
-    public func index(index: Int) {
-        let lingerie = self.lingeries[index]
-        self.logger.log("[SPOTLIGHT] indexing \(index, privacy: .public): \(lingerie.description, privacy: .public)")
+    func index(_ lngr: Lingerie) {
+        self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-        attributeSet.title = lingerie.naam
-        attributeSet.contentDescription = "De \(lingerie.naam) kost \(lingerie.prijs)"
-        attributeSet.thumbnailURL = URL(string: lingerie.img_url)!
-
-        let item = CSSearchableItem(uniqueIdentifier: lingerie.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
+        attributeSet.title = lngr.naam
+        attributeSet.contentDescription = "De \(lngr.naam) kost \(lngr.prijs)"
+        attributeSet.thumbnailURL = URL(string: lngr.img_url)!
+        
+        let item = CSSearchableItem(uniqueIdentifier: lngr.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
                 self.logger.error("[SPOTLIGHT] [ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
             } else {
-                self.logger.log("[SPOTLIGHT] Search item successfully indexed! \(lingerie.description, privacy: .public)")
+                self.logger.log("[SPOTLIGHT] Search item successfully indexed! \(lngr.description, privacy: .public)")
             }
         }
     }
@@ -100,42 +99,44 @@ public class LingerieFetcher: ObservableObject {
                     do {
                         self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
                         let encoder = JSONEncoder()
-                        if let encoded = try? encoder.encode(self.lingeries) {
-                            if let savedHash = defaults.object(forKey: "lngrsHash") as? String {
-                                let hashed = SHA256.hash(data: encoded)
-                                let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
-                                if savedHash == TheHash {
-                                    self.logger.log("[SPOTLIGHT] data was the same: \(savedHash, privacy: .public) == \(TheHash, privacy: .public)")
-                                } else {
-                                    defaults.set(encoded, forKey: "lngrs")
-                                    defaults.set(TheHash, forKey: "lngrsHash")
+                        
+                        let encoded = try encoder.encode(self.lingeries)
+                        if let savedHash = defaults.object(forKey: "lngrsHash") as? String {
+                            let hashed = SHA256.hash(data: encoded)
+                            let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
+                            if savedHash == TheHash {
+                                self.logger.log("[SPOTLIGHT] data was the same: \(savedHash, privacy: .public) == \(TheHash, privacy: .public)")
+                            } else {
+                                defaults.set(encoded, forKey: "lngrs")
+                                defaults.set(TheHash, forKey: "lngrsHash")
+                                self.logger.log("[SPOTLIGHT] Setting in spotlight")
+                                for lngr in self.lingeries {
+                                    self.logger.log("[SPOTLIGHT] indexing lngr: \(lngr, privacy: .public)")
+                                    self.index(lngr)
                                 }
                             }
                         }
                         self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists, privacy: .public)")
                     } catch {
-                        self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as! NSObject)")
+                        self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as NSObject)")
                     }
-                    
-                    self.logger.log("[SPOTLIGHT] Setting in spotlight")
-                    for i in  0...self.lingeries.count - 1 {
-                        self.logger.log("[SPOTLIGHT] indexing i: \(i, privacy: .public)")
-                        self.index(index: i)
-                    }
+                   
                 } else if let error = error {
                     self.simpleError()
+                    
                     if let response = response as? HTTPURLResponse {
-                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) \n Met de error: \(error.localizedDescription, privacy: .public)")
+                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) \n Met de error: \(error.localizedDescription, privacy: .public) en data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
                     } else {
                         self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                     }
                 }
             } catch {
                 self.simpleError()
+                
                 if let response = response as? HTTPURLResponse {
-                    self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                    self.logger.fault("[ERROR] Er was geen data met het laden een url: \(Url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public) met data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
                 } else {
-                    self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) met data \(data as! NSObject, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                    self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(Url, privacy: .public) met data \(String(decoding: data!, as: UTF8.self), privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                 }
             }
         }.resume()

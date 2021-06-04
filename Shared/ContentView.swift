@@ -9,10 +9,13 @@
 
 import Combine
 import SwiftUI
+import LocalAuthentication
 
 
 struct ContentView: View {
     @State private var selection = 0
+    @State private var blurRadius: CGFloat = 50.0
+    private var authContext = LAContext()
     
     var body: some View {
         TabView(selection: $selection){
@@ -33,7 +36,24 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
-        }
+        }.blur(radius: blurRadius)
+        .onAppear(perform: {
+            let reason = "Go to lngr"
+            authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+
+                if success {
+                    // Move to the main thread because a state update triggers UI changes.
+                    DispatchQueue.main.async {
+                        self.blurRadius = 0.0
+                    }
+                } else {
+                    print(error?.localizedDescription ?? "Failed to authenticate")
+
+                    // Fall back to a asking for username and password.
+                    // ...
+                }
+            }
+        })
     }
 }
 

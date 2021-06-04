@@ -37,36 +37,20 @@ struct lngrApp: App {
         let defaults = UserDefaults.standard
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
             self.logger.notice("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
-            do {
-                if let savedlngr = defaults.object(forKey: "lngrs") as? Data {
-                    if let loadedLngr = try? JSONDecoder().decode([Lingerie].self, from: savedlngr) {
-                        var i = 0
-                        self.logger.log("[SPOTLIGHT] Is loadedLngr an array: \(loadedLngr[0], privacy: .public), hopelijk is dit een id: \(loadedLngr[0].id, privacy: .public)")
-                        for lngr in loadedLngr {
-                            if lngr.id == id {
-                                self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
-                                self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) with name \(loadedLngr[i].naam, privacy: .public)")
-                                break
-                            }
-                            i += 1
+            if let savedlngr = defaults.object(forKey: "lngrs") as? Data {
+                if let loadedLngr = try? JSONDecoder().decode([Lingerie].self, from: savedlngr) {
+                    var i = 0
+                    self.logger.log("[SPOTLIGHT] Is loadedLngr an array: \(loadedLngr[0], privacy: .public), hopelijk is dit een id: \(loadedLngr[0].id, privacy: .public)")
+                    for lngr in loadedLngr {
+                        if lngr.id == id {
+                            self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
+                            self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) with name \(loadedLngr[i].naam, privacy: .public)")
+                            break
                         }
+                        i += 1
                     }
                 }
-            } catch {
-                    self.logger.log("Failed to convert lngr to Data : \(error.localizedDescription)")
             }
-            
-            /*if let savedLingerie = defaults.object(forKey: "lngrs") as? [Lingerie] {
-                var i = 0
-                self.logger.log("[SPOTLIGHT] Is savedLingerie an array: \(savedLingerie[0], privacy: .public), hopelijk is dit een id: \(savedLingerie[0].id, privacy: .public)")
-                for lngr in savedLingerie {
-                    if lngr.id == id {
-                        self.logger.notice("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
-                        break
-                    }
-                    i += 1
-                }
-            }*/
         }
     }
 }
