@@ -216,11 +216,11 @@
 				<array>
 					<dict>
 						<key>INIntentResponseCodeConciseFormatString</key>
-						<string>De ${sort} is het goedkoopst</string>
+						<string>De ${sort} is het goedkoopst voor maar ${lngr.prijs} in het ${lngr.kleur}</string>
 						<key>INIntentResponseCodeConciseFormatStringID</key>
 						<string>cFLgRf</string>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>De ${sort} is het goedkoopst</string>
+						<string>De ${sort} is het goedkoopst voor maar ${lngr.prijs} in het ${lngr.kleur}</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>G6FBtp</string>
 						<key>INIntentResponseCodeName</key>
@@ -230,11 +230,11 @@
 					</dict>
 					<dict>
 						<key>INIntentResponseCodeConciseFormatString</key>
-						<string>error</string>
+						<string>Error</string>
 						<key>INIntentResponseCodeConciseFormatStringID</key>
 						<string>9jpH6t</string>
 						<key>INIntentResponseCodeFormatString</key>
-						<string>error</string>
+						<string>Error</string>
 						<key>INIntentResponseCodeFormatStringID</key>
 						<string>omAdhR</string>
 						<key>INIntentResponseCodeName</key>
@@ -254,9 +254,7 @@
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
-				<integer>4</integer>
-				<key>INIntentResponseOutput</key>
-				<string>sort</string>
+				<integer>9</integer>
 				<key>INIntentResponseParameters</key>
 				<array>
 					<dict>
@@ -277,6 +275,24 @@
 						<key>INIntentResponseParameterType</key>
 						<string>Integer</string>
 					</dict>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Lngr</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>j3kgeJ</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>2</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>lngr</string>
+						<key>INIntentResponseParameterObjectType</key>
+						<string>TheLingerie</string>
+						<key>INIntentResponseParameterObjectTypeNamespace</key>
+						<string>pD4TDI</string>
+						<key>INIntentResponseParameterTag</key>
+						<integer>9</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>Object</string>
+					</dict>
 				</array>
 			</dict>
 			<key>INIntentTitle</key>
@@ -290,6 +306,100 @@
 		</dict>
 	</array>
 	<key>INTypes</key>
-	<array/>
+	<array>
+		<dict>
+			<key>INTypeDisplayName</key>
+			<string>TheLingerie</string>
+			<key>INTypeDisplayNameID</key>
+			<string>Q0IWpG</string>
+			<key>INTypeLastPropertyTag</key>
+			<integer>103</integer>
+			<key>INTypeName</key>
+			<string>TheLingerie</string>
+			<key>INTypeProperties</key>
+			<array>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>1</integer>
+					<key>INTypePropertyName</key>
+					<string>identifier</string>
+					<key>INTypePropertyTag</key>
+					<integer>1</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>2</integer>
+					<key>INTypePropertyName</key>
+					<string>displayString</string>
+					<key>INTypePropertyTag</key>
+					<integer>2</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>3</integer>
+					<key>INTypePropertyName</key>
+					<string>pronunciationHint</string>
+					<key>INTypePropertyTag</key>
+					<integer>3</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>4</integer>
+					<key>INTypePropertyName</key>
+					<string>alternativeSpeakableMatches</string>
+					<key>INTypePropertySupportsMultipleValues</key>
+					<true/>
+					<key>INTypePropertyTag</key>
+					<integer>4</integer>
+					<key>INTypePropertyType</key>
+					<string>SpeakableString</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDisplayName</key>
+					<string>Prijs</string>
+					<key>INTypePropertyDisplayNameID</key>
+					<string>GXXUIQ</string>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>5</integer>
+					<key>INTypePropertyName</key>
+					<string>prijs</string>
+					<key>INTypePropertyTag</key>
+					<integer>101</integer>
+					<key>INTypePropertyType</key>
+					<string>Decimal</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDisplayName</key>
+					<string>Kleur</string>
+					<key>INTypePropertyDisplayNameID</key>
+					<string>xmWZ4U</string>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>6</integer>
+					<key>INTypePropertyName</key>
+					<string>kleur</string>
+					<key>INTypePropertySupportsMultipleValues</key>
+					<true/>
+					<key>INTypePropertyTag</key>
+					<integer>103</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
