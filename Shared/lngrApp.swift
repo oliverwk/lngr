@@ -38,10 +38,9 @@ struct lngrApp: App {
     func handleSpotlight(_ userActivity: NSUserActivity) {
         self.logger.log("[SPOTLIGHT] Opend a spotlight link")
         let defaults = UserDefaults.standard
-        print(userActivity.userInfo as Any)
+        self.logger.log("userInfo: \(userActivity.userInfo.debugDescription, privacy: .public)")
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
             self.logger.log("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
-            // In curtom attrubte json string zetten of als id json string en dan die hier docden
             if let savedlngr = defaults.data(forKey: "lngrs") as Data? {
                 self.logger.log("savedlngr: \(savedlngr, privacy: .public)")
                 if let loadedLngr = try? JSONDecoder().decode([Lingerie].self, from: savedlngr) {

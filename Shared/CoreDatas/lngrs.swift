@@ -85,7 +85,7 @@ class LngrFetcher: ObservableObject {
             do {
                 if let d = data {
                     let decodedLists = try JSONDecoder().decode([Lingerie].self, from: d)
-                    self.logger.log("Parsed json \(decodedLists[0])")
+                    self.logger.log("Parsed json \(decodedLists[0], privacy: .public)")
                     DispatchQueue.main.async {
                         self.lngrs = decodedLists
                     }

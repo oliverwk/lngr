@@ -16,13 +16,13 @@ import os
 
 struct Lingeries: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
     @StateObject var sreachModel: lngrSreachModel
     
-
+    
     init(Url: String, title: String, sreachModel: lngrSreachModel) {
         self.Url = Url
         self.title = title
@@ -35,7 +35,7 @@ struct Lingeries: View {
     var body: some View {
         NavigationView {
             if sreachModel.IsSpotlightLink {
-                LinkView(lingerie: sreachModel.lingerie!)
+                LinkView(lingerie: sreachModel.lingerie!, FoundInSpotlight: true, sreachModel: sreachModel)
             } else {
                 List {
                     ForEach(github.lingeries) { TheLingerie in
@@ -80,9 +80,10 @@ public class LingerieFetcher: ObservableObject {
         genarator.notificationOccurred(.error)
     }
     
+    
     func index(_ lngr: Lingerie) {
         self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
-//        let attributeSet = CSSearchableItemAttributeSet(contentType: UTType)
+        //        let attributeSet = CSSearchableItemAttributeSet(contentType: UTType)
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         attributeSet.title = lngr.naam
         attributeSet.contentDescription = "De \(lngr.naam) kost \(lngr.prijs)"
@@ -137,7 +138,7 @@ public class LingerieFetcher: ObservableObject {
                             defaults.set(TheHash, forKey: "lngrsHash")
                             self.logger.log("[SPOTLIGHT] No lngrhash in UserDefaults")
                         }
-                       
+                        
                     } catch {
                         self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as NSObject)")
                     }

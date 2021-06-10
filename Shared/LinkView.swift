@@ -11,9 +11,14 @@ import os
 
 struct LinkView: View {
     let lingerie: Lingerie
+    let FoundInSpotlight: Bool?
+    let sreachModel: lngrSreachModel?
     let locale = Locale.current
+    
     @StateObject private var ImageFetcher: ImageFetchers
-    init(lingerie: Lingerie) {
+    init(lingerie: Lingerie, FoundInSpotlight: Bool? = false, sreachModel: lngrSreachModel? = nil) {
+        self.FoundInSpotlight = FoundInSpotlight
+        self.sreachModel = sreachModel
         self.lingerie = lingerie
         _ImageFetcher = StateObject(wrappedValue: ImageFetchers(ImageUrls: lingerie.imageUrls))
     }
@@ -34,7 +39,6 @@ struct LinkView: View {
                                     ImageFetcher.index -= 1
                                     ImageFetcher.load()
                                 } else if value.translation.width > 0 {
-                                    // right
                                     ImageFetcher.index += 1
                                     ImageFetcher.load()
                                 } else {
@@ -45,7 +49,12 @@ struct LinkView: View {
             Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                 .padding(.bottom, 10.0)
                 .foregroundColor(.secondary)
-        }.navigationBarTitle(Text(lingerie.naam), displayMode: .inline)
+        }.navigationBarBackButtonHidden(false).navigationBarTitle(Text(lingerie.naam), displayMode: .inline)
+        .onAppear {
+            if FoundInSpotlight! {
+//                self.sreachModel?.IsSpotlightLink = false
+            }
+        }
     }
     
     public class ImageFetchers: ObservableObject {
