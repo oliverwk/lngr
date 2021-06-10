@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import CoreData
 import CryptoKit
 import CoreSpotlight
 import MobileCoreServices
@@ -14,15 +15,18 @@ import os
 
 
 struct Lingeries: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
     @StateObject var sreachModel: lngrSreachModel
     
+
     init(Url: String, title: String, sreachModel: lngrSreachModel) {
         self.Url = Url
         self.title = title
-        _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!) )
+        _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!))
         _sreachModel = StateObject(wrappedValue: sreachModel) 
         print("sreachModel of \(title): \(sreachModel)")
     }
@@ -78,9 +82,13 @@ public class LingerieFetcher: ObservableObject {
     
     func index(_ lngr: Lingerie) {
         self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
+//        let attributeSet = CSSearchableItemAttributeSet(contentType: UTType)
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         attributeSet.title = lngr.naam
         attributeSet.contentDescription = "De \(lngr.naam) kost \(lngr.prijs)"
+        attributeSet.containerDisplayName = "slips"
+        attributeSet.contentURL = URL(string: lngr.url)!
+        attributeSet.containerTitle = "slips"
         attributeSet.thumbnailURL = URL(string: lngr.img_url)!
         
         let item = CSSearchableItem(uniqueIdentifier: lngr.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
@@ -106,7 +114,6 @@ public class LingerieFetcher: ObservableObject {
                     do {
                         self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
                         let encoder = JSONEncoder()
-                        
                         let encoded = try encoder.encode(self.lingeries)
                         if let savedHash = defaults.object(forKey: "lngrsHash") as? String {
                             let hashed = SHA256.hash(data: encoded)

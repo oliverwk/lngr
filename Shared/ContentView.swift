@@ -10,10 +10,12 @@
 import Combine
 import SwiftUI
 import LocalAuthentication
+import CoreData
 
 
 struct ContentView: View {
     @EnvironmentObject var sreachModel: lngrSreachModel
+    let persistenceController = PersistenceController.shared
     
     @State private var selection = 0
     @State private var blurRadius: CGFloat = 0.0 // 50.0
@@ -28,10 +30,6 @@ struct ContentView: View {
                         Text("test")
                     }
                 }
-                .onAppear {
-                    print("ContentView appeared!")
-                    print(sreachModel.IsSpotlightLink)
-                }
                 .tag(0)
             Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys", sreachModel: sreachModel)
                 .tabItem {
@@ -41,6 +39,15 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
+            DataView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "externaldrive.badge.wifi")
+                        Text("Data")
+                    }
+                }
+                .tag(2)
         }.blur(radius: blurRadius)
         /*.onAppear(perform: {
             let reason = "Authenticate to go to lngr"

@@ -5,6 +5,7 @@
 //  Created by Olivier Wittop Koning on 04/03/2021.
 //
 
+import Foundation
 import MobileCoreServices
 import CoreSpotlight
 import SwiftUI
@@ -16,12 +17,14 @@ struct lngrApp: App {
         subsystem: "nl.wittopkoning.lngr",
         category: "lngrApp"
     )
+//    let persistenceController = PersistenceController.shared
     @ObservedObject var sreachModel = lngrSreachModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(sreachModel)
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
                 .onOpenURL { url in
                     if url.scheme == "vacinn-widget" {
@@ -39,19 +42,16 @@ struct lngrApp: App {
         let defaults = UserDefaults.standard
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
             self.logger.log("[SPOTLIGHT] Found identifier \(id, privacy: .public)")
-            
-            if let savedlngr = defaults.object(forKey: "lngrs") as? Data {
-                
+            if let savedlngr = defaults.data(forKey: "lngrs") as Data? {
+                print("savedlngr:", savedlngr)
                 if let loadedLngr = try? JSONDecoder().decode([Lingerie].self, from: savedlngr) {
-//                    var i = 0
                     self.logger.log("[SPOTLIGHT] Is loadedLngr an array: \(loadedLngr[0], privacy: .public), hopelijk is dit een id: \(loadedLngr[0].id, privacy: .public)")
                     for theLngr in loadedLngr {
                         if theLngr.id == id {
-//                            self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
+                            // self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) for index \(i, privacy: .public)")
                             self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) with name \(theLngr.naam, privacy: .public)")
                             sreachModel.FoundSpotlightlink(lngr: theLngr)
                         }
-//                        i += 1
                     }
                 }
             } else {
