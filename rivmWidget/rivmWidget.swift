@@ -127,8 +127,9 @@ struct vacinnWidgetEntryView : View {
     var body: some View {
         Text(String(entry.vacinn.result.res[1]).replacingOccurrences(of: ",", with: "."))
             .font(.title)
-            .fontWeight(.heavy)
+            .fontWeight(.bold)
             .foregroundColor(Color.black)
+            .multilineTextAlignment(.center)
             .widgetURL(URL(string: "vacinn-widget://")!)
     }
 }
