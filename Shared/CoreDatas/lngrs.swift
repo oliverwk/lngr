@@ -90,8 +90,8 @@ class LngrFetcher: ObservableObject {
                         self.lngrs = decodedLists
                     }
                     for talngr in decodedLists {
-                        self.logger.log("talngr: \(talngr.id) \(talngr.naam)")
-                        // print("HasID:", (decodedLists.filter { $0.id == talngr.id }).count)
+                        self.logger.log("talngr: \(talngr.id, privacy: .public) \(talngr.naam, privacy: .public)")
+                        // self.logger.log("HasID:", (decodedLists.filter { $0.id == talngr.id }).count, privacy: .public)
                         addItem(lnger: talngr)
                     }
                 } else if let error = error {

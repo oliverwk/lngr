@@ -128,9 +128,16 @@ public class LingerieFetcher: ObservableObject {
                                     self.logger.log("[SPOTLIGHT] indexing lngr: \(lngr, privacy: .public)")
                                     self.index(lngr)
                                 }
+                                self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists.count, privacy: .public)")
                             }
+                        } else {
+                            let hashed = SHA256.hash(data: encoded)
+                            let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
+                            defaults.set(encoded, forKey: "lngrs")
+                            defaults.set(TheHash, forKey: "lngrsHash")
+                            self.logger.log("[SPOTLIGHT] No lngrhash in UserDefaults")
                         }
-                        self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists.count, privacy: .public)")
+                       
                     } catch {
                         self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as NSObject)")
                     }
