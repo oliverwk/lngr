@@ -74,11 +74,13 @@ struct LinkView: View {
             } else if self.index <= -1 {
                 self.index = TheImageUrls.count - 1
             }
-            self.logger.info("\(self.index, privacy: .public) >= \(self.TheImageUrls.count, privacy: .public):\(self.index >= self.TheImageUrls.count, privacy: .public)")
-            URLSession.shared.dataTask(with: URL(string: self.TheImageUrls[self.index])! ) {(data, response, error) in
-                if let image = UIImage(data: data!) {
-                    DispatchQueue.main.async {
-                        self.images = Image(uiImage: image)
+            self.logger.info("\(self.index, privacy: .public) >= \(self.TheImageUrls.count, privacy: .public):\(self.index >= self.TheImageUrls.count, privacy: .public) met url: \(self.TheImageUrls[self.index])!)")
+            URLSession.shared.dataTask(with: URL(string: self.TheImageUrls[self.index])! ) {(d, response, error) in
+                if let data = d {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self.images = Image(uiImage: image)
+                        }
                     }
                 } else {
                     if let response = response as? HTTPURLResponse {
@@ -92,6 +94,7 @@ struct LinkView: View {
                         self.images = Image(systemName: "multiply.circle")
                     }
                 }
+                
             }.resume()
         }
     }

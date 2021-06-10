@@ -21,6 +21,8 @@
 		E64DD17425F1843C00284803 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* RemoteImage.swift */; };
 		E64DD18E25F22A1000284803 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LinkView.swift */; };
 		E64DD18F25F22A1000284803 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LinkView.swift */; };
+		E64FA1A5267213A9003A1A86 /* lngrSreachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */; };
+		E64FA1A6267213A9003A1A86 /* lngrSreachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */; };
 		E65887D4266AB9B500816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		E65887D5266AB9BD00816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		E6B52B81265061BC006DAB5C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D525F3D5D200C9DD32 /* WidgetKit.framework */; };
@@ -79,10 +81,10 @@
 		E607CE612651193A0084F2E7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* RemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrSreachModel.swift; sourceTree = "<group>"; };
 		E68170D525F3D5D200C9DD32 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E68170D725F3D5D200C9DD32 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		E68B5E95260490F700385A7E /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
-		E68B5EB32604912800385A7E /* IntentHandler.swift.old */ = {isa = PBXFileReference; lastKnownFileType = text; path = IntentHandler.swift.old; sourceTree = "<group>"; };
 		E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = rivmWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6B52B84265061BD006DAB5C /* rivmWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rivmWidget.swift; sourceTree = "<group>"; };
 		E6B52B86265061C7006DAB5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,7 +148,7 @@
 				E6D2A15325F373100007EC2D /* Lingeries.swift */,
 				E64DD18D25F22A0F00284803 /* LinkView.swift */,
 				E64DD16C25F1843C00284803 /* RemoteImage.swift */,
-				E68B5EB32604912800385A7E /* IntentHandler.swift.old */,
+				E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */,
 				E6077B7525F175CC00F6F951 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -372,6 +374,7 @@
 				E6D2A15425F373100007EC2D /* Lingeries.swift in Sources */,
 				E64DD17325F1843C00284803 /* RemoteImage.swift in Sources */,
 				E64DD18E25F22A1000284803 /* LinkView.swift in Sources */,
+				E64FA1A5267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
 				E6077B8625F175CD00F6F951 /* lngrApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +388,7 @@
 				E6D2A15525F373100007EC2D /* Lingeries.swift in Sources */,
 				E64DD17425F1843C00284803 /* RemoteImage.swift in Sources */,
 				E64DD18F25F22A1000284803 /* LinkView.swift in Sources */,
+				E64FA1A6267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
 				E6077B8725F175CD00F6F951 /* lngrApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

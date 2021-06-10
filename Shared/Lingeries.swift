@@ -17,41 +17,48 @@ struct Lingeries: View {
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
+    @StateObject var sreachModel: lngrSreachModel
     
-    init(Url: String, title: String) {
+    init(Url: String, title: String, sreachModel: lngrSreachModel) {
         self.Url = Url
         self.title = title
         _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!) )
+        _sreachModel = StateObject(wrappedValue: sreachModel) 
+        print("sreachModel of \(title): \(sreachModel)")
     }
     let locale = Locale.current
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(github.lingeries) { TheLingerie in
-                    ZStack { //Dit is om de pijl weg te halen
-                        NavigationLink(destination: LinkView(lingerie: TheLingerie)) {
-                            EmptyView()
-                        }.hidden()
-                        RemoteImage(url: TheLingerie.img_url)
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(20)
-                            .shadow(radius: 5)
-                            .padding(5.0)
-                            .overlay(Text(TheLingerie.naam)
-                                        .font(.largeTitle)
-                                        .fontWeight(.heavy)
-                                        .shadow(radius: 11)
-                                        .foregroundColor(Color.white))
-                            .overlay(Text("\(locale.currencySymbol ?? "") \(String(TheLingerie.prijs))")
-                                        .font(.title)
-                                        .padding(.bottom, 25.0)
-                                        .shadow(radius: 11)
-                                        .foregroundColor(.secondary)
-                                        .frame(maxHeight: .infinity, alignment: .bottom))
+            if sreachModel.IsSpotlightLink {
+                LinkView(lingerie: sreachModel.lingerie!)
+            } else {
+                List {
+                    ForEach(github.lingeries) { TheLingerie in
+                        ZStack { //Dit is om de pijl weg te halen
+                            NavigationLink(destination: LinkView(lingerie: TheLingerie)) {
+                                EmptyView()
+                            }.hidden()
+                            RemoteImage(url: TheLingerie.img_url)
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(20)
+                                .shadow(radius: 5)
+                                .padding(5.0)
+                                .overlay(Text(TheLingerie.naam)
+                                            .font(.largeTitle)
+                                            .fontWeight(.heavy)
+                                            .shadow(radius: 11)
+                                            .foregroundColor(Color.white))
+                                .overlay(Text("\(locale.currencySymbol ?? "") \(String(TheLingerie.prijs))")
+                                            .font(.title)
+                                            .padding(.bottom, 25.0)
+                                            .shadow(radius: 11)
+                                            .foregroundColor(.secondary)
+                                            .frame(maxHeight: .infinity, alignment: .bottom))
+                        }
                     }
-                }
-            }.navigationBarTitle(Text(title))
+                }.navigationBarTitle(Text(title))
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
@@ -116,11 +123,11 @@ public class LingerieFetcher: ObservableObject {
                                 }
                             }
                         }
-                        self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists, privacy: .public)")
+                        self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists.count, privacy: .public)")
                     } catch {
                         self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as NSObject)")
                     }
-                   
+                    
                 } else if let error = error {
                     self.simpleError()
                     

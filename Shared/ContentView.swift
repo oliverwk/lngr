@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  sock
+//  lngr
 //
 //  Created by Olivier Wittop Koning on 09/05/2020.
 //  Copyright © 2020 Olivier Wittop Koning. All rights reserved.
@@ -13,22 +13,27 @@ import LocalAuthentication
 
 
 struct ContentView: View {
+    @EnvironmentObject var sreachModel: lngrSreachModel
+    
     @State private var selection = 0
-    @State private var blurRadius: CGFloat = 50.0
+    @State private var blurRadius: CGFloat = 0.0 // 50.0
     private var authContext = LAContext()
     
     var body: some View {
         TabView(selection: $selection){
-            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", title: "Slips")
+            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", title: "Slips", sreachModel: sreachModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
                         Text("test")
                     }
                 }
+                .onAppear {
+                    print("ContentView appeared!")
+                    print(sreachModel.IsSpotlightLink)
+                }
                 .tag(0)
-            
-            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys")
+            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys", sreachModel: sreachModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "rectangle.3.offgrid")
@@ -37,10 +42,9 @@ struct ContentView: View {
                 }
                 .tag(1)
         }.blur(radius: blurRadius)
-        .onAppear(perform: {
+        /*.onAppear(perform: {
             let reason = "Authenticate to go to lngr"
             authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
-
                 if success {
                     DispatchQueue.main.async {
                         self.blurRadius = 0.0
@@ -51,7 +55,7 @@ struct ContentView: View {
                     // ...
                 }
             }
-        })
+        })*/
     }
 }
 
