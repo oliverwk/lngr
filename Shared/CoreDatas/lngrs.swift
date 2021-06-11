@@ -60,16 +60,15 @@ class LngrFetcher: ObservableObject {
         
         do {
             try self.viewContexter.save()
-            print("Saved succefully")
-           
+            self.logger.log("Saved succefully")
         } catch {
             // Replace this implementation with code to handle the error appropriately.
             // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nsError = error as NSError
             if nsError.code == 133021 {
-                print("Er is al een item met het zelfde id")
+                self.logger.error("Er is al een item met het zelfde id")
             } else {
-                print("Got an error at addItem: \(nsError.debugDescription)")
+                self.logger.fault("Got an error at addItem: \(nsError.debugDescription)")
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }

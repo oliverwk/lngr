@@ -2,6 +2,7 @@
 # lngr
 - [x] Add loggin to widget
 - [x] Add loggin to main app "So we can see in the console app"
+- [] Add Share button
 - [] Add Handoff
 - [] Add MultipeerConnectivity
 - [] Add chacing to network reqeusts

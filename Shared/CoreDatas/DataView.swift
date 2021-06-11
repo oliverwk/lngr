@@ -18,7 +18,6 @@ struct DataView: View {
     
     init() {
         @ObservedObject var theLngrFetcher = LngrFetcher(viewContext: viewContext)
-        print(theLngrFetcher)
     }
     
     

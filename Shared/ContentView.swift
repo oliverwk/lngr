@@ -18,7 +18,7 @@ struct ContentView: View {
     let persistenceController = PersistenceController.shared
     
     @State private var selection = 0
-    @State private var blurRadius: CGFloat = 0.0 // 50.0
+    @State private var blurRadius: CGFloat = 50.0
     private var authContext = LAContext()
     
     var body: some View {
@@ -43,13 +43,13 @@ struct ContentView: View {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .tabItem {
                     VStack {
-                        Image(systemName: "externaldrive.badge.wifi")
+                        Image(systemName: "externaldrive.badge.icloud")
                         Text("Data")
                     }
                 }
                 .tag(2)
         }.blur(radius: blurRadius)
-        /*.onAppear(perform: {
+        .onAppear(perform: {
             let reason = "Authenticate to go to lngr"
             authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
                 if success {
@@ -59,10 +59,9 @@ struct ContentView: View {
                 } else {
                     print(error?.localizedDescription ?? "Failed to authenticate")
                     // Fall back to a asking for username and password.
-                    // ...
                 }
             }
-        })*/
+        })
     }
 }
 

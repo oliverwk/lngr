@@ -76,7 +76,7 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>pD4TDI</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20D91</string>
+	<string>20F71</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
 	<string>12E262</string>
 	<key>INIntentDefinitionToolsVersion</key>
@@ -88,12 +88,12 @@
 			<string>download</string>
 			<key>INIntentConfigurable</key>
 			<true/>
-			<key>INIntentDefaultImageName</key>
-			<string>String</string>
 			<key>INIntentDescription</key>
 			<string>Get the cheapest lngr</string>
 			<key>INIntentDescriptionID</key>
 			<string>i3DYKo</string>
+			<key>INIntentInput</key>
+			<string>sort</string>
 			<key>INIntentKeyParameter</key>
 			<string>sort</string>
 			<key>INIntentLastParameterTag</key>
@@ -105,7 +105,7 @@
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>See you'r cheapest lngr</string>
+					<string>Get the cheapest ${sort}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>vDMePj</string>
 					<key>INIntentParameterCombinationUpdatesLinked</key>
@@ -125,7 +125,7 @@
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
-					<string>See you'r cheapest lngr</string>
+					<string>Get the cheapest ${sort}</string>
 					<key>INIntentParameterCombinationTitleID</key>
 					<string>gAGZyx</string>
 				</dict>
@@ -255,6 +255,8 @@
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
 				<integer>9</integer>
+				<key>INIntentResponseOutput</key>
+				<string>lngr</string>
 				<key>INIntentResponseParameters</key>
 				<array>
 					<dict>

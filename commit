@@ -1,5 +1,5 @@
 git add .
-git commit -m "Added widgets and loggers"
+git commit -m "Fixed intent and spotlight"
 git branch -M main
 git remote add origin https://github.com/oliverwk/lngr.git
 git push -u origin main

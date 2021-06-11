@@ -29,11 +29,11 @@
 		E64FA1F7267239AA003A1A86 /* coredata.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F4267239AA003A1A86 /* coredata.xcdatamodeld */; };
 		E64FA1F926723B85003A1A86 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F826723B85003A1A86 /* DataView.swift */; };
 		E64FA1FA26723B85003A1A86 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F826723B85003A1A86 /* DataView.swift */; };
-		E64FA1FC26723B8F003A1A86 /* coredata.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F4267239AA003A1A86 /* coredata.xcdatamodeld */; };
 		E64FA1FF26724304003A1A86 /* lngrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1FE26724304003A1A86 /* lngrs.swift */; };
 		E64FA20026724304003A1A86 /* lngrs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1FE26724304003A1A86 /* lngrs.swift */; };
 		E65887D4266AB9B500816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		E65887D5266AB9BD00816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
+		E6B2894226739D3E00354743 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B2894126739D3E00354743 /* model.swift */; };
 		E6B52B81265061BC006DAB5C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D525F3D5D200C9DD32 /* WidgetKit.framework */; };
 		E6B52B82265061BC006DAB5C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D725F3D5D200C9DD32 /* SwiftUI.framework */; };
 		E6B52B85265061BD006DAB5C /* rivmWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B52B84265061BD006DAB5C /* rivmWidget.swift */; };
@@ -98,6 +98,7 @@
 		E68170D525F3D5D200C9DD32 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E68170D725F3D5D200C9DD32 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		E68B5E95260490F700385A7E /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		E6B2894126739D3E00354743 /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = rivmWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6B52B84265061BD006DAB5C /* rivmWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rivmWidget.swift; sourceTree = "<group>"; };
 		E6B52B86265061C7006DAB5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -200,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				E607CE582651190D0084F2E7 /* IntentHandler.swift */,
+				E6B2894126739D3E00354743 /* model.swift */,
 				E607CE612651193A0084F2E7 /* Intents.intentdefinition */,
 				E607CE5A2651190D0084F2E7 /* Info.plist */,
 			);
@@ -431,8 +433,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E64FA1FC26723B8F003A1A86 /* coredata.xcdatamodeld in Sources */,
 				E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */,
+				E6B2894226739D3E00354743 /* model.swift in Sources */,
 				E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
