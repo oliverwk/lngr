@@ -14,9 +14,7 @@ import MobileCoreServices
 import os
 
 
-struct Lingeries: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    
+struct Lingeries: View {    
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
