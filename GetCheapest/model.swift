@@ -15,6 +15,7 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible {
     public var img_url_sec: String
     public var imageUrls: [String]
     public var url: String
+    public var kleur: String
     public var description: String {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url) }"
     }
@@ -27,5 +28,6 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible {
         case img_url_sec = "img_url_sec"
         case imageUrls = "imageUrls"
         case url
+        case kleur
     }
 }

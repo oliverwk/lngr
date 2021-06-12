@@ -27,7 +27,7 @@ struct ContentView: View {
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
-                        Text("test")
+                        Text("Slips")
                     }
                 }
                 .tag(0)

@@ -17,7 +17,7 @@ class lngrSreachModel: ObservableObject {
     @Published var IsSpotlightLink = false
     
     func FoundSpotlightlink(lngr: Lingerie) -> Void {
-        self.logger.log("[SPOTLIGHT] Found spotlight item so showing \(lngr.naam)")
+        self.logger.log("[SPOTLIGHT] Found spotlight item so showing \(lngr.naam, privacy: .public)")
         self.IsSpotlightLink = true
         self.lingerie = lngr
     }

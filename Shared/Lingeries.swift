@@ -26,7 +26,7 @@ struct Lingeries: View {
     init(Url: String, title: String, sreachModel: lngrSreachModel) {
         self.Url = Url
         self.title = title
-        _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!))
+        _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!, lngrsName: "lngr\(title)"))
         _sreachModel = StateObject(wrappedValue: sreachModel) 
         print("sreachModel of \(title): \(sreachModel)")
     }
@@ -86,11 +86,14 @@ public class LingerieFetcher: ObservableObject {
         //        let attributeSet = CSSearchableItemAttributeSet(contentType: UTType)
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         attributeSet.title = lngr.naam
-        attributeSet.contentDescription = "De \(lngr.naam) kost \(lngr.prijs)"
-        attributeSet.containerDisplayName = "slips"
+        attributeSet.contentDescription = "De \(lngr.naam) kost €\(lngr.prijs)"
         attributeSet.contentURL = URL(string: lngr.url)!
-        attributeSet.containerTitle = "slips"
         attributeSet.thumbnailURL = URL(string: lngr.img_url)!
+        let request = URLRequest(url:  URL(string: lngr.img_url)!)
+        if let cachedResponse = URLSession.shared.configuration.urlCache?.cachedResponse(for: request), let _ = cachedResponse.response as? HTTPURLResponse {
+            attributeSet.thumbnailData = cachedResponse.data
+        }
+        
         
         let item = CSSearchableItem(uniqueIdentifier: lngr.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
@@ -101,9 +104,18 @@ public class LingerieFetcher: ObservableObject {
             }
         }
     }
+    func DeleteSpotlight() {
+        CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["nl.wittopkoning.lngr"]) { error in
+            if let errs = error {
+                print("errs",errs)
+            }
+        }
+    }
     
-    init(Url: URL) {
+    init(Url: URL, lngrsName: String) {
         self.logger.log("Making request with: \(Url.absoluteString, privacy: .public)")
+        let testing = false
+        
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
             do {
                 if let d = data {
@@ -111,18 +123,18 @@ public class LingerieFetcher: ObservableObject {
                     DispatchQueue.main.async {
                         self.lingeries = decodedLists
                     }
-                    let defaults = UserDefaults.standard
+                    //let defaults = UserDefaults.standard
+                    let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
                     do {
                         self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
                         let encoder = JSONEncoder()
                         let encoded = try encoder.encode(self.lingeries)
+                        self.logger.log("Setting key from UserDefaults: \(lngrsName)")
                         if let savedHash = defaults.object(forKey: "lngrsHash") as? String {
                             let hashed = SHA256.hash(data: encoded)
                             let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
-                            if savedHash == TheHash {
-                                self.logger.log("[SPOTLIGHT] data was the same: \(savedHash, privacy: .public) == \(TheHash, privacy: .public)")
-                            } else {
-                                defaults.set(encoded, forKey: "lngrs")
+                            if savedHash != TheHash || testing {
+                                defaults.set(encoded, forKey: lngrsName)
                                 defaults.set(TheHash, forKey: "lngrsHash")
                                 self.logger.log("[SPOTLIGHT] Setting in spotlight")
                                 for lngr in self.lingeries {
@@ -130,11 +142,13 @@ public class LingerieFetcher: ObservableObject {
                                     self.index(lngr)
                                 }
                                 self.logger.log("[SPOTLIGHT] saved data in UserDefaults: \(decodedLists.count, privacy: .public)")
+                            } else {
+                                self.logger.log("[SPOTLIGHT] data was the same: \(savedHash, privacy: .public) == \(TheHash, privacy: .public)")
                             }
                         } else {
                             let hashed = SHA256.hash(data: encoded)
                             let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
-                            defaults.set(encoded, forKey: "lngrs")
+                            defaults.set(encoded, forKey: lngrsName)
                             defaults.set(TheHash, forKey: "lngrsHash")
                             self.logger.log("[SPOTLIGHT] No lngrhash in UserDefaults")
                         }

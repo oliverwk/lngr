@@ -103,6 +103,8 @@
 		E6B52B84265061BD006DAB5C /* rivmWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rivmWidget.swift; sourceTree = "<group>"; };
 		E6B52B86265061C7006DAB5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6B52B88265061C7006DAB5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6C6419D2674974400D6984D /* GetCheapest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetCheapest.entitlements; sourceTree = "<group>"; };
+		E6C6419E2674980F00D6984D /* lngr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = lngr.entitlements; sourceTree = "<group>"; };
 		E6D2A15325F373100007EC2D /* Lingeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lingeries.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 		E6077B6D25F175B800F6F951 = {
 			isa = PBXGroup;
 			children = (
+				E6C6419E2674980F00D6984D /* lngr.entitlements */,
 				E6077B7225F175B800F6F951 /* Shared */,
 				E6077B7C25F175CD00F6F951 /* iOS */,
 				E6077B8325F175CD00F6F951 /* macOS */,
@@ -200,6 +203,7 @@
 		E607CE572651190D0084F2E7 /* GetCheapest */ = {
 			isa = PBXGroup;
 			children = (
+				E6C6419D2674974400D6984D /* GetCheapest.entitlements */,
 				E607CE582651190D0084F2E7 /* IntentHandler.swift */,
 				E6B2894126739D3E00354743 /* model.swift */,
 				E607CE612651193A0084F2E7 /* Intents.intentdefinition */,
@@ -582,6 +586,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = lngr.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				ENABLE_PREVIEWS = YES;
@@ -605,6 +610,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = lngr.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				ENABLE_PREVIEWS = YES;
@@ -676,6 +682,7 @@
 		E607CE5E2651190D0084F2E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GetCheapest/GetCheapest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				INFOPLIST_FILE = GetCheapest/Info.plist;
@@ -697,6 +704,7 @@
 		E607CE5F2651190D0084F2E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GetCheapest/GetCheapest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				INFOPLIST_FILE = GetCheapest/Info.plist;
