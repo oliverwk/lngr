@@ -105,7 +105,9 @@ div[color=\\"data.primary\\"]
             var entry: VacinnEntry
             var components = DateComponents()
             components.hour = 15
-            components.minute = 45
+            components.minute = 40
+            components.second = 0
+            components.nanosecond = 0
             let drieUur = Calendar.current.date(from: components)!
             logger.debug("[LOG] Adding the widget at: \(drieUur, privacy: .public)")
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)

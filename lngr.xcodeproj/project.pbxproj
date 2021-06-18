@@ -21,6 +21,9 @@
 		E64DD17425F1843C00284803 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* RemoteImage.swift */; };
 		E64DD18E25F22A1000284803 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LinkView.swift */; };
 		E64DD18F25F22A1000284803 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LinkView.swift */; };
+		E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
+		E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
+		E64E66052677AE5800B08C89 /* GetLngr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66042677AE5800B08C89 /* GetLngr.swift */; };
 		E64FA1A5267213A9003A1A86 /* lngrSreachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */; };
 		E64FA1A6267213A9003A1A86 /* lngrSreachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */; };
 		E64FA1F226723962003A1A86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F126723962003A1A86 /* Persistence.swift */; };
@@ -90,6 +93,8 @@
 		E607CE612651193A0084F2E7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* RemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		E64E66012677AD9F00B08C89 /* lngrRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrRow.swift; sourceTree = "<group>"; };
+		E64E66042677AE5800B08C89 /* GetLngr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetLngr.swift; path = Shared/GetLngr.swift; sourceTree = SOURCE_ROOT; };
 		E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrSreachModel.swift; sourceTree = "<group>"; };
 		E64FA1F126723962003A1A86 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E64FA1F5267239AA003A1A86 /* lngr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lngr.xcdatamodel; sourceTree = "<group>"; };
@@ -165,6 +170,7 @@
 				E6D2A15325F373100007EC2D /* Lingeries.swift */,
 				E64DD18D25F22A0F00284803 /* LinkView.swift */,
 				E64DD16C25F1843C00284803 /* RemoteImage.swift */,
+				E64E66012677AD9F00B08C89 /* lngrRow.swift */,
 				E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */,
 				E64FA1FD26723B9A003A1A86 /* CoreDatas */,
 				E6077B7525F175CC00F6F951 /* Assets.xcassets */,
@@ -205,6 +211,7 @@
 			children = (
 				E6C6419D2674974400D6984D /* GetCheapest.entitlements */,
 				E607CE582651190D0084F2E7 /* IntentHandler.swift */,
+				E64E66042677AE5800B08C89 /* GetLngr.swift */,
 				E6B2894126739D3E00354743 /* model.swift */,
 				E607CE612651193A0084F2E7 /* Intents.intentdefinition */,
 				E607CE5A2651190D0084F2E7 /* Info.plist */,
@@ -408,6 +415,7 @@
 				E64FA1FF26724304003A1A86 /* lngrs.swift in Sources */,
 				E6D2A15425F373100007EC2D /* Lingeries.swift in Sources */,
 				E64FA1F6267239AA003A1A86 /* coredata.xcdatamodeld in Sources */,
+				E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17325F1843C00284803 /* RemoteImage.swift in Sources */,
 				E64DD18E25F22A1000284803 /* LinkView.swift in Sources */,
 				E64FA1A5267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
@@ -426,6 +434,7 @@
 				E64FA20026724304003A1A86 /* lngrs.swift in Sources */,
 				E6D2A15525F373100007EC2D /* Lingeries.swift in Sources */,
 				E64FA1F7267239AA003A1A86 /* coredata.xcdatamodeld in Sources */,
+				E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17425F1843C00284803 /* RemoteImage.swift in Sources */,
 				E64DD18F25F22A1000284803 /* LinkView.swift in Sources */,
 				E64FA1A6267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
@@ -440,6 +449,7 @@
 				E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */,
 				E6B2894226739D3E00354743 /* model.swift in Sources */,
 				E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */,
+				E64E66052677AE5800B08C89 /* GetLngr.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

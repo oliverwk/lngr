@@ -14,7 +14,7 @@ import CoreData
 
 
 struct ContentView: View {
-    @EnvironmentObject var sreachModel: lngrSreachModel
+    //@EnvironmentObject var sreachModel: lngrSreachModel
     let persistenceController = PersistenceController.shared
     
     @State private var selection = 0
@@ -23,7 +23,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection){
-            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", title: "Slips", sreachModel: sreachModel)
+            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", title: "Slips")//, sreachModel: sreachModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
@@ -31,7 +31,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(0)
-            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys", sreachModel: sreachModel)
+            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys")//, sreachModel: sreachModel)
                 .tabItem {
                     VStack {
                         Image(systemName: "rectangle.3.offgrid")

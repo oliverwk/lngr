@@ -17,13 +17,13 @@ struct lngrApp: App {
         subsystem: "nl.wittopkoning.lngr",
         category: "lngrApp"
     )
-    @ObservedObject var sreachModel = lngrSreachModel()
+    //@ObservedObject var sreachModel = lngrSreachModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(sreachModel)
-                .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
+                //.environmentObject(sreachModel)
+                //.onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
                 .onOpenURL { url in
                     if url.scheme == "vacinn-widget" {
                         self.logger.log("Opening: \"https://coronadashboard.government.nl/landelijk/vaccinaties\" beacuse the url scheme was: vacinn-widget")
@@ -37,7 +37,7 @@ struct lngrApp: App {
     
     func handleSpotlight(_ userActivity: NSUserActivity) {
         self.logger.log("[SPOTLIGHT] Opend a spotlight link")
-//        let defaults = UserDefaults.standard
+        //let defaults = UserDefaults.standard
         let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
         self.logger.log("userInfo: \(userActivity.userInfo.debugDescription, privacy: .public)")
         if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
@@ -50,7 +50,7 @@ struct lngrApp: App {
                         for theLngr in loadedLngr {
                             if theLngr.id == id {
                                 self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) with name \(theLngr.naam, privacy: .public)")
-                                sreachModel.FoundSpotlightlink(lngr: theLngr)
+//                                sreachModel.FoundSpotlightlink(lngr: theLngr)
                             }
                         }
                     } else {

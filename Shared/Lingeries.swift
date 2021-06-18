@@ -18,50 +18,40 @@ struct Lingeries: View {
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
-    @StateObject var sreachModel: lngrSreachModel
+    //@StateObject var sreachModel: lngrSreachModel
+    @State private var LingerieID: String?
     
-    
-    init(Url: String, title: String, sreachModel: lngrSreachModel) {
+    init(Url: String, title: String) {//, sreachModel: lngrSreachModel) {
         self.Url = Url
         self.title = title
         _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!, lngrsName: "lngr\(title)"))
-        _sreachModel = StateObject(wrappedValue: sreachModel) 
-        print("sreachModel of \(title): \(sreachModel)")
+        //_sreachModel = StateObject(wrappedValue: sreachModel)
     }
-    let locale = Locale.current
+    
     
     var body: some View {
         NavigationView {
-            if sreachModel.IsSpotlightLink {
-                LinkView(lingerie: sreachModel.lingerie!, FoundInSpotlight: true, sreachModel: sreachModel)
-            } else {
-                List {
-                    ForEach(github.lingeries) { TheLingerie in
-                        ZStack { //Dit is om de pijl weg te halen
-                            NavigationLink(destination: LinkView(lingerie: TheLingerie)) {
-                                EmptyView()
-                            }.hidden()
-                            RemoteImage(url: TheLingerie.img_url)
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(20)
-                                .shadow(radius: 5)
-                                .padding(5.0)
-                                .overlay(Text(TheLingerie.naam)
-                                            .font(.largeTitle)
-                                            .fontWeight(.heavy)
-                                            .shadow(radius: 11)
-                                            .foregroundColor(Color.white))
-                                .overlay(Text("\(locale.currencySymbol ?? "") \(String(TheLingerie.prijs))")
-                                            .font(.title)
-                                            .padding(.bottom, 25.0)
-                                            .shadow(radius: 11)
-                                            .foregroundColor(.secondary)
-                                            .frame(maxHeight: .infinity, alignment: .bottom))
+            List {
+                ForEach(github.lingeries) { TheLingerie in
+                    //Text("\(TheLingerie.id) type: \(String(describing: type(of: TheLingerie.id)))")
+                    ZStack {
+                        NavigationLink(destination: LinkView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
+                            EmptyView()
                         }
+                        lngrRow(TheLingerie: TheLingerie)
                     }
-                }.navigationBarTitle(Text(title))
+                }
+            }.navigationBarTitle(Text(title))
+        }.navigationViewStyle(StackNavigationViewStyle()).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
+            if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+                print("Received a payload via spotlight with id: \(id)")
+                DispatchQueue.main.async {
+                    self.LingerieID = id
+                }
+            } else {
+                print("No CSSearchableItemActivityIdentifier found in spotlight")
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
     }
 }
 
@@ -81,7 +71,7 @@ public class LingerieFetcher: ObservableObject {
     
     func index(_ lngr: Lingerie) {
         self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
-        //        let attributeSet = CSSearchableItemAttributeSet(contentType: UTType)
+        // let attributeSet = CSSearchableItemAttributeSet(contentType: UTType)
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
         attributeSet.title = lngr.naam
         attributeSet.contentDescription = "De \(lngr.naam) kost €\(lngr.prijs)"
@@ -92,7 +82,6 @@ public class LingerieFetcher: ObservableObject {
             attributeSet.thumbnailData = cachedResponse.data
         }
         
-        
         let item = CSSearchableItem(uniqueIdentifier: lngr.id, domainIdentifier: "nl.wittopkoning.lngr", attributeSet: attributeSet)
         CSSearchableIndex.default().indexSearchableItems([item]) { error in
             if let error = error {
@@ -102,10 +91,20 @@ public class LingerieFetcher: ObservableObject {
             }
         }
     }
+    
+    func reset() {
+        print("Reseting")
+        let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
+        for lngrsName in ["lngrSlips","lngrBodys"] {
+            defaults.removeObject(forKey: lngrsName)
+            defaults.removeObject(forKey: "\(lngrsName)Hash")
+        }
+        DeleteSpotlight()
+    }
     func DeleteSpotlight() {
         CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["nl.wittopkoning.lngr"]) { error in
             if let errs = error {
-                print("errs",errs)
+                print("errs", errs)
             }
         }
     }
@@ -113,6 +112,7 @@ public class LingerieFetcher: ObservableObject {
     init(Url: URL, lngrsName: String) {
         self.logger.log("Making request with: \(Url.absoluteString, privacy: .public)")
         let testing = false
+        // reset()
         
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
             do {
@@ -127,13 +127,13 @@ public class LingerieFetcher: ObservableObject {
                         self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
                         let encoder = JSONEncoder()
                         let encoded = try encoder.encode(self.lingeries)
-                        self.logger.log("Setting key from UserDefaults: \(lngrsName)")
-                        if let savedHash = defaults.object(forKey: "lngrsHash") as? String {
+                        self.logger.log("Setting key from UserDefaults: \(lngrsName, privacy: .public)")
+                        if let savedHash = defaults.object(forKey: "\(lngrsName)Hash") as? String {
                             let hashed = SHA256.hash(data: encoded)
                             let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
                             if savedHash != TheHash || testing {
                                 defaults.set(encoded, forKey: lngrsName)
-                                defaults.set(TheHash, forKey: "lngrsHash")
+                                defaults.set(TheHash, forKey: "\(lngrsName)Hash")
                                 self.logger.log("[SPOTLIGHT] Setting in spotlight")
                                 for lngr in self.lingeries {
                                     self.logger.log("[SPOTLIGHT] indexing lngr: \(lngr, privacy: .public)")
@@ -147,10 +147,9 @@ public class LingerieFetcher: ObservableObject {
                             let hashed = SHA256.hash(data: encoded)
                             let TheHash = hashed.compactMap { String(format: "%02x", $0) }.joined()
                             defaults.set(encoded, forKey: lngrsName)
-                            defaults.set(TheHash, forKey: "lngrsHash")
+                            defaults.set(TheHash, forKey: "\(lngrsName)Hash")
                             self.logger.log("[SPOTLIGHT] No lngrhash in UserDefaults")
                         }
-                        
                     } catch {
                         self.logger.error("[SPOTLIGHT] failed to save lingeriez to user default: \(error.localizedDescription as NSObject)")
                     }
@@ -177,7 +176,7 @@ public class LingerieFetcher: ObservableObject {
     }
 }
 
-struct Lingerie: Codable, Identifiable, CustomStringConvertible {
+struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var id: String
     public var naam: String
     public var prijs: Double
