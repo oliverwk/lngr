@@ -10,22 +10,22 @@ import Combine
 import CoreData
 import CryptoKit
 import CoreSpotlight
+#if os(iOS)
 import MobileCoreServices
+#endif
 import os
 
 
-struct Lingeries: View {    
+struct LingeriesView: View {    
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
-    //@StateObject var sreachModel: lngrSreachModel
     @State private var LingerieID: String?
     
-    init(Url: String, title: String) {//, sreachModel: lngrSreachModel) {
+    init(Url: String, title: String) {
         self.Url = Url
         self.title = title
         _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!, lngrsName: "lngr\(title)"))
-        //_sreachModel = StateObject(wrappedValue: sreachModel)
     }
     
     
@@ -33,9 +33,8 @@ struct Lingeries: View {
         NavigationView {
             List {
                 ForEach(github.lingeries) { TheLingerie in
-                    //Text("\(TheLingerie.id) type: \(String(describing: type(of: TheLingerie.id)))")
                     ZStack {
-                        NavigationLink(destination: LinkView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
+                        NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
                             EmptyView()
                         }
                         lngrRow(TheLingerie: TheLingerie)
@@ -64,8 +63,11 @@ public class LingerieFetcher: ObservableObject {
     @Published var lingeries = [Lingerie]()
     
     public func simpleError() {
+        #if os(iOS)
         let genarator = UINotificationFeedbackGenerator()
         genarator.notificationOccurred(.error)
+        #endif
+        
     }
     
     
@@ -93,7 +95,7 @@ public class LingerieFetcher: ObservableObject {
     }
     
     func reset() {
-        print("Reseting")
+        logger.critical("Reseting")
         let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
         for lngrsName in ["lngrSlips","lngrBodys"] {
             defaults.removeObject(forKey: lngrsName)
@@ -104,7 +106,7 @@ public class LingerieFetcher: ObservableObject {
     func DeleteSpotlight() {
         CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["nl.wittopkoning.lngr"]) { error in
             if let errs = error {
-                print("errs", errs)
+                self.logger.fault("An error happend while reseting the spolight index: \(errs.localizedDescription, privacy: .public)")
             }
         }
     }
@@ -122,7 +124,7 @@ public class LingerieFetcher: ObservableObject {
                         self.lingeries = decodedLists
                     }
                     //let defaults = UserDefaults.standard
-                    let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
+                    let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs") ?? UserDefaults.standard
                     do {
                         self.logger.log("[SPOTLIGHT] Setting data in UserDefaults")
                         let encoder = JSONEncoder()

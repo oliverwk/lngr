@@ -10,12 +10,10 @@
 import Combine
 import SwiftUI
 import LocalAuthentication
-import CoreData
+//import CoreData
 
 
 struct ContentView: View {
-    //@EnvironmentObject var sreachModel: lngrSreachModel
-    let persistenceController = PersistenceController.shared
     
     @State private var selection = 0
     @State private var blurRadius: CGFloat = 50.0
@@ -23,7 +21,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection){
-            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", title: "Slips")//, sreachModel: sreachModel)
+            LingeriesView(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", title: "Slips")
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
@@ -31,7 +29,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(0)
-            Lingeries(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys")//, sreachModel: sreachModel)
+            LingeriesView(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys")
                 .tabItem {
                     VStack {
                         Image(systemName: "rectangle.3.offgrid")
@@ -39,15 +37,15 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
-            DataView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            /*DataView()
+                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                 .tabItem {
                     VStack {
                         Image(systemName: "externaldrive.badge.icloud")
                         Text("Data")
                     }
                 }
-                .tag(2)
+                .tag(2)*/
         }.blur(radius: blurRadius)
         .onAppear(perform: {
             let reason = "Authenticate to go to lngr"

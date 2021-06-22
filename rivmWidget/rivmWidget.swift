@@ -16,33 +16,40 @@ let logger = Logger(
     category: "rivmWidget"
 )
 
-let OneVacinn = Vacinn(result: Selector(res: ["0","0","0"]))
+let OneVacinn = Vacinn(result: Selector(result: ["0","0","0"]))
 
-struct Vacinn: Codable {
+struct Vacinn: Codable, CustomStringConvertible {
     public var result: Selector
-    
+
+    var description: String {
+        return "{ result: \(result) }"
+    }
     enum CodingKeys: String, CodingKey {
         case result = "result"
     }
 }
 
-extension Vacinn: CustomStringConvertible {
-    var description: String {
-        return "{ result: \(result) }"
+struct Selector: Codable, CustomStringConvertible {
+    public var result: [String]
+    
+    var Vacinns: String {
+        return result[1].replacingOccurrences(of: ",", with: ".")
     }
-}
-
-struct Selector: Codable {
-    public var res: [String]
+    
+    var VacinnsToday: String {
+        let formatter = NumberFormatter()
+        let VacinnsThisWeek = (Int(result[0].replacingOccurrences(of: ",", with: "")) ?? 0)
+        formatter.numberStyle = .decimal
+        formatter.decimalSeparator = "."
+        let vacinnsToday = formatter.string(from: NSNumber(value: (VacinnsThisWeek / 7))) ?? "\((VacinnsThisWeek / 7))"
+        return vacinnsToday
+    }
     
     enum CodingKeys: String, CodingKey {
-        case res = "vacs"
+        case result = "vacs"
     }
-}
-
-extension Selector: CustomStringConvertible {
     var description: String {
-        return "res: [\(res)]"
+        return "res: [\(result)]"
     }
 }
 
@@ -58,7 +65,6 @@ div[color=\\"data.primary\\"]
         logger.log("[LOG] Getting the Data from: \(urlString, privacy: .public)")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
             
-            //Parsing the json here
             guard error == nil, let content = data else {
                 logger.fault("[ERROR] Error getting data from API")
                 let response = OneVacinn
@@ -68,8 +74,6 @@ div[color=\\"data.primary\\"]
             let str = String(decoding: content, as: UTF8.self)
             let json = str.replacingOccurrences(of: theSelctor, with: "vacs")
             let jsonData: Data =  Data(json.utf8)
-            //as! NSObject
-            //description
             logger.log("[LOG] Parsing json from the data \(json, privacy: .public)")
             
             let lngrApiResponse: Vacinn
@@ -112,7 +116,7 @@ div[color=\\"data.primary\\"]
             logger.debug("[LOG] Adding the widget at: \(drieUur, privacy: .public)")
             entry = VacinnEntry(date: Date(), vacinn: theVacinn)
             entries.append(entry)
-            let timeline = Timeline(entries: entries, policy: .after(drieUur))
+            let timeline = Timeline(entries: entries, policy: .atEnd)//.after(drieUur))
             completion(timeline)
         }
     }
@@ -127,12 +131,18 @@ struct vacinnWidgetEntryView : View {
     var entry: Provider.Entry
     
     var body: some View {
-        Text(String(entry.vacinn.result.res[1]).replacingOccurrences(of: ",", with: "."))
-            .font(.title)
-            .fontWeight(.bold)
-            .foregroundColor(Color.black)
-            .multilineTextAlignment(.center)
-            .widgetURL(URL(string: "vacinn-widget://")!)
+        VStack(alignment: .leading, spacing: 2) {
+            Text("Vacinns")
+                .fontWeight(.semibold)
+            Text(String(entry.vacinn.result.Vacinns))
+                .font(.title2)
+                .fontWeight(.heavy)
+                .multilineTextAlignment(.center)
+            Text("+ \(entry.vacinn.result.VacinnsToday)")
+                .fontWeight(.regular)
+                .foregroundColor(.green)
+        }
+        .widgetURL(URL(string: "vacinn-widget://")!)
     }
 }
 
@@ -151,8 +161,8 @@ struct vacinnWidget: Widget {
 
 struct vacinnWidget_Previews: PreviewProvider {
     static var previews: some View {
-        vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn: OneVacinn))
-            .previewContext(WidgetPreviewContext(family: .systemSmall)).preferredColorScheme(.light)
+        vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["1,458,417","14,075,575","0"]))))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
             .previewDevice("iPhone 7")
     }
 }

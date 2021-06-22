@@ -6,7 +6,9 @@
 //
 
 import Foundation
+#if os(iOS)
 import MobileCoreServices
+#endif
 import CoreSpotlight
 import SwiftUI
 import os
