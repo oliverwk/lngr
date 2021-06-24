@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Combine
-import CoreData
 import CryptoKit
 import CoreSpotlight
 #if os(iOS)
@@ -16,7 +15,11 @@ import MobileCoreServices
 import os
 
 
-struct LingeriesView: View {    
+struct LingeriesView: View {
+    private let logger = Logger(
+        subsystem: "nl.wittopkoning.lngr",
+        category: "LingeriesView"
+    )
     let Url: String
     var title: String
     @StateObject private var github: LingerieFetcher
@@ -41,14 +44,25 @@ struct LingeriesView: View {
                     }
                 }
             }.navigationBarTitle(Text(title))
+            /*
+            EmptyView().onAppear {
+                logger.log("onAppear")
+                if github.lingeries.count > 0 {
+                    logger.log("Getting extra lngr")
+//                    github.getExtraLngr(url: URL(string: "https://lngr.ml/api?count=72")!)
+                }
+            }
+            .onDisappear {
+                logger.log("onDisappear")
+            }*/
         }.navigationViewStyle(StackNavigationViewStyle()).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
-                print("Received a payload via spotlight with id: \(id)")
+                logger.log("Received a payload via spotlight with id: \(id)")
                 DispatchQueue.main.async {
                     self.LingerieID = id
                 }
             } else {
-                print("No CSSearchableItemActivityIdentifier found in spotlight")
+                logger.critical("No CSSearchableItemActivityIdentifier found in spotlight")
             }
         }
     }
@@ -67,7 +81,6 @@ public class LingerieFetcher: ObservableObject {
         let genarator = UINotificationFeedbackGenerator()
         genarator.notificationOccurred(.error)
         #endif
-        
     }
     
     
@@ -97,13 +110,14 @@ public class LingerieFetcher: ObservableObject {
     func reset() {
         logger.critical("Reseting")
         let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
-        for lngrsName in ["lngrSlips","lngrBodys"] {
+        for lngrsName in ["lngrSlips", "lngrBodys"] {
             defaults.removeObject(forKey: lngrsName)
             defaults.removeObject(forKey: "\(lngrsName)Hash")
         }
-        DeleteSpotlight()
+        deleteSpotlight()
     }
-    func DeleteSpotlight() {
+    
+    func deleteSpotlight() {
         CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["nl.wittopkoning.lngr"]) { error in
             if let errs = error {
                 self.logger.fault("An error happend while reseting the spolight index: \(errs.localizedDescription, privacy: .public)")
@@ -111,11 +125,39 @@ public class LingerieFetcher: ObservableObject {
         }
     }
     
+    func getExtraLngr(url: URL) {
+        logger.log("Making request to: \(url.absoluteString, privacy: .public)")
+        URLSession.shared.dataTask(with: url) {(data, response, error) in
+            do {
+                if let d = data {
+                    let decodedLngrs = try JSONDecoder().decode([Lingerie].self, from: d)
+                    DispatchQueue.main.async {
+                        self.lingeries = decodedLngrs
+                    }
+                } else if let error = error {
+                    self.simpleError()
+                    if let response = response as? HTTPURLResponse {
+                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url, privacy: .public) en met response: \(response, privacy: .public) \n Met de error: \(error.localizedDescription, privacy: .public) en data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
+                    } else {
+                        self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(url, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                    }
+                }
+            } catch {
+                self.simpleError()
+                if let response = response as? HTTPURLResponse {
+                    self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public) met data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
+                } else {
+                    self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(url, privacy: .public) met data \(String(decoding: data!, as: UTF8.self), privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
+                }
+            }
+        }.resume()
+    }
+    
     init(Url: URL, lngrsName: String) {
-        self.logger.log("Making request with: \(Url.absoluteString, privacy: .public)")
+        self.logger.log("Making request to: \(Url.absoluteString, privacy: .public)")
         let testing = false
         // reset()
-        
+
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
             do {
                 if let d = data {

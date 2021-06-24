@@ -13,7 +13,7 @@ struct lngrRow: View {
     let locale = Locale.current
     
     var body: some View {
-        RemoteImage(url: TheLingerie.img_url)
+        LingerieImageView(url: TheLingerie.img_url)
             .aspectRatio(contentMode: .fit)
             .cornerRadius(20)
             .shadow(radius: 5)

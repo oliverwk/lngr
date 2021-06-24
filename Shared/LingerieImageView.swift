@@ -1,5 +1,5 @@
 //
-//  RemoteImage.swift
+//  LingerieImageView.swift
 //  lngr
 //
 //  Created by Olivier Wittop Koning on 04/03/2021.
@@ -8,7 +8,7 @@
 import SwiftUI
 import os
 
-struct RemoteImage: View {
+struct LingerieImageView: View {
     private enum LoadState {
         case loading, success, failure
     }
@@ -16,7 +16,7 @@ struct RemoteImage: View {
     private class Loader: ObservableObject {
         private let logger = Logger(
             subsystem: "nl.wittopkoning.lngr",
-            category: "Loader"
+            category: "LingerieImageView"
         )
         var data = Data()
         var state = LoadState.loading
@@ -27,7 +27,18 @@ struct RemoteImage: View {
                 fatalError("Invalid URL: \(url)")
             }
             
-            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
+            let config = URLSessionConfiguration.default
+            config.waitsForConnectivity = false
+            config.allowsConstrainedNetworkAccess = false
+            config.allowsExpensiveNetworkAccess = false
+            config.multipathServiceType = .aggregate
+            config.allowsCellularAccess = true
+            config.networkServiceType = .video
+            
+            let session = URLSession(configuration: config)
+
+            session.dataTask(with: parsedURL) { data, response, error in
+//            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
                 if let data = data, data.count > 0 {
                     self.data = data
                     self.state = .success

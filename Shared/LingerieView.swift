@@ -50,11 +50,6 @@ struct LingerieView: View {
                 .padding(.bottom, 10.0)
                 .foregroundColor(.secondary)
         }.navigationBarBackButtonHidden(false).navigationBarTitle(Text(lingerie.naam), displayMode: .inline)
-        .onAppear {
-            if FoundInSpotlight! {
-//                self.sreachModel?.IsSpotlightLink = false
-            }
-        }
     }
     
     public class ImageFetchers: ObservableObject {

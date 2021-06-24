@@ -19,17 +19,15 @@ struct lngrApp: App {
         subsystem: "nl.wittopkoning.lngr",
         category: "lngrApp"
     )
-    //@ObservedObject var sreachModel = lngrSreachModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                //.environmentObject(sreachModel)
                 //.onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
                 .onOpenURL { url in
                     if url.scheme == "vacinn-widget" {
-                        self.logger.log("Opening: \"https://coronadashboard.government.nl/landelijk/vaccinaties\" beacuse the url scheme was: vacinn-widget")
-                        if let theUrl = URL(string: "https://coronadashboard.government.nl/landelijk/vaccinaties") {
+                        self.logger.log("Opening: \"https://coronadashboard.rijksoverheid.nl/landelijk/vaccinaties\" beacuse the url scheme was: vacinn-widget")
+                        if let theUrl = URL(string: "https://coronadashboard.rijksoverheid.nl/landelijk/vaccinaties") {
                             UIApplication.shared.open(theUrl)
                         }
                     }

@@ -2,7 +2,7 @@
 //  vacinnWidget.swift
 //  lngrWidgetExtension
 //
-//  Created by Olvier Wittop Koning on 10/04/2021.
+//  Created by Olivier Wittop Koning on 10/04/2021.
 //
 
 
@@ -16,7 +16,8 @@ let logger = Logger(
     category: "rivmWidget"
 )
 
-let OneVacinn = Vacinn(result: Selector(result: ["0","0","0"]))
+let PlaceholderVacinn = Vacinn(result: Selector(result: ["0,758,417","5,276,345","0"]))
+let ErrorVacinn = Vacinn(result: Selector(result: ["0","0","0"]))
 
 struct Vacinn: Codable, CustomStringConvertible {
     public var result: Selector
@@ -32,16 +33,16 @@ struct Vacinn: Codable, CustomStringConvertible {
 struct Selector: Codable, CustomStringConvertible {
     public var result: [String]
     
-    var Vacinns: String {
+    var VacinnsThisWeek: String {
         return result[1].replacingOccurrences(of: ",", with: ".")
     }
     
     var VacinnsToday: String {
         let formatter = NumberFormatter()
-        let VacinnsThisWeek = (Int(result[0].replacingOccurrences(of: ",", with: "")) ?? 0)
+        let VacinnsWeek = (Int(result[0].replacingOccurrences(of: ",", with: "")) ?? 0)
         formatter.numberStyle = .decimal
         formatter.decimalSeparator = "."
-        let vacinnsToday = formatter.string(from: NSNumber(value: (VacinnsThisWeek / 7))) ?? "\((VacinnsThisWeek / 7))"
+        let vacinnsToday = formatter.string(from: NSNumber(value: (VacinnsWeek / 7))) ?? "\((VacinnsWeek / 7))"
         return vacinnsToday
     }
     
@@ -49,7 +50,7 @@ struct Selector: Codable, CustomStringConvertible {
         case result = "vacs"
     }
     var description: String {
-        return "res: [\(result)]"
+        return "results: [\(result)]"
     }
 }
 
@@ -67,7 +68,8 @@ div[color=\\"data.primary\\"]
             
             guard error == nil, let content = data else {
                 logger.fault("[ERROR] Error getting data from API")
-                let response = OneVacinn
+                var response = ErrorVacinn
+                response.result.result[0] = error?.localizedDescription ?? "0"
                 completion?(response)
                 return
             }
@@ -82,7 +84,8 @@ div[color=\\"data.primary\\"]
                 logger.log("[LOG] Parsing json from data")
             } catch {
                 logger.fault("[ERROR] Error parsing json from data")
-                let response = OneVacinn
+                var response = ErrorVacinn
+                response.result.result[0] = error.localizedDescription
                 completion?(response)
                 return
             }
@@ -93,12 +96,11 @@ div[color=\\"data.primary\\"]
     }
     
     func placeholder(in context: Context) -> VacinnEntry {
-        VacinnEntry(date: Date(), vacinn: OneVacinn)
+        VacinnEntry(date: Date(), vacinn: PlaceholderVacinn)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (VacinnEntry) -> ()) {
-        let entry = VacinnEntry(date: Date(), vacinn: OneVacinn)
-        completion(entry)
+        completion(.init(date: Date(), vacinn: PlaceholderVacinn))
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
@@ -134,7 +136,7 @@ struct vacinnWidgetEntryView : View {
         VStack(alignment: .leading, spacing: 2) {
             Text("Vacinns")
                 .fontWeight(.semibold)
-            Text(String(entry.vacinn.result.Vacinns))
+            Text(entry.vacinn.result.VacinnsThisWeek)
                 .font(.title2)
                 .fontWeight(.heavy)
                 .multilineTextAlignment(.center)
@@ -142,7 +144,7 @@ struct vacinnWidgetEntryView : View {
                 .fontWeight(.regular)
                 .foregroundColor(.green)
         }
-        .widgetURL(URL(string: "vacinn-widget://")!)
+        .widgetURL(URL(string: "vacinn-widget://rivm")!)
     }
 }
 
@@ -161,8 +163,13 @@ struct vacinnWidget: Widget {
 
 struct vacinnWidget_Previews: PreviewProvider {
     static var previews: some View {
-        vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["1,458,417","14,075,575","0"]))))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-            .previewDevice("iPhone 7")
+        Group {
+            vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["1,458,417","14,075,575","0"]))))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .previewDevice("iPhone 7")
+            vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["1,458,417","14,075,575","0"]))))
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .previewDevice("iPhone 7")
+        }
     }
 }

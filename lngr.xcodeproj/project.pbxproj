@@ -17,8 +17,8 @@
 		E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607CE582651190D0084F2E7 /* IntentHandler.swift */; };
 		E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E607CE552651190D0084F2E7 /* GetCheapest.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; };
-		E64DD17325F1843C00284803 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* RemoteImage.swift */; };
-		E64DD17425F1843C00284803 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* RemoteImage.swift */; };
+		E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
+		E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
 		E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LingerieView.swift */; };
 		E64DD18F25F22A1000284803 /* LingerieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LingerieView.swift */; };
 		E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
@@ -91,7 +91,7 @@
 		E607CE582651190D0084F2E7 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		E607CE5A2651190D0084F2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E607CE612651193A0084F2E7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
-		E64DD16C25F1843C00284803 /* RemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		E64DD16C25F1843C00284803 /* LingerieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingerieImageView.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LingerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieView.swift; sourceTree = "<group>"; };
 		E64E66012677AD9F00B08C89 /* lngrRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrRow.swift; sourceTree = "<group>"; };
 		E64E66042677AE5800B08C89 /* GetLngr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetLngr.swift; path = Shared/GetLngr.swift; sourceTree = SOURCE_ROOT; };
@@ -171,7 +171,7 @@
 				E6077B7425F175B800F6F951 /* ContentView.swift */,
 				E6D2A15325F373100007EC2D /* LingeriesView.swift */,
 				E64DD18D25F22A0F00284803 /* LingerieView.swift */,
-				E64DD16C25F1843C00284803 /* RemoteImage.swift */,
+				E64DD16C25F1843C00284803 /* LingerieImageView.swift */,
 				E64E66012677AD9F00B08C89 /* lngrRow.swift */,
 				E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */,
 				E64FA1FD26723B9A003A1A86 /* CoreDatas */,
@@ -418,7 +418,7 @@
 				E6D2A15425F373100007EC2D /* LingeriesView.swift in Sources */,
 				E64FA1F6267239AA003A1A86 /* coredata.xcdatamodeld in Sources */,
 				E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */,
-				E64DD17325F1843C00284803 /* RemoteImage.swift in Sources */,
+				E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */,
 				E64FA1A5267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
 				E6077B8625F175CD00F6F951 /* lngrApp.swift in Sources */,
@@ -437,7 +437,7 @@
 				E6D2A15525F373100007EC2D /* LingeriesView.swift in Sources */,
 				E64FA1F7267239AA003A1A86 /* coredata.xcdatamodeld in Sources */,
 				E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */,
-				E64DD17425F1843C00284803 /* RemoteImage.swift in Sources */,
+				E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18F25F22A1000284803 /* LingerieView.swift in Sources */,
 				E64FA1A6267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
 				E6077B8725F175CD00F6F951 /* lngrApp.swift in Sources */,

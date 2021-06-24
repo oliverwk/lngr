@@ -10,11 +10,12 @@
 import Combine
 import SwiftUI
 import LocalAuthentication
-//import CoreData
 
 
 struct ContentView: View {
     
+    // Used for detecting when this scene is backgrounded and isn't currently visible.
+    @Environment(\.scenePhase) private var scenePhase
     @State private var selection = 0
     @State private var blurRadius: CGFloat = 50.0
     private var authContext = LAContext()
@@ -37,29 +38,26 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
-            /*DataView()
-                .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-                .tabItem {
-                    VStack {
-                        Image(systemName: "externaldrive.badge.icloud")
-                        Text("Data")
-                    }
-                }
-                .tag(2)*/
-        }.blur(radius: blurRadius)
-        .onAppear(perform: {
+            /*DataView().environment(\.managedObjectContext, PersistenceController.shared.container.viewContext).tabItem { VStack { Image(systemName: "externaldrive.badge.icloud"); Text("Data") } }.tag(2)*/
+        }.blur(radius: blurRadius).onAppear {
             let reason = "Authenticate to go to lngr"
             authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
                 if success {
-                    DispatchQueue.main.async {
-                        self.blurRadius = 0.0
-                    }
+                    DispatchQueue.main.async { self.blurRadius = 0.0 }
                 } else {
                     print(error?.localizedDescription ?? "Failed to authenticate")
                     // Fall back to a asking for username and password.
                 }
             }
-        })
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            DispatchQueue.main.async { self.blurRadius = 100.0 }
+            }
+        .onChange(of: scenePhase) { newScenePhase in
+            if newScenePhase == .active {
+                DispatchQueue.main.async { self.blurRadius = 0.0 }
+            }
+        }
     }
 }
 
