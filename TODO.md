@@ -2,9 +2,9 @@
 # lngr
 - [x] Add loggin to widget
 - [x] Add loggin to main app
-- [] Add Handoff
-- [] Add low data mode optie
+- [x] Add Handoff
+- [x] Add low data mode optie
 - [] Add Share button
-- [] Add chacing to network reqeusts
-- [] Add MultipeerConnectivity
+- [] Add caching to network reqeusts
 - [] Add a settings bundle
+- [] Add MultipeerConnectivity?
