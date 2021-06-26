@@ -38,7 +38,6 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
-            /*DataView().environment(\.managedObjectContext, PersistenceController.shared.container.viewContext).tabItem { VStack { Image(systemName: "externaldrive.badge.icloud"); Text("Data") } }.tag(2)*/
         }.blur(radius: blurRadius).onAppear {
             let reason = "Authenticate to go to lngr"
             authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in

@@ -51,9 +51,10 @@ struct LingeriesView: View {
 
                     }
                 }
-                
+                HStack(alignment: .center, spacing: 0, content: {
+                    ProgressView()
+                }).opacity(github.IsLoading ? 1 : 0)
             }.navigationBarTitle(Text(title))
-            ProgressView().opacity(github.IsLoading ? 1 : 0)
         }.navigationViewStyle(StackNavigationViewStyle()).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
                 logger.log("Received a payload via spotlight with id: \(id)")
@@ -95,14 +96,14 @@ public class LingerieFetcher: ObservableObject {
     public func getExtraLngr(url: URL) {
         if !IsLoading {
             self.IsLoading = true
-            logger.log("Making request to: \(url.absoluteString, privacy: .public)")
+            self.logger.log("Making request to get extra lngr: \(url.absoluteString, privacy: .public)")
             URLSession.shared.dataTask(with: url) {(data, response, error) in
+                DispatchQueue.main.async { self.IsLoading = false }
                 do {
                     if let d = data {
                         let decodedLngrs = try JSONDecoder().decode([Lingerie].self, from: d)
                         self.simpleSuccess()
                         DispatchQueue.main.async {
-                            self.IsLoading = false
                             self.lingeries = decodedLngrs
                         }
                     } else if let error = error {
@@ -132,11 +133,11 @@ public class LingerieFetcher: ObservableObject {
         self.logger.log("Making request to: \(Url.absoluteString, privacy: .public)")
         self.IsLoading = true
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
+            DispatchQueue.main.async { self.IsLoading = false }
             do {
                 if let d = data {
                     let decodedLists = try JSONDecoder().decode([Lingerie].self, from: d)
                     DispatchQueue.main.async {
-                        self.IsLoading = false
                         self.lingeries = decodedLists
                     }
                     self.AddToSpotlightWithId(lngrName: lngrsName, lngrs: decodedLists)

@@ -26,14 +26,6 @@
 		E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
 		E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
 		E64E66052677AE5800B08C89 /* GetLngr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66042677AE5800B08C89 /* GetLngr.swift */; };
-		E64FA1F226723962003A1A86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F126723962003A1A86 /* Persistence.swift */; };
-		E64FA1F326723962003A1A86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F126723962003A1A86 /* Persistence.swift */; };
-		E64FA1F6267239AA003A1A86 /* coredata.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F4267239AA003A1A86 /* coredata.xcdatamodeld */; };
-		E64FA1F7267239AA003A1A86 /* coredata.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F4267239AA003A1A86 /* coredata.xcdatamodeld */; };
-		E64FA1F926723B85003A1A86 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F826723B85003A1A86 /* DataView.swift */; };
-		E64FA1FA26723B85003A1A86 /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F826723B85003A1A86 /* DataView.swift */; };
-		E64FA1FF26724304003A1A86 /* LngrFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1FE26724304003A1A86 /* LngrFetcher.swift */; };
-		E64FA20026724304003A1A86 /* LngrFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1FE26724304003A1A86 /* LngrFetcher.swift */; };
 		E65887D4266AB9B500816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		E65887D5266AB9BD00816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		E6B2894226739D3E00354743 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B2894126739D3E00354743 /* model.swift */; };
@@ -96,10 +88,6 @@
 		E64DD18D25F22A0F00284803 /* LingerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieView.swift; sourceTree = "<group>"; };
 		E64E66012677AD9F00B08C89 /* lngrRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrRow.swift; sourceTree = "<group>"; };
 		E64E66042677AE5800B08C89 /* GetLngr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetLngr.swift; path = Shared/GetLngr.swift; sourceTree = SOURCE_ROOT; };
-		E64FA1F126723962003A1A86 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		E64FA1F5267239AA003A1A86 /* lngr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lngr.xcdatamodel; sourceTree = "<group>"; };
-		E64FA1F826723B85003A1A86 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
-		E64FA1FE26724304003A1A86 /* LngrFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LngrFetcher.swift; sourceTree = "<group>"; };
 		E68170D525F3D5D200C9DD32 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E68170D725F3D5D200C9DD32 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		E68B5E95260490F700385A7E /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
@@ -174,7 +162,6 @@
 				E64DD18D25F22A0F00284803 /* LingerieView.swift */,
 				E64DD16C25F1843C00284803 /* LingerieImageView.swift */,
 				E64E66012677AD9F00B08C89 /* lngrRow.swift */,
-				E64FA1FD26723B9A003A1A86 /* CoreDatas */,
 				E6077B7525F175CC00F6F951 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -219,17 +206,6 @@
 				E607CE5A2651190D0084F2E7 /* Info.plist */,
 			);
 			path = GetCheapest;
-			sourceTree = "<group>";
-		};
-		E64FA1FD26723B9A003A1A86 /* CoreDatas */ = {
-			isa = PBXGroup;
-			children = (
-				E64FA1F4267239AA003A1A86 /* coredata.xcdatamodeld */,
-				E64FA1F126723962003A1A86 /* Persistence.swift */,
-				E64FA1F826723B85003A1A86 /* DataView.swift */,
-				E64FA1FE26724304003A1A86 /* LngrFetcher.swift */,
-			);
-			path = CoreDatas;
 			sourceTree = "<group>";
 		};
 		E68170D425F3D5D200C9DD32 /* Frameworks */ = {
@@ -411,12 +387,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E65887D4266AB9B500816B41 /* Intents.intentdefinition in Sources */,
-				E64FA1F226723962003A1A86 /* Persistence.swift in Sources */,
-				E64FA1F926723B85003A1A86 /* DataView.swift in Sources */,
 				E6077B8825F175CD00F6F951 /* ContentView.swift in Sources */,
-				E64FA1FF26724304003A1A86 /* LngrFetcher.swift in Sources */,
 				E6D2A15425F373100007EC2D /* LingeriesView.swift in Sources */,
-				E64FA1F6267239AA003A1A86 /* coredata.xcdatamodeld in Sources */,
 				E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */,
@@ -430,12 +402,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E65887D5266AB9BD00816B41 /* Intents.intentdefinition in Sources */,
-				E64FA1F326723962003A1A86 /* Persistence.swift in Sources */,
-				E64FA1FA26723B85003A1A86 /* DataView.swift in Sources */,
 				E6077B8925F175CD00F6F951 /* ContentView.swift in Sources */,
-				E64FA20026724304003A1A86 /* LngrFetcher.swift in Sources */,
 				E6D2A15525F373100007EC2D /* LingeriesView.swift in Sources */,
-				E64FA1F7267239AA003A1A86 /* coredata.xcdatamodeld in Sources */,
 				E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18F25F22A1000284803 /* LingerieView.swift in Sources */,
@@ -834,19 +802,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E64FA1F4267239AA003A1A86 /* coredata.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E64FA1F5267239AA003A1A86 /* lngr.xcdatamodel */,
-			);
-			currentVersion = E64FA1F5267239AA003A1A86 /* lngr.xcdatamodel */;
-			path = coredata.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E6077B6E25F175B800F6F951 /* Project object */;
 }
