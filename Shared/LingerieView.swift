@@ -11,14 +11,10 @@ import os
 
 struct LingerieView: View {
     let lingerie: Lingerie
-    let FoundInSpotlight: Bool?
-    let sreachModel: lngrSreachModel?
     let locale = Locale.current
     
     @StateObject private var ImageFetcher: ImageFetchers
-    init(lingerie: Lingerie, FoundInSpotlight: Bool? = false, sreachModel: lngrSreachModel? = nil) {
-        self.FoundInSpotlight = FoundInSpotlight
-        self.sreachModel = sreachModel
+    init(lingerie: Lingerie) {
         self.lingerie = lingerie
         _ImageFetcher = StateObject(wrappedValue: ImageFetchers(ImageUrls: lingerie.imageUrls))
     }

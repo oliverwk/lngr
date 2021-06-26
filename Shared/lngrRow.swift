@@ -23,6 +23,7 @@ struct lngrRow: View {
                         .fontWeight(.heavy)
                         .shadow(radius: 11)
                         .foregroundColor(Color.white))
+                        .padding(3)
             .overlay(Text("\(locale.currencySymbol ?? "") \(String(TheLingerie.prijs))")
                         .font(.title)
                         .padding(.bottom, 25.0)

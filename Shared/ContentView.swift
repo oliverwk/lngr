@@ -52,7 +52,7 @@ struct ContentView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             DispatchQueue.main.async { self.blurRadius = 100.0 }
-            }
+        }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
                 DispatchQueue.main.async { self.blurRadius = 0.0 }

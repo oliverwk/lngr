@@ -17,6 +17,8 @@
 		E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607CE582651190D0084F2E7 /* IntentHandler.swift */; };
 		E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E607CE552651190D0084F2E7 /* GetCheapest.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; };
+		E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
+		E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
 		E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
 		E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LingerieView.swift */; };
@@ -24,8 +26,6 @@
 		E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
 		E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
 		E64E66052677AE5800B08C89 /* GetLngr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66042677AE5800B08C89 /* GetLngr.swift */; };
-		E64FA1A5267213A9003A1A86 /* lngrSreachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */; };
-		E64FA1A6267213A9003A1A86 /* lngrSreachModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */; };
 		E64FA1F226723962003A1A86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F126723962003A1A86 /* Persistence.swift */; };
 		E64FA1F326723962003A1A86 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F126723962003A1A86 /* Persistence.swift */; };
 		E64FA1F6267239AA003A1A86 /* coredata.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E64FA1F4267239AA003A1A86 /* coredata.xcdatamodeld */; };
@@ -91,11 +91,11 @@
 		E607CE582651190D0084F2E7 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		E607CE5A2651190D0084F2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E607CE612651193A0084F2E7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieFetcherSpotlight.swift; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* LingerieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingerieImageView.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LingerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieView.swift; sourceTree = "<group>"; };
 		E64E66012677AD9F00B08C89 /* lngrRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrRow.swift; sourceTree = "<group>"; };
 		E64E66042677AE5800B08C89 /* GetLngr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetLngr.swift; path = Shared/GetLngr.swift; sourceTree = SOURCE_ROOT; };
-		E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrSreachModel.swift; sourceTree = "<group>"; };
 		E64FA1F126723962003A1A86 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E64FA1F5267239AA003A1A86 /* lngr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lngr.xcdatamodel; sourceTree = "<group>"; };
 		E64FA1F826723B85003A1A86 /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
@@ -170,10 +170,10 @@
 				E6077B7325F175B800F6F951 /* lngrApp.swift */,
 				E6077B7425F175B800F6F951 /* ContentView.swift */,
 				E6D2A15325F373100007EC2D /* LingeriesView.swift */,
+				E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */,
 				E64DD18D25F22A0F00284803 /* LingerieView.swift */,
 				E64DD16C25F1843C00284803 /* LingerieImageView.swift */,
 				E64E66012677AD9F00B08C89 /* lngrRow.swift */,
-				E64FA1A4267213A9003A1A86 /* lngrSreachModel.swift */,
 				E64FA1FD26723B9A003A1A86 /* CoreDatas */,
 				E6077B7525F175CC00F6F951 /* Assets.xcassets */,
 			);
@@ -420,7 +420,7 @@
 				E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */,
-				E64FA1A5267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
+				E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */,
 				E6077B8625F175CD00F6F951 /* lngrApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,7 +439,7 @@
 				E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18F25F22A1000284803 /* LingerieView.swift in Sources */,
-				E64FA1A6267213A9003A1A86 /* lngrSreachModel.swift in Sources */,
+				E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */,
 				E6077B8725F175CD00F6F951 /* lngrApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,21 +24,19 @@ struct LingerieImageView: View {
         init(url: String) {
             guard let parsedURL = URL(string: url) else {
                 logger.fault("[Fatal] Invalid URL: \(url, privacy: .public)")
-                fatalError("Invalid URL: \(url)")
+                return
             }
             
             let config = URLSessionConfiguration.default
             config.waitsForConnectivity = false
             config.allowsConstrainedNetworkAccess = false
             config.allowsExpensiveNetworkAccess = false
-            config.multipathServiceType = .aggregate
-            config.allowsCellularAccess = true
-            config.networkServiceType = .video
+            config.multipathServiceType = .none
             
             let session = URLSession(configuration: config)
-
+            
             session.dataTask(with: parsedURL) { data, response, error in
-//            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
+                //            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
                 if let data = data, data.count > 0 {
                     self.data = data
                     self.state = .success
