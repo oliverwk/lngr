@@ -55,7 +55,7 @@ struct Selector: Codable, CustomStringConvertible {
 }
 
 
-struct Provider: TimelineProvider {
+struct provider: TimelineProvider {
     static func getTheData(completion: ((Vacinn) -> Void)?) {
         let theSelctor = """
 div[color=\\"data.primary\\"]
@@ -69,7 +69,7 @@ div[color=\\"data.primary\\"]
             guard error == nil, let content = data else {
                 logger.fault("[ERROR] Error getting data from API")
                 var response = ErrorVacinn
-                response.result.result[0] = error?.localizedDescription ?? "0"
+                response.result.result[1] = error?.localizedDescription ?? "Geen data bij het reqeust"
                 completion?(response)
                 return
             }
@@ -85,7 +85,7 @@ div[color=\\"data.primary\\"]
             } catch {
                 logger.fault("[ERROR] Error parsing json from data")
                 var response = ErrorVacinn
-                response.result.result[0] = error.localizedDescription
+                response.result.result[1] = error.localizedDescription
                 completion?(response)
                 return
             }
@@ -96,7 +96,7 @@ div[color=\\"data.primary\\"]
     }
     
     func placeholder(in context: Context) -> VacinnEntry {
-        VacinnEntry(date: Date(), vacinn: PlaceholderVacinn)
+        return VacinnEntry(date: Date(), vacinn: PlaceholderVacinn)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (VacinnEntry) -> ()) {
@@ -106,17 +106,17 @@ div[color=\\"data.primary\\"]
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         logger.info("[LOG] Making the timeline")
         var entries: [VacinnEntry] = []
-        Provider.getTheData() { theVacinn in
+        provider.getTheData() { theVacinn in
             logger.info("[LOG] Got the Data: \(theVacinn, privacy: .public)")
             var entry: VacinnEntry
             var components = DateComponents()
             components.hour = 15
-            components.minute = 40
+            components.minute = 55
             components.second = 0
             components.nanosecond = 0
             let drieUur = Calendar.current.date(from: components)!
             logger.debug("[LOG] Adding the widget at: \(drieUur, privacy: .public)")
-            entry = VacinnEntry(date: Date(), vacinn: theVacinn)
+            entry = VacinnEntry(date: drieUur, vacinn: theVacinn)
             entries.append(entry)
             let timeline = Timeline(entries: entries, policy: .atEnd)//.after(drieUur))
             completion(timeline)
@@ -130,7 +130,7 @@ struct VacinnEntry: TimelineEntry {
 }
 
 struct vacinnWidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: provider.Entry
     
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -152,7 +152,7 @@ struct vacinnWidgetEntryView : View {
 struct vacinnWidget: Widget {
     let kind: String = "rivmWidget"
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: provider()) { entry in
             vacinnWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Vacinn Watcher")
