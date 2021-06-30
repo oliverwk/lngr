@@ -1,5 +1,5 @@
 //
-//  lngr-old.swift
+//  LingeriesView.swift
 //  lngr
 //
 //  Created by Olivier Wittop Koning on 21/04/2021.
@@ -25,10 +25,10 @@ struct LingeriesView: View {
     @StateObject private var github: LingerieFetcher
     @State var LingerieID: String?
     
-    init(Url: String, title: String) {
+    init(_ Url: String, _ title: String) {
         self.Url = Url
         self.title = title
-        _github = StateObject(wrappedValue: LingerieFetcher(Url: URL(string: Url)!, lngrsName: "lngr\(title)"))
+        _github = StateObject(wrappedValue: LingerieFetcher(URL(string: Url)!, "lngr\(title)"))
     }
     
     var body: some View {
@@ -77,6 +77,7 @@ public class LingerieFetcher: ObservableObject {
     @Published var lingeries = [Lingerie]()
     @Published var IsLoading = false
     
+    /// Helper function to porvide user feedback when somthing has gone wrong
     public func simpleError() {
         #if os(iOS)
         let genarator = UINotificationFeedbackGenerator()
@@ -128,8 +129,19 @@ public class LingerieFetcher: ObservableObject {
         }
     }
     
-    init(Url: URL, lngrsName: String) {
+    init(_ url: URL, _ lngrsName: String) {
         //If you want to reset everting from spotlight use: reset()
+        LoadLngrs(Url: url, lngrsName: lngrsName)
+    }
+    
+    /// Loads Lingreies from the provided url an adds it to the Published properties
+    ///
+    /// Runs at init of ``LingerieFetcher``
+    ///
+    /// - Parameters:
+    ///   - Url: URL to load the data from
+    ///   - lngrsName: What sort of lingerie is going to be loaded
+    func LoadLngrs(Url: URL, lngrsName: String) -> Void {
         self.logger.log("Making request to: \(Url.absoluteString, privacy: .public)")
         self.IsLoading = true
         URLSession.shared.dataTask(with: Url) {(data, response, error) in

@@ -36,6 +36,11 @@
 		E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6D2A15425F373100007EC2D /* LingeriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D2A15325F373100007EC2D /* LingeriesView.swift */; };
 		E6D2A15525F373100007EC2D /* LingeriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D2A15325F373100007EC2D /* LingeriesView.swift */; };
+		E6DE7E53268C5581003B88B4 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DE7E52268C5581003B88B4 /* QuickLook.framework */; };
+		E6DE7E56268C5581003B88B4 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE7E55268C5581003B88B4 /* PreviewViewController.swift */; };
+		E6DE7E59268C5581003B88B4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DE7E57268C5581003B88B4 /* MainInterface.storyboard */; };
+		E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6DE7E51268C5581003B88B4 /* MarkDown.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E6DE7E68268C9FB6003B88B4 /* lngrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +58,20 @@
 			remoteGlobalIDString = E6B52B7F265061BC006DAB5C;
 			remoteInfo = rivmWidgetExtension;
 		};
+		E6DE7E5B268C5581003B88B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6077B6E25F175B800F6F951 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6DE7E50268C5581003B88B4;
+			remoteInfo = MarkDown;
+		};
+		E6DE7E6A268C9FB6003B88B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6077B6E25F175B800F6F951 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6077B7925F175CC00F6F951;
+			remoteInfo = "lngr (iOS)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +82,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */,
+				E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */,
 				E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -100,6 +120,14 @@
 		E6C6419D2674974400D6984D /* GetCheapest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetCheapest.entitlements; sourceTree = "<group>"; };
 		E6C6419E2674980F00D6984D /* lngr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = lngr.entitlements; sourceTree = "<group>"; };
 		E6D2A15325F373100007EC2D /* LingeriesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingeriesView.swift; sourceTree = "<group>"; };
+		E6DE7E51268C5581003B88B4 /* MarkDown.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MarkDown.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6DE7E52268C5581003B88B4 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		E6DE7E55268C5581003B88B4 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		E6DE7E58268C5581003B88B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		E6DE7E5A268C5581003B88B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6DE7E65268C9FB6003B88B4 /* lngrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lngrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrUITests.swift; sourceTree = "<group>"; };
+		E6DE7E69268C9FB6003B88B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +162,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6DE7E4E268C5581003B88B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6DE7E53268C5581003B88B4 /* QuickLook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6DE7E62268C9FB6003B88B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -147,6 +190,8 @@
 				E6077B8325F175CD00F6F951 /* macOS */,
 				E6B52B83265061BD006DAB5C /* rivmWidget */,
 				E607CE572651190D0084F2E7 /* GetCheapest */,
+				E6DE7E54268C5581003B88B4 /* MarkDown */,
+				E6DE7E66268C9FB6003B88B4 /* lngrUITests */,
 				E68170D425F3D5D200C9DD32 /* Frameworks */,
 				E6077B7B25F175CD00F6F951 /* Products */,
 			);
@@ -174,6 +219,8 @@
 				E6077B8225F175CD00F6F951 /* lngr.app */,
 				E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */,
 				E607CE552651190D0084F2E7 /* GetCheapest.appex */,
+				E6DE7E51268C5581003B88B4 /* MarkDown.appex */,
+				E6DE7E65268C9FB6003B88B4 /* lngrUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +261,7 @@
 				E68170D525F3D5D200C9DD32 /* WidgetKit.framework */,
 				E68170D725F3D5D200C9DD32 /* SwiftUI.framework */,
 				E68B5E95260490F700385A7E /* Intents.framework */,
+				E6DE7E52268C5581003B88B4 /* QuickLook.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -226,6 +274,25 @@
 				E6B52B88265061C7006DAB5C /* Info.plist */,
 			);
 			path = rivmWidget;
+			sourceTree = "<group>";
+		};
+		E6DE7E54268C5581003B88B4 /* MarkDown */ = {
+			isa = PBXGroup;
+			children = (
+				E6DE7E55268C5581003B88B4 /* PreviewViewController.swift */,
+				E6DE7E57268C5581003B88B4 /* MainInterface.storyboard */,
+				E6DE7E5A268C5581003B88B4 /* Info.plist */,
+			);
+			path = MarkDown;
+			sourceTree = "<group>";
+		};
+		E6DE7E66268C9FB6003B88B4 /* lngrUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */,
+				E6DE7E69268C9FB6003B88B4 /* Info.plist */,
+			);
+			path = lngrUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +312,7 @@
 			dependencies = (
 				E6B52B8A265061C7006DAB5C /* PBXTargetDependency */,
 				E607CE5C2651190D0084F2E7 /* PBXTargetDependency */,
+				E6DE7E5C268C5581003B88B4 /* PBXTargetDependency */,
 			);
 			name = "lngr (iOS)";
 			productName = "lngr (iOS)";
@@ -302,6 +370,41 @@
 			productReference = E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		E6DE7E50268C5581003B88B4 /* MarkDown */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6DE7E60268C5581003B88B4 /* Build configuration list for PBXNativeTarget "MarkDown" */;
+			buildPhases = (
+				E6DE7E4D268C5581003B88B4 /* Sources */,
+				E6DE7E4E268C5581003B88B4 /* Frameworks */,
+				E6DE7E4F268C5581003B88B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MarkDown;
+			productName = MarkDown;
+			productReference = E6DE7E51268C5581003B88B4 /* MarkDown.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E6DE7E64268C9FB6003B88B4 /* lngrUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6DE7E6C268C9FB6003B88B4 /* Build configuration list for PBXNativeTarget "lngrUITests" */;
+			buildPhases = (
+				E6DE7E61268C9FB6003B88B4 /* Sources */,
+				E6DE7E62268C9FB6003B88B4 /* Frameworks */,
+				E6DE7E63268C9FB6003B88B4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E6DE7E6B268C9FB6003B88B4 /* PBXTargetDependency */,
+			);
+			name = lngrUITests;
+			productName = lngrUITests;
+			productReference = E6DE7E65268C9FB6003B88B4 /* lngrUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -323,6 +426,13 @@
 					E6B52B7F265061BC006DAB5C = {
 						CreatedOnToolsVersion = 12.5;
 					};
+					E6DE7E50268C5581003B88B4 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					E6DE7E64268C9FB6003B88B4 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = E6077B7925F175CC00F6F951;
+					};
 				};
 			};
 			buildConfigurationList = E6077B7125F175B800F6F951 /* Build configuration list for PBXProject "lngr" */;
@@ -343,6 +453,8 @@
 				E6077B8125F175CD00F6F951 /* lngr (macOS) */,
 				E6B52B7F265061BC006DAB5C /* rivmWidgetExtension */,
 				E607CE542651190D0084F2E7 /* GetCheapest */,
+				E6DE7E50268C5581003B88B4 /* MarkDown */,
+				E6DE7E64268C9FB6003B88B4 /* lngrUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -376,6 +488,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6B52B87265061C7006DAB5C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6DE7E4F268C5581003B88B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6DE7E59268C5581003B88B4 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6DE7E63268C9FB6003B88B4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +558,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6DE7E4D268C5581003B88B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6DE7E56268C5581003B88B4 /* PreviewViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6DE7E61268C9FB6003B88B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6DE7E68268C9FB6003B88B4 /* lngrUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -444,7 +587,28 @@
 			target = E6B52B7F265061BC006DAB5C /* rivmWidgetExtension */;
 			targetProxy = E6B52B89265061C7006DAB5C /* PBXContainerItemProxy */;
 		};
+		E6DE7E5C268C5581003B88B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6DE7E50268C5581003B88B4 /* MarkDown */;
+			targetProxy = E6DE7E5B268C5581003B88B4 /* PBXContainerItemProxy */;
+		};
+		E6DE7E6B268C9FB6003B88B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6077B7925F175CC00F6F951 /* lngr (iOS) */;
+			targetProxy = E6DE7E6A268C9FB6003B88B4 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E6DE7E57268C5581003B88B4 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6DE7E58268C5581003B88B4 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E6077B8C25F175CD00F6F951 /* Debug */ = {
@@ -753,6 +917,88 @@
 			};
 			name = Release;
 		};
+		E6DE7E5E268C5581003B88B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = MarkDown/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.MarkDown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E6DE7E5F268C5581003B88B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = MarkDown/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.MarkDown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E6DE7E6D268C9FB6003B88B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = lngrUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngrUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "lngr (iOS)";
+			};
+			name = Debug;
+		};
+		E6DE7E6E268C9FB6003B88B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				INFOPLIST_FILE = lngrUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngrUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "lngr (iOS)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -797,6 +1043,24 @@
 			buildConfigurations = (
 				E6B52B8D265061C7006DAB5C /* Debug */,
 				E6B52B8E265061C7006DAB5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6DE7E60268C5581003B88B4 /* Build configuration list for PBXNativeTarget "MarkDown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6DE7E5E268C5581003B88B4 /* Debug */,
+				E6DE7E5F268C5581003B88B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6DE7E6C268C9FB6003B88B4 /* Build configuration list for PBXNativeTarget "lngrUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6DE7E6D268C9FB6003B88B4 /* Debug */,
+				E6DE7E6E268C9FB6003B88B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -22,7 +22,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection){
-            LingeriesView(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", title: "Slips")
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips")
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
@@ -30,7 +30,7 @@ struct ContentView: View {
                     }
                 }
                 .tag(0)
-            LingeriesView(Url: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", title: "Bodys")
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", "Bodys")
                 .tabItem {
                     VStack {
                         Image(systemName: "rectangle.3.offgrid")
@@ -40,12 +40,16 @@ struct ContentView: View {
                 .tag(1)
         }.blur(radius: blurRadius).onAppear {
             let reason = "Authenticate to go to lngr"
-            authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
-                if success {
-                    DispatchQueue.main.async { self.blurRadius = 0.0 }
-                } else {
-                    print(error?.localizedDescription ?? "Failed to authenticate")
-                    // Fall back to a asking for username and password.
+            if ProcessInfo.processInfo.arguments.contains("NoAuth") {
+                DispatchQueue.main.async { self.blurRadius = 0.0 }
+            } else {
+                authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+                    if success {
+                        DispatchQueue.main.async { self.blurRadius = 0.0 }
+                    } else {
+                        print(error?.localizedDescription ?? "Failed to authenticate")
+                        // Fall back to a asking for username and password.
+                    }
                 }
             }
         }

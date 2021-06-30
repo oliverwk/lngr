@@ -41,7 +41,7 @@ extension LingerieFetcher {
                 self.logger.log("\(lngr.id) is already indexed, \(lngr.naam)")
             }
         }
-        self.logger.log("idsToUserDefaults: \(UserDefaults.standard.object(forKey: "\(lngrName)IdsIndexInSpotlight") as? [String] ?? [String]())")
+        self.logger.log("idsToUserDefaults \("\(lngrName)IdsIndexInSpotlight"): \(UserDefaults.standard.object(forKey: "\(lngrName)IdsIndexInSpotlight") as? [String] ?? [String]())")
     }
     
     /// Makes a spotlight item with specifedLingerie
@@ -67,6 +67,7 @@ extension LingerieFetcher {
         logger.critical("Reseting")
         let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
         for lngrsName in ["lngrSlips", "lngrBodys"] {
+            logger.log("Deleting: \(lngrsName)IdsIndexInSpotlight")
             defaults.removeObject(forKey: "\(lngrsName)IdsIndexInSpotlight")
         }
         deleteSpotlight()
