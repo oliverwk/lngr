@@ -36,7 +36,7 @@ struct LingerieImageView: View {
             let session = URLSession(configuration: config)
             
             session.dataTask(with: parsedURL) { data, response, error in
-                //            URLSession.shared.dataTask(with: parsedURL) { data, response, error in
+                // URLSession.shared.dataTask(with: parsedURL) { data, response, error in
                 if let data = data, data.count > 0 {
                     self.data = data
                     self.state = .success

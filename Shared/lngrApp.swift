@@ -50,7 +50,6 @@ struct lngrApp: App {
                         for theLngr in loadedLngr {
                             if theLngr.id == id {
                                 self.logger.log("[SPOTLIGHT] Found \(id, privacy: .public) with name \(theLngr.naam, privacy: .public)")
-//                                sreachModel.FoundSpotlightlink(lngr: theLngr)
                             }
                         }
                     } else {

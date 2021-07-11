@@ -4,7 +4,7 @@
 - [x] Add loggin to main app
 - [x] Add Handoff
 - [x] Add low data mode optie
-- [] Add Share button
-- [] Add caching to network reqeusts
-- [] Add a settings bundle
-- [] Add MultipeerConnectivity?
+- [x] Add caching to network reqeusts
+- [ ] Add Share button
+- [ ] Add a settings bundle
+- [ ] Add MultipeerConnectivity?

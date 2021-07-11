@@ -20,6 +20,10 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url) }"
     }
     
+    public var Url: URL {
+        return URL(string: self.url)!
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case naam
@@ -29,5 +33,15 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible {
         case imageUrls = "imageUrls"
         case url
         case kleur
+    }
+}
+
+extension Lingeries: CustomStringConvertible {
+    public var description: String {
+        self.rawValue == 1 ? "Slips" : (self.rawValue == 2 ? "Bras" : (self.rawValue == 3 ? "Bodys" : "Unknown"))
+    }
+    
+    public var url: URL {
+       return URL(string: (self.rawValue == 1 ? "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json" : (self.rawValue == 2 ? "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json" : (self.rawValue == 3 ? "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json" : "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json")) ))!
     }
 }

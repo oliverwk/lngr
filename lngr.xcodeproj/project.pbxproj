@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,6 +41,8 @@
 		E6DE7E59268C5581003B88B4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DE7E57268C5581003B88B4 /* MainInterface.storyboard */; };
 		E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6DE7E51268C5581003B88B4 /* MarkDown.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6DE7E68268C9FB6003B88B4 /* lngrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */; };
+		E6ED55FA26945F0D001F978F /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = E6ED55F926945F0D001F978F /* Down */; };
+		E6ED55FC26946F1C001F978F /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED55FB26946F1C001F978F /* GetImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,7 @@
 		E6DE7E65268C9FB6003B88B4 /* lngrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lngrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrUITests.swift; sourceTree = "<group>"; };
 		E6DE7E69268C9FB6003B88B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6ED55FB26946F1C001F978F /* GetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6ED55FA26945F0D001F978F /* Down in Frameworks */,
 				E6DE7E53268C5581003B88B4 /* QuickLook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +252,7 @@
 				E6C6419D2674974400D6984D /* GetCheapest.entitlements */,
 				E607CE582651190D0084F2E7 /* IntentHandler.swift */,
 				E64E66042677AE5800B08C89 /* GetLngr.swift */,
+				E6ED55FB26946F1C001F978F /* GetImage.swift */,
 				E6B2894126739D3E00354743 /* model.swift */,
 				E607CE612651193A0084F2E7 /* Intents.intentdefinition */,
 				E607CE5A2651190D0084F2E7 /* Info.plist */,
@@ -383,6 +388,9 @@
 			dependencies = (
 			);
 			name = MarkDown;
+			packageProductDependencies = (
+				E6ED55F926945F0D001F978F /* Down */,
+			);
 			productName = MarkDown;
 			productReference = E6DE7E51268C5581003B88B4 /* MarkDown.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -445,6 +453,9 @@
 				nl,
 			);
 			mainGroup = E6077B6D25F175B800F6F951;
+			packageReferences = (
+				E6ED55F826945F0D001F978F /* XCRemoteSwiftPackageReference "Down" */,
+			);
 			productRefGroup = E6077B7B25F175CD00F6F951 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -544,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */,
+				E6ED55FC26946F1C001F978F /* GetImage.swift in Sources */,
 				E6B2894226739D3E00354743 /* model.swift in Sources */,
 				E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */,
 				E64E66052677AE5800B08C89 /* GetLngr.swift in Sources */,
@@ -1066,6 +1078,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E6ED55F826945F0D001F978F /* XCRemoteSwiftPackageReference "Down" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnxnguyen/Down.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E6ED55F926945F0D001F978F /* Down */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E6ED55F826945F0D001F978F /* XCRemoteSwiftPackageReference "Down" */;
+			productName = Down;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E6077B6E25F175B800F6F951 /* Project object */;
 }
