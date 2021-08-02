@@ -18,7 +18,7 @@ extension LingerieFetcher {
     ///   - lngrs: The Lingeries to add to spotlight
     /// - Returns: Nothing
     func AddToSpotlightWithId(lngrName: String, lngrs: [Lingerie]) -> Void {
-        let testing = true
+        let testing = false
         var idsToUserDefaults = [String]()
         let idsFromUserDefaults = UserDefaults.standard.object(forKey: "\(lngrName)IdsIndexInSpotlight") as? [String] ?? [String]()
         idsToUserDefaults = idsFromUserDefaults
@@ -50,6 +50,8 @@ extension LingerieFetcher {
     func indexWithId(_ lngr: Lingerie) -> CSSearchableItem {
         self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+        attributeSet.identifier = lngr.id
+        attributeSet.domainIdentifier = "nl.wittopkoning.lngr"
         attributeSet.title = lngr.naam
         attributeSet.contentDescription = "De \(lngr.naam) kost €\(lngr.prijs)"
         attributeSet.contentURL = URL(string: lngr.url)!
