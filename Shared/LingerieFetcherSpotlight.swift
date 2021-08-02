@@ -22,26 +22,26 @@ extension LingerieFetcher {
         var idsToUserDefaults = [String]()
         let idsFromUserDefaults = UserDefaults.standard.object(forKey: "\(lngrName)IdsIndexInSpotlight") as? [String] ?? [String]()
         idsToUserDefaults = idsFromUserDefaults
-        self.logger.log("\(lngrName)IdsFromUserDefaults: \(idsFromUserDefaults)")
+        self.logger.log("\(lngrName, privacy: .public)IdsFromUserDefaults: \(idsFromUserDefaults, privacy: .public)")
         for lngr in lngrs {
             if !idsFromUserDefaults.contains(lngr.id) || testing {
                 self.logger.log("Indexing in spotlight: \(lngr.naam)")
                 let item = indexWithId(lngr)
                 CSSearchableIndex.default().indexSearchableItems([item]) { error in
                     if let error = error {
-                        self.logger.error("[SPOTLIGHT] [ERROR] Er was indexing error: \(error.localizedDescription)")
+                        self.logger.error("[SPOTLIGHT] [ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
                     } else {
-                        self.logger.log("[SPOTLIGHT] Search item successfully indexed! \(lngr.naam), \(lngr.id)")
+                        self.logger.log("[SPOTLIGHT] Search item successfully indexed! \(lngr.naam, privacy: .public), \(lngr.id, privacy: .public)")
                         idsToUserDefaults.insert(lngr.id, at: idsToUserDefaults.count)
                         UserDefaults.standard.set(idsToUserDefaults, forKey: "\(lngrName)IdsIndexInSpotlight")
                         idsToUserDefaults = UserDefaults.standard.object(forKey: "\(lngrName)IdsIndexInSpotlight") as? [String] ?? [String]()
                     }
                 }
             } else {
-                self.logger.log("\(lngr.id) is already indexed, \(lngr.naam)")
+                self.logger.log("\(lngr.id, privacy: .public) is already indexed, \(lngr.naam, privacy: .public)")
             }
         }
-        self.logger.log("idsToUserDefaults \("\(lngrName)IdsIndexInSpotlight"): \(UserDefaults.standard.object(forKey: "\(lngrName)IdsIndexInSpotlight") as? [String] ?? [String]())")
+        self.logger.log("idsToUserDefaults \("\(lngrName)IdsIndexInSpotlight", privacy: .public): \(UserDefaults.standard.object(forKey: "\(lngrName)IdsIndexInSpotlight") as? [String] ?? [String](), privacy: .public)")
     }
     
     /// Makes a spotlight item with specifedLingerie
@@ -50,8 +50,8 @@ extension LingerieFetcher {
     func indexWithId(_ lngr: Lingerie) -> CSSearchableItem {
         self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-        attributeSet.identifier = lngr.id
         attributeSet.domainIdentifier = "nl.wittopkoning.lngr"
+        attributeSet.keywords = [lngr.id, lngr.url, lngr.naam]
         attributeSet.title = lngr.naam
         attributeSet.contentDescription = "De \(lngr.naam) kost €\(lngr.prijs)"
         attributeSet.contentURL = URL(string: lngr.url)!
@@ -69,7 +69,7 @@ extension LingerieFetcher {
         logger.critical("Reseting")
         let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
         for lngrsName in ["lngrSlips", "lngrBodys"] {
-            logger.log("Deleting: \(lngrsName)IdsIndexInSpotlight")
+            logger.log("Deleting: \(lngrsName, privacy: .public)IdsIndexInSpotlight")
             defaults.removeObject(forKey: "\(lngrsName)IdsIndexInSpotlight")
         }
         deleteSpotlight()

@@ -48,18 +48,20 @@ struct ContentView: View {
                 CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["nl.wittopkoning.lngr"]) { error in
                     if let errs = error {
                         logger.fault("An error happend while reseting the spolight index: \(errs.localizedDescription, privacy: .public)")
+                    } else {
+                        logger.critical("Deleted the hole spotlight index")
                     }
                 }
             }
             
             let ResetEverything = UserDefaults.standard.bool(forKey: "reset_everything")
             let ResetSpotlight = UserDefaults.standard.bool(forKey: "reset_spotlight")
-            logger.log("In the settings page the reset everything is: \(ResetEverything) and the reset spotlight is: \(ResetSpotlight)")
+            logger.log("In the settings page the reset everything is: \(ResetEverything, privacy: .public) and the reset spotlight is: \(ResetSpotlight, privacy: .public)")
             if ResetEverything {
                 logger.critical("Reseting Spotlight and userdefaults")
                 let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
                 for lngrsName in ["lngrSlips", "lngrBodys"] {
-                    logger.log("Deleting: \(lngrsName)IdsIndexInSpotlight")
+                    logger.critical("Deleting: \(lngrsName, privacy: .public)IdsIndexInSpotlight")
                     defaults.removeObject(forKey: "\(lngrsName)IdsIndexInSpotlight")
                 }
                 deleteSpotlight()
@@ -79,7 +81,7 @@ struct ContentView: View {
                     if success {
                         DispatchQueue.main.async { self.blurRadius = 0.0 }
                     } else {
-                        logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate")")
+                        logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate", privacy: .public)")
                         // Fall back to a asking for username and password.
                     }
                 }

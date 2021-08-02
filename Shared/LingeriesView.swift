@@ -57,8 +57,7 @@ struct LingeriesView: View {
             }.navigationBarTitle(Text(title))
         }.navigationViewStyle(StackNavigationViewStyle()).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
-                logger.log("The persistentIdentifier is: \(userActivity.persistentIdentifier.debugDescription)")
-                logger.log("Received a payload via spotlight with id: \(id)")
+                logger.log("Received a payload via spotlight with id: \(id, privacy: .public)")
                 DispatchQueue.main.async {
                     self.LingerieID = id
                 }
