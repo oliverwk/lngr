@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,7 +43,6 @@
 		E6DE7E59268C5581003B88B4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DE7E57268C5581003B88B4 /* MainInterface.storyboard */; };
 		E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6DE7E51268C5581003B88B4 /* MarkDown.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6DE7E68268C9FB6003B88B4 /* lngrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */; };
-		E6ED55FA26945F0D001F978F /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = E6ED55F926945F0D001F978F /* Down */; };
 		E6ED55FC26946F1C001F978F /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED55FB26946F1C001F978F /* GetImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,7 +171,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6ED55FA26945F0D001F978F /* Down in Frameworks */,
 				E6DE7E53268C5581003B88B4 /* QuickLook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,7 +391,6 @@
 			);
 			name = MarkDown;
 			packageProductDependencies = (
-				E6ED55F926945F0D001F978F /* Down */,
 			);
 			productName = MarkDown;
 			productReference = E6DE7E51268C5581003B88B4 /* MarkDown.appex */;
@@ -458,7 +455,6 @@
 			);
 			mainGroup = E6077B6D25F175B800F6F951;
 			packageReferences = (
-				E6ED55F826945F0D001F978F /* XCRemoteSwiftPackageReference "Down" */,
 			);
 			productRefGroup = E6077B7B25F175CD00F6F951 /* Products */;
 			projectDirPath = "";
@@ -1084,25 +1080,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		E6ED55F826945F0D001F978F /* XCRemoteSwiftPackageReference "Down" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/johnxnguyen/Down.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.11.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E6ED55F926945F0D001F978F /* Down */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E6ED55F826945F0D001F978F /* XCRemoteSwiftPackageReference "Down" */;
-			productName = Down;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E6077B6E25F175B800F6F951 /* Project object */;
 }

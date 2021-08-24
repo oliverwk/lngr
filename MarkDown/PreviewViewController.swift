@@ -8,7 +8,6 @@
 import UIKit
 import QuickLook
 import WebKit
-//import Down
 
 class PreviewViewController: UIViewController, QLPreviewingController, WKNavigationDelegate {
     enum MarkDownPreviewError: Error {
@@ -75,14 +74,13 @@ class PreviewViewController: UIViewController, QLPreviewingController, WKNavigat
         // Quick Look will display a loading spinner while the completion handler is not called.
         
         do {
-            let MarkDownString = try String(contentsOf: url)
+            let html = try String(contentsOf: url)
             
             print("Getting markdown")
 /*            let down = Down(markdownString: MarkDownString)
             
             print("Making markdown to html")
             let html = try down.toHTML()*/
-            let html = "f";
             
             print("Adding: \(html) to webview")
             //self.webView.loadHTMLString("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>* { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"; }</style></head><body><h1>SnapKit-LoginKit</h1><p>This example will show how to use snapchat's LoginKit with swiftui.</p><p>An API that changed in IOS 14 was how you handle url's as you see below this is the old way of doing it</p><pre><code class=\"language-swift\">import SCSDKLoginKit                func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -&gt; Bool {                    if SCSDKLoginClient.application(app, open: url, options: options) {return true}}</code></pre><p>While the new of doing things is this wich as you can see does not pass a <code>UIApplication</code> only a url as you can see below.</p> <pre><code class=\"language-swift\">ConentView().onOpenURL(perform: { url inprint(ulr)})</code></pre><p>So you need to pass it <code>UIApplication.shared</code> which does the trick.</p><pre><code class=\"language-swift\">ConentView().onOpenURL(perform: { url in if SCSDKLoginClient.application(UIApplication.shared, open: url, options: nil) { print(&quot;Nice, snapchat can read your url&quot;)} }) </code></pre></body></html>", baseURL: nil)
