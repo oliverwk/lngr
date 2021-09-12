@@ -7,13 +7,14 @@
 
 import UIKit
 import QuickLook
-import WebKit
+import SwiftUI
+//import WebKit
 
-class PreviewViewController: UIViewController, QLPreviewingController, WKNavigationDelegate {
+class PreviewViewController: UIViewController, QLPreviewingController {
     enum MarkDownPreviewError: Error {
         case unableToOpenFile(atURL: URL)
     }
-    var webView: WKWebView!
+    // var webView: WKWebView!
     
     
     override func viewDidLoad() {
@@ -23,9 +24,9 @@ class PreviewViewController: UIViewController, QLPreviewingController, WKNavigat
     }
     
     override func loadView() {
-        webView = WKWebView()
+        /*webView = WKWebView()
         webView.navigationDelegate = self
-        view = webView
+        view = webView*/
     }
     
     /*
@@ -39,29 +40,31 @@ class PreviewViewController: UIViewController, QLPreviewingController, WKNavigat
      handler(nil)
      }
      */
+    var markDownString: String = "H"
+    @IBOutlet weak var TheText: UILabel!
+    
     func preparePreviewOfFile(at url: URL, completionHandler handler: @escaping (Error?) -> Void) {
         
         print("Hello from: preparePreviewOfFile")
         do {
             print("Getting markdown from the file: \(url.absoluteString)")
             let MarkDownString = try String(contentsOf: url)
-            print("Got markdown: \(MarkDownString)\nNow handing it to evaluateJavaScript")
-            self.webView.loadHTMLString("<html><head></head><body><script>let getMark = fetch('https://api.github.com/markdown/raw', { method: 'POST', body: '\(MarkDownString)', header: { 'Content-Type': 'text/plain' } }).then((res) => res.text().then((html) => document.getRootNode()['all'][0]['innerHTML'] = `<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>* { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"; }</style></head><body>${html}</body></html>`));</script></body></html>", baseURL: nil)
-/*            self.webView.evaluateJavaScript(js) { (result, error) in
-                if error == nil {
-                    handler(nil)
-                    print("result: \(result as Any)")
-                } else {
-                    print("A big as errror: \(error.debugDescription)")
-                    handler(MarkDownPreviewError.unableToOpenFile(atURL: url))
-                }
-            }*/
+            self.markDownString = MarkDownString
+            
+            /*let vc = UIHostingController(rootView: Text(MarkDownString))
+            addChild(vc)
+            vc.view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            theView.addSubview(vc.view)
+            vc.didMove(toParent: self)*/
+            
             handler(nil)
         } catch {
             print("Er was geen data uit het bestand: \(error.localizedDescription)")
             handler(MarkDownPreviewError.unableToOpenFile(atURL: url))
         }
     }
+    
+    
     
     @available(*, deprecated, message: "preparePreviewOfFileSSSSSSSSSS doesn't work ")
     func preparePreviewOfFileSSSSSSSSSS(at url: URL, completionHandler handler: @escaping (Error?) -> Void) {
@@ -84,7 +87,7 @@ class PreviewViewController: UIViewController, QLPreviewingController, WKNavigat
             
             print("Adding: \(html) to webview")
             //self.webView.loadHTMLString("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>* { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"; }</style></head><body><h1>SnapKit-LoginKit</h1><p>This example will show how to use snapchat's LoginKit with swiftui.</p><p>An API that changed in IOS 14 was how you handle url's as you see below this is the old way of doing it</p><pre><code class=\"language-swift\">import SCSDKLoginKit                func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -&gt; Bool {                    if SCSDKLoginClient.application(app, open: url, options: options) {return true}}</code></pre><p>While the new of doing things is this wich as you can see does not pass a <code>UIApplication</code> only a url as you can see below.</p> <pre><code class=\"language-swift\">ConentView().onOpenURL(perform: { url inprint(ulr)})</code></pre><p>So you need to pass it <code>UIApplication.shared</code> which does the trick.</p><pre><code class=\"language-swift\">ConentView().onOpenURL(perform: { url in if SCSDKLoginClient.application(UIApplication.shared, open: url, options: nil) { print(&quot;Nice, snapchat can read your url&quot;)} }) </code></pre></body></html>", baseURL: nil)
-            self.webView.loadHTMLString("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>* { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"; }</style></head><body>\(html)</body></html>", baseURL: nil)
+            //self.webView.loadHTMLString("<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><style>* { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"; }</style></head><body>\(html)</body></html>", baseURL: nil)
         } catch {
             print("Er was geen data uit het bestand: \(error.localizedDescription)")
             handler(MarkDownPreviewError.unableToOpenFile(atURL: url))
