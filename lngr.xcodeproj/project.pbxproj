@@ -17,7 +17,6 @@
 		E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607CE582651190D0084F2E7 /* IntentHandler.swift */; };
 		E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E607CE552651190D0084F2E7 /* GetCheapest.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; };
-		E612295B26EE3B170022AB89 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E612295A26EE3B110022AB89 /* HapticManager.swift */; };
 		E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
@@ -154,7 +153,6 @@
 		E607CE582651190D0084F2E7 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		E607CE5A2651190D0084F2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E607CE612651193A0084F2E7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
-		E612295A26EE3B110022AB89 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieFetcherSpotlight.swift; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* LingerieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingerieImageView.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LingerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieView.swift; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 			children = (
 				E6C810C626ED0DAE00A9925B /* lngrApp.swift */,
 				E6C810C826ED0DAE00A9925B /* ContentView.swift */,
-				E612295A26EE3B110022AB89 /* HapticManager.swift */,
 				E6C810E426ED0E9E00A9925B /* LockerManager.swift */,
 				E6C810CA26ED0DAE00A9925B /* NotificationController.swift */,
 				E6C810CC26ED0DAE00A9925B /* NotificationView.swift */,
@@ -782,7 +779,6 @@
 			files = (
 				E6C810CB26ED0DAE00A9925B /* NotificationController.swift in Sources */,
 				E6C810E526ED0E9E00A9925B /* LockerManager.swift in Sources */,
-				E612295B26EE3B170022AB89 /* HapticManager.swift in Sources */,
 				E6C810C926ED0DAE00A9925B /* ContentView.swift in Sources */,
 				E6C810CF26ED0DAE00A9925B /* ComplicationController.swift in Sources */,
 				E6C810C726ED0DAE00A9925B /* lngrApp.swift in Sources */,

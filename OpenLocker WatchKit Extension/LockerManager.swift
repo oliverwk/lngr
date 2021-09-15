@@ -23,15 +23,13 @@ public class LockerManager: ObservableObject {
     
     /// Helper function to porvide user feedback when somthing has gone wrong
     public func simpleError() {
+        WKInterfaceDevice.current().play(.failure)
         logger.log("simpleError")
-        //let genarator = UINotificationFeedbackGenerator()
-        //genarator.notificationOccurred(.error)
     }
     
     public func simpleSuccess() {
+        WKInterfaceDevice.current().play(.success)
         logger.log("simpleSuccess")
-        //let genarator = UINotificationFeedbackGenerator()
-        //genarator.notificationOccurred(.success)
     }
     
     
