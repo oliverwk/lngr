@@ -16,8 +16,8 @@ let logger = Logger(
     category: "rivmWidget"
 )
 
-let PlaceholderVacinn = Vacinn(result: Selector(result: ["0,758,417","5,276,345","0"]))
-let ErrorVacinn = Vacinn(result: Selector(result: ["0","0","0"]))
+let PlaceholderVacinn = Vacinn(result: Selector(result: ["105,000", "85.6%", "81.7%", "13,320,388", "91%"]))
+let ErrorVacinn = Vacinn(result: Selector(result: ["0","0","0","0","0"]))
 
 struct Vacinn: Codable, CustomStringConvertible {
     public var result: Selector
@@ -34,7 +34,7 @@ struct Selector: Codable, CustomStringConvertible {
     public var result: [String]
     
     var VacinnsThisWeek: String {
-        return result[1].replacingOccurrences(of: ",", with: ".")
+        return result[3].replacingOccurrences(of: ",", with: ".")
     }
     
     var VacinnsToday: String {
@@ -65,8 +65,14 @@ div[color=\\"data.primary\\"]
         let urlRequest = URLRequest(url: url)
         logger.log("[LOG] Getting the Data from: \(urlString, privacy: .public)")
         let task = URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
-            
-            guard error == nil, let content = data else {
+            if (error != nil) {
+                logger.fault("[ERROR] Error getting data from API: \(error.debugDescription)")
+                var response = ErrorVacinn
+                response.result.result[1] = error?.localizedDescription ?? "Geen data bij het reqeust"
+                completion?(response)
+                return
+            }
+            guard let content = data else {
                 logger.fault("[ERROR] Error getting data from API")
                 var response = ErrorVacinn
                 response.result.result[1] = error?.localizedDescription ?? "Geen data bij het reqeust"
@@ -164,10 +170,10 @@ struct vacinnWidget: Widget {
 struct vacinnWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["1,458,417","14,075,575","0"]))))
+            vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["105,000", "85.6%", "81.7%", "13,320,388", "91%"]))))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .previewDevice("iPhone 7")
-            vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["1,458,417","14,075,575","0"]))))
+            vacinnWidgetEntryView(entry: VacinnEntry(date: Date(), vacinn:  Vacinn(result: Selector(result: ["105,000", "85.6%", "81.7%", "13,320,388", "91%"]))))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
                 .previewDevice("iPhone 7")
         }
