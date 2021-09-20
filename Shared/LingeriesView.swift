@@ -103,26 +103,28 @@ public class LingerieFetcher: ObservableObject {
             if let error = error {
                 self.logger.error("The err: \(error.localizedDescription, privacy: .public)")
             }
+            self.logger.log("Notifaction Authorization: \(granted, privacy: .public)")
             
             if granted {
                 DispatchQueue.global(qos: .utility).async {
-                    print("This is run on a background queue")
-
-                    self.logger.log("Notifaction Authorization: \(granted, privacy: .public)")
+                    self.logger.debug("This is run on a background queue")
+                    
+                    var MyLngr: Lingerie
+                    if (self.lingeries.isEmpty) {
+                        self.LoadLngrs(Url: URL(string: self.lngrsName == "lngrSlips" ? "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json": "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json")!, lngrsName: self.lngrsName)
+                        MyLngr = self.lingeries[0]
+                    } else {
+                        MyLngr = self.lingeries[0]
+                    }
+                    
                     if (UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") != nil && !( UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") as! String == SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description )) {
-                        let lngrType = self.lngrsName == "Slips" ? "slip" : "body"
-                        var MyLngr: Lingerie
-                        if (self.lingeries.isEmpty) {
-                            self.LoadLngrs(Url: URL(string: self.lngrsName == "Slips" ? "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json": "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json")!, lngrsName: self.lngrsName)
-                            MyLngr = self.lingeries[0]
-                        } else {
-                            MyLngr = self.lingeries[0]
-                        }
+                        let lngrType = self.lngrsName == "lngrSlips" ? "slip" : "body"
+                        
                         
                         let content = UNMutableNotificationContent()
                         content.title = "New lngr"
                         content.body = "Er is een nieuw \(lngrType) de \(MyLngr.naam) voor maar €\(MyLngr.prijs) in het \(MyLngr.kleur)"
-                        // content.badge = 1
+                        content.badge = 0
                         
                         let url = URL(string: MyLngr.img_url_sec)!
 
@@ -147,7 +149,7 @@ public class LingerieFetcher: ObservableObject {
                                     dateInfo.minute = 55
                                        
                                     // Deliver the notification in 30 seconds.
-                                    // let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: false)
+                                    // let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
                                     let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
                                     
                                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger) // Schedule the notification.
@@ -226,7 +228,7 @@ public class LingerieFetcher: ObservableObject {
     ///   - lngrsName: What sort of lingerie is going to be loaded
     func LoadLngrs(Url: URL, lngrsName: String) -> Void {
         self.logger.log("Making request to: \(Url.absoluteString, privacy: .public)")
-        self.IsLoading = true
+        DispatchQueue.main.async { self.IsLoading = true }
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
             DispatchQueue.main.async { self.IsLoading = false }
             do {
