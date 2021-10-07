@@ -8,7 +8,21 @@
 import SwiftUI
 import os
 
+
 struct LingerieImageView: View {
+    var lngr: Lingerie
+    
+    var body: some View {
+        AsyncImage(url: lngr.SecondImage) { image in
+            image.resizable()
+        } placeholder: {
+            Image("01j").resizable()
+        }
+    }
+}
+
+@available(*, deprecated, message: "Use the new AsyncImage")
+struct OLDLingerieImageView: View {
     private enum LoadState {
         case loading, success, failure
     }
@@ -20,13 +34,14 @@ struct LingerieImageView: View {
         )
         var data = Data()
         var state = LoadState.loading
-        
-        init(url: String) {
-            guard let parsedURL = URL(string: url) else {
+
+        init(url: URL) {
+        /*init(url: String) {
+           guard let parsedURL = URL(string: url) else {
                 logger.fault("[Fatal] Invalid URL: \(url, privacy: .public)")
                 return
-            }
-            
+            }*/
+
             let config = URLSessionConfiguration.default
             config.waitsForConnectivity = false
             config.allowsConstrainedNetworkAccess = false
@@ -35,16 +50,16 @@ struct LingerieImageView: View {
             
             let session = URLSession(configuration: config)
             
-            session.dataTask(with: parsedURL) { data, response, error in
+            session.dataTask(with: url) { data, response, error in
                 // URLSession.shared.dataTask(with: parsedURL) { data, response, error in
                 if let data = data, data.count > 0 {
                     self.data = data
                     self.state = .success
                 } else {
                     if let response = response as? HTTPURLResponse {
-                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.debugDescription, privacy: .public)")
+                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url.absoluteString, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.debugDescription, privacy: .public)")
                     } else {
-                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url, privacy: .public) Met de error: \(error.debugDescription, privacy: .public)")
+                        self.logger.error("[ERROR] Er was geen data bij het laden een afbeelding url: \(url.absoluteString, privacy: .public) Met de error: \(error.debugDescription, privacy: .public)")
                     }
                     self.state = .failure
                 }
@@ -65,8 +80,8 @@ struct LingerieImageView: View {
             .resizable()
     }
     
-    init(url: String, loading: Image = Image("01j"), failure: Image = Image(systemName: "multiply.circle")) {
-        _loader = StateObject(wrappedValue: Loader(url: url))
+    init(lngr: Lingerie, loading: Image = Image("01j"), failure: Image = Image(systemName: "multiply.circle")) {
+        _loader = StateObject(wrappedValue: Loader(url: lngr.SecondImage))
         self.loading = loading
         self.failure = failure
     }

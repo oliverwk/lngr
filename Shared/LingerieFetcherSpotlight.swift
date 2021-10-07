@@ -49,7 +49,7 @@ extension LingerieFetcher {
     /// - Returns: Spotlight item
     func indexWithId(_ lngr: Lingerie) -> CSSearchableItem {
         self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
-        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+        let attributeSet = CSSearchableItemAttributeSet(contentType: UTType.jpeg)
         attributeSet.domainIdentifier = "nl.wittopkoning.lngr"
         attributeSet.keywords = [lngr.id, lngr.url, lngr.naam]
         attributeSet.title = lngr.naam

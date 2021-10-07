@@ -5,6 +5,6 @@
 - [x] Add Handoff
 - [x] Add low data mode optie
 - [x] Add caching to network reqeusts
+- [x] Add a settings bundle
 - [ ] Add Share button
-- [ ] Add a settings bundle
 - [ ] Add MultipeerConnectivity?

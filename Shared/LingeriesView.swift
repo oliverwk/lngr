@@ -36,8 +36,7 @@ struct LingeriesView: View {
         NavigationView {
             List {
                 ForEach(lngrs.lingeries) { TheLingerie in
-                    ZStack {
-                        NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
+                    NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
                             lngrRow(TheLingerie: TheLingerie).onAppear {
                                 self.StopIndex = lngrs.lingeries.count - 1
                                 if lngrs.lingeries.count > 0 {
@@ -49,14 +48,13 @@ struct LingeriesView: View {
                                 }
                             }
                         }
-
-                    }
                 }
                 HStack(alignment: .center, spacing: 0, content: {
                     ProgressView()
                 }).opacity(lngrs.IsLoading ? 1 : 0)
-            }.navigationBarTitle(Text(title))
-        }.navigationViewStyle(StackNavigationViewStyle()).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
+            }.listStyle(.automatic).navigationBarTitle(Text(title))
+            // TODO: .searchable(text: $search)
+        }.navigationViewStyle(.stack).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
                 logger.log("Received a payload via spotlight with id: \(id, privacy: .public)")
                 DispatchQueue.main.async {
@@ -65,9 +63,6 @@ struct LingeriesView: View {
             } else {
                 logger.critical("No CSSearchableItemActivityIdentifier found in spotlight")
             }
-        }
-        .onAppear {
-            lngrs.ShowNotification()
         }
     }
 }
@@ -104,14 +99,13 @@ public class LingerieFetcher: ObservableObject {
                 self.logger.error("The err: \(error.localizedDescription, privacy: .public)")
             }
             self.logger.log("Notifaction Authorization: \(granted, privacy: .public)")
-            
+
             if granted {
                 DispatchQueue.global(qos: .utility).async {
                     self.logger.debug("This is run on a background queue")
                     
                     var MyLngr: Lingerie
                     if (self.lingeries.isEmpty) {
-                        self.LoadLngrs(Url: URL(string: self.lngrsName == "lngrSlips" ? "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json": "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json")!, lngrsName: self.lngrsName)
                         MyLngr = self.lingeries[0]
                     } else {
                         MyLngr = self.lingeries[0]
@@ -278,6 +272,9 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var description: String {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url), kleur: \(kleur) }"
     }
+    public var SecondImage: URL {
+        return URL(string: img_url_sec) ?? URL(string: "about:blank")!
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -290,3 +287,13 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
         case kleur
     }
 }
+
+struct LingeriesView_Previews: PreviewProvider {
+    static var previews: some View {
+        LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips")
+            .previewLayout(.device)
+        .previewInterfaceOrientation(.portrait)
+        .previewDevice("iPhone 8")
+    }
+}
+

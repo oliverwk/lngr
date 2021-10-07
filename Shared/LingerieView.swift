@@ -27,7 +27,6 @@ struct LingerieView: View {
                 .clipped()
                 .cornerRadius(5)
                 .padding(10)
-                .animation(.easeInOut)
                 .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                             .onEnded({ value in
                                 if value.translation.width < 0 {
@@ -45,7 +44,7 @@ struct LingerieView: View {
             Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                 .padding(.bottom, 10.0)
                 .foregroundColor(.secondary)
-        }.navigationBarBackButtonHidden(false).navigationBarTitle(Text(lingerie.naam), displayMode: .inline)
+        }.navigationBarBackButtonHidden(false).navigationBarTitle(lingerie.naam, displayMode: .inline)
     }
     
     public class ImageFetchers: ObservableObject {
@@ -79,7 +78,9 @@ struct LingerieView: View {
                 if let data = d {
                     if let image = UIImage(data: data) {
                         DispatchQueue.main.async {
-                            self.images = Image(uiImage: image)
+                            withAnimation {
+                                self.images = Image(uiImage: image)
+                            }
                         }
                     } else {
                         self.logger.error("[ERROR] Er was een error met het laden een afbeelding url nar UIImage: \(self.TheImageUrls[self.index], privacy: .public) Met de error: \(error.debugDescription, privacy: .public)")
@@ -92,7 +93,9 @@ struct LingerieView: View {
                     }
                     DispatchQueue.main.async {
                         self.🚫()
-                        self.images = Image(systemName: "multiply.circle")
+                        withAnimation {
+                            self.images = Image(systemName: "multiply.circle")
+                        }
                     }
                 }
             }.resume()
@@ -100,15 +103,15 @@ struct LingerieView: View {
     }
 }
 
-struct LinkView_Previews: PreviewProvider {
+struct LingerieView_Previews: PreviewProvider {
     static var previews: some View {
-        LingerieView(lingerie: Lingerie(id: "01094830958049238", naam: "Klassiek Katoenen String", prijs: 69.95, img_url:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg", img_url_sec:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg",imageUrls: [
-            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg?width=640",
-            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
-            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
-            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
-        ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black"))
+                LingerieView(lingerie: Lingerie(id: "01094830958049238", naam: "Klassiek Katoenen String", prijs: 69.95, img_url:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg", img_url_sec:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg",imageUrls: [
+                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg?width=640",
+                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
+                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
+                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
+                ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black"))
         .preferredColorScheme(.light)
-        .previewDevice("iPhone 7")
+        .previewDevice("iPhone 8")
     }
 }
