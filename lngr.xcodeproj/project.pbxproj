@@ -154,6 +154,7 @@
 		E607CE5A2651190D0084F2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E607CE612651193A0084F2E7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieFetcherSpotlight.swift; sourceTree = "<group>"; };
+		E64D0C7C2727112200A8A50F /* lngr.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = lngr.docc; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* LingerieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingerieImageView.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LingerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieView.swift; sourceTree = "<group>"; };
 		E64E66012677AD9F00B08C89 /* lngrRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrRow.swift; sourceTree = "<group>"; };
@@ -259,6 +260,7 @@
 		E6077B6D25F175B800F6F951 = {
 			isa = PBXGroup;
 			children = (
+				E64D0C7C2727112200A8A50F /* lngr.docc */,
 				E6BB0E7E26827884001E567B /* TODO.md */,
 				E6C6419E2674980F00D6984D /* lngr.entitlements */,
 				E6077B7225F175B800F6F951 /* Shared */,
@@ -982,6 +984,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr;
 				PRODUCT_NAME = lngr;
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1006,6 +1009,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr;
 				PRODUCT_NAME = lngr;
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
