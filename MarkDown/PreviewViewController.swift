@@ -14,21 +14,14 @@ class PreviewViewController: UIViewController, QLPreviewingController {
     enum MarkDownPreviewError: Error {
         case unableToOpenFile(atURL: URL)
     }
-    // var webView: WKWebView!
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
     }
-    
-    override func loadView() {
-        /*webView = WKWebView()
-        webView.navigationDelegate = self
-        view = webView*/
-    }
-    
+        
     /*
      * Implement this method and set QLSupportsSearchableItems to YES in the Info.plist of the extension if you support CoreSpotlight.
      *
@@ -51,11 +44,11 @@ class PreviewViewController: UIViewController, QLPreviewingController {
             let MarkDownString = try String(contentsOf: url)
             self.markDownString = MarkDownString
             
-            /*let vc = UIHostingController(rootView: Text(MarkDownString))
-            addChild(vc)
-            vc.view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            theView.addSubview(vc.view)
-            vc.didMove(toParent: self)*/
+            let childView = UIHostingController(rootView: Text(MarkDownString))
+            addChild(childView)
+            childView.view.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
+            view.addSubview(childView.view)
+            childView.didMove(toParent: self)
             
             handler(nil)
         } catch {

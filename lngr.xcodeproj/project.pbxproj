@@ -427,6 +427,7 @@
 				E6077B7725F175CC00F6F951 /* Frameworks */,
 				E6077B7825F175CC00F6F951 /* Resources */,
 				E68170E525F3D5E600C9DD32 /* Embed App Extensions */,
+				E6ED266E272844B0005FC554 /* Replace settings bundle */,
 			);
 			buildRules = (
 			);
@@ -723,6 +724,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E6ED266E272844B0005FC554 /* Replace settings bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Replace settings bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nBUILD_APP_DIR=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app\"\n\necho $BUILD_APP_DIR\n\nif [ $CONFIGURATION == \"Release\" ]; then\n    rm -rf \"$BUILD_APP_DIR/Settings.bundle\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E6077B7625F175CC00F6F951 /* Sources */ = {
