@@ -54,7 +54,9 @@ public class LockerManager: ObservableObject {
                             if seconds <= 3 {
                                 self.logger.debug("(seconds <= 3) Setting color to yellow")
                                 DispatchQueue.main.asyncAfter(deadline: .now() + Double(seconds)) {
-                                    self.secondsRemaining += 0.5
+                                    withAnimation {
+                                        self.secondsRemaining += 0.5
+                                    }
                                 }
                             } else if seconds <= 5 && seconds >= 3 {
                                 self.logger.debug("(seconds <= 5) Setting color to yellow")

@@ -6,12 +6,12 @@
 //
 
 import ClockKit
-
+import SwiftUI
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
     
     // MARK: - Complication Configuration
-
+    
     func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
         let descriptors = [
             CLKComplicationDescriptor(identifier: "isLockerOpen", displayName: "isMyLockerOpen", supportedFamilies: CLKComplicationFamily.allCases)
@@ -24,7 +24,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func handleSharedComplicationDescriptors(_ complicationDescriptors: [CLKComplicationDescriptor]) {
         // Do any necessary work to support these newly shared complication descriptors
     }
-
+    
     // MARK: - Timeline Configuration
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
@@ -36,13 +36,24 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with your desired behavior when the device is locked
         handler(.showOnLockScreen)
     }
-
+    
     // MARK: - Timeline Population
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
-
-        let templ = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: UIColor.green, fillFraction: 1.0), centerTextProvider: CLKTextProvider(format: "C"))
+        
+        //        let templ = CLKComplicationTemplateGraphicCircularImage(imageProvider: CLKFullColorImageProvider(fullColorImage: UIImage(named: "locked")!))
+        
+        //        let templ = CLKComplicationTemplateGraphicCircularClosedGaugeView(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: UIColor.green, fillFraction: 1.0), label: ComplicationView())
+        
+        //        let templ = CLKComplicationTemplateGraphicCircularClosedGaugeImage(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: UIColor.green, fillFraction: 1.0), imageProvider: CLKFullColorImageProvider(fullColorImage: UIImage(named: "locked")!))
+        
+        
+        
+        // OLD:        let templ = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: UIColor.green, fillFraction: 1.0), centerTextProvider: CLKTextProvider(format: "C"))
+        
+        let templ =  CLKComplicationTemplateGraphicCircularView(ComplicationView())
+        
         let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: templ)
         handler(entry)
     }
@@ -51,7 +62,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         // Call the handler with the timeline entries after the given date
         handler(nil)
     }
-
+    
     // MARK: - Sample Templates
     
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {

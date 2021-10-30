@@ -21,8 +21,8 @@ struct ContentView: View {
                             .fontWeight(.medium)
                             .foregroundColor(Color.green)
                     }.padding()
+                
                 ProgressView(value: Locker.secondsRemaining, total: 10.0)
-                    .animation(.easeInOut)
                     .progressViewStyle(LinearProgressViewStyle(tint: $Locker.Colour.wrappedValue))
             }
             

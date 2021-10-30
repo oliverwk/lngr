@@ -55,6 +55,7 @@
 		E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6DE7E51268C5581003B88B4 /* MarkDown.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6DE7E68268C9FB6003B88B4 /* lngrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */; };
 		E6ED55FC26946F1C001F978F /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED55FB26946F1C001F978F /* GetImage.swift */; };
+		E6F003B3272D3CB1000C92A4 /* ComplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F003B2272D3CB1000C92A4 /* ComplicationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +199,7 @@
 		E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrUITests.swift; sourceTree = "<group>"; };
 		E6DE7E69268C9FB6003B88B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6ED55FB26946F1C001F978F /* GetImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetImage.swift; sourceTree = "<group>"; };
+		E6F003B2272D3CB1000C92A4 /* ComplicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +381,7 @@
 				E6C810CA26ED0DAE00A9925B /* NotificationController.swift */,
 				E6C810CC26ED0DAE00A9925B /* NotificationView.swift */,
 				E6C810CE26ED0DAE00A9925B /* ComplicationController.swift */,
+				E6F003B2272D3CB1000C92A4 /* ComplicationView.swift */,
 				E6C810D026ED0DAF00A9925B /* Assets.xcassets */,
 				E6C810D526ED0DAF00A9925B /* Info.plist */,
 				E6C810D626ED0DAF00A9925B /* PushNotificationPayload.apns */,
@@ -807,6 +810,7 @@
 				E6C810CF26ED0DAE00A9925B /* ComplicationController.swift in Sources */,
 				E6C810C726ED0DAE00A9925B /* lngrApp.swift in Sources */,
 				E6C810CD26ED0DAE00A9925B /* NotificationView.swift in Sources */,
+				E6F003B3272D3CB1000C92A4 /* ComplicationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,7 +1253,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -1277,7 +1281,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -1301,7 +1305,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -1326,7 +1330,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
