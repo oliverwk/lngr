@@ -111,7 +111,7 @@ public class LingerieFetcher: ObservableObject {
                         MyLngr = self.lingeries[0]
                     }
                     
-                    if (UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") != nil && !( UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") as! String == SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description )) {
+                    if (UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") != nil && !( UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") as! String == SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description )) || ProcessInfo.processInfo.arguments.contains("SendNotification") {
                         let lngrType = self.lngrsName == "lngrSlips" ? "slip" : "body"
                         
                         
@@ -141,10 +141,15 @@ public class LingerieFetcher: ObservableObject {
                                     dateInfo.year = Calendar.current.component(.year, from: Date())
                                     dateInfo.hour = 7
                                     dateInfo.minute = 55
-                                       
                                     // Deliver the notification in 30 seconds.
-                                    // let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
-                                    let trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+                                    var trigger: UNCalendarNotificationTrigger
+                                    if ProcessInfo.processInfo.arguments.contains("SendNotification") {
+                                        let nextTriggerDate = Calendar.current.date(byAdding: .second, value: 30, to: Date())!
+                                        let nextTriggerDateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: nextTriggerDate)
+                                        trigger = UNCalendarNotificationTrigger(dateMatching: nextTriggerDateComponent, repeats: false)
+                                    } else {
+                                        trigger = UNCalendarNotificationTrigger(dateMatching: dateInfo, repeats: false)
+                                    }
                                     
                                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger) // Schedule the notification.
                                     self.logger.log("Scheduleing Notification")
@@ -230,10 +235,12 @@ public class LingerieFetcher: ObservableObject {
                     let decodedLists = try JSONDecoder().decode([Lingerie].self, from: d)
                     DispatchQueue.main.async {
                         self.lingeries = decodedLists
+                        self.ShowNotification()
                     }
-                    
-                    if UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") == nil {
-                        UserDefaults.standard.set(SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description, forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))")
+                   
+                    if UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") == nil || false {
+                        let key = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))"
+                        UserDefaults.standard.set(SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description, forKey: key)
                     }
                     
              

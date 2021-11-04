@@ -65,6 +65,10 @@
             argument = "NoAuth"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "SendNotification"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
