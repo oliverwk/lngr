@@ -16,8 +16,8 @@ let logger = Logger(
     category: "rivmWidget"
 )
 
-let PlaceholderVacinn = Vacinn(result: Selector(result: ["105,000", "85.6%", "81.7%", "13,320,388", "91%"]))
-let ErrorVacinn = Vacinn(result: Selector(result: ["0","0","0","0","0"]))
+let PlaceholderVacinn = Vacinn(result: Selector(result: ["81.6%", "85.6%", "81.7%", "13,320,388", "91%"]))
+let ErrorVacinn = Vacinn(result: Selector(result: ["00.0%","00.0%","00.0%","00.0%","00.0%"]))
 
 struct Vacinn: Codable, CustomStringConvertible {
     public var result: Selector
@@ -34,7 +34,7 @@ struct Selector: Codable, CustomStringConvertible {
     public var result: [String]
     
     var VacinnsThisWeek: String {
-        return result[3].replacingOccurrences(of: ",", with: ".")
+        return result[1].replacingOccurrences(of: ",", with: ".")
     }
     
     var VacinnsToday: String {
@@ -42,7 +42,9 @@ struct Selector: Codable, CustomStringConvertible {
         let VacinnsWeek = (Int(result[0].replacingOccurrences(of: ",", with: "")) ?? 0)
         formatter.numberStyle = .decimal
         formatter.decimalSeparator = "."
-        let vacinnsToday = formatter.string(from: NSNumber(value: (VacinnsWeek / 7))) ?? "\((VacinnsWeek / 7))"
+        print("res: \(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))")
+        print("res1: \(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))")
+        let vacinnsToday = (formatter.string(from: NSNumber(value: (Float(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))! - Float(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))!) )) ?? "\((VacinnsWeek))")+"%"
         return vacinnsToday
     }
     
