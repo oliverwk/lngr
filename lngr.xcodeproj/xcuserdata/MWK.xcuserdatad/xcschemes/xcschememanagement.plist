@@ -12,7 +12,7 @@
 		<key>MarkDown.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
 		</dict>
 		<key>OpenLocker WatchKit App (Complication).xcscheme_^#shared#^_</key>
 		<dict>
@@ -52,7 +52,7 @@
 		<key>lngr (macOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 		<key>lngr widgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
@@ -93,6 +93,16 @@
 			<true/>
 		</dict>
 		<key>E6B52B7F265061BC006DAB5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6C810B126ED0DAD00A9925B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6C810B426ED0DAD00A9925B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

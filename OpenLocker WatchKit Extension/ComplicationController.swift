@@ -49,7 +49,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         //        let templ = CLKComplicationTemplateGraphicCircularClosedGaugeImage(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: UIColor.green, fillFraction: 1.0), imageProvider: CLKFullColorImageProvider(fullColorImage: UIImage(named: "locked")!))
         
         
-        
+        //        let tmp = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKGaugeProvider(style: .fill, gaugeColors: [UIColor.green], gaugeColorLocations: [10], start startDate: Date(), end endDate: Date(timeIntervalSince1970: Date().timeIntervalSince1970), centerTextProvider: CLKTextProvider(format: "40"))
         // OLD:        let templ = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: UIColor.green, fillFraction: 1.0), centerTextProvider: CLKTextProvider(format: "C"))
         
         let templ =  CLKComplicationTemplateGraphicCircularView(ComplicationView())
