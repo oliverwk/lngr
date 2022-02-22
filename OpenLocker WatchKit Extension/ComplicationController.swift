@@ -14,7 +14,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
         let descriptors = [
-            CLKComplicationDescriptor(identifier: "isLockerOpen", displayName: "isMyLockerOpen", supportedFamilies: CLKComplicationFamily.allCases)
+            CLKComplicationDescriptor(identifier: "isLockerOpen", displayName: "isMyLockerOpen", supportedFamilies: [CLKComplicationFamily.graphicCircular])
         ]
         
         // Call the handler with the currently supported complication descriptors
@@ -67,6 +67,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
-        handler(nil)
+        let ComTem =  CLKComplicationTemplateGraphicCircularView(ComplicationView())
+        
+        handler(ComTem)
     }
 }
