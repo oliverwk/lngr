@@ -17,6 +17,8 @@
 		E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607CE582651190D0084F2E7 /* IntentHandler.swift */; };
 		E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E607CE552651190D0084F2E7 /* GetCheapest.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; };
+		E621E1A427CD271300AE8297 /* stoicWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621E1A327CD271300AE8297 /* stoicWidget.swift */; };
+		E621E1E127CD2B2500AE8297 /* qoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621E1E027CD2B2500AE8297 /* qoutes.swift */; };
 		E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
@@ -157,6 +159,8 @@
 		E607CE582651190D0084F2E7 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		E607CE5A2651190D0084F2E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E607CE612651193A0084F2E7 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		E621E1A327CD271300AE8297 /* stoicWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stoicWidget.swift; sourceTree = "<group>"; };
+		E621E1E027CD2B2500AE8297 /* qoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qoutes.swift; sourceTree = "<group>"; };
 		E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieFetcherSpotlight.swift; sourceTree = "<group>"; };
 		E64D0C7C2727112200A8A50F /* lngr.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = lngr.docc; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* LingerieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingerieImageView.swift; sourceTree = "<group>"; };
@@ -361,6 +365,8 @@
 			isa = PBXGroup;
 			children = (
 				E6B52B84265061BD006DAB5C /* rivmWidget.swift */,
+				E621E1A327CD271300AE8297 /* stoicWidget.swift */,
+				E621E1E027CD2B2500AE8297 /* qoutes.swift */,
 				E6B52B86265061C7006DAB5C /* Assets.xcassets */,
 				E6B52B88265061C7006DAB5C /* Info.plist */,
 			);
@@ -804,6 +810,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E621E1E127CD2B2500AE8297 /* qoutes.swift in Sources */,
+				E621E1A427CD271300AE8297 /* stoicWidget.swift in Sources */,
 				E6B52B85265061BD006DAB5C /* rivmWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -83,6 +83,7 @@ struct ContentView: View {
                     } else {
                         logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate", privacy: .public)")
                         // Fall back to a asking for username and password.
+                        DispatchQueue.main.async { self.blurRadius = 100.0 }
                     }
                 }
             }

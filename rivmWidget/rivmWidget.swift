@@ -32,6 +32,7 @@ struct Vacinn: Codable, CustomStringConvertible {
 
 struct Selector: Codable, CustomStringConvertible {
     public var result: [String]
+    static let regexNumber = try! NSRegularExpression(pattern: "[1-9]")
     
     var VacinnsThisWeek: String {
         return result[1].replacingOccurrences(of: ",", with: ".")
@@ -39,12 +40,18 @@ struct Selector: Codable, CustomStringConvertible {
     
     var VacinnsToday: String {
         let formatter = NumberFormatter()
+        var vacinnsToday: String
         let VacinnsWeek = (Int(result[0].replacingOccurrences(of: ",", with: "")) ?? 0)
         formatter.numberStyle = .decimal
         formatter.decimalSeparator = "."
-        print("res: \(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))")
-        print("res1: \(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))")
-        let vacinnsToday = (formatter.string(from: NSNumber(value: (Float(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))! - Float(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))!) )) ?? "\((VacinnsWeek))")+"%"
+        logger.log("res: \(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))")
+        logger.log("res1: \(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))")
+        if (Selector.regexNumber.firstMatch(in: result[1], options: [], range: NSRange(location: 0, length: result[1].utf16.count)) == nil)  {
+            logger.log("There was an error, because there aren't any numbers in result[1] \(result[1], privacy: .public) so not doing any thing with the result")
+            vacinnsToday = "null" //result[1]
+        } else {
+            vacinnsToday = (formatter.string(from: NSNumber(value: (Float(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))! - Float(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))!) )) ?? "\((VacinnsWeek))")+"%"
+        }
         return vacinnsToday
     }
     
@@ -108,7 +115,7 @@ div[color=\\"data.primary\\"]
     }
     
     func getSnapshot(in context: Context, completion: @escaping (VacinnEntry) -> ()) {
-        completion(.init(date: Date(), vacinn: PlaceholderVacinn))
+        completion(VacinnEntry(date: Date(), vacinn: PlaceholderVacinn))
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
@@ -157,6 +164,13 @@ struct vacinnWidgetEntryView : View {
 }
 
 @main
+struct lngrWidgets: WidgetBundle {
+    var body: some Widget {
+        vacinnWidget()
+        stoicWidget()
+    }
+}
+
 struct vacinnWidget: Widget {
     let kind: String = "rivmWidget"
     var body: some WidgetConfiguration {
@@ -164,7 +178,7 @@ struct vacinnWidget: Widget {
             vacinnWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Vacinn Watcher")
-        .description("Watch the vacinns from your homescreen with the new vacinn widget.")
+        .description("Watch the vacinns from your homescreen.")
         .supportedFamilies([.systemSmall])
     }
 }
