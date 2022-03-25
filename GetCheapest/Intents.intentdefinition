@@ -76,11 +76,11 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>pD4TDI</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20F71</string>
+	<string>21E230</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>12E507</string>
+	<string>13E113</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>12.5.1</string>
+	<string>13.3</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -216,7 +216,7 @@
 				<array>
 					<dict>
 						<key>INIntentResponseCodeConciseFormatString</key>
-						<string>De goedkoopst ${sort} is de ${lngr.naam} voor maar ${lngr.prijs} in het ${lngr.kleur}${img}</string>
+						<string>De goedkoopst ${sort} is de ${lngr.naam} voor maar ${lngr.prijs} in het ${lngr.kleur} ${img}</string>
 						<key>INIntentResponseCodeConciseFormatStringID</key>
 						<string>cFLgRf</string>
 						<key>INIntentResponseCodeFormatString</key>

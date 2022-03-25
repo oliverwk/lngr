@@ -34,18 +34,18 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>QLSupportsConcurrentRequests</key>
-	<true/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.entertainment</string>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>GetCheapestIntent</string>
 	</array>
+	<key>QLSupportsConcurrentRequests</key>
+	<true/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

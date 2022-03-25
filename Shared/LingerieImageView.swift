@@ -21,7 +21,7 @@ struct LingerieImageView: View {
     }
 }
 
-@available(*, deprecated, message: "Use the new AsyncImage")
+@available(*, deprecated, message: "Use the new methode with AsyncImage")
 struct OLDLingerieImageView: View {
     private enum LoadState {
         case loading, success, failure

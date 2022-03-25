@@ -54,7 +54,7 @@ struct LingeriesView: View {
                                     logger.log("Getting lngr: \(currentLngr == StopIndex) index: \(currentLngr.debugDescription) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
                                     if currentLngr == StopIndex {
                                         logger.log("Getting extra lngr \(StopIndex + 20)")
-                                        lngrs.getExtraLngr(url: URL(string: "https://lngr.ml/api?count=\(StopIndex + 20)")!)
+                                        lngrs.getExtraLngr(url: URL(string: "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)")!)
                                     }
                                 }
                             }
