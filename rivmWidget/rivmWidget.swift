@@ -50,7 +50,8 @@ struct Selector: Codable, CustomStringConvertible {
             logger.log("There was an error, because there aren't any numbers in result[1] \(result[1], privacy: .public) so not doing any thing with the result")
             vacinnsToday = "null" //result[1]
         } else {
-            vacinnsToday = (formatter.string(from: NSNumber(value: (Float(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))! - Float(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))!) )) ?? "\((VacinnsWeek))")+"%"
+            let num = (Float(result[0].prefix(2) + "." + result[0].suffix(2).prefix(1))! - Float(result[1].prefix(2) + "." + result[1].suffix(2).prefix(1))!)
+            vacinnsToday = (formatter.string(from: NSNumber(value: num)) ?? "\((VacinnsWeek))")+"%"
         }
         return vacinnsToday
     }

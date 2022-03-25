@@ -25,6 +25,8 @@ struct LingeriesView: View {
     @State private var StopIndex = 34
     @StateObject private var lngrs: LingerieFetcher
     @State var LingerieID: String?
+    @State var search = ""
+    @State var searchedFailed = false
     
     init(_ Url: String, _ title: String) {
         self.Url = Url
@@ -35,25 +37,63 @@ struct LingeriesView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(lngrs.lingeries) { TheLingerie in
-                    NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
+                if searchedFailed {
+                    HStack {
+                        Text("Didn't find anything")
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                            .padding()
+                    }
+                } else {
+                    ForEach(lngrs.lingeries) { TheLingerie in
+                        NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
                             lngrRow(TheLingerie: TheLingerie).onAppear {
                                 self.StopIndex = lngrs.lingeries.count - 1
                                 if lngrs.lingeries.count > 0 {
-                                    logger.log("Getting lngr: \(lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })! == StopIndex) index: \(lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })!) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
-                                    if lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })! == StopIndex {
+                                    let currentLngr = lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })
+                                    logger.log("Getting lngr: \(currentLngr == StopIndex) index: \(currentLngr.debugDescription) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
+                                    if currentLngr == StopIndex {
                                         logger.log("Getting extra lngr \(StopIndex + 20)")
                                         lngrs.getExtraLngr(url: URL(string: "https://lngr.ml/api?count=\(StopIndex + 20)")!)
                                     }
                                 }
                             }
                         }
+                    }
+                    if !lngrs.IsLoading {
+                        HStack(alignment: .center, spacing: 0, content: {
+                            ProgressView()
+                        }).opacity(lngrs.IsLoading ? 1 : 0)
+                    }
                 }
-                HStack(alignment: .center, spacing: 0, content: {
-                    ProgressView()
-                }).opacity(lngrs.IsLoading ? 1 : 0)
-            }.listStyle(.automatic).navigationBarTitle(Text(title))
-            // TODO: .searchable(text: $search)
+            }.listStyle(.automatic)
+                .refreshable {
+                    lngrs.lingeries = []
+                    lngrs.LoadLngrs(Url: lngrs.url, lngrsName: lngrs.lngrsName)
+                }
+                .searchable(text: $search) {
+                    Group {
+                        Text("String met micro kant rand - 1-pak").searchCompletion("String met micro kant rand")
+                        Text("Kanten slip").searchCompletion("Kanten slip")
+                        Text("V-String").searchCompletion("V-String")
+                        Text("Klassiek Katoenen Slip").searchCompletion("Klassiek Katoenen Slip")
+                        Text("Kanten string").searchCompletion("Kanten string")
+                    }
+                }
+                .navigationTitle(title)
+                .onSubmit(of: .search) {
+                    logger.critical("Searching: \(search)")
+                    let searchedLngrs = lngrs.OriginalLingeries.filter{ $0.naam.contains(self.search) }
+                    logger.log("found lngr: \(searchedLngrs, privacy: .public)")
+                    if !searchedLngrs.isEmpty {
+                        lngrs.lingeries = searchedLngrs
+                        searchedFailed = false
+                    } else {
+                        logger.log("Didn't find anything")
+                        lngrs.lingeries = []
+                        searchedFailed = true
+                    }
+                }
         }.navigationViewStyle(.stack).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
                 logger.log("Received a payload via spotlight with id: \(id, privacy: .public)")
@@ -75,20 +115,22 @@ public class LingerieFetcher: ObservableObject {
     )
     @Published var lingeries = [Lingerie]()
     @Published var IsLoading = false
-    private var lngrsName: String
+    var OriginalLingeries = [Lingerie]()
+    var lngrsName: String
+    var url: URL
     /// Helper function to porvide user feedback when somthing has gone wrong
     public func simpleError() {
-        #if os(iOS)
+#if os(iOS)
         let genarator = UINotificationFeedbackGenerator()
         genarator.notificationOccurred(.error)
-        #endif
+#endif
     }
     
     public func simpleSuccess() {
-        #if os(iOS)
+#if os(iOS)
         let genarator = UINotificationFeedbackGenerator()
         genarator.notificationOccurred(.success)
-        #endif
+#endif
     }
     
     public func ShowNotification() {
@@ -99,7 +141,7 @@ public class LingerieFetcher: ObservableObject {
                 self.logger.error("The err: \(error.localizedDescription, privacy: .public)")
             }
             self.logger.log("Notifaction Authorization: \(granted, privacy: .public)")
-
+            
             if granted {
                 DispatchQueue.global(qos: .utility).async {
                     self.logger.debug("This is run on a background queue")
@@ -121,7 +163,7 @@ public class LingerieFetcher: ObservableObject {
                         content.badge = 0
                         
                         let url = URL(string: MyLngr.img_url_sec)!
-
+                        
                         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
                             guard let data = data else { return }
                             if (error != nil) {
@@ -134,7 +176,7 @@ public class LingerieFetcher: ObservableObject {
                                     content.attachments = [try UNNotificationAttachment(identifier: MyLngr.img_url_sec, url: tmpurl)]
                                     content.userInfo = ["id": MyLngr.id]
                                     content.sound = .none
-                                
+                                    
                                     var dateInfo = DateComponents()
                                     dateInfo.day =  Calendar.current.component(.day, from: Date())+1
                                     dateInfo.month = Calendar.current.component(.month, from: Date())
@@ -154,12 +196,12 @@ public class LingerieFetcher: ObservableObject {
                                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger) // Schedule the notification.
                                     self.logger.log("Scheduleing Notification")
                                     center.add(request) { (error : Error?) in
-                                         if let theError = error {
+                                        if let theError = error {
                                             self.logger.error("The err: \(theError.localizedDescription, privacy: .public)")
-                                             // Handle any errors
-                                         } else {
+                                            // Handle any errors
+                                        } else {
                                             self.logger.log("Added to the notification center")
-                                         }
+                                        }
                                     }
                                 } catch {
                                     self.logger.error("There was an error with getting the notifation thumbnail: \(error.localizedDescription, privacy: .public)")
@@ -189,6 +231,7 @@ public class LingerieFetcher: ObservableObject {
                         self.simpleSuccess()
                         DispatchQueue.main.async {
                             self.lingeries = decodedLngrs
+                            self.OriginalLingeries = decodedLngrs
                         }
                     } else if let error = error {
                         self.simpleError()
@@ -215,6 +258,7 @@ public class LingerieFetcher: ObservableObject {
     init(_ url: URL, _ lngrsName: String) {
         //If you want to reset everting from spotlight use: reset()
         self.lngrsName = lngrsName
+        self.url = url
         LoadLngrs(Url: url, lngrsName: lngrsName)
     }
     
@@ -235,15 +279,16 @@ public class LingerieFetcher: ObservableObject {
                     let decodedLists = try JSONDecoder().decode([Lingerie].self, from: d)
                     DispatchQueue.main.async {
                         self.lingeries = decodedLists
+                        self.OriginalLingeries = decodedLists
                         self.ShowNotification()
                     }
-                   
+                    
                     if UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") == nil || false {
                         let key = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))"
                         UserDefaults.standard.set(SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description, forKey: key)
                     }
                     
-             
+                    
                     self.AddToSpotlightWithId(lngrName: lngrsName, lngrs: decodedLists)
                 } else if let error = error {
                     self.simpleError()
@@ -299,8 +344,8 @@ struct LingeriesView_Previews: PreviewProvider {
     static var previews: some View {
         LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips")
             .previewLayout(.device)
-        .previewInterfaceOrientation(.portrait)
-        .previewDevice("iPhone 8")
+            .previewInterfaceOrientation(.portrait)
+            .previewDevice("iPhone 8")
     }
 }
 
