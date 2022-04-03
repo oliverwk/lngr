@@ -54,7 +54,8 @@ struct LingeriesView: View {
                                     logger.log("Getting lngr: \(currentLngr == StopIndex) index: \(currentLngr.debugDescription) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
                                     if currentLngr == StopIndex {
                                         logger.log("Getting extra lngr \(StopIndex + 20)")
-                                        lngrs.getExtraLngr(url: URL(string: "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)")!)
+                                        let LNurl = lngrs.lngrsName == "lngrSlips" ? "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price" : "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bodys?sortBy=price"
+                                        lngrs.getExtraLngr(url: URL(string: LNurl)!)
                                     }
                                 }
                             }
@@ -230,8 +231,8 @@ public class LingerieFetcher: ObservableObject {
                         let decodedLngrs = try JSONDecoder().decode([Lingerie].self, from: d)
                         self.simpleSuccess()
                         DispatchQueue.main.async {
-                            self.lingeries = decodedLngrs
-                            self.OriginalLingeries = decodedLngrs
+                            self.lingeries.append(contentsOf: decodedLngrs)
+                            self.OriginalLingeries.append(contentsOf: decodedLngrs)
                         }
                     } else if let error = error {
                         self.simpleError()
