@@ -51,7 +51,11 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
         
         //        let tmp = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKGaugeProvider(style: .fill, gaugeColors: [UIColor.green], gaugeColorLocations: [10], start startDate: Date(), end endDate: Date(timeIntervalSince1970: Date().timeIntervalSince1970), centerTextProvider: CLKTextProvider(format: "40"))
         // OLD:        let templ = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: UIColor.green, fillFraction: 1.0), centerTextProvider: CLKTextProvider(format: "C"))
-        
+        // TODO: Make a complication with just the time in it
+        print("C.identifier: \(complication.identifier)")
+        if complication.identifier == "H" {
+            
+        }
         let templ =  CLKComplicationTemplateGraphicCircularView(ComplicationView())
         
         let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: templ)
@@ -67,6 +71,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
+        print("complication.desc: \(complication.debugDescription)")
         let ComTem =  CLKComplicationTemplateGraphicCircularView(ComplicationView())
         
         handler(ComTem)

@@ -211,9 +211,11 @@ public class LingerieFetcher: ObservableObject {
                         }
                         task.resume()
                     } else {
-                        self.logger.notice("There was no access granted to the notifactions")
+                        self.logger.log("no notifactions need to be send right now")
                     }
                 }
+            } else {
+                self.logger.notice("There was no access granted to the notifactions")
             }
         }
     }
@@ -286,7 +288,7 @@ public class LingerieFetcher: ObservableObject {
                     
                     if UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") == nil || false {
                         let key = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))"
-                        UserDefaults.standard.set(SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description, forKey: key)
+                        UserDefaults.standard.set(SHA256.hash(data: Data("\(decodedLists[0])".utf8)).description, forKey: key)
                     }
                     
                     
