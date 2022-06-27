@@ -72,6 +72,7 @@ struct LingeriesView: View {
                     lngrs.lingeries = []
                     lngrs.LoadLngrs(Url: lngrs.url, lngrsName: lngrs.lngrsName)
                 }
+                .navigationTitle(title)
                 .searchable(text: $search) {
                     Group {
                         Text("String met micro kant rand - 1-pak").searchCompletion("String met micro kant rand")
@@ -81,7 +82,6 @@ struct LingeriesView: View {
                         Text("Kanten string").searchCompletion("Kanten string")
                     }
                 }
-                .navigationTitle(title)
                 .onSubmit(of: .search) {
                     logger.critical("Searching: \(search)")
                     let searchedLngrs = lngrs.OriginalLingeries.filter{ $0.naam.contains(self.search) }

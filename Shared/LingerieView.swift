@@ -44,7 +44,8 @@ struct LingerieView: View {
             Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                 .padding(.bottom, 10.0)
                 .foregroundColor(.secondary)
-        }.navigationBarBackButtonHidden(false).navigationBarTitle(lingerie.naam, displayMode: .inline)
+        
+        }.navigationBarTitle(lingerie.naam, displayMode: .inline)
     }
     
     public class ImageFetchers: ObservableObject {
