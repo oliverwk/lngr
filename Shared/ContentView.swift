@@ -73,27 +73,38 @@ struct ContentView: View {
                 UserDefaults.standard.set(false, forKey: "reset_spotlight")
             }
             
-            let reason = "Authenticate to go to lngr"
             if ProcessInfo.processInfo.arguments.contains("NoAuth") {
                 DispatchQueue.main.async { self.blurRadius = 0.0 }
             } else {
-                authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+                authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Authenticate to go to lngr") { success, error in
                     if success {
                         DispatchQueue.main.async { self.blurRadius = 0.0 }
                     } else {
                         logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate", privacy: .public)")
                         // Fall back to a asking for username and password.
-                        DispatchQueue.main.async { self.blurRadius = 100.0 }
+                        DispatchQueue.main.async { self.blurRadius = 1000.0 }
                     }
                 }
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            DispatchQueue.main.async { self.blurRadius = 100.0 }
+            // go to background
+            DispatchQueue.main.async { self.blurRadius = 1000.0 }
+            
         }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
-                DispatchQueue.main.async { self.blurRadius = 0.0 }
+                authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Authenticate to go to lngr") { success, error in
+                    if success {
+                        DispatchQueue.main.async { self.blurRadius = 0.0 }
+                    } else {
+                        logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate", privacy: .public)")
+                        // Fall back to a asking for username and password.
+                        DispatchQueue.main.async { self.blurRadius = 1000.0 }
+                    }
+                }
+            } else if newScenePhase == .background {
+                DispatchQueue.main.async { self.blurRadius = 1000.0 }
             }
         }
     }
