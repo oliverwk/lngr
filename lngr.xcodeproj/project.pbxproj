@@ -21,6 +21,8 @@
 		E621E1E127CD2B2500AE8297 /* qoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621E1E027CD2B2500AE8297 /* qoutes.swift */; };
 		E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
+		E62D0170286E14CC005DAE25 /* BackgroundSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */; };
+		E62D0171286E14CC005DAE25 /* BackgroundSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */; };
 		E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
 		E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
 		E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LingerieView.swift */; };
@@ -30,6 +32,11 @@
 		E64E66052677AE5800B08C89 /* GetLngr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66042677AE5800B08C89 /* GetLngr.swift */; };
 		E65887D4266AB9B500816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		E65887D5266AB9BD00816B41 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
+		E6A65B9D286C870300EEA2C8 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A65B9C286C870300EEA2C8 /* UserNotifications.framework */; };
+		E6A65B9F286C870300EEA2C8 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A65B9E286C870300EEA2C8 /* UserNotificationsUI.framework */; };
+		E6A65BA2286C870300EEA2C8 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A65BA1286C870300EEA2C8 /* NotificationViewController.swift */; };
+		E6A65BA5286C870300EEA2C8 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6A65BA3286C870300EEA2C8 /* MainInterface.storyboard */; };
+		E6A65BA9286C870300EEA2C8 /* notificationui.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6A65B9B286C870300EEA2C8 /* notificationui.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6B2894226739D3E00354743 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B2894126739D3E00354743 /* model.swift */; };
 		E6B52B81265061BC006DAB5C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D525F3D5D200C9DD32 /* WidgetKit.framework */; };
 		E6B52B82265061BC006DAB5C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D725F3D5D200C9DD32 /* SwiftUI.framework */; };
@@ -70,6 +77,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E607CE542651190D0084F2E7;
 			remoteInfo = GetCheapest;
+		};
+		E6A65BA7286C870300EEA2C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6077B6E25F175B800F6F951 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6A65B9A286C870300EEA2C8;
+			remoteInfo = notificationui;
 		};
 		E6B52B89265061C7006DAB5C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -116,6 +130,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */,
+				E6A65BA9286C870300EEA2C8 /* notificationui.appex in Embed App Extensions */,
 				E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */,
 				E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed App Extensions */,
 			);
@@ -162,6 +177,7 @@
 		E621E1A327CD271300AE8297 /* stoicWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stoicWidget.swift; sourceTree = "<group>"; };
 		E621E1E027CD2B2500AE8297 /* qoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qoutes.swift; sourceTree = "<group>"; };
 		E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieFetcherSpotlight.swift; sourceTree = "<group>"; };
+		E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupport.swift; sourceTree = "<group>"; };
 		E64D0C7C2727112200A8A50F /* lngr.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = lngr.docc; sourceTree = "<group>"; };
 		E64DD16C25F1843C00284803 /* LingerieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingerieImageView.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LingerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieView.swift; sourceTree = "<group>"; };
@@ -170,6 +186,12 @@
 		E68170D525F3D5D200C9DD32 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E68170D725F3D5D200C9DD32 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		E68B5E95260490F700385A7E /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		E6A65B9B286C870300EEA2C8 /* notificationui.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = notificationui.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6A65B9C286C870300EEA2C8 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		E6A65B9E286C870300EEA2C8 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		E6A65BA1286C870300EEA2C8 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		E6A65BA4286C870300EEA2C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		E6A65BA6286C870300EEA2C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6B2894126739D3E00354743 /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = rivmWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6B52B84265061BD006DAB5C /* rivmWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rivmWidget.swift; sourceTree = "<group>"; };
@@ -233,6 +255,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6A65B98286C870300EEA2C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6A65B9F286C870300EEA2C8 /* UserNotificationsUI.framework in Frameworks */,
+				E6A65B9D286C870300EEA2C8 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6B52B7D265061BC006DAB5C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,6 +313,7 @@
 				E6DE7E66268C9FB6003B88B4 /* lngrUITests */,
 				E6C810B926ED0DAD00A9925B /* OpenLocker WatchKit App */,
 				E6C810C526ED0DAE00A9925B /* OpenLocker WatchKit Extension */,
+				E6A65BA0286C870300EEA2C8 /* notificationui */,
 				E68170D425F3D5D200C9DD32 /* Frameworks */,
 				E6077B7B25F175CD00F6F951 /* Products */,
 			);
@@ -292,6 +324,7 @@
 			children = (
 				E6077B7325F175B800F6F951 /* lngrApp.swift */,
 				E6077B7425F175B800F6F951 /* ContentView.swift */,
+				E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */,
 				E6D2A15325F373100007EC2D /* LingeriesView.swift */,
 				E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */,
 				E64DD18D25F22A0F00284803 /* LingerieView.swift */,
@@ -315,6 +348,7 @@
 				E6C810B226ED0DAD00A9925B /* OpenLocker.app */,
 				E6C810B526ED0DAD00A9925B /* OpenLocker WatchKit App.app */,
 				E6C810C126ED0DAE00A9925B /* OpenLocker WatchKit Extension.appex */,
+				E6A65B9B286C870300EEA2C8 /* notificationui.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -357,8 +391,20 @@
 				E68170D725F3D5D200C9DD32 /* SwiftUI.framework */,
 				E68B5E95260490F700385A7E /* Intents.framework */,
 				E6DE7E52268C5581003B88B4 /* QuickLook.framework */,
+				E6A65B9C286C870300EEA2C8 /* UserNotifications.framework */,
+				E6A65B9E286C870300EEA2C8 /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6A65BA0286C870300EEA2C8 /* notificationui */ = {
+			isa = PBXGroup;
+			children = (
+				E6A65BA1286C870300EEA2C8 /* NotificationViewController.swift */,
+				E6A65BA3286C870300EEA2C8 /* MainInterface.storyboard */,
+				E6A65BA6286C870300EEA2C8 /* Info.plist */,
+			);
+			path = notificationui;
 			sourceTree = "<group>";
 		};
 		E6B52B83265061BD006DAB5C /* rivmWidget */ = {
@@ -449,6 +495,7 @@
 				E6B52B8A265061C7006DAB5C /* PBXTargetDependency */,
 				E607CE5C2651190D0084F2E7 /* PBXTargetDependency */,
 				E6DE7E5C268C5581003B88B4 /* PBXTargetDependency */,
+				E6A65BA8286C870300EEA2C8 /* PBXTargetDependency */,
 			);
 			name = "lngr (iOS)";
 			productName = "lngr (iOS)";
@@ -487,6 +534,23 @@
 			name = GetCheapest;
 			productName = GetCheapest;
 			productReference = E607CE552651190D0084F2E7 /* GetCheapest.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E6A65B9A286C870300EEA2C8 /* notificationui */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6A65BAC286C870300EEA2C8 /* Build configuration list for PBXNativeTarget "notificationui" */;
+			buildPhases = (
+				E6A65B97286C870300EEA2C8 /* Sources */,
+				E6A65B98286C870300EEA2C8 /* Frameworks */,
+				E6A65B99286C870300EEA2C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = notificationui;
+			productName = notificationui;
+			productReference = E6A65B9B286C870300EEA2C8 /* notificationui.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		E6B52B7F265061BC006DAB5C /* rivmWidgetExtension */ = {
@@ -600,7 +664,7 @@
 		E6077B6E25F175B800F6F951 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					E6077B7925F175CC00F6F951 = {
@@ -611,6 +675,9 @@
 					};
 					E607CE542651190D0084F2E7 = {
 						CreatedOnToolsVersion = 12.5;
+					};
+					E6A65B9A286C870300EEA2C8 = {
+						CreatedOnToolsVersion = 13.4.1;
 					};
 					E6B52B7F265061BC006DAB5C = {
 						CreatedOnToolsVersion = 12.5;
@@ -660,6 +727,7 @@
 				E6C810B126ED0DAD00A9925B /* OpenLocker */,
 				E6C810B426ED0DAD00A9925B /* OpenLocker WatchKit App */,
 				E6C810C026ED0DAE00A9925B /* OpenLocker WatchKit Extension */,
+				E6A65B9A286C870300EEA2C8 /* notificationui */,
 			);
 		};
 /* End PBXProject section */
@@ -687,6 +755,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6A65B99286C870300EEA2C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6A65BA5286C870300EEA2C8 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,6 +850,7 @@
 				E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */,
+				E62D0170286E14CC005DAE25 /* BackgroundSupport.swift in Sources */,
 				E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */,
 				E6077B8625F175CD00F6F951 /* lngrApp.swift in Sources */,
 			);
@@ -789,6 +866,7 @@
 				E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */,
 				E64DD18F25F22A1000284803 /* LingerieView.swift in Sources */,
+				E62D0171286E14CC005DAE25 /* BackgroundSupport.swift in Sources */,
 				E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */,
 				E6077B8725F175CD00F6F951 /* lngrApp.swift in Sources */,
 			);
@@ -803,6 +881,14 @@
 				E6B2894226739D3E00354743 /* model.swift in Sources */,
 				E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */,
 				E64E66052677AE5800B08C89 /* GetLngr.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6A65B97286C870300EEA2C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6A65BA2286C870300EEA2C8 /* NotificationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,6 +940,11 @@
 			target = E607CE542651190D0084F2E7 /* GetCheapest */;
 			targetProxy = E607CE5B2651190D0084F2E7 /* PBXContainerItemProxy */;
 		};
+		E6A65BA8286C870300EEA2C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6A65B9A286C870300EEA2C8 /* notificationui */;
+			targetProxy = E6A65BA7286C870300EEA2C8 /* PBXContainerItemProxy */;
+		};
 		E6B52B8A265061C7006DAB5C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E6B52B7F265061BC006DAB5C /* rivmWidgetExtension */;
@@ -882,6 +973,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E6A65BA3286C870300EEA2C8 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E6A65BA4286C870300EEA2C8 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		E6DE7E57268C5581003B88B4 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1148,6 +1247,63 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E6A65BAA286C870300EEA2C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = notificationui/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = notificationui;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.notificationui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E6A65BAB286C870300EEA2C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = notificationui/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = notificationui;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.notificationui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1467,6 +1623,15 @@
 			buildConfigurations = (
 				E607CE5E2651190D0084F2E7 /* Debug */,
 				E607CE5F2651190D0084F2E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6A65BAC286C870300EEA2C8 /* Build configuration list for PBXNativeTarget "notificationui" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6A65BAA286C870300EEA2C8 /* Debug */,
+				E6A65BAB286C870300EEA2C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

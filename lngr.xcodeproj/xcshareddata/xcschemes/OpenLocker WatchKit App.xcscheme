@@ -55,8 +55,10 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       notificationPayloadFile = "OpenLocker WatchKit Extension/PushNotificationPayload.apns">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/OpenLocker App">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6C810B426ED0DAD00A9925B"
@@ -64,7 +66,7 @@
             BlueprintName = "OpenLocker WatchKit App"
             ReferencedContainer = "container:lngr.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "Reelzme_API_KEY"
@@ -79,8 +81,10 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.Carousel"
+         RemotePath = "/OpenLocker App">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6C810B426ED0DAD00A9925B"
@@ -88,7 +92,16 @@
             BlueprintName = "OpenLocker WatchKit App"
             ReferencedContainer = "container:lngr.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E6C810B426ED0DAD00A9925B"
+            BuildableName = "OpenLocker WatchKit App.app"
+            BlueprintName = "OpenLocker WatchKit App"
+            ReferencedContainer = "container:lngr.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

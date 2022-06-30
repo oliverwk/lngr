@@ -151,17 +151,34 @@ public class LingerieFetcher: ObservableObject {
                     if (self.lingeries.isEmpty) {
                         MyLngr = self.lingeries[0]
                     } else {
-                        MyLngr = self.lingeries[0]
+                        MyLngr = self.lingeries[1]
                     }
                     
                     if (UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") != nil && !( UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") as! String == SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description )) || ProcessInfo.processInfo.arguments.contains("SendNotification") {
                         let lngrType = self.lngrsName == "lngrSlips" ? "slip" : "body"
-                        
+                       
                         
                         let content = UNMutableNotificationContent()
                         content.title = "New lngr"
                         content.body = "Er is een nieuw \(lngrType) de \(MyLngr.naam) voor maar €\(MyLngr.prijs) in het \(MyLngr.kleur)"
                         content.badge = 0
+                        content.userInfo["price"] = "€\(MyLngr.prijs)"
+                        content.userInfo["kleurFamilies"] = MyLngr.kleurFam
+                        content.userInfo["ImageURLS"] = MyLngr.imageUrls
+                        
+                        if self.lngrsName == "lngrSlips" {
+                            content.categoryIdentifier = "LingeriePriceUpdate"
+                        }
+                        
+                        let hiddenPreviewsPlaceholder = "%u new lngr available for a lower price"
+                        let summaryFormat = "%u more lngrs for a lower price"
+                        let lngrCategory = UNNotificationCategory(identifier: "lngr", actions: [], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: hiddenPreviewsPlaceholder, categorySummaryFormat: summaryFormat, options: [])
+                        UNUserNotificationCenter.current().setNotificationCategories([lngrCategory])
+                        if self.lngrsName != "lngrSlips" {
+                            content.categoryIdentifier = lngrCategory.identifier
+                        }
+                       
+                        
                         
                         let url = URL(string: MyLngr.img_url_sec)!
                         
@@ -171,11 +188,12 @@ public class LingerieFetcher: ObservableObject {
                                 self.logger.log("The error: \(error.debugDescription, privacy: .public)")
                             } else {
                                 self.logger.log("The res: \(response.debugDescription, privacy: .public)")
-                                let tmpurl = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("tmp.jpg")
+                                let tmpurl = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(self.lngrsName)tmp.jpg")
                                 do {
                                     try data.write(to: tmpurl)
                                     content.attachments = [try UNNotificationAttachment(identifier: MyLngr.img_url_sec, url: tmpurl)]
-                                    content.userInfo = ["id": MyLngr.id]
+                                    content.userInfo["id"] = MyLngr.id
+                                    content.userInfo["notiImage"] = data
                                     content.sound = .none
                                     
                                     var dateInfo = DateComponents()
@@ -187,7 +205,7 @@ public class LingerieFetcher: ObservableObject {
                                     // Deliver the notification in 30 seconds.
                                     var trigger: UNCalendarNotificationTrigger
                                     if ProcessInfo.processInfo.arguments.contains("SendNotification") {
-                                        let nextTriggerDate = Calendar.current.date(byAdding: .second, value: 30, to: Date())!
+                                        let nextTriggerDate = Calendar.current.date(byAdding: .second, value: 10, to: Date())!
                                         let nextTriggerDateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: nextTriggerDate)
                                         trigger = UNCalendarNotificationTrigger(dateMatching: nextTriggerDateComponent, repeats: false)
                                     } else {
@@ -315,6 +333,12 @@ public class LingerieFetcher: ObservableObject {
     }
 }
 
+enum LngrType {
+    case slip
+    case bra
+    case body
+}
+
 struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var id: String
     public var naam: String
@@ -324,11 +348,20 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var imageUrls: [String]
     public var url: String
     public var kleur: String
+    public var kleurFam: Array<String>
     public var description: String {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url), kleur: \(kleur) }"
     }
     public var SecondImage: URL {
         return URL(string: img_url_sec) ?? URL(string: "about:blank")!
+    }
+    
+    public var ImageURLS: Array<URL> {
+        var ImageUrlS = [URL]()
+        for url in imageUrls {
+            ImageUrlS.append(URL(string: url)!)
+        }
+        return ImageUrlS
     }
     
     enum CodingKeys: String, CodingKey {
@@ -338,6 +371,7 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
         case img_url = "img_url"
         case img_url_sec = "img_url_sec"
         case imageUrls = "imageUrls"
+        case kleurFam = "kleurFamilies"
         case url
         case kleur
     }

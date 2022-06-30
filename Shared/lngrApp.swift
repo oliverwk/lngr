@@ -5,13 +5,17 @@
 //  Created by Olivier Wittop Koning on 04/03/2021.
 //
 
-import Foundation
 #if os(iOS)
 import MobileCoreServices
 #endif
+import BackgroundTasks
 import CoreSpotlight
+import Foundation
 import SwiftUI
 import os
+
+
+
 
 @main
 struct lngrApp: App {
@@ -19,11 +23,12 @@ struct lngrApp: App {
         subsystem: "nl.wittopkoning.lngr",
         category: "lngrApp"
     )
+    private var backgroundSupport = BackgroundSupport()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                //.onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
+            //.onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
                 .onOpenURL { url in
                     if url.scheme == "vacinn-widget" {
                         self.logger.log("Opening: \"https://coronadashboard.rijksoverheid.nl/landelijk/vaccinaties\" beacuse the url scheme was: vacinn-widget")
@@ -31,6 +36,14 @@ struct lngrApp: App {
                             UIApplication.shared.open(theUrl)
                         }
                     }
+                }
+                .onAppear {
+                    BGTaskScheduler.shared.register(forTaskWithIdentifier: "nl.wittopkoning.lngr.GetNewLngrTask", using: nil) { (task) in
+                        backgroundSupport.handleAppRefreshTask(task: task as! BGAppRefreshTask)
+                    }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+                    backgroundSupport.scheduleAppRefresh()
                 }
         }
     }

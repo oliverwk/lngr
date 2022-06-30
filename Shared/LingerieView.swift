@@ -111,7 +111,7 @@ struct LingerieView_Previews: PreviewProvider {
                     "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
                     "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
                     "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
-                ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black"))
+                ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black", kleurFam: ["Black"]))
         .preferredColorScheme(.light)
         .previewDevice("iPhone 8")
     }
