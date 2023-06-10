@@ -18,6 +18,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var selection = 0
     @State private var blurRadius: CGFloat = 50.0
+    @State private var previousScene = ScenePhase.background
     private var authContext = LAContext()
     let logger = Logger(
         subsystem: "nl.wittopkoning.lngr",
@@ -80,9 +81,9 @@ struct ContentView: View {
                     if success {
                         DispatchQueue.main.async { self.blurRadius = 0.0 }
                     } else {
-                        logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate", privacy: .public)")
+                        logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate", privacy: .public) ")
                         // Fall back to a asking for username and password.
-                        DispatchQueue.main.async { self.blurRadius = 1000.0 }
+                            DispatchQueue.main.async { self.blurRadius = 1000.0 }
                     }
                 }
             }
@@ -93,7 +94,7 @@ struct ContentView: View {
             
         }
         .onChange(of: scenePhase) { newScenePhase in
-            if newScenePhase == .active {
+            if newScenePhase == .active && !(previousScene == .inactive) {
                 authContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Authenticate to go to lngr") { success, error in
                     if success {
                         DispatchQueue.main.async { self.blurRadius = 0.0 }
@@ -106,6 +107,7 @@ struct ContentView: View {
             } else if newScenePhase == .background {
                 DispatchQueue.main.async { self.blurRadius = 1000.0 }
             }
+            previousScene = newScenePhase
         }
     }
 }

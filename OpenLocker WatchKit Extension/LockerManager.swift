@@ -36,7 +36,7 @@ public class LockerManager: ObservableObject {
     
     func open() -> Void {
         let timestamp = Int64(round(Date().timeIntervalSince1970*1000) - 30000)
-        let url = URL(string: "https://mapi.releezme.net/api/Lockers/9960a1c9-bc66-4d61-b00d-c4e4701cc019/Open?nocache=\(timestamp)")!
+        let url = URL(string: "https://mapi.releezme.net/api/Lockers/246c3ae1-dfba-45cd-a3eb-a7662fa47d58/Open?nocache=\(timestamp)")!
         
         var request = URLRequest(url: url)
         var token = ProcessInfo.processInfo.environment["Reelzme_API_KEY"] ?? "No Token"

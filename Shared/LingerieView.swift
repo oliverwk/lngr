@@ -14,6 +14,8 @@ struct LingerieView: View {
     let locale = Locale.current
     
     @StateObject private var ImageFetcher: ImageFetchers
+    @State private var favoriteColor = "Red"
+
     init(lingerie: Lingerie) {
         self.lingerie = lingerie
         _ImageFetcher = StateObject(wrappedValue: ImageFetchers(ImageUrls: lingerie.imageUrls))
@@ -28,23 +30,29 @@ struct LingerieView: View {
                 .cornerRadius(5)
                 .padding(10)
                 .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                            .onEnded({ value in
-                                if value.translation.width < 0 {
-                                    // left
-                                    ImageFetcher.index -= 1
-                                    ImageFetcher.load()
-                                } else if value.translation.width > 0 {
-                                    ImageFetcher.index += 1
-                                    ImageFetcher.load()
-                                } else {
-                                    ImageFetcher.index += 1
-                                    ImageFetcher.load()
-                                }
-                            }))
+                    .onEnded({ value in
+                        if value.translation.width < 0 {
+                            // left
+                            ImageFetcher.index -= 1
+                            ImageFetcher.load()
+                        } else if value.translation.width > 0 {
+                            ImageFetcher.index += 1
+                            ImageFetcher.load()
+                        } else {
+                            ImageFetcher.index += 1
+                            ImageFetcher.load()
+                        }
+                    }))
             Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                 .padding(.bottom, 10.0)
                 .foregroundColor(.secondary)
-        
+            Picker("What is your favorite color?", selection: $favoriteColor) {
+                ForEach(lingerie.kleurFam, id: \.self) {
+                    Text($0)
+                }
+            }
+            .pickerStyle(.segmented)
+            
         }.navigationBarTitle(lingerie.naam, displayMode: .inline)
     }
     
@@ -106,12 +114,12 @@ struct LingerieView: View {
 
 struct LingerieView_Previews: PreviewProvider {
     static var previews: some View {
-                LingerieView(lingerie: Lingerie(id: "01094830958049238", naam: "Klassiek Katoenen String", prijs: 69.95, img_url:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg", img_url_sec:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg",imageUrls: [
-                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg?width=640",
-                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
-                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
-                    "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
-                ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black", kleurFam: ["Black"]))
+        LingerieView(lingerie: Lingerie(id: "01094830958049238", naam: "Klassiek Katoenen String", prijs: 69.95, img_url:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg", img_url_sec:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg",imageUrls: [
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg?width=640",
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
+            "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
+        ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black", kleurFam: ["Black"]))
         .preferredColorScheme(.light)
         .previewDevice("iPhone 8")
     }

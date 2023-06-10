@@ -52,7 +52,7 @@
 		<key>lngr (macOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>8</integer>
 		</dict>
 		<key>lngr widgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
@@ -67,7 +67,7 @@
 		<key>notificationui.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>7</integer>
 		</dict>
 		<key>rivmWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>

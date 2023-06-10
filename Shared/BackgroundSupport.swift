@@ -19,27 +19,43 @@ struct RefreshAppContentsOperation {
     
     static let urlSessionLngr = URLSession(configuration: .default)
     static let urlSessionTumb = URLSession(configuration: .default)
-    
+    static let urlSessionpi = URLSession(configuration: .default)
+
     func cancel() {
         RefreshAppContentsOperation.urlSessionLngr.invalidateAndCancel()
         RefreshAppContentsOperation.urlSessionTumb.invalidateAndCancel()
+        RefreshAppContentsOperation.urlSessionpi.invalidateAndCancel()
         return
+    }
+    
+    func testBackgroundFreq() async {
+        logger.log("Making request to the pi to test if this works")
+        let someString = "{\"naam\": \"Olivier\",\"e_mail\": \"oli4wk@gmail.com\", \"bericht\": \"Er is een verzoek gekomen vanaf jouw iphone vanaf de lngr app. De achtergrond werkt daar echt\"}"
+        do {
+            var request = URLRequest(url: URL(string: "https://send.wttp.workers.dev/send_mail")!)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = Data(someString.utf8)
+            let (data, _) = try await RefreshAppContentsOperation.urlSessionpi.upload(for: request, from: Data(someString.utf8))
+            logger.log("returnJson: \(String(decoding: data, as: UTF8.self), privacy: .public)")
+        } catch {
+            logger.fault("[ERROR] Er was een error bij het laden van de pi test req Met de error: \(error.localizedDescription, privacy: .public)")
+        }
     }
     
     func start(_ task: BGAppRefreshTask) -> Void {
         Task {
-            do {
-                logger.log("started the oparation")
-                let lngrBody = await loadItems(URL(string: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json")!)
-                let lngrSlip = await loadItems(URL(string: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json")!)
-                logger.log("Got both the lngrs, now showing the message")
-                await ShowNotification(lngrSlip[0], .slip)
-                await ShowNotification(lngrBody[0], .body)
-                logger.log("Showed both the notifications")
-                task.setTaskCompleted(success: true)
-            } catch {
-                logger.log("hi, error in the oparation.start \(error.localizedDescription, privacy: .public)")
-            }
+            logger.log("started the oparation")
+            let lngrBody = await loadItems(URL(string: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json")!)
+            let lngrSlip = await loadItems(URL(string: "https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json")!)
+            logger.log("Got both the lngrs, now showing the message")
+            await ShowNotification(lngrSlip[0], .slip)
+            await ShowNotification(lngrBody[0], .body)
+            await testBackgroundFreq()
+            logger.log("Showed both the notifications")
+            
+            
+            task.setTaskCompleted(success: true)
         }
     }
     
@@ -68,6 +84,7 @@ struct RefreshAppContentsOperation {
                 content.badge = 0
                 content.userInfo["price"] = "€\(lngr.prijs)"
                 content.userInfo["kleurFamilies"] = lngr.kleurFam
+                logger.log("kleurfam \(lngr.kleurFam, privacy: .public)")
                 content.userInfo["ImageURLS"] = lngr.imageUrls
                 if lngrType == .slip {
                     content.categoryIdentifier = "LingeriePriceUpdate"
@@ -120,7 +137,7 @@ struct RefreshAppContentsOperation {
                     
                     let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger) // Schedule the notification.
                     logger.log("Scheduleing Notification")
-
+                    
                     do {
                         try await center.add(request)
                         self.logger.log("Added to the notification center")
@@ -169,14 +186,16 @@ struct BackgroundSupport {
     func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: "nl.wittopkoning.lngr.GetNewLngrTask")
         // Fetch tommorw at 7:30 so it is ready at 8 a.m.
-        let tom = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
-        let morgenAchtUur = Calendar.current.date(bySettingHour: 9, minute: 30, second: 00, of: tom)!
+        let tom = Calendar.current.date(byAdding: .day, value: 0, to: Date())! //TODO maak dit 1
+        let morgenAchtUur = Calendar.current.date(bySettingHour: 8, minute: 30, second: 00, of: tom)!
         request.earliestBeginDate = morgenAchtUur
         
         do {
             try BGTaskScheduler.shared.submit(request)
+            logger.log("We hebben summit van de background")
         } catch {
-            print("Could not schedule app refresh: \(error)")
+            logger.log("Could not schedule app refresh: \(error, privacy: .public)")
+            logger.log("Could not schedule app refresh")
         }
     }
     

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,7 +15,7 @@
 		E6077B8B25F175CD00F6F951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6077B7525F175CC00F6F951 /* Assets.xcassets */; };
 		E607CE562651190D0084F2E7 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68B5E95260490F700385A7E /* Intents.framework */; };
 		E607CE592651190D0084F2E7 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E607CE582651190D0084F2E7 /* IntentHandler.swift */; };
-		E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E607CE552651190D0084F2E7 /* GetCheapest.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E607CE552651190D0084F2E7 /* GetCheapest.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E607CE622651193A0084F2E7 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = E607CE612651193A0084F2E7 /* Intents.intentdefinition */; };
 		E621E1A427CD271300AE8297 /* stoicWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621E1A327CD271300AE8297 /* stoicWidget.swift */; };
 		E621E1E127CD2B2500AE8297 /* qoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621E1E027CD2B2500AE8297 /* qoutes.swift */; };
@@ -36,18 +36,17 @@
 		E6A65B9F286C870300EEA2C8 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A65B9E286C870300EEA2C8 /* UserNotificationsUI.framework */; };
 		E6A65BA2286C870300EEA2C8 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A65BA1286C870300EEA2C8 /* NotificationViewController.swift */; };
 		E6A65BA5286C870300EEA2C8 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6A65BA3286C870300EEA2C8 /* MainInterface.storyboard */; };
-		E6A65BA9286C870300EEA2C8 /* notificationui.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6A65B9B286C870300EEA2C8 /* notificationui.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E6A65BA9286C870300EEA2C8 /* notificationui.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E6A65B9B286C870300EEA2C8 /* notificationui.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6B2894226739D3E00354743 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B2894126739D3E00354743 /* model.swift */; };
 		E6B52B81265061BC006DAB5C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D525F3D5D200C9DD32 /* WidgetKit.framework */; };
 		E6B52B82265061BC006DAB5C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D725F3D5D200C9DD32 /* SwiftUI.framework */; };
 		E6B52B85265061BD006DAB5C /* rivmWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B52B84265061BD006DAB5C /* rivmWidget.swift */; };
 		E6B52B87265061C7006DAB5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6B52B86265061C7006DAB5C /* Assets.xcassets */; };
-		E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6C5DB1E26B7D7850002A7F1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6C5DB1D26B7D7850002A7F1 /* Settings.bundle */; };
 		E6C5DB1F26B7D7850002A7F1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6C5DB1D26B7D7850002A7F1 /* Settings.bundle */; };
 		E6C810B626ED0DAD00A9925B /* OpenLocker WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E6C810B526ED0DAD00A9925B /* OpenLocker WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6C810BB26ED0DAE00A9925B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6C810BA26ED0DAE00A9925B /* Assets.xcassets */; };
-		E6C810C226ED0DAE00A9925B /* OpenLocker WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6C810C126ED0DAE00A9925B /* OpenLocker WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6C810C726ED0DAE00A9925B /* lngrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C810C626ED0DAE00A9925B /* lngrApp.swift */; };
 		E6C810C926ED0DAE00A9925B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C810C826ED0DAE00A9925B /* ContentView.swift */; };
 		E6C810CB26ED0DAE00A9925B /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C810CA26ED0DAE00A9925B /* NotificationController.swift */; };
@@ -64,7 +63,7 @@
 		E6DE7E53268C5581003B88B4 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DE7E52268C5581003B88B4 /* QuickLook.framework */; };
 		E6DE7E56268C5581003B88B4 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE7E55268C5581003B88B4 /* PreviewViewController.swift */; };
 		E6DE7E59268C5581003B88B4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6DE7E57268C5581003B88B4 /* MainInterface.storyboard */; };
-		E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E6DE7E51268C5581003B88B4 /* MarkDown.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E6DE7E51268C5581003B88B4 /* MarkDown.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E6DE7E68268C9FB6003B88B4 /* lngrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DE7E67268C9FB6003B88B4 /* lngrUITests.swift */; };
 		E6ED55FC26946F1C001F978F /* GetImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ED55FB26946F1C001F978F /* GetImage.swift */; };
 		E6F003B3272D3CB1000C92A4 /* ComplicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F003B2272D3CB1000C92A4 /* ComplicationView.swift */; };
@@ -99,13 +98,6 @@
 			remoteGlobalIDString = E6C810B426ED0DAD00A9925B;
 			remoteInfo = "OpenLocker WatchKit App";
 		};
-		E6C810C326ED0DAE00A9925B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E6077B6E25F175B800F6F951 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6C810C026ED0DAE00A9925B;
-			remoteInfo = "OpenLocker WatchKit Extension";
-		};
 		E6DE7E5B268C5581003B88B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E6077B6E25F175B800F6F951 /* Project object */;
@@ -123,18 +115,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E68170E525F3D5E600C9DD32 /* Embed App Extensions */ = {
+		E68170E525F3D5E600C9DD32 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed App Extensions */,
-				E6A65BA9286C870300EEA2C8 /* notificationui.appex in Embed App Extensions */,
-				E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed App Extensions */,
-				E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed App Extensions */,
+				E607CE5D2651190D0084F2E7 /* GetCheapest.appex in Embed Foundation Extensions */,
+				E6A65BA9286C870300EEA2C8 /* notificationui.appex in Embed Foundation Extensions */,
+				E6DE7E5D268C5581003B88B4 /* MarkDown.appex in Embed Foundation Extensions */,
+				E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E6C810D926ED0DAF00A9925B /* Embed Watch Content */ = {
@@ -146,17 +138,6 @@
 				E6C810B626ED0DAD00A9925B /* OpenLocker WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6C810DC26ED0DAF00A9925B /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				E6C810C226ED0DAE00A9925B /* OpenLocker WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -205,7 +186,6 @@
 		E6C810B526ED0DAD00A9925B /* OpenLocker WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenLocker WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6C810BA26ED0DAE00A9925B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6C810BC26ED0DAE00A9925B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6C810C126ED0DAE00A9925B /* OpenLocker WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "OpenLocker WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6C810C626ED0DAE00A9925B /* lngrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrApp.swift; sourceTree = "<group>"; };
 		E6C810C826ED0DAE00A9925B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E6C810CA26ED0DAE00A9925B /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
@@ -347,7 +327,6 @@
 				E6DE7E65268C9FB6003B88B4 /* lngrUITests.xctest */,
 				E6C810B226ED0DAD00A9925B /* OpenLocker.app */,
 				E6C810B526ED0DAD00A9925B /* OpenLocker WatchKit App.app */,
-				E6C810C126ED0DAE00A9925B /* OpenLocker WatchKit Extension.appex */,
 				E6A65B9B286C870300EEA2C8 /* notificationui.appex */,
 			);
 			name = Products;
@@ -486,7 +465,7 @@
 				E6077B7625F175CC00F6F951 /* Sources */,
 				E6077B7725F175CC00F6F951 /* Frameworks */,
 				E6077B7825F175CC00F6F951 /* Resources */,
-				E68170E525F3D5E600C9DD32 /* Embed App Extensions */,
+				E68170E525F3D5E600C9DD32 /* Embed Foundation Extensions */,
 				E6ED266E272844B0005FC554 /* Replace settings bundle */,
 			);
 			buildRules = (
@@ -592,34 +571,17 @@
 			buildConfigurationList = E6C810E026ED0DAF00A9925B /* Build configuration list for PBXNativeTarget "OpenLocker WatchKit App" */;
 			buildPhases = (
 				E6C810B326ED0DAD00A9925B /* Resources */,
-				E6C810DC26ED0DAF00A9925B /* Embed App Extensions */,
+				E6C810BD26ED0DAE00A9925B /* Sources */,
+				E6C810BE26ED0DAE00A9925B /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E6C810C426ED0DAE00A9925B /* PBXTargetDependency */,
 			);
 			name = "OpenLocker WatchKit App";
 			productName = "OpenLocker WatchKit App";
 			productReference = E6C810B526ED0DAD00A9925B /* OpenLocker WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		E6C810C026ED0DAE00A9925B /* OpenLocker WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6C810DF26ED0DAF00A9925B /* Build configuration list for PBXNativeTarget "OpenLocker WatchKit Extension" */;
-			buildPhases = (
-				E6C810BD26ED0DAE00A9925B /* Sources */,
-				E6C810BE26ED0DAE00A9925B /* Frameworks */,
-				E6C810BF26ED0DAE00A9925B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "OpenLocker WatchKit Extension";
-			productName = "OpenLocker WatchKit Extension";
-			productReference = E6C810C126ED0DAE00A9925B /* OpenLocker WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
+			productType = "com.apple.product-type.application";
 		};
 		E6DE7E50268C5581003B88B4 /* MarkDown */ = {
 			isa = PBXNativeTarget;
@@ -664,8 +626,9 @@
 		E6077B6E25F175B800F6F951 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					E6077B7925F175CC00F6F951 = {
 						CreatedOnToolsVersion = 12.3;
@@ -689,9 +652,6 @@
 					E6C810B426ED0DAD00A9925B = {
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1250;
-					};
-					E6C810C026ED0DAE00A9925B = {
-						CreatedOnToolsVersion = 12.5.1;
 					};
 					E6DE7E50268C5581003B88B4 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -726,7 +686,6 @@
 				E6DE7E64268C9FB6003B88B4 /* lngrUITests */,
 				E6C810B126ED0DAD00A9925B /* OpenLocker */,
 				E6C810B426ED0DAD00A9925B /* OpenLocker WatchKit App */,
-				E6C810C026ED0DAE00A9925B /* OpenLocker WatchKit Extension */,
 				E6A65B9A286C870300EEA2C8 /* notificationui */,
 			);
 		};
@@ -786,17 +745,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6C810D426ED0DAF00A9925B /* Preview Assets.xcassets in Resources */,
 				E6C810BB26ED0DAE00A9925B /* Assets.xcassets in Resources */,
 				E6D08C9A27B4051400B133ED /* .env.txt in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E6C810BF26ED0DAE00A9925B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 				E6D08C9B27B4051400B133ED /* .env.txt in Resources */,
-				E6C810D426ED0DAF00A9925B /* Preview Assets.xcassets in Resources */,
 				E6C810D126ED0DAF00A9925B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -955,11 +907,6 @@
 			target = E6C810B426ED0DAD00A9925B /* OpenLocker WatchKit App */;
 			targetProxy = E6C810B726ED0DAD00A9925B /* PBXContainerItemProxy */;
 		};
-		E6C810C426ED0DAE00A9925B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6C810C026ED0DAE00A9925B /* OpenLocker WatchKit Extension */;
-			targetProxy = E6C810C326ED0DAE00A9925B /* PBXContainerItemProxy */;
-		};
 		E6DE7E5C268C5581003B88B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E6DE7E50268C5581003B88B4 /* MarkDown */;
@@ -1027,6 +974,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1088,6 +1036,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1167,6 +1116,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1192,6 +1142,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1315,6 +1266,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				INFOPLIST_FILE = rivmWidget/Info.plist;
@@ -1326,6 +1278,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.rivmWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1338,6 +1291,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
 				INFOPLIST_FILE = rivmWidget/Info.plist;
@@ -1349,6 +1303,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr.rivmWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1406,16 +1361,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
-				IBSC_MODULE = OpenLocker_WatchKit_Extension;
 				INFOPLIST_FILE = "OpenLocker WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.OpenLocker.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1434,71 +1388,21 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6CDWQZK7UX;
-				IBSC_MODULE = OpenLocker_WatchKit_Extension;
 				INFOPLIST_FILE = "OpenLocker WatchKit App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.OpenLocker.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "OpenLocker WatchKit Extension/OpenLocker WatchKit App-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
-			};
-			name = Release;
-		};
-		E6C810DD26ED0DAF00A9925B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"OpenLocker WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 6CDWQZK7UX;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "OpenLocker WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.OpenLocker.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
-			};
-			name = Debug;
-		};
-		E6C810DE26ED0DAF00A9925B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"OpenLocker WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 6CDWQZK7UX;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "OpenLocker WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.OpenLocker.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
@@ -1550,8 +1454,8 @@
 		E6DE7E6D268C9FB6003B88B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = lngrUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1560,6 +1464,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngrUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1570,8 +1475,8 @@
 		E6DE7E6E268C9FB6003B88B4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6CDWQZK7UX;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = lngrUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1580,6 +1485,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngrUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1641,15 +1547,6 @@
 			buildConfigurations = (
 				E6B52B8D265061C7006DAB5C /* Debug */,
 				E6B52B8E265061C7006DAB5C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E6C810DF26ED0DAF00A9925B /* Build configuration list for PBXNativeTarget "OpenLocker WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E6C810DD26ED0DAF00A9925B /* Debug */,
-				E6C810DE26ED0DAF00A9925B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

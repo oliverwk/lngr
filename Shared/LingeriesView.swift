@@ -164,6 +164,7 @@ public class LingerieFetcher: ObservableObject {
                         content.badge = 0
                         content.userInfo["price"] = "€\(MyLngr.prijs)"
                         content.userInfo["kleurFamilies"] = MyLngr.kleurFam
+                        self.logger.log("kleurfam \(MyLngr.kleurFam, privacy: .public)")
                         content.userInfo["ImageURLS"] = MyLngr.imageUrls
                         
                         if self.lngrsName == "lngrSlips" {
