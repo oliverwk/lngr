@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "CADD535F-EAB2-4677-95AF-2EC9272F39FE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MarkDown/PreviewViewController.swift"
@@ -56,7 +56,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D545ECB6-252B-4F5A-B1B4-899B9675AD45"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MarkDown/PreviewViewController.swift"
@@ -65,6 +65,130 @@
             startingLineNumber = "52"
             endingLineNumber = "52"
             landmarkName = "preparePreviewOfFile(at:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/BackgroundSupport.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "start(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - b23b62f8b6853b82"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
+                  moduleName = "lngr"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "1296">
+               </Location>
+               <Location
+                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - 2b72e46b0e717d95"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
+                  moduleName = "lngr"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "37">
+               </Location>
+               <Location
+                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - 92ab2d69c0b2ff80"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
+                  moduleName = "lngr"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "174">
+               </Location>
+               <Location
+                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - 8f9d1ec5dda7370"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
+                  moduleName = "lngr"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - cb25864fa49583e8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () async -&gt; () in lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
+                  moduleName = "lngr"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "320">
+               </Location>
+               <Location
+                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - b23b62f8b6853b82"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
+                  moduleName = "lngr"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "172">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F4CE2C6-EA2C-49C8-9B5B-6E645F673D65"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "notificationui/NotificationViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "didReceive(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

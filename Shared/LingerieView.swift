@@ -14,7 +14,7 @@ struct LingerieView: View {
     let locale = Locale.current
     
     @StateObject private var ImageFetcher: ImageFetchers
-    @State private var favoriteColor = "Red"
+    @State var favoriteColor = KleurFamilie(naam: "zwart", hex: "#0000", imgUrl: "about:blank", URLS: "about:blank")
 
     init(lingerie: Lingerie) {
         self.lingerie = lingerie
@@ -48,8 +48,17 @@ struct LingerieView: View {
                 .foregroundColor(.secondary)
             Picker("What is your favorite color?", selection: $favoriteColor) {
                 ForEach(lingerie.kleurFam, id: \.self) {
-                    Text($0)
+                    Text($0.naam)
                 }
+            }
+           .onChange(of: favoriteColor) { newcol in
+               print("favoriteColor \(favoriteColor)")
+               print(favoriteColor.colour)
+               ImageFetcher.TheImageUrls = [newcol.imgUrl]
+               ImageFetcher.load()
+            }
+            .onAppear {
+                favoriteColor = self.lingerie.kleurFam[0]
             }
             .pickerStyle(.segmented)
             
@@ -119,7 +128,7 @@ struct LingerieView_Previews: PreviewProvider {
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
-        ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black", kleurFam: ["Black"]))
+        ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black", kleurFam: [KleurFamilie(naam: "Zwart", hex: "#000000", imgUrl: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640", URLS: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640")]))
         .preferredColorScheme(.light)
         .previewDevice("iPhone 8")
     }

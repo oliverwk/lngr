@@ -163,7 +163,7 @@ public class LingerieFetcher: ObservableObject {
                         content.body = "Er is een nieuw \(lngrType) de \(MyLngr.naam) voor maar €\(MyLngr.prijs) in het \(MyLngr.kleur)"
                         content.badge = 0
                         content.userInfo["price"] = "€\(MyLngr.prijs)"
-                        content.userInfo["kleurFamilies"] = MyLngr.kleurFam
+                        content.userInfo["kleurFamilies"] = MyLngr.kleurFam[0].naam
                         self.logger.log("kleurfam \(MyLngr.kleurFam, privacy: .public)")
                         content.userInfo["ImageURLS"] = MyLngr.imageUrls
                         
@@ -340,6 +340,46 @@ enum LngrType {
     case body
 }
 
+struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, Equatable {
+    public var id = UUID()
+    public var naam: String
+    public var hex: String
+    public var imgUrl: String
+    public var URLS: String
+    public var url: URL {
+        return URL(string: URLS) ?? URL(string: "about:blank")!
+    }
+    
+    
+    public var description: String {
+        return "{ naam: \(naam), hex: \(hex), img_url: \(imgUrl) url: \(url)}"
+    }
+    
+    public var colour: Color {
+        let index1 = hex.index(hex.startIndex, offsetBy: 1)
+        let hexColour = hex[index1...]
+        
+        print(hexColour)
+        let indexr = hexColour.index(hexColour.startIndex, offsetBy: 2)
+        let red = UInt8(hexColour[..<indexr], radix: 16)
+        print(red as Any)
+        let indexg = hexColour.index(hexColour.startIndex, offsetBy: 4)
+        let green = UInt8(hexColour[indexr..<indexg], radix: 16)
+        print(green as Any)        
+        let indexb = hexColour.index(hexColour.startIndex, offsetBy: 6)
+        let blue = UInt8(hexColour[indexg..<indexb], radix: 16)
+        print(blue as Any)
+        return Color(red: Double(red!), green: Double(green!), blue: Double(blue!))
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case naam
+        case hex
+        case imgUrl = "img_url"
+        case URLS = "url"
+    }
+}
+
 struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var id: String
     public var naam: String
@@ -349,7 +389,7 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var imageUrls: [String]
     public var url: String
     public var kleur: String
-    public var kleurFam: Array<String>
+    public var kleurFam: Array<KleurFamilie>
     public var description: String {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url), kleur: \(kleur) }"
     }
