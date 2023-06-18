@@ -14,7 +14,7 @@ struct LingerieView: View {
     let locale = Locale.current
     
     @StateObject private var ImageFetcher: ImageFetchers
-    @State var favoriteColor = KleurFamilie(naam: "zwart", hex: "#0000", imgUrl: "about:blank", URLS: "about:blank")
+    @State var favoriteColor = KleurFamilie(id: "01094830958049238", naam: "zwart", hex: "#000000", imgUrl: "about:blank", URLS: "about:blank")
 
     init(lingerie: Lingerie) {
         self.lingerie = lingerie
@@ -45,16 +45,28 @@ struct LingerieView: View {
                     }))
             Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                 .padding(.bottom, 10.0)
-                .foregroundColor(.secondary)
+                //.foregroundColor(.secondary)
+                .foregroundColor(favoriteColor.colour)
             Picker("What is your favorite color?", selection: $favoriteColor) {
                 ForEach(lingerie.kleurFam, id: \.self) {
                     Text($0.naam)
+                        .foregroundColor($0.colour)
                 }
             }
-           .onChange(of: favoriteColor) { newcol in
+           .onChange(of: favoriteColor) { newFavoriteColor in
                print("favoriteColor \(favoriteColor)")
-               print(favoriteColor.colour)
-               ImageFetcher.TheImageUrls = [newcol.imgUrl]
+               print("\(favoriteColor.id) == \(lingerie.id.split(separator: "-")[...3].joined(separator: "-"))")
+               if (favoriteColor.id == lingerie.id.split(separator: "-")[...3].joined(separator: "-")) {
+                   ImageFetcher.TheImageUrls = lingerie.imageUrls
+                   print(lingerie.imageUrls)
+                   ImageFetcher.index = 0
+                   print("Dit is de orginele lngr")
+            //   } else if (lngrs.lingeries.contains { $0.id == favoriteColor.id } ) {
+            // Hier de huigde database zoek of de zelfde kleur er in zit
+               } else {
+                   ImageFetcher.TheImageUrls = [newFavoriteColor.imgUrl]
+                   ImageFetcher.index = 0
+               }
                ImageFetcher.load()
             }
             .onAppear {
@@ -128,7 +140,7 @@ struct LingerieView_Previews: PreviewProvider {
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
-        ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black", kleurFam: [KleurFamilie(naam: "Zwart", hex: "#000000", imgUrl: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640", URLS: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640")]))
+        ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Black", kleurFam: [KleurFamilie(id: "01094830958049238", naam: "Zwart", hex: "#000000", imgUrl: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640", URLS: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640")]))
         .preferredColorScheme(.light)
         .previewDevice("iPhone 8")
     }

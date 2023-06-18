@@ -188,7 +188,7 @@ public class LingerieFetcher: ObservableObject {
                             if (error != nil) {
                                 self.logger.log("The error: \(error.debugDescription, privacy: .public)")
                             } else {
-                                self.logger.log("The res: \(response.debugDescription, privacy: .public)")
+                                self.logger.log("The res: \((response as? HTTPURLResponse)!.statusCode, privacy: .public)")
                                 let tmpurl = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(self.lngrsName)tmp.jpg")
                                 do {
                                     try data.write(to: tmpurl)
@@ -341,7 +341,7 @@ enum LngrType {
 }
 
 struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, Equatable {
-    public var id = UUID()
+    public var id: String
     public var naam: String
     public var hex: String
     public var imgUrl: String
@@ -352,27 +352,25 @@ struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, E
     
     
     public var description: String {
-        return "{ naam: \(naam), hex: \(hex), img_url: \(imgUrl) url: \(url)}"
+        return "{ id: \(id), naam: \(naam), hex: \(hex), img_url: \(imgUrl), url: \(url)}"
     }
     
     public var colour: Color {
         let index1 = hex.index(hex.startIndex, offsetBy: 1)
         let hexColour = hex[index1...]
         
-        print(hexColour)
         let indexr = hexColour.index(hexColour.startIndex, offsetBy: 2)
         let red = UInt8(hexColour[..<indexr], radix: 16)
-        print(red as Any)
         let indexg = hexColour.index(hexColour.startIndex, offsetBy: 4)
         let green = UInt8(hexColour[indexr..<indexg], radix: 16)
-        print(green as Any)        
         let indexb = hexColour.index(hexColour.startIndex, offsetBy: 6)
         let blue = UInt8(hexColour[indexg..<indexb], radix: 16)
-        print(blue as Any)
-        return Color(red: Double(red!), green: Double(green!), blue: Double(blue!))
+       // print("rgb \(Double(red!)) \(Double(green!)) \(Double(blue!))")
+        return Color(red: Double(red!) / 255, green: Double(green!) / 255, blue: Double(blue!) / 255)
     }
     
     enum CodingKeys: String, CodingKey {
+        case id
         case naam
         case hex
         case imgUrl = "img_url"

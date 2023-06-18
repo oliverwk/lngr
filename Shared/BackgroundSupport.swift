@@ -110,7 +110,7 @@ struct RefreshAppContentsOperation {
                     return
                 }
                 
-                logger.log("The res: \(res.debugDescription, privacy: .public)")
+                logger.log("The res: \((res as? HTTPURLResponse)!.statusCode, privacy: .public)")
                 let tmpurl = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(lngrTypeName)tmp.jpg")
                 do {
                     try data.write(to: tmpurl)
