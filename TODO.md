@@ -6,5 +6,7 @@
 - [x] Add low data mode optie
 - [x] Add caching to network reqeusts
 - [x] Add a settings bundle
+- [x] Add a search field
+- [x] Add multiple colours
 - [ ] Add Share button
 - [ ] Add MultipeerConnectivity?

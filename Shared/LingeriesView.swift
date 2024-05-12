@@ -33,6 +33,18 @@ struct LingeriesView: View {
         self.title = title
         _lngrs = StateObject(wrappedValue: LingerieFetcher(URL(string: Url)!, "lngr\(title)"))
     }
+    func checkIfExtraLngr(TheLingerie: Lingerie) {
+        self.StopIndex = lngrs.lingeries.count - 1
+        if lngrs.lingeries.count > 0 {
+            let currentLngr = lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })
+            logger.log("Getting lngr: \(currentLngr == StopIndex) index: \(currentLngr.debugDescription) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
+            if currentLngr == StopIndex {
+                logger.log("Getting extra lngr \(StopIndex + 20)")
+                let LNurl = lngrs.lngrsName == "lngrSlips" ? "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price" : "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bodys?sortBy=price"
+                lngrs.getExtraLngr(url: URL(string: LNurl)!)
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -45,19 +57,11 @@ struct LingeriesView: View {
                             .padding()
                     }
                 } else {
+                    //                    ImageViewTest()
                     ForEach(lngrs.lingeries) { TheLingerie in
                         NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
                             lngrRow(TheLingerie: TheLingerie).onAppear {
-                                self.StopIndex = lngrs.lingeries.count - 1
-                                if lngrs.lingeries.count > 0 {
-                                    let currentLngr = lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })
-                                    logger.log("Getting lngr: \(currentLngr == StopIndex) index: \(currentLngr.debugDescription) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
-                                    if currentLngr == StopIndex {
-                                        logger.log("Getting extra lngr \(StopIndex + 20)")
-                                        let LNurl = lngrs.lngrsName == "lngrSlips" ? "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price" : "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bodys?sortBy=price"
-                                        lngrs.getExtraLngr(url: URL(string: LNurl)!)
-                                    }
-                                }
+                                checkIfExtraLngr(TheLingerie: TheLingerie)
                             }
                         }
                     }
@@ -67,34 +71,27 @@ struct LingeriesView: View {
                         }).opacity(lngrs.IsLoading ? 1 : 0)
                     }
                 }
-            }.listStyle(.automatic)
-                .refreshable {
+            }
+            .listStyle(.automatic)
+            .refreshable {
+                lngrs.lingeries = []
+                lngrs.LoadLngrs(Url: lngrs.url, lngrsName: lngrs.lngrsName)
+            }
+            .navigationTitle(title)
+            .searchable(text: $search)
+            .onSubmit(of: .search) {
+                logger.critical("Searching: \(search)")
+                let searchedLngrs = lngrs.OriginalLingeries.filter { $0.naam.uppercased().contains(self.search.uppercased()) }
+                logger.log("found lngr: \(searchedLngrs, privacy: .public)")
+                if !searchedLngrs.isEmpty {
+                    lngrs.lingeries = searchedLngrs
+                    searchedFailed = false
+                } else {
+                    logger.log("Didn't find anything")
                     lngrs.lingeries = []
-                    lngrs.LoadLngrs(Url: lngrs.url, lngrsName: lngrs.lngrsName)
+                    searchedFailed = true
                 }
-                .navigationTitle(title)
-                .searchable(text: $search) {
-                    Group {
-                        Text("String met micro kant rand - 1-pak").searchCompletion("String met micro kant rand")
-                        Text("Kanten slip").searchCompletion("Kanten slip")
-                        Text("V-String").searchCompletion("V-String")
-                        Text("Klassiek Katoenen Slip").searchCompletion("Klassiek Katoenen Slip")
-                        Text("Kanten string").searchCompletion("Kanten string")
-                    }
-                }
-                .onSubmit(of: .search) {
-                    logger.critical("Searching: \(search)")
-                    let searchedLngrs = lngrs.OriginalLingeries.filter{ $0.naam.contains(self.search) }
-                    logger.log("found lngr: \(searchedLngrs, privacy: .public)")
-                    if !searchedLngrs.isEmpty {
-                        lngrs.lingeries = searchedLngrs
-                        searchedFailed = false
-                    } else {
-                        logger.log("Didn't find anything")
-                        lngrs.lingeries = []
-                        searchedFailed = true
-                    }
-                }
+            }
         }.navigationViewStyle(.stack).onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
                 logger.log("Received a payload via spotlight with id: \(id, privacy: .public)")
@@ -156,7 +153,7 @@ public class LingerieFetcher: ObservableObject {
                     
                     if (UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") != nil && !( UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") as! String == SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description )) || ProcessInfo.processInfo.arguments.contains("SendNotification") {
                         let lngrType = self.lngrsName == "lngrSlips" ? "slip" : "body"
-                       
+                        
                         
                         let content = UNMutableNotificationContent()
                         content.title = "New lngr"
@@ -178,7 +175,7 @@ public class LingerieFetcher: ObservableObject {
                         if self.lngrsName != "lngrSlips" {
                             content.categoryIdentifier = lngrCategory.identifier
                         }
-                       
+                        
                         
                         
                         let url = URL(string: MyLngr.img_url_sec)!
@@ -365,7 +362,7 @@ struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, E
         let green = UInt8(hexColour[indexr..<indexg], radix: 16)
         let indexb = hexColour.index(hexColour.startIndex, offsetBy: 6)
         let blue = UInt8(hexColour[indexg..<indexb], radix: 16)
-       // print("rgb \(Double(red!)) \(Double(green!)) \(Double(blue!))")
+        // print("rgb \(Double(red!)) \(Double(green!)) \(Double(blue!))")
         return Color(red: Double(red!) / 255, green: Double(green!) / 255, blue: Double(blue!) / 255)
     }
     
