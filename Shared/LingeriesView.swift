@@ -57,7 +57,10 @@ struct LingeriesView: View {
                             .padding()
                     }
                 } else {
-                    //                    ImageViewTest()
+                    NavigationLink(destination: ImageViewTest()) {
+//                        ImageViewTest()
+                    }
+                   
                     ForEach(lngrs.lingeries) { TheLingerie in
                         NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
                             lngrRow(TheLingerie: TheLingerie).onAppear {

@@ -8,5 +8,6 @@
 - [x] Add a settings bundle
 - [x] Add a search field
 - [x] Add multiple colours
+- [ ] Add a function to remove background of images 
 - [ ] Add Share button
 - [ ] Add MultipeerConnectivity?

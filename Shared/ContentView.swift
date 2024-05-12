@@ -43,6 +43,14 @@ struct ContentView: View {
                     }
                 }
                 .tag(1)
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras")
+                .tabItem {
+                    VStack {
+                        Image(systemName: "figure.seated.side.airbag.on.2")
+                        Text("Bras")
+                    }
+                }
+                .tag(2)
         }.blur(radius: blurRadius)
             .onAppear {
                 // MARK: - spotlight and reset logic
