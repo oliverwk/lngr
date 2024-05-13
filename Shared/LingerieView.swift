@@ -17,6 +17,7 @@ struct LingerieView: View {
         category: "LingerieView"
     )
     
+    @Environment(\.colorScheme) var colorScheme
     @StateObject private var ImageFetcher: ImageFetchers
     @State var favoriteColor = KleurFamilie(id: "01094830958049238", naam: "zwart", hex: "#000000", imgUrl: "about:blank", URLS: "about:blank")
 
@@ -51,7 +52,7 @@ struct LingerieView: View {
                 Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                     .padding(.bottom, 10.0)
                 //.foregroundColor(.secondary)
-                    .foregroundColor(favoriteColor.colour)
+                    .foregroundColor((colorScheme == .dark && favoriteColor.hex == "#000000") ? Color.white : ((colorScheme == .light && favoriteColor.hex.uppercased() == "#FFFFFF") ? Color.black: favoriteColor.colour))
                 Picker("What is your favorite color?", selection: $favoriteColor) {
                     ForEach(lingerie.kleurFam, id: \.self) {
                         Text($0.naam)

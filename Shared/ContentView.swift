@@ -46,7 +46,7 @@ struct ContentView: View {
             LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras")
                 .tabItem {
                     VStack {
-                        Image(systemName: "figure.seated.side.airbag.on.2")
+                        Image(systemName: "eyes")
                         Text("Bras")
                     }
                 }

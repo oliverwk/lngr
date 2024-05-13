@@ -40,7 +40,16 @@ struct LingeriesView: View {
             logger.log("Getting lngr: \(currentLngr == StopIndex) index: \(currentLngr.debugDescription) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
             if currentLngr == StopIndex {
                 logger.log("Getting extra lngr \(StopIndex + 20)")
-                let LNurl = lngrs.lngrsName == "lngrSlips" ? "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price" : "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bodys?sortBy=price"
+                let LNurl: String
+                if (lngrs.lngrsName == "lngrSlips") {
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price"
+                } else if (lngrs.lngrsName == "lngrBodys") {
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bodys?sortBy=price"
+                } else if (lngrs.lngrsName == "lngrBra  s") {
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bhs?sortBy=price"
+                } else {
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price"
+                }
                 lngrs.getExtraLngr(url: URL(string: LNurl)!)
             }
         }
@@ -258,15 +267,26 @@ public class LingerieFetcher: ObservableObject {
                     } else if let error = error {
                         self.simpleError()
                         if let response = response as? HTTPURLResponse {
-                            self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url, privacy: .public) en met response: \(response, privacy: .public) \n Met de error: \(error.localizedDescription, privacy: .public) en data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
+                            self.logger.fault("[ERROR] Er was geen data met het laden van extra lngr een url: \(url, privacy: .public) en met response: \(response, privacy: .public) \n Met de error: \(String(describing :error), privacy: .public) en data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
                         } else {
                             self.logger.fault("[ERROR] Er was een terwijl de json werd geparsed: \(url, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                         }
                     }
+                } catch let DecodingError.dataCorrupted(context) {
+                       print(context)
+                   } catch let DecodingError.keyNotFound(key, context) {
+                       print("Key '\(key)' not found:", context.debugDescription)
+                       print("codingPath:", context.codingPath)
+                   } catch let DecodingError.valueNotFound(value, context) {
+                       print("Value '\(value)' not found:", context.debugDescription)
+                       print("codingPath:", context.codingPath)
+                   } catch let DecodingError.typeMismatch(type, context)  {
+                       print("Type '\(type)' mismatch:", context.debugDescription)
+                       print("codingPath:", context.codingPath)
                 } catch {
                     self.simpleError()
                     if let response = response as? HTTPURLResponse {
-                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(error.localizedDescription, privacy: .public) met data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
+                        self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url, privacy: .public) en met response: \(response, privacy: .public) Met de error: \(String(describing: error), privacy: .public) met data: \n \(String(decoding: data!, as: UTF8.self), privacy: .public)")
                     } else {
                         self.logger.fault("[ERROR] Er was een error terwijl de json werd geparsed: \(url, privacy: .public) met data \(String(decoding: data!, as: UTF8.self), privacy: .public) Met de error: \(error.localizedDescription, privacy: .public)")
                     }
@@ -341,6 +361,7 @@ enum LngrType {
 }
 
 struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, Equatable {
+   
     public var id: String
     public var naam: String
     public var hex: String
