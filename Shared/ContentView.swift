@@ -26,6 +26,23 @@ struct ContentView: View {
     )
     
     var body: some View {
+        if blurRadius == 1000.0 {
+            Button("Authenticate application") {
+                self.logger.debug("We gaan identitiet checken, na  druk op de knop")
+                authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Authenticate to go to lngr") { success, error in
+                    if success {
+                        self.logger.debug("Identitiet is gechecken")
+                        DispatchQueue.main.async { self.blurRadius = 0.0 }
+                    } else {
+                        logger.log("There was an error with localAuth: \(error?.localizedDescription ?? "Failed to authenticate", privacy: .public)")
+                        // Fall back to a asking for username and password.
+                        DispatchQueue.main.async { self.blurRadius = 1000.0 }
+                    }
+                }
+            }
+            .buttonStyle(.bordered)
+        }
+      
         TabView(selection: $selection) {
             LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips")
                 .tabItem {
