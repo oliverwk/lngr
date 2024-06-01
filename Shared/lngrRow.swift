@@ -13,24 +13,24 @@ struct lngrRow: View {
     let locale = Locale.current
     
     var body: some View {
-//        LingerieImageView(url: TheLingerie.img_url)
+        //        LingerieImageView(url: TheLingerie.img_url)
         LingerieImageView(lngr: TheLingerie)
             .aspectRatio(contentMode: .fill)
             .cornerRadius(20)
-            //.shadow(radius: 5)
+        //.shadow(radius: 5)
             .padding(.vertical, 5.0)
             .overlay(Text(TheLingerie.naam)
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .shadow(radius: 11)
-                        .foregroundColor(Color.white))
-                        .padding(3)
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .shadow(radius: 11)
+                .foregroundColor(Color.white))
+            .padding(3)
             .overlay(Text("\(locale.currencySymbol ?? "") \(String(TheLingerie.prijs))")
-                        .font(.title)
-                        .padding(.bottom, 25.0)
-                        .shadow(radius: 11)
-                        .foregroundColor(.secondary)
-                        .frame(maxHeight: .infinity, alignment: .bottom))
+                .font(.title)
+                .padding(.bottom, 25.0)
+                .shadow(radius: 11)
+                .foregroundColor(.secondary)
+                .frame(maxHeight: .infinity, alignment: .bottom))
     }
 }
 
@@ -43,25 +43,22 @@ struct lngrRow_Previews: PreviewProvider {
             "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
         ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "black", kleurFam: [KleurFamilie(id: "01094830958049238", naam: "Zwart", hex: "#000000", imgUrl: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640", URLS: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640")])
         Group {
-            NavigationView {
+            NavigationStack {
                 List {
-                        ZStack {
-                            lngrRow(TheLingerie: TheLingerie)
-                            NavigationLink(destination: Text(TheLingerie.naam), tag: TheLingerie.id, selection: .constant("no id")) {
-                                            EmptyView()
-                            }.buttonStyle(PlainButtonStyle()).frame(width: 0, height: 0)
-                        }
-                    }.listStyle(.automatic).navigationBarTitle(Text("Slipjes")).navigationViewStyle(.stack)
-                }
-            NavigationView {
-                List {
-                    ZStack {
-                            lngrRow(TheLingerie: TheLingerie)
-                            NavigationLink(destination: Text("Hello")) {
-                                            EmptyView()
-                            }.buttonStyle(PlainButtonStyle()).hidden()
-                        }
-                }
+                    NavigationLink(value: TheLingerie) {
+                        lngrRow(TheLingerie: TheLingerie)
+                    }
+                    NavigationLink(value: TheLingerie) {
+                        lngrRow(TheLingerie: TheLingerie)
+                    }
+                    
+                }.listStyle(.automatic).navigationBarTitle(Text("Slipjes")).searchable(text: .constant(""))
+                    .navigationDestination(for: Lingerie.self) { lngr in
+                        LingerieView(lingerie: lngr)
+                    }
+            }
+            ZStack {
+                lngrRow(TheLingerie: TheLingerie)
             }
         }
         .previewDevice("iPhone 8")
