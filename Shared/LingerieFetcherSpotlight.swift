@@ -26,7 +26,7 @@ extension LingerieFetcher {
         for lngr in lngrs {
             if !idsFromUserDefaults.contains(lngr.id) || testing {
                 self.logger.log("Indexing in spotlight: \(lngr.naam)")
-                let item = indexWithId(lngr)
+                let item = indexWithId(lngr, lngrName: lngrName)
                 CSSearchableIndex.default().indexSearchableItems([item]) { error in
                     if let error = error {
                         self.logger.error("[SPOTLIGHT] [ERROR] Er was indexing error: \(error.localizedDescription, privacy: .public)")
@@ -47,7 +47,7 @@ extension LingerieFetcher {
     /// Makes a spotlight item with specifedLingerie
     /// - Parameter lngr: Lingerie to be added to spotlight item
     /// - Returns: Spotlight item
-    func indexWithId(_ lngr: Lingerie) -> CSSearchableItem {
+    func indexWithId(_ lngr: Lingerie, lngrName: String) -> CSSearchableItem {
         self.logger.log("[SPOTLIGHT] indexing: \(lngr.description, privacy: .public)")
         let attributeSet = CSSearchableItemAttributeSet(contentType: UTType.jpeg)
         attributeSet.domainIdentifier = "nl.wittopkoning.lngr"
@@ -56,6 +56,8 @@ extension LingerieFetcher {
         attributeSet.contentDescription = "De \(lngr.naam) kost €\(lngr.prijs)"
         attributeSet.contentURL = URL(string: lngr.url)!
         attributeSet.thumbnailURL = URL(string: lngr.img_url)!
+        attributeSet.containerDisplayName = lngrName
+        attributeSet.containerIdentifier = lngrName
         let request = URLRequest(url:  URL(string: lngr.img_url)!)
         if let cachedResponse = URLSession.shared.configuration.urlCache?.cachedResponse(for: request), let _ = cachedResponse.response as? HTTPURLResponse {
             attributeSet.thumbnailData = cachedResponse.data

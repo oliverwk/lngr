@@ -16,7 +16,7 @@ struct ContentView: View {
     
     // Used for detecting when this scene is backgrounded and isn't currently visible.
     @Environment(\.scenePhase) private var scenePhase
-    @State private var selection = 0
+    @State private var selection = ""
     @State private var blurRadius: CGFloat = 50.0
     @State private var previousScene = ScenePhase.background
     private var authContext = LAContext()
@@ -44,30 +44,30 @@ struct ContentView: View {
         }
       
         TabView(selection: $selection) {
-            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips")
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", $selection)
                 .tabItem {
                     VStack {
                         Image(systemName: "house")
                         Text("Slips")
                     }
                 }
-                .tag(0)
-            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", "Bodys")
+                .tag("Slips")
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", "Bodys", $selection)
                 .tabItem {
                     VStack {
                         Image(systemName: "rectangle.3.offgrid")
                         Text("Bodys")
                     }
                 }
-                .tag(1)
-            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras")
+                .tag("Bodys")
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras", $selection)
                 .tabItem {
                     VStack {
                         Image(systemName: "eyes")
                         Text("Bras")
                     }
                 }
-                .tag(2)
+                .tag("Bras")
         }.blur(radius: blurRadius)
             .onAppear {
                 // MARK: - spotlight and reset logic

@@ -22,15 +22,16 @@ struct LingeriesView: View {
     )
     let Url: String
     var title: String
+    @Binding var selection: String
     @State private var StopIndex = 34
     @StateObject private var lngrs: LingerieFetcher
-    @State var LingerieID: String?
     @State var search = ""
     @State var searchedFailed = false
     
-    init(_ Url: String, _ title: String) {
+    init(_ Url: String, _ title: String, _ sel: Binding<String>) {
         self.Url = Url
         self.title = title
+        self._selection = sel
         _lngrs = StateObject(wrappedValue: LingerieFetcher(URL(string: Url)!, "lngr\(title)"))
     }
     func checkIfExtraLngr(TheLingerie: Lingerie) {
@@ -45,7 +46,7 @@ struct LingeriesView: View {
                     LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price"
                 } else if (lngrs.lngrsName == "lngrBodys") {
                     LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bodys?sortBy=price"
-                } else if (lngrs.lngrsName == "lngrBra  s") {
+                } else if (lngrs.lngrsName == "lngrBras") {
                     LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bhs?sortBy=price"
                 } else {
                     LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price"
@@ -115,14 +116,16 @@ struct LingeriesView: View {
         .navigationViewStyle(.stack)
         .onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+                print("info: \(String(describing: userActivity.userInfo))")
                 logger.log("Received a payload via spotlight with id: \(id, privacy: .public)")
                 DispatchQueue.main.async {
-                    self.LingerieID = id
                     if let lngrf = lngrs.lingeries.first(where: {$0.id == id}) {
                         PresentedLngrs = []
                         PresentedLngrs.insert(lngrf, at: 0)
+                        selection = lngrs.lngrsName.replacingOccurrences(of: "lngr", with: "")
                     } else {
                         // item could not be found
+                        // omdat hij niet gevonden is, is het waarschijnlijk een bh of body
                     }
                 }
             } else {
@@ -134,7 +137,7 @@ struct LingeriesView: View {
 
 struct LingeriesView_Previews: PreviewProvider {
     static var previews: some View {
-        LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips")
+        LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", .constant("Slips"))
             .previewLayout(.device)
             .previewInterfaceOrientation(.portrait)
             .previewDevice("iPhone 8")
