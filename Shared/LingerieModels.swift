@@ -268,6 +268,11 @@ struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, E
         return "{ id: \(id), naam: \(naam), hex: \(hex), img_url: \(imgUrl), url: \(url)}"
     }
     
+    public var mutedColour: Color {
+        return colour.opacity(0.5)
+        
+    }
+    
     public var colour: Color {
         let index1 = hex.index(hex.startIndex, offsetBy: 1)
         let hexColour = hex[index1...]
@@ -301,6 +306,7 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var url: String
     public var kleur: String
     public var kleurFam: Array<KleurFamilie>
+    public var isMatching: Bool = false
     public var description: String {
         return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url), kleur: \(kleur) }"
     }

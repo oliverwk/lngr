@@ -37,7 +37,7 @@ struct LingeriesView: View {
         self.StopIndex = lngrs.lingeries.count - 1
         if lngrs.lingeries.count > 0 {
             let currentLngr = lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })
-            logger.log("Getting lngr: \(currentLngr == StopIndex) index: \(currentLngr.debugDescription) op \(lngrs.lingeries.count), naam: \(TheLingerie.naam, privacy: .public)")
+            logger.log("Getting lngr: \(currentLngr == StopIndex, privacy: .public) index: \(currentLngr.debugDescription, privacy: .public) op \(lngrs.lingeries.count, privacy: .public), naam: \(TheLingerie.naam, privacy: .public)")
             if currentLngr == StopIndex {
                 logger.log("Getting extra lngr \(StopIndex + 20)")
                 let LNurl: String
@@ -71,17 +71,15 @@ struct LingeriesView: View {
                     NavigationLink(destination: ImageViewTest()) {
                         //                        ImageViewTest()
                     }
-                    
-                    ForEach(lngrs.lingeries) { TheLingerie in
-                        
-                       // NavigationLink(destination: LingerieView(lingerie: TheLingerie), tag: TheLingerie.id, selection: $LingerieID) {
-                        NavigationLink(value: TheLingerie) {
-                            lngrRow(TheLingerie: TheLingerie).onAppear {
-                                checkIfExtraLngr(TheLingerie: TheLingerie)
+//                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
+                        ForEach(lngrs.lingeries) { TheLingerie in
+                            NavigationLink(value: TheLingerie) {
+                                lngrRow(TheLingerie: TheLingerie).onAppear {
+                                    checkIfExtraLngr(TheLingerie: TheLingerie)
+                                }
                             }
                         }
-//                        }
-                    }
+//                    }
                     if !lngrs.IsLoading {
                         HStack(alignment: .center, spacing: 0, content: {
                             ProgressView()
@@ -122,11 +120,10 @@ struct LingeriesView: View {
                     self.LingerieID = id
                     if let lngrf = lngrs.lingeries.first(where: {$0.id == id}) {
                         PresentedLngrs = []
-                        PresentedLngrs[0] = lngrf
+                        PresentedLngrs.insert(lngrf, at: 0)
                     } else {
-                       // item could not be found
+                        // item could not be found
                     }
-                   
                 }
             } else {
                 logger.critical("No CSSearchableItemActivityIdentifier found in spotlight")

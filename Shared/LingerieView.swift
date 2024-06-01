@@ -11,6 +11,7 @@ import os
 
 struct LingerieView: View {
     var lingerie: Lingerie
+    var isMatching: Bool
     let locale = Locale.current
     let logger = Logger(
         subsystem: "nl.wittopkoning.lngr",
@@ -18,160 +19,138 @@ struct LingerieView: View {
     )
     
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.openURL) var openURL
+    
     @StateObject private var ImageFetcher: ImageFetchers
     @State private var hasMatchingSet = false
     @State var matchingLngr: Lingerie?
-    @State var presentView: Bool = false
+    @State var goToWebsite: Bool = false
     @State var favoriteColor = KleurFamilie(id: "01094830958049238", naam: "zwart", hex: "#000000", imgUrl: "about:blank", URLS: "about:blank")
     @State var i = 0
     
     init(lingerie: Lingerie) {
         self.lingerie = lingerie
+        self.isMatching = lingerie.isMatching
         _ImageFetcher = StateObject(wrappedValue: ImageFetchers(ImageUrls: lingerie.imageUrls))
     }
     
     var body: some View {
-        VStack  {
-            ScrollView {
-                VStack {
-                    ImageFetcher.images
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipped()
-                        .cornerRadius(5)
-                        .padding(10)
-                        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                            .onEnded({ value in
-                                if value.translation.width < 0 {
-                                    // left
-                                    ImageFetcher.index -= 1
-                                    ImageFetcher.load()
-                                } else if value.translation.width > 0 {
-                                    ImageFetcher.index += 1
-                                    ImageFetcher.load()
-                                } else {
-                                    ImageFetcher.index += 1
-                                    ImageFetcher.load()
-                                }
-                            }))
-                    
-                    HStack {
-                        Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
-                            .foregroundColor((colorScheme == .dark && favoriteColor.hex == "#000000") ? Color.white : ((colorScheme == .light && favoriteColor.hex.uppercased() == "#FFFFFF") ? Color.black: favoriteColor.colour))
-                        ForEach(0...lingerie.imageUrls.count, id: \.self) { i in
-                            ZStack {
-                                // TODO: zorg er voor dat dit images preview worden
-                                Text("\(i)")
-                                Rectangle()
-                                    .foregroundColor(favoriteColor.colour)
-                                    .cornerRadius(5)
-                                    .onTapGesture {
-                                        ImageFetcher.index = i
-                                        ImageFetcher.load()
-                                    }
+        ScrollView {
+            VStack {
+                ImageFetcher.images
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipped()
+                    .cornerRadius(5)
+                    .padding(10)
+                    .onLongPressGesture {
+                        self.logger.log("Long pressed!")
+                        goToWebsite = true
+                    }
+                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                        .onEnded({ value in
+                            if value.translation.width < 0 {
+                                // left
+                                ImageFetcher.index -= 1
+                                ImageFetcher.load()
+                            } else if value.translation.width > 0 {
+                                ImageFetcher.index += 1
+                                ImageFetcher.load()
+                            } else {
+                                ImageFetcher.index += 1
+                                ImageFetcher.load()
                             }
-                        }
-                    }
-                    .padding(.bottom, 10.0)
-                    .padding(.horizontal, 10.0)
-                    
-                    Picker("What is your favorite color?", selection: $favoriteColor) {
-                        ForEach(lingerie.kleurFam, id: \.self) {
-                            Text($0.naam)
-                                .foregroundColor($0.colour)
-                        }
-                    }
-                    
-                    .onChange(of: favoriteColor) { newFavoriteColor in
-                        print("favoriteColor \(favoriteColor)")
-                        print("\(favoriteColor.id) == \(lingerie.id.split(separator: "-")[...3].joined(separator: "-"))")
-                        // Check if they have the same id, so they have the same colour, but reomve the last three characters, because that is the size
-                        if (favoriteColor.id == lingerie.id.split(separator: "-")[...3].joined(separator: "-")) {
-                            ImageFetcher.TheImageUrls = lingerie.imageUrls
-                            print(lingerie.imageUrls)
-                            ImageFetcher.index = 0
-                            print("Dit is de orginele lngr")
-                        } else if (false) {
-                            // TODO: Hier de huigde database zoek of de zelfde kleur er in zit
-                            //                  } else if (lingeries.contains { $0.id == favoriteColor.id }) {
-                            //                      let llngr = lingeries.filter { $0.id == favoriteColor.id }
-                            //                      ImageFetcher.TheImageUrls = llngr[0].imageUrls
-                            //                      ImageFetcher.index = 0
-                            //                      print("Dit een andere lngr, maar hij zit wel in de huidige database")
-                        } else {
-                            ImageFetcher.TheImageUrls = [newFavoriteColor.imgUrl]
-                            ImageFetcher.index = 0
-                            getExtraImages(searchUrl: newFavoriteColor.url, imageFetcher: ImageFetcher)
-                            print("Dit een andere lngr, waar wij geen info over hebben, dus nieuwe aan het halen zijn")
-                        }
-                        ImageFetcher.load()
-                    }
-                    .onAppear {
-                        favoriteColor = self.lingerie.kleurFam[0]
-                    }
-                    .pickerStyle(.segmented)
-                    
-                }
-                .navigationBarTitle(lingerie.naam, displayMode: .inline)
+                        }))
                 
-                .toolbar {
-                    if hasMatchingSet {
-                        ToolbarItem(placement: .navigation) {
-                            Button("", systemImage: "ellipsis.circle") {
-                                presentView = true
-                            }
+                
+                HStack {
+                    Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
+                        .foregroundColor((colorScheme == .dark && favoriteColor.hex == "#000000") ? Color.white : ((colorScheme == .light && favoriteColor.hex.uppercased() == "#FFFFFF") ? Color.black: favoriteColor.colour))
+                    ForEach(0...(ImageFetcher.TheImageUrls.count-1), id: \.self) { irs in
+                        ZStack {
+                            // TODO: zorg er voor dat dit images preview worden
+                            Rectangle()
+                                .foregroundColor(ImageFetcher.index == irs ? favoriteColor.mutedColour : favoriteColor.colour)
+                                .cornerRadius(5)
+                                .frame(width: 40, height: 30)
+                                .onTapGesture {
+                                    ImageFetcher.index = irs
+                                    ImageFetcher.load()
+                                }
                         }
                     }
                 }
-                .navigationDestination(isPresented: $presentView) {
-                    VStack {
-                        HStack {
-                            VStack {
-                                Text("\(matchingLngr?.naam ?? "niks")")
-                                Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
-                            }
-                            .padding(.horizontal, 15.0)
-                            AsyncImage(url: matchingLngr?.ImageURLS[i]) { image in
-                                image.resizable()
-                            } placeholder: {
-                                Image("01j").resizable()
-                            }
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(5)
-                            .padding(.trailing, 10.0)
-                            .onTapGesture {
-                                if (i+1) < matchingLngr?.imageUrls.count ?? 0 {
-                                    i += 1
-                                } else {
-                                    i = 0
-                                }
-                            }
-                        }
-                        HStack {
-                            ForEach(0...((matchingLngr?.imageUrls.count ?? 2)-1), id: \.self) { ir in
-                                ZStack {
-                                    // TODO: zorg er voor dat dit images preview worden
-                                    Rectangle()
-                                        .foregroundColor(matchingLngr?.kleurFam[0].colour)
-                                        .cornerRadius(5)
-                                        .frame(width: 40, height: 30)
-                                        .onTapGesture {
-                                            i = ir
-                                        }
-                                }
-                            }
-                        }
+                .padding(.bottom, 10.0)
+                .padding(.horizontal, 10.0)
+                
+                Picker("What is your favorite color?", selection: $favoriteColor) {
+                    ForEach(lingerie.kleurFam, id: \.self) {
+                        Text($0.naam)
+                            .foregroundColor($0.colour)
                     }
+                }
+                
+                .onChange(of: favoriteColor) { newFavoriteColor in
+                    logger.log("favoriteColor \(favoriteColor, privacy: .public)")
+                    logger.log("\(favoriteColor.id, privacy: .public) == \(lingerie.id.split(separator: "-")[...3].joined(separator: "-"), privacy: .public)")
+                    // Check if they have the same id, so they have the same colour, but reomve the last three characters, because that is the size
+                    if (favoriteColor.id == lingerie.id.split(separator: "-")[...3].joined(separator: "-")) {
+                        ImageFetcher.TheImageUrls = lingerie.imageUrls
+                        logger.log("imgurl: \(lingerie.imageUrls, privacy: .public)")
+                        ImageFetcher.index = 0
+                        logger.log("Dit is de orginele lngr")
+                    } else if (false) {
+                        // TODO: Hier de huigde database zoek of de zelfde kleur er in zit
+                        //                  } else if (lingeries.contains { $0.id == favoriteColor.id }) {
+                        //                      let llngr = lingeries.filter { $0.id == favoriteColor.id }
+                        //                      ImageFetcher.TheImageUrls = llngr[0].imageUrls
+                        //                      ImageFetcher.index = 0
+                        //                      print("Dit een andere lngr, maar hij zit wel in de huidige database")
+                    } else {
+                        ImageFetcher.TheImageUrls = [newFavoriteColor.imgUrl]
+                        ImageFetcher.index = 0
+                        getExtraImages(searchUrl: newFavoriteColor.url, imageFetcher: ImageFetcher)
+                        logger.log("Dit een andere lngr, waar wij geen info over hebben, dus nieuwe aan het halen zijn")
+                    }
+                    ImageFetcher.load()
                 }
                 .onAppear {
-                    Task {
-                        let matchingSets = await getMatchingSet(searchUrl: URL(string: lingerie.url)!)
-                        if let matchingSet = matchingSets {
-                            matchingLngr = matchingSet
-                            hasMatchingSet = true
+                    favoriteColor = self.lingerie.kleurFam[0]
+                }
+                .pickerStyle(.segmented)
+                
+            }
+            .navigationBarTitle(lingerie.naam, displayMode: .inline)
+            
+            .toolbar {
+                if hasMatchingSet && !isMatching {
+                    ToolbarItem(placement: .navigation) {
+                        NavigationLink(value: matchingLngr) {
+                            Button("", systemImage: "ellipsis.circle") {
+                                
+                            }
                         }
-                        
                     }
+                }
+            }
+            .alert("Do you want to go to the website", isPresented: $goToWebsite) {
+                Button("Yes", role: .destructive) {
+                    openURL(URL(string: lingerie.url)!)
+                    goToWebsite = false
+                }
+                Button("No, thanks", role: .cancel) {
+                    goToWebsite = false
+                }
+            }
+            .onAppear {
+                Task {
+                    let matchingSets = await getMatchingSet(searchUrl: URL(string: lingerie.url)!)
+                    if let matchingSet = matchingSets {
+                        matchingLngr = matchingSet
+                        matchingLngr?.isMatching = true
+                        hasMatchingSet = true
+                    }
+                    
                 }
             }
         }
