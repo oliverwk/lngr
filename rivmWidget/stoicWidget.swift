@@ -19,11 +19,11 @@ struct Provider: TimelineProvider {
     let SampleQoute = ["Verba volant,scripta manent", "Woorden vervliegen, het geschrevene blijft"]
     
     func placeholder(in context: Context) -> stoicEntry {
-        stoicEntry(date: Date(), qoute: SampleQoute)
+        stoicEntry(date: Date(), rndint: 0, qoute: SampleQoute)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (stoicEntry) -> ()) {
-        let entry = stoicEntry(date: Date(), qoute: SampleQoute)
+        let entry = stoicEntry(date: Date(), rndint: 0, qoute: SampleQoute)
         completion(entry)
     }
     
@@ -34,8 +34,9 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 10 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let qoute = qoutes[Int.random(in: 0..<845)]
-            let entry = stoicEntry(date: entryDate, qoute: qoute)
+            let rndint = Int.random(in: 0..<845)
+            let qoute = qoutes[rndint]
+            let entry = stoicEntry(date: entryDate, rndint: rndint, qoute: qoute)
             entries.append(entry)
         }
         
@@ -46,24 +47,48 @@ struct Provider: TimelineProvider {
 
 struct stoicEntry: TimelineEntry {
     let date: Date
+    let rndint: Int
     let qoute: [String]
 }
 
 struct stoicEntryView : View {
     var entry: Provider.Entry
-    // @Environment(\.widgetFamily) var family: WidgetFamily
+    @Environment(\.widgetFamily) var family: WidgetFamily
     
     var body: some View {
-        VStack {
-            Text("\(entry.qoute[0])")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundColor(Color.pink)
-                .padding(4.0)
-            Text("\(entry.qoute[1])")
-                .font(.caption)
-                .padding(3.0)
+        switch family {
+        case .systemSmall:
+            VStack {
+                Text("\(entry.qoute[0])")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.pink)
+                    .padding(4.0)
+                Text("\(entry.qoute[1])")
+                    .font(.caption)
+                    .padding(3.0)
+            }
+            .widgetAccentable()
+            .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
+        case .accessoryInline:
+            Text(entry.qoute[1])
+        case .accessoryRectangular:
+            Text(entry.qoute[1])
+        default:
+            VStack {
+                Text("\(entry.qoute[0])")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.pink)
+                    .padding(4.0)
+                Text("\(entry.qoute[1])")
+                    .font(.caption)
+                    .padding(3.0)
+            }
+            .widgetAccentable()
+            .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
         }
+        
     }
 }
 
@@ -72,11 +97,23 @@ struct stoicWidget: Widget {
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            stoicEntryView(entry: entry)
+            if  #available(iOSApplicationExtension 17.0, *) {
+                stoicEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                if #available(iOSApplicationExtension 15.0, *) {
+                    stoicEntryView(entry: entry)
+                        .padding()
+                        .background()
+                } else {
+                    stoicEntryView(entry: entry)
+                        .padding()
+                }
+            }
         }
         .configurationDisplayName("stoic widget")
         .description("A new latin qoute every hour")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall, .accessoryRectangular, .accessoryInline])
     }
 }
 
@@ -84,8 +121,10 @@ struct stoicWidget_Previews: PreviewProvider {
     static let SampleQoute = ["Verba volant,scripta manent", "Woorden vervliegen, het geschrevene blijft"]
     static var previews: some View {
         Group {
-            stoicEntryView(entry: stoicEntry(date: Date(), qoute: SampleQoute))
+            stoicEntryView(entry: stoicEntry(date: Date(), rndint: 0, qoute: SampleQoute))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
+                .previewContext(WidgetPreviewContext(family: .accessoryInline))
         }
     }
 }
