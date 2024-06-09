@@ -72,6 +72,11 @@ struct LingeriesView: View {
                     NavigationLink(destination: ImageViewTest()) {
                         //                        ImageViewTest()
                     }
+                    
+                        Button("show") {
+                            lngrs.ShowNotification(true)
+                            print("hi")
+                        }.buttonStyle(.bordered)
 //                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
                         ForEach(lngrs.lingeries) { TheLingerie in
                             NavigationLink(value: TheLingerie) {

@@ -11,11 +11,11 @@ import CoreImage
 import CoreImage.CIFilterBuiltins
 
 struct ImageViewTest: View {
-    
     @State var image1: UIImage = UIImage(named: "04k")!
+    @State private var iss = 2
     private var processingQueue = DispatchQueue(label: "ProcessingQueue")
     private let options = [UIImage(named: "01j")!, UIImage(named: "02i")!, UIImage(named: "04k")!]
-    @State private var iss = 2
+   
     
     var body: some View {
         VStack {
