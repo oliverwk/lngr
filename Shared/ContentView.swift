@@ -71,17 +71,6 @@ struct ContentView: View {
         }.blur(radius: blurRadius)
             .onAppear {
                 // MARK: - spotlight and reset logic
-                // Check settings page
-                func deleteSpotlight() {
-                    CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["nl.wittopkoning.lngr"]) { error in
-                        if let errs = error {
-                            logger.fault("An error happend while reseting the spolight index: \(errs.localizedDescription, privacy: .public)")
-                        } else {
-                            logger.critical("Deleted the hole spotlight index")
-                        }
-                    }
-                }
-                
                 let ResetEverything = UserDefaults.standard.bool(forKey: "reset_everything")
                 let ResetSpotlight = UserDefaults.standard.bool(forKey: "reset_spotlight")
                 logger.log("In the settings page the reset everything is: \(ResetEverything, privacy: .public) and the reset spotlight is: \(ResetSpotlight, privacy: .public)")
@@ -102,7 +91,7 @@ struct ContentView: View {
                 }
                 
                 
-                // MARK: - Blur logic
+                
                /* if ProcessInfo.processInfo.arguments.contains("NoAuth") {
                     DispatchQueue.main.async { self.blurRadius = 0.0 }
                 } else {
@@ -117,13 +106,15 @@ struct ContentView: View {
                     }
                 }*/
             }
+        // MARK: - Blur logic
+            #if os(iOS)
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
                 // go to background
                 DispatchQueue.main.async { self.blurRadius = 1000.0 }
                 self.logger.debug("We zijn onrecieve naar de background")
             }
+            #endif
             .onChange(of: scenePhase) { newScenePhase in
-                
                 if newScenePhase == .active && !(previousScene == .inactive) {
                     self.logger.debug("We gaan identitiet checken")
                     authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Authenticate to go to lngr") { success, error in
@@ -142,6 +133,17 @@ struct ContentView: View {
                 }
                 previousScene = newScenePhase
             }
+        
+    }
+    /// Checks the settings page and if
+    func deleteSpotlight() {
+        CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["nl.wittopkoning.lngr"]) { error in
+            if let errs = error {
+                logger.fault("An error happend while reseting the spolight index: \(errs.localizedDescription, privacy: .public)")
+            } else {
+                logger.critical("Deleted the hole spotlight index")
+            }
+        }
     }
 }
 
