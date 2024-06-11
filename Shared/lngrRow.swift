@@ -14,7 +14,7 @@ struct lngrRow: View {
     
     var body: some View {
         //        LingerieImageView(url: TheLingerie.img_url)
-        LingerieImageView(lngr: TheLingerie)
+        LingeriesImageView(lngr: TheLingerie)
             .aspectRatio(contentMode: .fill)
             .cornerRadius(20)
         //.shadow(radius: 5)
@@ -52,10 +52,13 @@ struct lngrRow_Previews: PreviewProvider {
                         lngrRow(TheLingerie: TheLingerie)
                     }
                     
-                }.listStyle(.automatic).navigationBarTitle(Text("Slipjes")).searchable(text: .constant(""))
-                    .navigationDestination(for: Lingerie.self) { lngr in
-                        LingerieView(lingerie: lngr)
-                    }
+                }
+                .listStyle(.automatic)
+                .navigationTitle(Text("Slipjes"))
+                .searchable(text: .constant(""))
+                .navigationDestination(for: Lingerie.self) { lngr in
+                    LingerieView(lingerie: lngr)
+                }
             }
             ZStack {
                 lngrRow(TheLingerie: TheLingerie)

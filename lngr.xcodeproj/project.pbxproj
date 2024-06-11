@@ -23,9 +23,8 @@
 		E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */; };
 		E62D0170286E14CC005DAE25 /* BackgroundSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */; };
-		E62D0171286E14CC005DAE25 /* BackgroundSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */; };
-		E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
-		E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingerieImageView.swift */; };
+		E64DD17325F1843C00284803 /* LingeriesImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingeriesImageView.swift */; };
+		E64DD17425F1843C00284803 /* LingeriesImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD16C25F1843C00284803 /* LingeriesImageView.swift */; };
 		E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LingerieView.swift */; };
 		E64DD18F25F22A1000284803 /* LingerieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DD18D25F22A0F00284803 /* LingerieView.swift */; };
 		E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64E66012677AD9F00B08C89 /* lngrRow.swift */; };
@@ -42,13 +41,13 @@
 		E6A65BA2286C870300EEA2C8 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A65BA1286C870300EEA2C8 /* NotificationViewController.swift */; };
 		E6A65BA5286C870300EEA2C8 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6A65BA3286C870300EEA2C8 /* MainInterface.storyboard */; };
 		E6A65BA9286C870300EEA2C8 /* notificationui.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E6A65B9B286C870300EEA2C8 /* notificationui.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E6A9A3AA2C18E15E00487F9C /* qoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E621E1E027CD2B2500AE8297 /* qoutes.swift */; };
 		E6B2894226739D3E00354743 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B2894126739D3E00354743 /* model.swift */; };
 		E6B52B81265061BC006DAB5C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D525F3D5D200C9DD32 /* WidgetKit.framework */; };
 		E6B52B82265061BC006DAB5C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E68170D725F3D5D200C9DD32 /* SwiftUI.framework */; };
 		E6B52B85265061BD006DAB5C /* rivmWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B52B84265061BD006DAB5C /* rivmWidget.swift */; };
 		E6B52B87265061C7006DAB5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6B52B86265061C7006DAB5C /* Assets.xcassets */; };
 		E6B52B8B265061C7006DAB5C /* rivmWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E6B52B80265061BC006DAB5C /* rivmWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E6BEF8252A58318700A2CD6C /* ImageViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF8242A58318700A2CD6C /* ImageViewTest.swift */; };
 		E6C5DB1E26B7D7850002A7F1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6C5DB1D26B7D7850002A7F1 /* Settings.bundle */; };
 		E6C5DB1F26B7D7850002A7F1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6C5DB1D26B7D7850002A7F1 /* Settings.bundle */; };
 		E6C6F47C2C0B150C0053D65B /* LingerieModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C6F47B2C0B150C0053D65B /* LingerieModels.swift */; };
@@ -166,7 +165,7 @@
 		E621E1E027CD2B2500AE8297 /* qoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qoutes.swift; sourceTree = "<group>"; };
 		E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieFetcherSpotlight.swift; sourceTree = "<group>"; };
 		E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSupport.swift; sourceTree = "<group>"; };
-		E64DD16C25F1843C00284803 /* LingerieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingerieImageView.swift; sourceTree = "<group>"; };
+		E64DD16C25F1843C00284803 /* LingeriesImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LingeriesImageView.swift; sourceTree = "<group>"; };
 		E64DD18D25F22A0F00284803 /* LingerieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LingerieView.swift; sourceTree = "<group>"; };
 		E64E66012677AD9F00B08C89 /* lngrRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lngrRow.swift; sourceTree = "<group>"; };
 		E64E66042677AE5800B08C89 /* GetLngr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GetLngr.swift; path = Shared/GetLngr.swift; sourceTree = SOURCE_ROOT; };
@@ -186,7 +185,6 @@
 		E6B52B86265061C7006DAB5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6B52B88265061C7006DAB5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6BB0E7E26827884001E567B /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
-		E6BEF8242A58318700A2CD6C /* ImageViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewTest.swift; sourceTree = "<group>"; };
 		E6C5DB1D26B7D7850002A7F1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E6C6419D2674974400D6984D /* GetCheapest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GetCheapest.entitlements; sourceTree = "<group>"; };
 		E6C6419E2674980F00D6984D /* lngr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = lngr.entitlements; sourceTree = "<group>"; };
@@ -310,7 +308,6 @@
 		E6077B7225F175B800F6F951 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E6BEF8242A58318700A2CD6C /* ImageViewTest.swift */,
 				E6077B7325F175B800F6F951 /* lngrApp.swift */,
 				E6077B7425F175B800F6F951 /* ContentView.swift */,
 				E62D016F286E14CC005DAE25 /* BackgroundSupport.swift */,
@@ -319,7 +316,7 @@
 				E6501C9B2C15933300192033 /* LingerieFetcher.swift */,
 				E62C7AF62687183F00429C97 /* LingerieFetcherSpotlight.swift */,
 				E64DD18D25F22A0F00284803 /* LingerieView.swift */,
-				E64DD16C25F1843C00284803 /* LingerieImageView.swift */,
+				E64DD16C25F1843C00284803 /* LingeriesImageView.swift */,
 				E64E66012677AD9F00B08C89 /* lngrRow.swift */,
 				E6C5DB1D26B7D7850002A7F1 /* Settings.bundle */,
 				E6077B7525F175CC00F6F951 /* Assets.xcassets */,
@@ -812,8 +809,7 @@
 				E6D2A15425F373100007EC2D /* LingeriesView.swift in Sources */,
 				E64E66022677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E6501C9C2C15933300192033 /* LingerieFetcher.swift in Sources */,
-				E6BEF8252A58318700A2CD6C /* ImageViewTest.swift in Sources */,
-				E64DD17325F1843C00284803 /* LingerieImageView.swift in Sources */,
+				E64DD17325F1843C00284803 /* LingeriesImageView.swift in Sources */,
 				E64DD18E25F22A1000284803 /* LingerieView.swift in Sources */,
 				E62D0170286E14CC005DAE25 /* BackgroundSupport.swift in Sources */,
 				E62C7AF72687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */,
@@ -826,15 +822,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6A9A3AA2C18E15E00487F9C /* qoutes.swift in Sources */,
 				E65887D5266AB9BD00816B41 /* Intents.intentdefinition in Sources */,
 				E6077B8925F175CD00F6F951 /* ContentView.swift in Sources */,
 				E6501C9D2C15933300192033 /* LingerieFetcher.swift in Sources */,
 				E6D2A15525F373100007EC2D /* LingeriesView.swift in Sources */,
 				E64E66032677AD9F00B08C89 /* lngrRow.swift in Sources */,
 				E6C6F47D2C0B150C0053D65B /* LingerieModels.swift in Sources */,
-				E64DD17425F1843C00284803 /* LingerieImageView.swift in Sources */,
+				E64DD17425F1843C00284803 /* LingeriesImageView.swift in Sources */,
 				E64DD18F25F22A1000284803 /* LingerieView.swift in Sources */,
-				E62D0171286E14CC005DAE25 /* BackgroundSupport.swift in Sources */,
 				E62C7AF82687183F00429C97 /* LingerieFetcherSpotlight.swift in Sources */,
 				E6077B8725F175CD00F6F951 /* lngrApp.swift in Sources */,
 			);
@@ -1149,7 +1145,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr;
 				PRODUCT_NAME = lngr;
 				SDKROOT = macosx;
@@ -1175,7 +1171,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.wittopkoning.lngr;
 				PRODUCT_NAME = lngr;
 				SDKROOT = macosx;

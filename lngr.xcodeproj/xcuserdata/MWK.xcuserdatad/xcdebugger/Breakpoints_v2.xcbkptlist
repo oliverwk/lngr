@@ -71,66 +71,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/BackgroundSupport.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "start(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - 8f9d1ec5dda7370"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
-                  moduleName = "lngr"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47">
-               </Location>
-               <Location
-                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - cb25864fa49583e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async -&gt; () in lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
-                  moduleName = "lngr"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47">
-               </Location>
-               <Location
-                  uuid = "518C79F2-66D0-4C1D-AC44-37ABC1FC4606 - b23b62f8b6853b82"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in lngr.RefreshAppContentsOperation.start(__C.BGAppRefreshTask) -&gt; ()"
-                  moduleName = "lngr"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "341401EC-8F7B-4644-9706-040C68E99BAD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -138,13 +78,13 @@
             filePath = "Shared/BackgroundSupport.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "ShowNotification(_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "341401EC-8F7B-4644-9706-040C68E99BAD - debc9fb8cea85ff6"
+                  uuid = "341401EC-8F7B-4644-9706-040C68E99BAD - debc9fb8cea85e53"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -154,11 +94,11 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81">
+                  startingLineNumber = "84"
+                  endingLineNumber = "84">
                </Location>
                <Location
-                  uuid = "341401EC-8F7B-4644-9706-040C68E99BAD - 5302f15c6200c18b"
+                  uuid = "341401EC-8F7B-4644-9706-040C68E99BAD - 5302f15c6200c02e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -168,8 +108,8 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81">
+                  startingLineNumber = "84"
+                  endingLineNumber = "84">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -184,13 +124,13 @@
             filePath = "Shared/BackgroundSupport.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "ShowNotification(_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - 732dbd7aa30bf3c3"
+                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - 732dbd7aa30bf220"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -200,11 +140,11 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
                <Location
-                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - fcb8fdee4e085f27"
+                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - fcb8fdee4e085ec4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -214,11 +154,11 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
                <Location
-                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - e5da603c97d69fb1"
+                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - e5da603c97d69e52"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -228,11 +168,11 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
                <Location
-                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - c99c132e8b0e509a"
+                  uuid = "17C06335-3157-48BF-B6B4-CD110E0EB823 - c99c132e8b0e5179"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -242,8 +182,8 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -258,26 +198,10 @@
             filePath = "Shared/BackgroundSupport.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "BackgroundSupport"
             landmarkType = "14">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AAA3FFF5-6DF7-4EC2-B7E3-4B50E2E94E47"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Shared/lngrApp.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "handleSpotlight(_:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -290,13 +214,13 @@
             filePath = "Shared/BackgroundSupport.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "ShowNotification(_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - 732dbd7aa30bf3c3"
+                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - 732dbd7aa30bf220"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -306,11 +230,11 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
                <Location
-                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - fcb8fdee4e085f27"
+                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - fcb8fdee4e085ec4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -320,11 +244,11 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
                <Location
-                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - e5da603c97d69fb1"
+                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - e5da603c97d69e52"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -334,11 +258,11 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
                <Location
-                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - c99c132e8b0e509a"
+                  uuid = "40F058D3-8219-4C7A-B28D-1B7CCD6B118D - c99c132e8b0e5179"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -348,8 +272,8 @@
                   urlString = "file:///Users/mwk/iOS-Projecten/lngr/Shared/BackgroundSupport.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145">
                </Location>
             </Locations>
          </BreakpointContent>
