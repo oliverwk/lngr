@@ -37,6 +37,7 @@ public class LingerieFetcher: ObservableObject {
     
     public func ShowNotification(_ sendAnyway: Bool = false) {
         logger.log("Showing the notification")
+#if os(iOS)
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
@@ -55,7 +56,9 @@ public class LingerieFetcher: ObservableObject {
                         MyLngr = self.lingeries[1]
                     }
                     
-                    if (UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") != nil && !( UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") as! String == SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description )) || ProcessInfo.processInfo.arguments.contains("SendNotification") || sendAnyway {
+                    let lngrhash = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))-\(self.lngrsName)"
+                    
+                    if (UserDefaults.standard.value(forKey: lngrhash) != nil && !(UserDefaults.standard.value(forKey: lngrhash) as! String == SHA256.hash(data: Data("\(self.lingeries[0])".utf8)).description )) || ProcessInfo.processInfo.arguments.contains("SendNotification") || sendAnyway {
                         let lngrType = self.lngrsName == "lngrSlips" ? "slip" : "body"
                         
                         
@@ -139,6 +142,7 @@ public class LingerieFetcher: ObservableObject {
                 self.logger.notice("There was no access granted to the notifactions")
             }
         }
+#endif
     }
     
     /// Gets extra Lingerie from specifed url
@@ -218,11 +222,11 @@ public class LingerieFetcher: ObservableObject {
                         self.ShowNotification()
                     }
                     
-                    if UserDefaults.standard.value(forKey: "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))") == nil || false {
-                        let key = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))"
-                        UserDefaults.standard.set(SHA256.hash(data: Data("\(decodedLists[0])".utf8)).description, forKey: key)
-                    }
+                    let lngrHash = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))-\(lngrsName)"
                     
+                    if UserDefaults.standard.value(forKey: lngrHash) == nil || false {
+                        UserDefaults.standard.set(SHA256.hash(data: Data("\(decodedLists[0])".utf8)).description, forKey: lngrHash)
+                    }
                     
                     self.AddToSpotlightWithId(lngrName: lngrsName, lngrs: decodedLists)
                 } else if let error = error {

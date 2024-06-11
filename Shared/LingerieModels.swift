@@ -6,11 +6,9 @@
 //
 
 import Foundation
-
 import SwiftUI
 
-
-
+/// Provides all information for the lingerie
 struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var id: String
     public var naam: String
@@ -50,6 +48,7 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     }
 }
 
+/// Gives information about one color of a lingreie item
 struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, Equatable {
    
     public var id: String
@@ -68,11 +67,6 @@ struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, E
     
     public var description: String {
         return "{ id: \(id), naam: \(naam), hex: \(hex), img_url: \(imgUrl), url: \(url)}"
-    }
-    
-    public var mutedColour: Color {
-        return colour.opacity(0.5)
-        
     }
     
     public var colour: Color {
@@ -103,3 +97,29 @@ enum LngrType {
     case bra
     case body
 }
+
+extension Color {
+    public var muted: Color {
+        return self.opacity(0.5)
+        
+    }
+}
+#if os(macOS)
+import Cocoa
+
+// Step 1: Typealias UIImage to NSImage
+typealias UIImage = NSImage
+
+// Step 2: You might want to add these APIs that UIImage has but NSImage doesn't.
+extension NSImage {
+    var cgImage: CGImage? {
+        var proposedRect = CGRect(origin: .zero, size: size)
+
+        return cgImage(forProposedRect: &proposedRect,
+                       context: nil,
+                       hints: nil)
+    }
+
+}
+#endif
+
