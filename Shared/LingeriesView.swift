@@ -63,7 +63,6 @@ struct LingeriesView: View {
     var body: some View {
         NavigationStack(path: $PresentedLngrs) {
             ScrollView {
-//            List {
                 if searchedFailed {
                     HStack {
                         Text("Didn't find anything")
@@ -80,7 +79,8 @@ struct LingeriesView: View {
                         }.buttonStyle(.bordered)
                         Spacer()
                     }
-                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
+                    // TODO: Dit hier onder is voor macos
+//                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
                         ForEach(lngrs.lingeries) { TheLingerie in
                             NavigationLink(value: TheLingerie) {
                                 lngrRow(TheLingerie: TheLingerie).onAppear {
@@ -88,14 +88,13 @@ struct LingeriesView: View {
                                 }
                             }
                         }
-                    }
+                    //}
                     if !lngrs.IsLoading {
                         HStack(alignment: .center, spacing: 0, content: {
                             ProgressView()
                         }).opacity(lngrs.IsLoading ? 1 : 0)
                     }
                 }
-//            }
         }
             .navigationDestination(for: Lingerie.self) { lngr in
                 LingerieView(lingerie: lngr)

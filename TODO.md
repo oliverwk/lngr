@@ -2,12 +2,12 @@
 # lngr
 - [x] Add loggin to widget
 - [x] Add loggin to main app
-- [x] Add Handoff
+- [ ] Add Handoff
 - [x] Add low data mode optie
 - [x] Add caching to network reqeusts
 - [x] Add a settings bundle
 - [x] Add a search field
 - [x] Add multiple colours
-- [ ] Add a function to remove background of images 
+- [x] Add a function to remove background of images 
 - [ ] Add Share button
 - [ ] Add MultipeerConnectivity?
