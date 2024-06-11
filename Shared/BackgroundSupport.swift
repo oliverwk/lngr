@@ -21,11 +21,11 @@ struct RefreshAppContentsOperation {
     static let urlSessionTumb = URLSession(configuration: .default)
     static let urlSessionpi = URLSession(configuration: .default)
 
+    /// Cancel all outgoing network reqeusts
     func cancel() {
         RefreshAppContentsOperation.urlSessionLngr.invalidateAndCancel()
         RefreshAppContentsOperation.urlSessionTumb.invalidateAndCancel()
         RefreshAppContentsOperation.urlSessionpi.invalidateAndCancel()
-        return
     }
     
     func testBackgroundFreq() async {
@@ -42,7 +42,8 @@ struct RefreshAppContentsOperation {
             logger.fault("[ERROR] Er was een error bij het laden van de pi test req Met de error: \(error.localizedDescription, privacy: .public)")
         }
     }
-    
+   
+    /// Start the background refresk task
     func start(_ task: BGAppRefreshTask) -> Void {
         Task {
             logger.log("started the oparation")
@@ -53,12 +54,14 @@ struct RefreshAppContentsOperation {
             await ShowNotification(lngrBody[0], .body)
             await testBackgroundFreq()
             logger.log("Showed both the notifications")
-            
-            
             task.setTaskCompleted(success: true)
         }
     }
     
+    /// Make the notification and scheduale it
+    /// - Parameters:
+    ///   - lngr: The lingerie for which to send the notifcaion
+    ///   - lngrType: An enum to indicate which type of lngr is going to be send
     public func ShowNotification(_ lngr: Lingerie, _ lngrType: LngrType) async {
         logger.log("Showing the notification")
         let center = UNUserNotificationCenter.current()
@@ -86,7 +89,7 @@ struct RefreshAppContentsOperation {
                 content.userInfo["kleurFamilies"] = lngr.kleurFam
                 logger.log("kleurfam \(lngr.kleurFam, privacy: .public)")
                 content.userInfo["ImageURLS"] = lngr.imageUrls
-                if lngrType == .slip {
+                if lngrType == .slip || lngrType == .bra  {
                     content.categoryIdentifier = "LingeriePriceUpdate"
                 }
                 
