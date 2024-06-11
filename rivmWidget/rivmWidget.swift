@@ -176,7 +176,14 @@ struct vacinnWidget: Widget {
     let kind: String = "rivmWidget"
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: provider()) { entry in
-            vacinnWidgetEntryView(entry: entry)
+            if #available(iOSApplicationExtension 17.0, *) {
+                vacinnWidgetEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                vacinnWidgetEntryView(entry: entry)
+                    .padding()
+                // Fallback on earlier versions
+            }
         }
         .configurationDisplayName("Vacinn Watcher")
         .description("Watch the vacinns from your homescreen.")

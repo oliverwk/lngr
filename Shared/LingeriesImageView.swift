@@ -9,7 +9,7 @@ import SwiftUI
 import os
 
 
-struct LingerieImageView: View {
+struct LingeriesImageView: View {
     var lngr: Lingerie
     
     var body: some View {

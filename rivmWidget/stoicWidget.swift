@@ -57,36 +57,50 @@ struct stoicEntryView : View {
     
     var body: some View {
         switch family {
-        case .systemSmall:
-            VStack {
-                Text("\(entry.qoute[0])")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.pink)
-                    .padding(4.0)
-                Text("\(entry.qoute[1])")
-                    .font(.caption)
-                    .padding(3.0)
-            }
-            .widgetAccentable()
-            .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
         case .accessoryInline:
             Text(entry.qoute[1])
+                .font(.headline)
+                .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
         case .accessoryRectangular:
-            Text(entry.qoute[1])
-        default:
-            VStack {
-                Text("\(entry.qoute[0])")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.pink)
-                    .padding(4.0)
-                Text("\(entry.qoute[1])")
-                    .font(.caption)
-                    .padding(3.0)
+            if #available(iOSApplicationExtension 17.0, *) {
+                ZStack {
+                    AccessoryWidgetBackground()
+                        .cornerRadius(5)
+                    VStack {
+                        Text(entry.qoute[1])
+                            .font(.subheadline)
+                        Text(entry.qoute[0])
+                            .font(.caption)
+                    }
+                }
+                .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
+                .widgetAccentable()
+                .containerBackground(for: .widget) { }
+            } else {
+                // Fallback on earlier versions
             }
-            .widgetAccentable()
-            .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
+            
+        default: // This is for the .systemSmall
+            if #available(iOSApplicationExtension 17.0, *) {
+                VStack {
+                    AccessoryWidgetBackground()
+                    Text("\(entry.qoute[0])")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color.pink)
+                        .padding(4.0)
+                        .widgetAccentable()
+                    Text("\(entry.qoute[1])")
+                        .font(.caption)
+                        .padding(3.0)
+                }
+                .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
+                .containerBackground(for: .widget) {
+                    Color.white
+                }
+            } else {
+                // Fallback on earlier versions
+            }
         }
         
     }
@@ -99,16 +113,11 @@ struct stoicWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if  #available(iOSApplicationExtension 17.0, *) {
                 stoicEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
+//                    .containerBackground(.fill.secondary, for: .widget)
             } else {
-                if #available(iOSApplicationExtension 15.0, *) {
-                    stoicEntryView(entry: entry)
-                        .padding()
-                        .background()
-                } else {
-                    stoicEntryView(entry: entry)
-                        .padding()
-                }
+                stoicEntryView(entry: entry)
+                    .padding()
+                    .background()
             }
         }
         .configurationDisplayName("stoic widget")
