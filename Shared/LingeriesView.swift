@@ -34,6 +34,8 @@ struct LingeriesView: View {
         self._selection = sel
         _lngrs = StateObject(wrappedValue: LingerieFetcher(URL(string: Url)!, "lngr\(title)"))
     }
+    
+    /// Check at the end of the list if extra lingerie should be loded
     func checkIfExtraLngr(TheLingerie: Lingerie) {
         self.StopIndex = lngrs.lingeries.count - 1
         if lngrs.lingeries.count > 0 {
@@ -60,7 +62,8 @@ struct LingeriesView: View {
 
     var body: some View {
         NavigationStack(path: $PresentedLngrs) {
-            List {
+            ScrollView {
+//            List {
                 if searchedFailed {
                     HStack {
                         Text("Didn't find anything")
@@ -69,15 +72,15 @@ struct LingeriesView: View {
                             .padding()
                     }
                 } else {
-                    NavigationLink(destination: ImageViewTest()) {
-                        //                        ImageViewTest()
-                    }
-                    
-                        Button("show") {
+                    HStack {
+                        Spacer()
+                        Button("Show") {
                             lngrs.ShowNotification(true)
-                            print("hi")
+                            print("Showing notifaction")
                         }.buttonStyle(.bordered)
-//                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
+                        Spacer()
+                    }
+                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
                         ForEach(lngrs.lingeries) { TheLingerie in
                             NavigationLink(value: TheLingerie) {
                                 lngrRow(TheLingerie: TheLingerie).onAppear {
@@ -85,14 +88,15 @@ struct LingeriesView: View {
                                 }
                             }
                         }
-//                    }
+                    }
                     if !lngrs.IsLoading {
                         HStack(alignment: .center, spacing: 0, content: {
                             ProgressView()
                         }).opacity(lngrs.IsLoading ? 1 : 0)
                     }
                 }
-            }
+//            }
+        }
             .navigationDestination(for: Lingerie.self) { lngr in
                 LingerieView(lingerie: lngr)
             }
@@ -118,7 +122,6 @@ struct LingeriesView: View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .onContinueUserActivity(CSSearchableItemActionType) { userActivity in
             if let id = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
                 print("info: \(String(describing: userActivity.userInfo))")
@@ -143,9 +146,8 @@ struct LingeriesView: View {
 struct LingeriesView_Previews: PreviewProvider {
     static var previews: some View {
         LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", .constant("Slips"))
-            .previewLayout(.device)
             .previewInterfaceOrientation(.portrait)
-            .previewDevice("iPhone 8")
+            .previewDevice("iPhone 12")
     }
 }
 
