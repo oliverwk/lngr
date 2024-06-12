@@ -50,11 +50,7 @@ public class LingerieFetcher: ObservableObject {
                     self.logger.debug("This is run on a background queue")
                     
                     var MyLngr: Lingerie
-                    if (self.lingeries.isEmpty) {
-                        MyLngr = self.lingeries[0]
-                    } else {
-                        MyLngr = self.lingeries[1]
-                    }
+                    MyLngr = self.lingeries[0]
                     
                     let lngrhash = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))-\(self.lngrsName)"
                     
@@ -72,7 +68,7 @@ public class LingerieFetcher: ObservableObject {
                         self.logger.log("kleurfam \(MyLngr.kleurFam, privacy: .public)")
                         content.userInfo["ImageURLS"] = MyLngr.imageUrls
                         
-                        if self.lngrsName == "lngrSlips" {
+                        if self.lngrsName != "lngrSlips" ||  self.lngrsName != "lngrBras" {
                             content.categoryIdentifier = "LingeriePriceUpdate"
                         }
                         
@@ -80,11 +76,9 @@ public class LingerieFetcher: ObservableObject {
                         let summaryFormat = "%u more lngrs for a lower price"
                         let lngrCategory = UNNotificationCategory(identifier: "lngr", actions: [], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: hiddenPreviewsPlaceholder, categorySummaryFormat: summaryFormat, options: [])
                         UNUserNotificationCenter.current().setNotificationCategories([lngrCategory])
-                        if self.lngrsName != "lngrSlips" {
+                        if self.lngrsName != "lngrSlips" ||  self.lngrsName != "lngrBras" {
                             content.categoryIdentifier = lngrCategory.identifier
                         }
-                        
-                        
                         
                         let url = URL(string: MyLngr.img_url_sec+"?width=500")!
                         
