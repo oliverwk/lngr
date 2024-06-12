@@ -67,18 +67,16 @@ public class LingerieFetcher: ObservableObject {
                         content.userInfo["kleurFamilies"] = String(data: jsonData ?? Data(), encoding: String.Encoding.utf8)
                         self.logger.log("kleurfam \(MyLngr.kleurFam, privacy: .public)")
                         content.userInfo["ImageURLS"] = MyLngr.imageUrls
-                        
-                        if self.lngrsName != "lngrSlips" ||  self.lngrsName != "lngrBras" {
+
+//                        if self.lngrsName == "lngrSlips" {
                             content.categoryIdentifier = "LingeriePriceUpdate"
-                        }
+//                        }
                         
                         let hiddenPreviewsPlaceholder = "%u new lngr available for a lower price"
                         let summaryFormat = "%u more lngrs for a lower price"
                         let lngrCategory = UNNotificationCategory(identifier: "lngr", actions: [], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: hiddenPreviewsPlaceholder, categorySummaryFormat: summaryFormat, options: [])
                         UNUserNotificationCenter.current().setNotificationCategories([lngrCategory])
-                        if self.lngrsName != "lngrSlips" ||  self.lngrsName != "lngrBras" {
-                            content.categoryIdentifier = lngrCategory.identifier
-                        }
+
                         
                         let url = URL(string: MyLngr.img_url_sec+"?width=500")!
                         

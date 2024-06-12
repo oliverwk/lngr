@@ -106,6 +106,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                 i += 1
             }
             colorSelector?.selectedSegmentIndex = 0
+            if kleurFamilies?.count ?? 0 <= 1 {
+                colorSelector?.setTitle("", forSegmentAt: 1)
+                colorSelector?.isEnabled = false
+            }
         } else {
             logger.log("no kleurFamilies in userinfo")
         }

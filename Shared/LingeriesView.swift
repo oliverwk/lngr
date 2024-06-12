@@ -58,6 +58,13 @@ struct LingeriesView: View {
         }
     }
     
+    public func simpleSuccess() {
+#if os(iOS)
+        let genarator = UINotificationFeedbackGenerator()
+        genarator.notificationOccurred(.success)
+#endif
+    }
+    
     @State private var PresentedLngrs: [Lingerie] = []
 
     var body: some View {
@@ -74,6 +81,7 @@ struct LingeriesView: View {
                     HStack {
                         Spacer()
                         Button("Show") {
+                            simpleSuccess()
                             lngrs.ShowNotification(true)
                             print("Showing notifaction")
                         }.buttonStyle(.bordered)
