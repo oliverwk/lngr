@@ -159,7 +159,6 @@ struct LingerieView: View {
                         favoriteColor = self.lingerie.kleurFam[0]
                     }
                     .pickerStyle(.segmented)
-                    
                 }
 #if os(iOS)
                 .navigationBarTitle(lingerie.naam, displayMode: .inline)
@@ -175,12 +174,10 @@ struct LingerieView: View {
                     if hasMatchingSet && !isMatching {
                         ToolbarItem(placement: .navigation) {
                             NavigationLink(value: matchingLngr) {
-                                Button {
+                                Button("", systemImage: "ellipsis.circle") {
                                     #if os(macOS)
                                         ImageFetcher.changeList(lngrr: matchingLngr!)
                                     #endif
-                                } label: {
-                                    Image(systemName: "ellipsis.circle")
                                 }
                             }
                         }
@@ -257,15 +254,15 @@ public class ImageFetchers: ObservableObject {
         category: "ImageFetchers"
     )
     @Published var index: Int = 1
-#if os(iOS)
+#if targetEnvironment(simulator)
+    @Published var removeBackground: Bool = false
+#elseif os(iOS)
     @Published var removeBackground: Bool = true
 #endif
 #if os(macOS)
     @Published var removeBackground: Bool = false
 #endif
-#if targetEnvironment(simulator)
-    @Published var removeBackground: Bool = false
-#endif
+
     @Published var image: Image = Image("04k")
     @Published var TheImageUrls: [String]
     private var processingQueue = DispatchQueue(label: "ProcessingQueue")
