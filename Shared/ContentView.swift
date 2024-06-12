@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var selection = ""
     @State private var blurRadius: CGFloat = 50.0
     @State private var previousScene = ScenePhase.background
+    let iconSize = 20.0
     private var authContext = LAContext()
     let logger = Logger(
         subsystem: "nl.wittopkoning.lngr",
@@ -47,7 +48,11 @@ struct ContentView: View {
             LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", $selection)
                 .tabItem {
                     VStack {
-                        Image(systemName: "house")
+//                        Image(systemName: "house")
+                        Image("string.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: iconSize, height: iconSize)
                         Text("Slips")
                     }
                 }
@@ -55,7 +60,10 @@ struct ContentView: View {
             LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", "Bodys", $selection)
                 .tabItem {
                     VStack {
-                        Image(systemName: "rectangle.3.offgrid")
+//                        Image(systemName: "rectangle.3.offgrid")
+                            Image("body.empty")
+                                .resizable()
+                                .frame(width: iconSize, height: iconSize)
                         Text("Bodys")
                     }
                 }
@@ -63,7 +71,10 @@ struct ContentView: View {
             LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras", $selection)
                 .tabItem {
                     VStack {
-                        Image(systemName: "eyes")
+//                        Image(systemName: "rectangle.3.offgrid")
+                        Image("bra.fill")
+                            .resizable()
+                            .frame(width: iconSize, height: iconSize)
                         Text("Bras")
                     }
                 }
@@ -146,4 +157,3 @@ struct ContentView: View {
         }
     }
 }
-
