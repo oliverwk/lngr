@@ -45,13 +45,13 @@ struct LingeriesView: View {
                 logger.log("Getting extra lngr \(StopIndex + 20)")
                 let LNurl: String
                 if (lngrs.lngrsName == "lngrSlips") {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price"
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/onderbroeken?sortBy=price"
                 } else if (lngrs.lngrsName == "lngrBodys") {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bodys?sortBy=price"
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/bodys?sortBy=price"
                 } else if (lngrs.lngrsName == "lngrBras") {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/bhs?sortBy=price"
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/bhs?sortBy=price"
                 } else {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/lingerie--nachtkleding/onderbroeken?sortBy=price"
+                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/onderbroeken?sortBy=price"
                 }
                 lngrs.getExtraLngr(url: URL(string: LNurl)!)
             }
