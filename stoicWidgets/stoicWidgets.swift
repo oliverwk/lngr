@@ -1,19 +1,12 @@
 //
-//  stoicWidget.swift
-//  rivmWidgetExtension
+//  stoicWidgets.swift
+//  stoicWidgets
 //
-//  Created by Olivier Wittop Koning on 28/02/2022.
+//  Created by Maarten Wittop Koning on 14/06/2024.
 //
-
 
 import WidgetKit
 import SwiftUI
-import os
-
-let stoicLogger = Logger(
-    subsystem: "nl.wittopkoning.lngr.rivmWidget",
-    category: "rivmWidget"
-)
 
 struct Provider: TimelineProvider {
     let SampleQoute = ["Verba volant,scripta manent", "Woorden vervliegen, het geschrevene blijft"]
@@ -45,13 +38,14 @@ struct Provider: TimelineProvider {
     }
 }
 
+
 struct stoicEntry: TimelineEntry {
     let date: Date
     let rndint: Int
     let qoute: [String]
 }
 
-struct stoicEntryView : View {
+struct stoicWidgetsEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family: WidgetFamily
     
@@ -62,86 +56,66 @@ struct stoicEntryView : View {
                 .font(.headline)
                 .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
         case .accessoryRectangular:
-            if #available(iOSApplicationExtension 17.0, *) {
-                ZStack {
-                    AccessoryWidgetBackground()
-                        .cornerRadius(5)
-                    VStack {
-                        Text(entry.qoute[1])
-                            .font(.subheadline)
-                            .widgetAccentable()
-                        Text(entry.qoute[0])
-                            .font(.caption)
-                    }
+            ZStack {
+                VStack {
+                    Text(entry.qoute[0])
+                        .font(.caption)
+                        .widgetAccentable()
+                    Text(entry.qoute[1])
+                        .font(.caption2)
                 }
-                .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
-                .widgetAccentable()
-                .containerBackground(for: .widget) { }
-            } else {
-                // Fallback on earlier versions
             }
-            
+                .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
+                .containerBackground(for: .widget) { }
+        case .accessoryCorner:
+           Image(systemName: "doc.append")
+                .font(.title2)
+                .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
+        case .accessoryCircular:
+            Image(systemName: "doc.append")
+                .font(.title2)
+                .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
         default: // This is for the .systemSmall
-            if #available(iOSApplicationExtension 17.0, *) {
                 VStack {
                     AccessoryWidgetBackground()
                     Text("\(entry.qoute[0])")
                         .font(.subheadline)
-                        .fontWeight(.semibold)
                         .foregroundColor(Color.pink)
-                        .padding(4.0)
                         .widgetAccentable()
                     Text("\(entry.qoute[1])")
                         .font(.caption)
-                        .padding(3.0)
                 }
                 .widgetURL(URL(string: "stoic-widget://\(entry.rndint)")!)
                 .containerBackground(for: .widget) {
                     Color.white
                 }
-            } else {
-                // Fallback on earlier versions
-            }
         }
-        
     }
 }
-
-struct stoicWidget: Widget {
-    let kind: String = "stoicWidget"
-
-    #if os(watchOS)
-     let fams: [WidgetFamily] = [.accessoryRectangular, .accessoryInline]
-    #elseif os(iOS)
-    let fams: [WidgetFamily] = [.accessoryRectangular, .accessoryInline, .systemSmall]
-
-    #endif
+@main
+struct stoicWidgets: Widget {
+    let kind: String = "stoicWidgets"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if  #available(iOSApplicationExtension 17.0, *) {
-                stoicEntryView(entry: entry)
+            if #available(watchOS 10.0, *) {
+                stoicWidgetsEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
             } else {
-                stoicEntryView(entry: entry)
+                stoicWidgetsEntryView(entry: entry)
                     .padding()
                     .background()
             }
         }
-        .configurationDisplayName("stoic widget")
-        .description("A new latin qoute every hour")
-        .supportedFamilies(fams)
+        .configurationDisplayName("My Widget")
+        .description("This is an example widget.")
+        .supportedFamilies([.accessoryRectangular, .accessoryInline, .accessoryCorner, .accessoryCircular])
     }
 }
 
-struct stoicWidget_Previews: PreviewProvider {
-    static let SampleQoute = ["Verba volant,scripta manent", "Woorden vervliegen, het geschrevene blijft"]
-    
-    static var previews: some View {
-        Group {
-            stoicEntryView(entry: stoicEntry(date: Date(), rndint: 0, qoute: SampleQoute))
-                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-                .previewContext(WidgetPreviewContext(family: .accessoryInline))
-        }
-    }
+#Preview(as: .accessoryRectangular) {
+    stoicWidgets()
+} timeline: {
+    stoicEntry(date: .now, rndint: 0, qoute: ["Verba volant,scripta manent", "Woorden vervliegen, het geschrevene blijft"])
+    stoicEntry(date: .now, rndint: 1, qoute: ["Verba volant,scripta manent", "Woorden vervliegen, het geschrevene blijft"])
 }
-

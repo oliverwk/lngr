@@ -69,7 +69,7 @@ public class LockerManager: ObservableObject {
         
         URLSession.shared.dataTask(with: request) {(data, response, error) in
             do {
-                let TheStatus = try JSONDecoder().decode(LockerOpened.self, from: data!)
+                let TheStatus = try JSONDecoder().decode(LockerOpened.self, from: data ?? Data())
                 if TheStatus.status.isOk {
                     self.simpleSuccess()
                     for second in 0...20 {
