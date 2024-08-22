@@ -36,9 +36,9 @@ struct LingerieView: View {
     @State var i = 0
     
     var foregroundColourText: Color {
-        if colorScheme == .dark && favoriteColor.hex == "#000000" {
+        if colorScheme == .dark && (favoriteColor.hex == "#000000" || favoriteColor.naam.lowercased() == "zwart") {
             return Color.white
-        } else if colorScheme == .light && favoriteColor.hex.uppercased() == "#FFFFFF" {
+        } else if colorScheme == .light && (favoriteColor.hex.uppercased() == "#FFFFFF" || favoriteColor.naam.lowercased().contains("wit")) {
             return Color.black
         } else if ImageFetcher.removeBackground {
             var hue: CGFloat  = 2.4
@@ -77,7 +77,6 @@ struct LingerieView: View {
                         .clipped()
                         .cornerRadius(5)
                         .padding(10)
-                    
                         .onLongPressGesture {
                             self.logger.log("Long pressed!")
                             goToWebsite = true
@@ -100,6 +99,7 @@ struct LingerieView: View {
                                     ImageFetcher.load()
                                 }
                             }))
+                        
 #if os(macOS)
                         .environmentObject(ImageFetcher)
 #endif
@@ -113,7 +113,7 @@ struct LingerieView: View {
                                 //                                .foregroundColor(ImageFetcher.index == irs ? favoriteColor.colour.muted : favoriteColor.colour)
                                     .foregroundColor(ImageFetcher.index == irs ? foregroundColourText.muted : foregroundColourText)
                                     .cornerRadius(5)
-                                    .frame(width: 40, height: 30)
+                                    .frame(width: ImageFetcher.TheImageUrls.count >= 6 ? 35 : 40, height: 30)
                                     .onTapGesture {
                                         ImageFetcher.index = irs
                                         ImageFetcher.load()
@@ -209,11 +209,12 @@ struct LingerieView: View {
     }
     
     func getExtraImages(searchUrl: URL, imageFetcher: ImageFetchers)  {
-        let url = URL(string: "https://nkd_worker.wttp.workers.dev/getImagesColour/"+searchUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
+        let url = URL(string: "https://nkd_worker.wttp.workers.dev/getlngr/"+searchUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)!
         URLSession.shared.dataTask(with: url) {(data, response, error) in
             do {
                 if let d = data {
-                    let decodeImageUrls = try JSONDecoder().decode([String].self, from: d)
+                    let decodeLngrs = try JSONDecoder().decode(Lingerie.self, from: d)
+                    let decodeImageUrls = decodeLngrs.imageUrls.map { $0.replacingOccurrences(of: "?width=400", with: "") }
                     DispatchQueue.main.async {
                         imageFetcher.TheImageUrls = decodeImageUrls
                         ImageFetcher.index = 0
@@ -236,8 +237,13 @@ struct LingerieView: View {
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
-            return decodeSet
+            if String(decoding: data, as: UTF8.self) == "null" {
+                return nil
+            } else {
+                let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
+                return decodeSet
+            }
+           
         } catch {
             self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url.absoluteString, privacy: .public) Met de error: \(String(describing: error), privacy: .public)")
             return nil
@@ -299,6 +305,9 @@ public class ImageFetchers: ObservableObject {
                         if #available(iOS 17.0, *) {
                         #if os(iOS)
                             if self.removeBackground {
+                                withAnimation {
+                                    self.image = Image(uiImage: image)
+                                }
                                 guard let inputImage = CIImage(image: image) else {
                                     print("Failed to create CIImage")
                                     self.🚫()
