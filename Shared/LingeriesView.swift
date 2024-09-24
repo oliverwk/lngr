@@ -16,6 +16,9 @@ import os
 
 
 struct LingeriesView: View {
+    
+    @Environment(\.managedObjectContext) var moc
+    
     private let logger = Logger(
         subsystem: "nl.wittopkoning.lngr",
         category: "LingeriesView"
@@ -27,6 +30,8 @@ struct LingeriesView: View {
     @StateObject private var lngrs: LingerieFetcher
     @State var search = ""
     @State var searchedFailed = false
+    @State var PresentedLngrs: [Lingerie] = []
+    @Environment(\.isSearching) var isSearching
     
     init(_ Url: String, _ title: String, _ sel: Binding<String>) {
         self.Url = Url
@@ -37,23 +42,25 @@ struct LingeriesView: View {
     
     /// Check at the end of the list if extra lingerie should be loded
     func checkIfExtraLngr(TheLingerie: Lingerie) {
-        self.StopIndex = lngrs.lingeries.count - 1
-        if lngrs.lingeries.count > 0 {
-            let currentLngr = lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })
-            logger.log("Getting lngr: \(currentLngr == StopIndex, privacy: .public) index: \(currentLngr.debugDescription, privacy: .public) op \(lngrs.lingeries.count, privacy: .public), naam: \(TheLingerie.naam, privacy: .public)")
-            if currentLngr == StopIndex {
-                logger.log("Getting extra lngr \(StopIndex + 20)")
-                let LNurl: String
-                if (lngrs.lngrsName == "lngrSlips") {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/onderbroeken?sortBy=price"
-                } else if (lngrs.lngrsName == "lngrBodys") {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/bodys?sortBy=price"
-                } else if (lngrs.lngrsName == "lngrBras") {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/bhs?sortBy=price"
-                } else {
-                    LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/onderbroeken?sortBy=price"
+        if isSearching {
+            self.StopIndex = lngrs.lingeries.count - 1
+            if lngrs.lingeries.count > 0 {
+                let currentLngr = lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })
+                logger.log("Getting lngr: \(currentLngr == StopIndex, privacy: .public) index: \(currentLngr.debugDescription, privacy: .public) op \(lngrs.lingeries.count, privacy: .public), naam: \(TheLingerie.naam, privacy: .public)")
+                if currentLngr == StopIndex {
+                    logger.log("Getting extra lngr \(StopIndex + 20)")
+                    let LNurl: String
+                    if (lngrs.lngrsName == "lngrSlips") {
+                        LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/onderbroeken?sortBy=price"
+                    } else if (lngrs.lngrsName == "lngrBodys") {
+                        LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/bodys?sortBy=price"
+                    } else if (lngrs.lngrsName == "lngrBras") {
+                        LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/bhs?sortBy=price"
+                    } else {
+                        LNurl = "https://nkd_worker.wttp.workers.dev/?count=\(StopIndex + 20)&url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/onderbroeken?sortBy=price"
+                    }
+                    lngrs.getExtraLngr(url: URL(string: LNurl)!)
                 }
-                lngrs.getExtraLngr(url: URL(string: LNurl)!)
             }
         }
     }
@@ -65,8 +72,17 @@ struct LingeriesView: View {
 #endif
     }
     
-    @State private var PresentedLngrs: [Lingerie] = []
-
+    
+    func fetchImageData(url: URL) async -> Data? {
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            return data
+        } catch {
+            print("[ERROR] Er was geen data met het laden een url: \(url.absoluteString) Met de error: \(String(describing: error))")
+            return nil
+        }
+    }
+    
     var body: some View {
         NavigationStack(path: $PresentedLngrs) {
             ScrollView {
@@ -79,23 +95,63 @@ struct LingeriesView: View {
                     }
                 } else {
                     HStack {
-                        Spacer()
-                        Button("Show") {
-                            simpleSuccess()
-                            lngrs.ShowNotification(true)
-                            print("Showing notifaction")
-                        }.buttonStyle(.bordered)
-                        Spacer()
+                        NavigationLink(destination: {
+                            SearchView()
+                                .environment(\.managedObjectContext, moc)
+                            
+                        }, label: {
+                            Spacer()
+                            Text("Go to")
+                            Spacer()
+                        })
+                        HStack {
+                            Spacer()
+                            Button("Show") {
+                                simpleSuccess()
+                                lngrs.ShowNotification(true)
+                                print("Showing notifaction")
+                            }.buttonStyle(.bordered)
+                            Spacer()
+                        }
                     }
                     // TODO: Dit hier onder is voor macos
-//                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
-                        ForEach(lngrs.lingeries) { TheLingerie in
-                            NavigationLink(value: TheLingerie) {
-                                lngrRow(TheLingerie: TheLingerie).onAppear {
-                                    checkIfExtraLngr(TheLingerie: TheLingerie)
+                    //                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
+                    ForEach(lngrs.lingeries) { TheLingerie in
+                        NavigationLink(value: TheLingerie) {
+                            lngrRow(TheLingerie: TheLingerie).onAppear {
+                                checkIfExtraLngr(TheLingerie: TheLingerie)
+                            }.onAppear {
+                                if !UserDefaults.standard.bool(forKey: "AddedQoutesToSpotlight") {
+                                    lngrs.AddQoutesToSpotlight(qoutes: qoutes)
+                                    UserDefaults.standard.set(true, forKey: "AddedQoutesToSpotlight")
+                                    UserDefaults(suiteName: "lngrMeIndex")?.set(lngrs.lingeries.description, forKey: "\(title)IndexLngrs")
+                                }
+                                if false {
+                                    let TheLNGR = LNGR(context: moc)
+                                    TheLNGR.naam = TheLingerie.naam
+                                    TheLNGR.prijs = TheLingerie.prijs
+                                    TheLNGR.nkdid = TheLingerie.id
+                                    TheLNGR.url = TheLingerie.url
+                                    TheLNGR.kleur = TheLingerie.kleur
+                                    TheLNGR.kleurFamIds = TheLingerie.kleurFamIds
+                                    URLSession.shared.dataTask(with: TheLingerie.SecondImage) {(data, response, error) in
+                                        if data != nil || error == nil {
+                                            TheLNGR.image = data!
+                                            DispatchQueue.main.async {
+                                                do {
+                                                    try moc.save()
+                                                } catch {
+                                                    print("[ERROR] Er een error bij het opslaan naar core data met de error: \(String(describing: error)) en de lngr: \(TheLingerie.description), \(error.localizedDescription)")
+                                                }
+                                            }
+                                        } else {
+                                            print("was een error bij het ophalne van het iamge voor core data met de error: \(String(describing: error)) en de lngr: \(TheLingerie.description)")
+                                        }
+                                    }.resume()
                                 }
                             }
                         }
+                    }
                     //}
                     if !lngrs.IsLoading {
                         HStack(alignment: .center, spacing: 0, content: {
@@ -103,7 +159,7 @@ struct LingeriesView: View {
                         }).opacity(lngrs.IsLoading ? 1 : 0)
                     }
                 }
-        }
+            }
             .navigationDestination(for: Lingerie.self) { lngr in
                 LingerieView(lingerie: lngr)
             }
@@ -111,7 +167,8 @@ struct LingeriesView: View {
             .listStyle(.automatic)
             .refreshable {
                 lngrs.lingeries = []
-                lngrs.LoadLngrs(Url: lngrs.url, lngrsName: lngrs.lngrsName)
+                lngrs.LoadLngrs(url: lngrs.url, lngrsName: lngrs.lngrsName)
+                searchedFailed = false
             }
             .navigationTitle(title)
             .searchable(text: $search)
@@ -126,6 +183,15 @@ struct LingeriesView: View {
                     logger.log("Didn't find anything")
                     lngrs.lingeries = []
                     searchedFailed = true
+                    lngrs.LoadLngrs(url: "https://nkd_worker.wttp.workers.dev/?url=https://www.na-kd.com/nl/search-page?q=\(search)".url, lngrsName: lngrs.lngrsName)
+                    
+                    //                    lngrs.getExtraLngr(url: "https://nkd_worker.wttp.workers.dev/?url=https://www.na-kd.com/nl/search-page?q=\(search)".url)
+                    searchedFailed = false
+                }
+            }
+            .onChange(of: isSearching) { newValue in
+                if !newValue {
+                    print("Searching cancelled")
                 }
             }
         }
@@ -141,7 +207,14 @@ struct LingeriesView: View {
                     } else {
                         // item could not be found
                         // omdat hij niet gevonden is, is het waarschijnlijk een bh of body
+                        lngrs.lingeries = []
+                        let ids = "\(id.split(separator: "-")[1])-\(id.split(separator: "-")[2])-\(id.split(separator: "-")[3])"
+                        //                        "https://nkd_worker.wttp.workers.dev/getLngr?url=https://www.na-kd.com/nl/search-page?q=\(ids)".url
+                        let searchUrl = "https://www.na-kd.com/nl/search-page?q=\(ids)"
+                        lngrs.getExtraLngr(url: ("https://nkd_worker.wttp.workers.dev/getMatchingSet/"+searchUrl.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!).url, $PresentedLngrs)
+                        selection = lngrs.lngrsName.replacingOccurrences(of: "lngr", with: "")
                     }
+                    // 1-1100-008449-0212-004 -> 1100-008449-0212
                 }
             } else {
                 logger.critical("No CSSearchableItemActivityIdentifier found in spotlight")

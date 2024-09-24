@@ -31,6 +31,8 @@ struct LingerieView: View {
     @State private var hasMatchingSet = false
     @State var matchingLngr: Lingerie?
     
+    @State private var showExtraInformation = false
+    @State var extraInformation: Lingerie?
     @State var goToWebsite: Bool = false
     @State var favoriteColor = KleurFamilie(id: "01094830958049238", naam: "zwart", hex: "#000000", imgUrl: "about:blank", URLS: "about:blank")
     @State var i = 0
@@ -68,7 +70,7 @@ struct LingerieView: View {
                 .opacity(0.75)
             ScrollView {
                 VStack {
-//                        LingerieImageView(ImageUrls: lingerie.ImageURLS)
+                    //                        LingerieImageView(ImageUrls: lingerie.ImageURLS)
                     /* Dit hier boven is voor mac
                      dir hier onder is ios*/
                     ImageFetcher.image
@@ -99,7 +101,7 @@ struct LingerieView: View {
                                     ImageFetcher.load()
                                 }
                             }))
-                        
+                    
 #if os(macOS)
                         .environmentObject(ImageFetcher)
 #endif
@@ -120,9 +122,51 @@ struct LingerieView: View {
                                     }
                             }
                         }
+                        Button {
+                            showExtraInformation = true
+                        } label: {
+                            Image(systemName: "info.circle")
+                        }
+                        .padding(.horizontal, 10.0)
                     }
                     .padding(.bottom, 10.0)
                     .padding(.horizontal, 10.0)
+                    .popover(isPresented: $showExtraInformation) {
+                        VStack(alignment: .leading) {
+                            Text("Description: \n  \(extraInformation?.beschrijving ?? "Geen beschrijving gevonden")\n")
+                                .padding(.horizontal, 10.0)
+                            Text("Materials: \n  \(extraInformation?.materials ?? "Geen materials gevonden")\n")
+                                .padding(.horizontal, 10.0)
+                            Text("Sizes available:")
+                                .padding(.horizontal, 10.0)
+                            ForEach(extraInformation?.sizesAvailable ?? []) {
+                                Text("  \($0.sizeName) | \($0.stock)")
+                                    .foregroundColor($0.stockColor)
+                                    .padding(.horizontal, 10.0)
+                            }
+                        }
+                    }
+                    .onAppear {
+                        Task {
+                            let sq = lingerie.url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+                            let url = URL(string: "https://nkd_worker.wttp.workers.dev/getLngr/\(sq)")!
+                            
+                            do {
+                                let (data, _) = try await URLSession.shared.data(from: url)
+                                if String(decoding: data, as: UTF8.self) == "null" {
+                                } else {
+                                    let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
+                                    extraInformation = decodeSet
+                                }
+                            } catch {
+                                self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url.absoluteString, privacy: .public) Met de error: \(String(describing: error), privacy: .public)")
+                                
+                            }
+                        }
+                    }
+                   
+                    
+                  
                     
                     Picker("What is your favorite color?", selection: $favoriteColor) {
                         ForEach(lingerie.kleurFam, id: \.self) {
@@ -163,6 +207,7 @@ struct LingerieView: View {
 #if os(iOS)
                 .navigationBarTitle(lingerie.naam, displayMode: .inline)
 #endif
+                
                 .toolbar {
                     ToolbarItem(placement: .navigation) {
                         Button {
@@ -171,13 +216,14 @@ struct LingerieView: View {
                             Image(systemName: "rectangle.slash")
                         }
                     }
+                    
                     if hasMatchingSet && !isMatching {
                         ToolbarItem(placement: .navigation) {
                             NavigationLink(value: matchingLngr) {
                                 Button("", systemImage: "ellipsis.circle") {
-                                    #if os(macOS)
-                                        ImageFetcher.changeList(lngrr: matchingLngr!)
-                                    #endif
+#if os(macOS)
+                                    ImageFetcher.changeList(lngrr: matchingLngr!)
+#endif
                                 }
                             }
                         }
@@ -243,16 +289,15 @@ struct LingerieView: View {
                 let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
                 return decodeSet
             }
-           
+            
         } catch {
             self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url.absoluteString, privacy: .public) Met de error: \(String(describing: error), privacy: .public)")
             return nil
         }
     }
     
-    
-    
 }
+    
 
 public class ImageFetchers: ObservableObject {
     private let logger = Logger(
@@ -437,14 +482,7 @@ struct LingerieImageView: View {
 }
 
 struct LingerieView_Previews: PreviewProvider {
-    static var lngr = Lingerie(id: "1-1013-000820-0138", naam: "Klassiek Katoenen String", prijs: 69.95, img_url:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg", img_url_sec:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg",imageUrls: [
-        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg?width=640",
-        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
-        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
-        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
-    ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "Grijs", kleurFam: [
-        KleurFamilie(id: "1-1013-000820-0138", naam: "Grijs", hex: "#bfbcb4", imgUrl: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640", URLS: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"),
-        KleurFamilie(id: "1-1013-000820-0138", naam: "Zwart", hex: "#000000", imgUrl: "https://www.na-kd.com/resize/globalassets/cotton_thong-1013-000820-0002_01j.jpg?width=640", URLS: "https://www.na-kd.com/resize/globalassets/cotton_thong-1013-000820-0002_01j.jpg?width=640")])
+    static var lngr = Lingerie.TheLingerie
     static var previews: some View {
         NavigationStack {
             LingerieView(lingerie: lngr)

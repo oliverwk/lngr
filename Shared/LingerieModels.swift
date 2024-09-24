@@ -20,11 +20,23 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
     public var kleur: String
     public var kleurFam: Array<KleurFamilie>
     public var isMatching: Bool = false
+    public var beschrijving: String?
+    public var sizesAvailable: Array<SizeFamilie>?
+    public var materials: String?
     public var description: String {
-        return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url), kleur: \(kleur) }"
+        return "{ id: \(id), naam: \(naam), prijs: \(prijs), img_url: \(img_url), img_url_sec: \(img_url_sec), imageUrls: \(imageUrls), url: \(url), kleur: \(kleur) SecondImage: \(SecondImage), kleur: \(kleurFam), isMatching: \(isMatching)}"
     }
+    
     public var SecondImage: URL {
         return URL(string: img_url_sec) ?? URL(string: "about:blank")!
+    }
+    
+    public var kleurFamIds: [String] {
+        var ks = [String]()
+        for k in kleurFam {
+            ks.append(k.id)
+        }
+        return ks
     }
     
     public var ImageURLS: Array<URL> {
@@ -34,6 +46,12 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
         }
         return ImageUrlS
     }
+    static let TheLingerie = Lingerie(id: "1-1013-000820-0138", naam: "Klassiek Katoenen String", prijs: 69.95, img_url:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg", img_url_sec:"https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg", imageUrls: [
+        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_01j.jpg?width=640",
+        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_02i.jpg?width=640",
+        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_03h.jpg?width=640",
+        "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640"
+    ], url: "https://www.na-kd.com/nakd_classic_cotton_thong", kleur: "black", kleurFam: [KleurFamilie(id: "01094830958049238", naam: "Zwart", hex: "#000000", imgUrl: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640", URLS: "https://www.na-kd.com/resize/globalassets/nakd_classic_cotton_thong-1013-000820-0138_04k.jpg?width=640")], sizesAvailable: [SizeFamilie(id: "1-1013-000820-0138", sizeName: "XS", price: Prices(current: 69.69, original: 69.95), stock: "LOW")])
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -43,12 +61,51 @@ struct Lingerie: Codable, Identifiable, CustomStringConvertible, Hashable {
         case img_url_sec = "img_url_sec"
         case imageUrls = "imageUrls"
         case kleurFam = "kleurFamilies"
+        case beschrijving = "description"
+        case materials
+        case sizesAvailable
         case url
         case kleur
     }
 }
 
-/// Gives information about one color of a lingreie item
+
+
+/// Gives information about the one size of a lingerie item
+struct SizeFamilie: Codable, Identifiable, CustomStringConvertible, Hashable {
+    public var id: String
+    public var sizeName: String
+    public var price: Prices
+    public var stock: String
+    public var stockColor: Color {
+        switch stock {
+        case "high":
+            return Color.blue
+        case "low":
+            return Color.orange
+        case "":
+            return Color.red
+        default:
+            return Color.black
+        }
+    }
+    public var description: String {
+        return "{ id: \(id), sizeName: \(sizeName), price: \(price), stock: \(stock) }"
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "code"
+        case sizeName
+        case price
+        case stock
+    }
+}
+
+struct Prices: Codable, Hashable {
+    let current, original: Double
+}
+    
+/// Gives information about one color of a lingerie item
 struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, Equatable {
    
     public var id: String
@@ -66,7 +123,7 @@ struct KleurFamilie: Codable, Identifiable, CustomStringConvertible, Hashable, E
     
     
     public var description: String {
-        return "{ id: \(id), naam: \(naam), hex: \(hex), img_url: \(imgUrl), url: \(url)}"
+        return "{ id: \(id), naam: \(naam), hex: \(hex), img_url: \(imgUrl), url: \(url), colour: \(colour)}"
     }
     
     public var colour: Color {
@@ -104,6 +161,14 @@ extension Color {
         
     }
 }
+
+extension String {
+    public var url: URL {
+        return URL(string: self)!
+        
+    }
+}
+
 #if os(macOS)
 import Cocoa
 
