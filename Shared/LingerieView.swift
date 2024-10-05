@@ -148,24 +148,11 @@ struct LingerieView: View {
                     }
                     .onAppear {
                         Task {
-                            let sq = lingerie.url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-                            let url = URL(string: "https://nkd_worker.wttp.workers.dev/getLngr/\(sq)")!
-                            
-                            do {
-                                let (data, _) = try await URLSession.shared.data(from: url)
-                                if String(decoding: data, as: UTF8.self) == "null" {
-                                } else {
-                                    let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
-                                    extraInformation = decodeSet
-                                }
-                            } catch {
-                                self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url.absoluteString, privacy: .public) Met de error: \(String(describing: error), privacy: .public)")
-                                
-                            }
+                           let sq = lingerie.url.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                            let decodeSet = await GetExtraInfo(searchUrl: sq)
+                            self.extraInformation = decodeSet
                         }
                     }
-                   
-                    
                   
                     
                     Picker("What is your favorite color?", selection: $favoriteColor) {
@@ -195,6 +182,10 @@ struct LingerieView: View {
                             ImageFetcher.TheImageUrls = [newFavoriteColor.imgUrl]
                             ImageFetcher.index = 0
                             getExtraImages(searchUrl: newFavoriteColor.url, imageFetcher: ImageFetcher)
+                            Task {
+                                let decodeSet = await GetExtraInfo(searchUrl: newFavoriteColor.URLS)
+                                self.extraInformation = decodeSet
+                            }
                             logger.log("Dit een andere lngr, waar wij geen info over hebben, dus nieuwe aan het halen zijn")
                         }
                         ImageFetcher.load()
@@ -276,6 +267,24 @@ struct LingerieView: View {
                 }
             }
         }.resume()
+    }
+    
+    func GetExtraInfo(searchUrl: String) async -> Lingerie?  {
+            let url = URL(string: "https://nkd_worker.wttp.workers.dev/getLngr/\(searchUrl)")!
+            
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                if String(decoding: data, as: UTF8.self) == "null" {
+                    return nil
+                } else {
+                    let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
+                    return decodeSet
+                }
+            } catch {
+                self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url.absoluteString, privacy: .public) Met de error: \(String(describing: error), privacy: .public)")
+                return nil
+                
+            }
     }
     
     func getMatchingSet(searchUrl: URL) async -> Lingerie? {

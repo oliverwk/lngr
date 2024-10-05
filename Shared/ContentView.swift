@@ -19,6 +19,9 @@ struct ContentView: View {
     @State private var selection = ""
     @State private var blurRadius: CGFloat = 50.0
     @State private var previousScene = ScenePhase.background
+    #if os(iOS)
+    @StateObject private var coreDataStack = CoreDataStack()
+    #endif
     let iconSize = 20.0
     private var authContext = LAContext()
     let logger = Logger(
@@ -57,6 +60,9 @@ struct ContentView: View {
                     }
                 }
                 .tag("Slips")
+            #if os(iOS)
+                .environment(\.managedObjectContext, coreDataStack.container.viewContext)
+            #endif
             LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", "Bodys", $selection)
                 .tabItem {
                     VStack {
@@ -68,6 +74,9 @@ struct ContentView: View {
                     }
                 }
                 .tag("Bodys")
+            #if os(iOS)
+                .environment(\.managedObjectContext, coreDataStack.container.viewContext)
+            #endif
             LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras", $selection)
                 .tabItem {
                     VStack {
@@ -79,6 +88,9 @@ struct ContentView: View {
                     }
                 }
                 .tag("Bras")
+            #if os(iOS)
+                .environment(\.managedObjectContext, coreDataStack.container.viewContext)
+            #endif
         }.blur(radius: blurRadius)
             .onAppear {
                 // MARK: - spotlight and reset logic
@@ -88,9 +100,12 @@ struct ContentView: View {
                 if ResetEverything {
                     logger.critical("Reseting Spotlight and userdefaults")
                     let defaults = UserDefaults(suiteName: "nl.wittopkoning.lngr.lngrs")!
-                    for lngrsName in ["lngrSlips", "lngrBodys"] {
+                    for lngrsName in ["lngrSlips", "lngrsBras", "lngrBodys"] {
                         logger.critical("Deleting: \(lngrsName, privacy: .public)IdsIndexInSpotlight")
                         defaults.removeObject(forKey: "\(lngrsName)IdsIndexInSpotlight")
+                        UserDefaults.standard.removeObject(forKey: "\(lngrsName)IdsIndexInSpotlight")
+                        UserDefaults.standard.removeObject(forKey: "AddedQoutesToSpotlight")
+                        UserDefaults(suiteName: "lngrMeIndex")?.removeObject(forKey: "SlipsIndexLngrs")
                     }
                     deleteSpotlight()
                     UserDefaults.standard.set(false, forKey: "reset_spotlight")
