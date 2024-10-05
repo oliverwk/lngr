@@ -7,6 +7,7 @@
 
 import Foundation
 import CryptoKit
+import CoreData
 import SwiftUI
 import os
 
@@ -20,6 +21,7 @@ public class LingerieFetcher: ObservableObject {
     var OriginalLingeries = [Lingerie]()
     var lngrsName: String
     var url: URL
+    var moc: NSManagedObjectContext?
     /// Helper function to porvide user feedback when somthing has gone wrong
     public func simpleError() {
 #if os(iOS)
@@ -137,9 +139,14 @@ public class LingerieFetcher: ObservableObject {
 #endif
     }
     
+    internal func hi(_ decodedLngrs: Any,  _ presentedLngrs: Binding<[Lingerie]>? = nil) {
+       
+    }
+    
     /// Gets extra Lingerie from specifed url
     /// - Parameter url: Url to get the lngr from
-    public func getExtraLngr(url: URL) {
+    /// - Parameter presentedLngrs: Url to get the lngr from
+    func getExtraLngr(url: URL, _ presentedLngrs: Binding<[Lingerie]>? = nil) {
         if !IsLoading {
             self.IsLoading = true
             self.logger.log("Making request to get extra lngr: \(url.absoluteString, privacy: .public)")
@@ -147,12 +154,28 @@ public class LingerieFetcher: ObservableObject {
                 DispatchQueue.main.async { self.IsLoading = false }
                 do {
                     if let d = data {
-                        let decodedLngrs = try JSONDecoder().decode([Lingerie].self, from: d)
-                        self.simpleSuccess()
-                        DispatchQueue.main.async {
-                            self.lingeries.append(contentsOf: decodedLngrs)
-                            self.OriginalLingeries.append(contentsOf: decodedLngrs)
+                        if presentedLngrs == nil {
+                            let decodedLngrs = try JSONDecoder().decode([Lingerie].self, from: d)
+                            self.simpleSuccess()
+                            DispatchQueue.main.async {
+                                self.lingeries.append(contentsOf: decodedLngrs)
+                                self.OriginalLingeries.append(contentsOf: decodedLngrs)
+                                if presentedLngrs != nil && decodedLngrs.count > 0 {
+                                    presentedLngrs?.wrappedValue = [decodedLngrs[0]]
+                                }
+                            }
+                        } else {
+                            let decodedLngrs = try JSONDecoder().decode(Lingerie.self, from: d)
+                            self.simpleSuccess()
+                            DispatchQueue.main.async {
+                                self.lingeries.append(decodedLngrs)
+                                self.OriginalLingeries.append(decodedLngrs)
+                                if presentedLngrs != nil {
+                                    presentedLngrs?.wrappedValue = [decodedLngrs]
+                                }
+                            }
                         }
+                        
                     } else if let error = error {
                         self.simpleError()
                         if let response = response as? HTTPURLResponse {
@@ -162,7 +185,7 @@ public class LingerieFetcher: ObservableObject {
                         }
                     }
                 } catch let DecodingError.dataCorrupted(context) {
-                       print(context)
+                       print("context DecodingError met in getExtraLngr", context)
                    } catch let DecodingError.keyNotFound(key, context) {
                        print("Key '\(key)' not found:", context.debugDescription)
                        print("codingPath:", context.codingPath)
@@ -190,7 +213,7 @@ public class LingerieFetcher: ObservableObject {
         //If you want to reset everting from spotlight use: reset()
         self.lngrsName = lngrsName
         self.url = url
-        LoadLngrs(Url: url, lngrsName: lngrsName)
+        LoadLngrs(url: url, lngrsName: lngrsName)
     }
     
     /// Loads Lingreies from the provided url an adds it to the Published properties
@@ -200,7 +223,7 @@ public class LingerieFetcher: ObservableObject {
     /// - Parameters:
     ///   - Url: URL to load the data from
     ///   - lngrsName: What sort of lingerie is going to be loaded
-    func LoadLngrs(Url: URL, lngrsName: String) -> Void {
+    func LoadLngrs(url Url: URL, lngrsName: String) {
         self.logger.log("Making request to: \(Url.absoluteString, privacy: .public)")
         DispatchQueue.main.async { self.IsLoading = true }
         URLSession.shared.dataTask(with: Url) {(data, response, error) in
@@ -211,7 +234,10 @@ public class LingerieFetcher: ObservableObject {
                     DispatchQueue.main.async {
                         self.lingeries = decodedLists
                         self.OriginalLingeries = decodedLists
-                        self.ShowNotification()
+                        if self.lingeries.count > 0 {
+                            self.ShowNotification()
+
+                        }
                     }
                     
                     let lngrHash = "LngrHash\(Calendar.current.component(.day, from: Date()))-\(Calendar.current.component(.month, from: Date()))-\(lngrsName)"
