@@ -95,6 +95,7 @@ struct LingeriesView: View {
                     }
                 } else {
                     HStack {
+#if os(iOS)
                         NavigationLink(destination: {
                             SearchView()
                                 .environment(\.managedObjectContext, moc)
@@ -104,6 +105,7 @@ struct LingeriesView: View {
                             Text("Go to")
                             Spacer()
                         })
+                        #endif
                         HStack {
                             Spacer()
                             Button("Show") {
@@ -127,6 +129,7 @@ struct LingeriesView: View {
                                     UserDefaults(suiteName: "lngrMeIndex")?.set(lngrs.lingeries.description, forKey: "\(title)IndexLngrs")
                                 }
                                 if false {
+                                #if os(iOS)
                                     let TheLNGR = LNGR(context: moc)
                                     TheLNGR.naam = TheLingerie.naam
                                     TheLNGR.prijs = TheLingerie.prijs
@@ -148,6 +151,7 @@ struct LingeriesView: View {
                                             print("was een error bij het ophalne van het iamge voor core data met de error: \(String(describing: error)) en de lngr: \(TheLingerie.description)")
                                         }
                                     }.resume()
+                                #endif
                                 }
                             }
                         }
