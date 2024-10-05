@@ -52,7 +52,7 @@
 		<key>lngr (macOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>9</integer>
 		</dict>
 		<key>lngr widgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
@@ -67,7 +67,7 @@
 		<key>notificationui.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>7</integer>
 		</dict>
 		<key>rivmWidgetExtension copy.xcscheme_^#shared#^_</key>
 		<dict>
@@ -79,10 +79,10 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>rivmWidgetExtensionWatch.xcscheme_^#shared#^_</key>
+		<key>spotlightPreview.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>8</integer>
 		</dict>
 		<key>stoicWidgetsExtension.xcscheme_^#shared#^_</key>
 		<dict>
@@ -108,6 +108,11 @@
 			<true/>
 		</dict>
 		<key>E607CE542651190D0084F2E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6837C842C1CE91C00FBE8A4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
