@@ -36,6 +36,7 @@ struct LingerieView: View {
     @State var goToWebsite: Bool = false
     @State var favoriteColor = KleurFamilie(id: "01094830958049238", naam: "zwart", hex: "#000000", imgUrl: "about:blank", URLS: "about:blank")
     @State var i = 0
+    @State var screenHeight = 0.0
     
     var foregroundColourText: Color {
         if colorScheme == .dark && (favoriteColor.hex == "#000000" || favoriteColor.naam.lowercased() == "zwart") {
@@ -65,12 +66,18 @@ struct LingerieView: View {
     
     var body: some View {
         ZStack {
-            favoriteColor.colour
-                .ignoresSafeArea()
-                .opacity(0.75)
+            GeometryReader { geo in
+                favoriteColor.colour
+                    .ignoresSafeArea()
+                    .opacity(0.75)
+                    .onAppear {
+                        screenHeight = geo.size.height * 0.775
+                    }
+            }
+            
             ScrollView {
                 VStack {
-                    //                        LingerieImageView(ImageUrls: lingerie.ImageURLS)
+                    //LingerieImageView(ImageUrls: lingerie.ImageURLS)
                     /* Dit hier boven is voor mac
                      dir hier onder is ios*/
                     ImageFetcher.image
@@ -79,10 +86,12 @@ struct LingerieView: View {
                         .clipped()
                         .cornerRadius(5)
                         .padding(10)
+                        .frame(maxHeight: screenHeight)
                         .onLongPressGesture {
                             self.logger.log("Long pressed!")
                             goToWebsite = true
                         }
+                    
                         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                             .onEnded({ value in
                                 if value.translation.width < 0 {
@@ -105,63 +114,69 @@ struct LingerieView: View {
 #if os(macOS)
                         .environmentObject(ImageFetcher)
 #endif
-                    HStack {
-                        Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
-                            .foregroundColor(foregroundColourText)
-                        ForEach(0...(ImageFetcher.TheImageUrls.count-1), id: \.self) { irs in
-                            ZStack {
-                                // TODO: zorg er voor dat dit images preview worden
-                                Rectangle()
-                                //                                .foregroundColor(ImageFetcher.index == irs ? favoriteColor.colour.muted : favoriteColor.colour)
-                                    .foregroundColor(ImageFetcher.index == irs ? foregroundColourText.muted : foregroundColourText)
-                                    .cornerRadius(5)
-                                    .frame(width: ImageFetcher.TheImageUrls.count >= 6 ? 35 : 40, height: 30)
-                                    .onTapGesture {
-                                        ImageFetcher.index = irs
-                                        ImageFetcher.load()
-                                    }
+                        HStack {
+                            Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
+                                .foregroundColor(foregroundColourText)
+                            ForEach(0...(ImageFetcher.TheImageUrls.count-1), id: \.self) { irs in
+                                ZStack {
+                                    // TODO: zorg er voor dat dit images preview worden
+                                    Rectangle()
+                                    //                                .foregroundColor(ImageFetcher.index == irs ? favoriteColor.colour.muted : favoriteColor.colour)
+                                        .foregroundColor(ImageFetcher.index == irs ? foregroundColourText.muted : foregroundColourText)
+                                        .cornerRadius(5)
+                                        .frame(width: ImageFetcher.TheImageUrls.count >= 6 ? 35 : 40, height: 30)
+                                        .onTapGesture {
+                                            ImageFetcher.index = irs
+                                            ImageFetcher.load()
+                                        }
+                                }
                             }
+                            Button {
+                                showExtraInformation = true
+                            } label: {
+                                Image(systemName: "info.circle")
+                            }
+                            .padding(.horizontal, 10.0)
                         }
-                        Button {
-                            showExtraInformation = true
-                        } label: {
-                            Image(systemName: "info.circle")
-                        }
+                        .padding(.bottom, 10.0)
                         .padding(.horizontal, 10.0)
-                    }
-                    .padding(.bottom, 10.0)
-                    .padding(.horizontal, 10.0)
-                    .popover(isPresented: $showExtraInformation) {
-                        VStack(alignment: .leading) {
-                            Text("Description: \n  \(extraInformation?.beschrijving ?? "Geen beschrijving gevonden")\n")
-                                .padding(.horizontal, 10.0)
-                            Text("Materials: \n  \(extraInformation?.materials ?? "Geen materials gevonden")\n")
-                                .padding(.horizontal, 10.0)
-                            Text("Sizes available:")
-                                .padding(.horizontal, 10.0)
-                            ForEach(extraInformation?.sizesAvailable ?? []) {
-                                Text("  \($0.sizeName) | \($0.stock)")
-                                    .foregroundColor($0.stockColor)
+                        .popover(isPresented: $showExtraInformation) {
+                            VStack(alignment: .leading) {
+                                Text("Description: \n  \(extraInformation?.beschrijving ?? "Geen beschrijving gevonden")\n")
                                     .padding(.horizontal, 10.0)
+                                Text("Materials: \n  \(extraInformation?.materials ?? "Geen materials gevonden")\n")
+                                    .padding(.horizontal, 10.0)
+                                Text("Sizes available:")
+                                    .padding(.horizontal, 10.0)
+                                ForEach(extraInformation?.sizesAvailable ?? []) {
+                                    Text("  \($0.sizeName) | \($0.stock)")
+                                        .foregroundColor($0.stockColor)
+                                        .padding(.horizontal, 10.0)
+                                }
                             }
                         }
-                    }
-                    .onAppear {
-                        Task {
-                           let sq = lingerie.url.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-                            let decodeSet = await GetExtraInfo(searchUrl: sq)
-                            self.extraInformation = decodeSet
+                        .onAppear {
+                            Task {
+                                let sq = lingerie.url.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                                let decodeSet = await GetExtraInfo(searchUrl: sq)
+                                self.extraInformation = decodeSet
+                            }
                         }
-                    }
-                  
-                    
-                    Picker("What is your favorite color?", selection: $favoriteColor) {
-                        ForEach(lingerie.kleurFam, id: \.self) {
-                            Text($0.naam)
-                                .foregroundColor($0.colour)
+                        
+                        
+                        
+                        Picker("What is your favorite color?", selection: $favoriteColor) {
+                            ForEach(lingerie.kleurFam, id: \.self) {
+                                Text($0.naam)
+                                    .foregroundColor($0.colour)
+                            }
                         }
-                    }
                     
+#if os(macOS)
+                    .padding(.horizontal, 25)
+#endif
+                
+            }
                     .onChange(of: favoriteColor) { newFavoriteColor in
                         logger.log("favoriteColor \(favoriteColor, privacy: .public)")
                         logger.log("\(favoriteColor.id, privacy: .public) == \(lingerie.id.split(separator: "-")[...3].joined(separator: "-"), privacy: .public)")
@@ -194,7 +209,7 @@ struct LingerieView: View {
                         favoriteColor = self.lingerie.kleurFam[0]
                     }
                     .pickerStyle(.segmented)
-                }
+                
 #if os(iOS)
                 .navigationBarTitle(lingerie.naam, displayMode: .inline)
 #endif
@@ -240,7 +255,6 @@ struct LingerieView: View {
                         
                     }
                 }
-                
             }
         }
     }
@@ -270,21 +284,21 @@ struct LingerieView: View {
     }
     
     func GetExtraInfo(searchUrl: String) async -> Lingerie?  {
-            let url = URL(string: "https://nkd_worker.wttp.workers.dev/getLngr/\(searchUrl)")!
-            
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                if String(decoding: data, as: UTF8.self) == "null" {
-                    return nil
-                } else {
-                    let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
-                    return decodeSet
-                }
-            } catch {
-                self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url.absoluteString, privacy: .public) Met de error: \(String(describing: error), privacy: .public)")
+        let url = URL(string: "https://nkd_worker.wttp.workers.dev/getLngr/\(searchUrl)")!
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if String(decoding: data, as: UTF8.self) == "null" {
                 return nil
-                
+            } else {
+                let decodeSet = try JSONDecoder().decode(Lingerie.self, from: data)
+                return decodeSet
             }
+        } catch {
+            self.logger.fault("[ERROR] Er was geen data met het laden een url: \(url.absoluteString, privacy: .public) Met de error: \(String(describing: error), privacy: .public)")
+            return nil
+            
+        }
     }
     
     func getMatchingSet(searchUrl: URL) async -> Lingerie? {
@@ -306,7 +320,7 @@ struct LingerieView: View {
     }
     
 }
-    
+
 
 public class ImageFetchers: ObservableObject {
     private let logger = Logger(
@@ -322,7 +336,7 @@ public class ImageFetchers: ObservableObject {
 #if os(macOS)
     @Published var removeBackground: Bool = false
 #endif
-
+    
     @Published var image: Image = Image("04k")
     @Published var TheImageUrls: [String]
     private var processingQueue = DispatchQueue(label: "ProcessingQueue")
@@ -357,7 +371,12 @@ public class ImageFetchers: ObservableObject {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         if #available(iOS 17.0, *) {
-                        #if os(iOS)
+#if os(macOS)
+                                let nnsimage = NSImage(data: data)
+                                self.image = Image(nsImage: nnsimage!)
+#endif
+
+#if os(iOS)
                             if self.removeBackground {
                                 withAnimation {
                                     self.image = Image(uiImage: image)
@@ -390,13 +409,13 @@ public class ImageFetchers: ObservableObject {
                             }
 #endif
                         } else {
+
                             withAnimation {
 #if os(iOS)
                                 self.image = Image(uiImage: image)
 #endif
 #if os(macOS)
-                                
-                                let nnsimage =  NSImage(named: "01j")//NSImage(data: data)
+                                let nnsimage = NSImage(data: data)
                                 self.image = Image(nsImage: nnsimage!)
 #endif
                             }

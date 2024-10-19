@@ -32,6 +32,7 @@ struct LingeriesView: View {
     @State var searchedFailed = false
     @State var PresentedLngrs: [Lingerie] = []
     @Environment(\.isSearching) var isSearching
+    let cols = [GridItem(.adaptive(minimum: 325))]
     
     init(_ Url: String, _ title: String, _ sel: Binding<String>) {
         self.Url = Url
@@ -116,47 +117,46 @@ struct LingeriesView: View {
                             Spacer()
                         }
                     }
-                    // TODO: Dit hier onder is voor macos
-                    //                    LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible())], spacing: 20) {
-                    ForEach(lngrs.lingeries) { TheLingerie in
-                        NavigationLink(value: TheLingerie) {
-                            lngrRow(TheLingerie: TheLingerie).onAppear {
-                                checkIfExtraLngr(TheLingerie: TheLingerie)
-                            }.onAppear {
-                                if !UserDefaults.standard.bool(forKey: "AddedQoutesToSpotlight") {
-                                    lngrs.AddQoutesToSpotlight(qoutes: qoutes)
-                                    UserDefaults.standard.set(true, forKey: "AddedQoutesToSpotlight")
-                                    UserDefaults(suiteName: "lngrMeIndex")?.set(lngrs.lingeries.description, forKey: "\(title)IndexLngrs")
-                                }
-                                if false {
-                                #if os(iOS)
-                                    let TheLNGR = LNGR(context: moc)
-                                    TheLNGR.naam = TheLingerie.naam
-                                    TheLNGR.prijs = TheLingerie.prijs
-                                    TheLNGR.nkdid = TheLingerie.id
-                                    TheLNGR.url = TheLingerie.url
-                                    TheLNGR.kleur = TheLingerie.kleur
-                                    TheLNGR.kleurFamIds = TheLingerie.kleurFamIds
-                                    URLSession.shared.dataTask(with: TheLingerie.SecondImage) {(data, response, error) in
-                                        if data != nil || error == nil {
-                                            TheLNGR.image = data!
-                                            DispatchQueue.main.async {
-                                                do {
-                                                    try moc.save()
-                                                } catch {
-                                                    print("[ERROR] Er een error bij het opslaan naar core data met de error: \(String(describing: error)) en de lngr: \(TheLingerie.description), \(error.localizedDescription)")
+                    LazyVGrid(columns: cols, spacing: 20) {
+                        ForEach(lngrs.lingeries) { TheLingerie in
+                            NavigationLink(value: TheLingerie) {
+                                lngrRow(TheLingerie: TheLingerie).onAppear {
+                                    checkIfExtraLngr(TheLingerie: TheLingerie)
+                                }.onAppear {
+                                    if !UserDefaults.standard.bool(forKey: "AddedQoutesToSpotlight") {
+                                        lngrs.AddQoutesToSpotlight(qoutes: qoutes)
+                                        UserDefaults.standard.set(true, forKey: "AddedQoutesToSpotlight")
+                                        UserDefaults(suiteName: "lngrMeIndex")?.set(lngrs.lingeries.description, forKey: "\(title)IndexLngrs")
+                                    }
+                                    if false {
+#if os(iOS)
+                                        let TheLNGR = LNGR(context: moc)
+                                        TheLNGR.naam = TheLingerie.naam
+                                        TheLNGR.prijs = TheLingerie.prijs
+                                        TheLNGR.nkdid = TheLingerie.id
+                                        TheLNGR.url = TheLingerie.url
+                                        TheLNGR.kleur = TheLingerie.kleur
+                                        TheLNGR.kleurFamIds = TheLingerie.kleurFamIds
+                                        URLSession.shared.dataTask(with: TheLingerie.SecondImage) {(data, response, error) in
+                                            if data != nil || error == nil {
+                                                TheLNGR.image = data!
+                                                DispatchQueue.main.async {
+                                                    do {
+                                                        try moc.save()
+                                                    } catch {
+                                                        print("[ERROR] Er een error bij het opslaan naar core data met de error: \(String(describing: error)) en de lngr: \(TheLingerie.description), \(error.localizedDescription)")
+                                                    }
                                                 }
+                                            } else {
+                                                print("was een error bij het ophalne van het iamge voor core data met de error: \(String(describing: error)) en de lngr: \(TheLingerie.description)")
                                             }
-                                        } else {
-                                            print("was een error bij het ophalne van het iamge voor core data met de error: \(String(describing: error)) en de lngr: \(TheLingerie.description)")
-                                        }
-                                    }.resume()
-                                #endif
+                                        }.resume()
+#endif
+                                    }
                                 }
                             }
                         }
                     }
-                    //}
                     if !lngrs.IsLoading {
                         HStack(alignment: .center, spacing: 0, content: {
                             ProgressView()
