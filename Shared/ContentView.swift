@@ -48,7 +48,7 @@ struct ContentView: View {
         }
       
         TabView(selection: $selection) {
-            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", $selection)
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", "onderbroeken", $selection)
                 .tabItem {
                     VStack {
 //                        Image(systemName: "house")
@@ -63,7 +63,7 @@ struct ContentView: View {
             #if os(iOS)
                 .environment(\.managedObjectContext, coreDataStack.container.viewContext)
             #endif
-            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", "Bodys", $selection)
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bodys.json", "Bodys" , "bodies", $selection)
                 .tabItem {
                     VStack {
 //                        Image(systemName: "rectangle.3.offgrid")
@@ -77,7 +77,7 @@ struct ContentView: View {
             #if os(iOS)
                 .environment(\.managedObjectContext, coreDataStack.container.viewContext)
             #endif
-            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras", $selection)
+            LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/bras.json", "Bras", "bhs", $selection)
                 .tabItem {
                     VStack {
 //                        Image(systemName: "rectangle.3.offgrid")

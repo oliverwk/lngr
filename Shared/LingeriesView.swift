@@ -25,25 +25,28 @@ struct LingeriesView: View {
     )
     let Url: String
     var title: String
+    let nakdname: String
     @Binding var selection: String
     @State private var StopIndex = 34
     @StateObject private var lngrs: LingerieFetcher
     @State var search = ""
     @State var searchedFailed = false
     @State var PresentedLngrs: [Lingerie] = []
+    @State var selectedSize = 0
     @Environment(\.isSearching) var isSearching
     let cols = [GridItem(.adaptive(minimum: 325))]
     
-    init(_ Url: String, _ title: String, _ sel: Binding<String>) {
+    init(_ Url: String, _ title: String, _ nakdname: String, _ sel: Binding<String>) {
         self.Url = Url
         self.title = title
+        self.nakdname = nakdname
         self._selection = sel
         _lngrs = StateObject(wrappedValue: LingerieFetcher(URL(string: Url)!, "lngr\(title)"))
     }
     
     /// Check at the end of the list if extra lingerie should be loded
     func checkIfExtraLngr(TheLingerie: Lingerie) {
-        if isSearching {
+        if !isSearching {
             self.StopIndex = lngrs.lingeries.count - 1
             if lngrs.lingeries.count > 0 {
                 let currentLngr = lngrs.lingeries.firstIndex(where: { $0.id == TheLingerie.id })
@@ -106,7 +109,13 @@ struct LingeriesView: View {
                             Text("Go to")
                             Spacer()
                         })
-                        #endif
+#endif
+                        Picker("Select a size filter", selection: $selectedSize) {
+                            ForEach([0, 32,34,36,38,40,42,44], id: \.self) {
+                                Text("EU\($0)")
+                            }
+                        }
+                        .pickerStyle(.menu)
                         HStack {
                             Spacer()
                             Button("Show") {
@@ -176,6 +185,11 @@ struct LingeriesView: View {
             }
             .navigationTitle(title)
             .searchable(text: $search)
+            .onChange(of: selectedSize) { newvalue in
+                lngrs.lingeries = []
+                logger.log("Getting url with size: \("https://nkd_worker.wttp.workers.dev/?url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price", privacy: .public)")
+                lngrs.getExtraLngr(url: "https://nkd_worker.wttp.workers.dev/?url=https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price".url)
+            }
             .onSubmit(of: .search) {
                 logger.critical("Searching: \(search)")
                 let searchedLngrs = lngrs.OriginalLingeries.filter { $0.naam.uppercased().contains(self.search.uppercased()) }
@@ -229,7 +243,7 @@ struct LingeriesView: View {
 
 struct LingeriesView_Previews: PreviewProvider {
     static var previews: some View {
-        LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", .constant("Slips"))
+        LingeriesView("https://raw.githubusercontent.com/oliverwk/wttpknng/master/Lingerie.json", "Slips", "onderbroek",.constant("Slips"))
             .previewInterfaceOrientation(.portrait)
             .previewDevice("iPhone 12")
     }
