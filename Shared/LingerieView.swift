@@ -121,10 +121,10 @@ struct LingerieView: View {
                                 ZStack {
                                     // TODO: zorg er voor dat dit images preview worden
                                     Rectangle()
-                                    //                                .foregroundColor(ImageFetcher.index == irs ? favoriteColor.colour.muted : favoriteColor.colour)
+                                    //       .foregroundColor(ImageFetcher.index == irs ? favoriteColor.colour.muted : favoriteColor.colour)
                                         .foregroundColor(ImageFetcher.index == irs ? foregroundColourText.muted : foregroundColourText)
                                         .cornerRadius(5)
-                                        .frame(width: ImageFetcher.TheImageUrls.count >= 6 ? 35 : 40, height: 30)
+                                        .frame(width: ImageFetcher.TheImageUrls.count >= 6 ? 30 : 40, height: 30)
                                         .onTapGesture {
                                             ImageFetcher.index = irs
                                             ImageFetcher.load()
