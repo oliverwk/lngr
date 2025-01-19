@@ -88,6 +88,9 @@ struct LingeriesView: View {
                             
                         }, label: {
                             Text("Go to       ")
+                                .padding(12)
+                                .background(.thickMaterial)
+                                .cornerRadius(10)
                         })
 #endif
                         Picker("Select a size filter", selection: $selectedSize) {
@@ -95,12 +98,22 @@ struct LingeriesView: View {
                                 Text("EU\($0)")
                             }
                         }.pickerStyle(.menu)
+                            .padding(5)
+                            .background(.thickMaterial)
+                            .cornerRadius(10)
+                        
                         Picker("Select a colour filter", selection: $selectedColour) {
                             ForEach(["colors","Black","Red","Green","Blue","Grey","Brown","Pink","White","Beige","Leopard","Offwhite","Burgundy","Yellow","Purple","Multicolor","Navy"], id: \.self) {
                                 Text("\($0)")
                             }
                         }.pickerStyle(.menu)
+                            .padding(5)
+                            .background(.thickMaterial)
+                            .cornerRadius(10)
                     }
+                    #if os(macOS)
+                    .padding(10)
+                    #endif
                     LazyVGrid(columns: cols, spacing: 20) {
                         ForEach(lngrs.lingeries) { TheLingerie in
                             NavigationLink(value: TheLingerie) {
@@ -163,8 +176,12 @@ struct LingeriesView: View {
             .onChange(of: selectedSize) { newvalue in
                 lngrs.lingeries = []
                 var urlstr: String
-                if selectedColour == "colors" {
+                if selectedColour == "colors" && selectedSize != 0 {
                      urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price"
+                } else if selectedSize == 0 && selectedColour != "colors" {
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_color_families=\(selectedColour)&sortBy=price"
+                } else if selectedColour == "colors" && selectedSize == 0 {
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?sortBy=price"
                 } else {
                     urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&p_color_families=\(selectedColour)&sortBy=price"
                 }
@@ -175,8 +192,12 @@ struct LingeriesView: View {
             .onChange(of: selectedColour) { newvalue in
                 lngrs.lingeries = []
                 
-                if selectedSize == 0 {
+                if selectedSize == 0 && selectedColour != "colors" {
                     urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_color_families=\(selectedColour)&sortBy=price"
+                } else if selectedColour == "colors" && selectedSize != 0 {
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price"
+                } else if selectedColour == "colors" && selectedSize == 0 {
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?sortBy=price"
                 } else {
                     urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&p_color_families=\(selectedColour)&sortBy=price"
                 }
