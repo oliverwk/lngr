@@ -42,7 +42,7 @@ struct LingeriesView: View {
         self.Url = Url
         self.title = title
         self.nakdname = nakdname
-        self.urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(nakdname)?sortBy=price"
+        self.urlstr = "https://www.na-kd.com/nl/category/lingerie/\(nakdname)?sortBy=price"
         self._selection = sel
         _lngrs = StateObject(wrappedValue: LingerieFetcher(URL(string: Url)!, "lngr\(title)"))
     }
@@ -177,13 +177,13 @@ struct LingeriesView: View {
                 lngrs.lingeries = []
                 var urlstr: String
                 if selectedColour == "colors" && selectedSize != 0 {
-                     urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price"
+                     urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price"
                 } else if selectedSize == 0 && selectedColour != "colors" {
-                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_color_families=\(selectedColour)&sortBy=price"
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?p_color_families=\(selectedColour)&sortBy=price"
                 } else if selectedColour == "colors" && selectedSize == 0 {
-                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?sortBy=price"
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?sortBy=price"
                 } else {
-                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&p_color_families=\(selectedColour)&sortBy=price"
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&p_color_families=\(selectedColour)&sortBy=price"
                 }
                 
                 logger.log("Getting url with size: \(("https://nkd_worker.wttp.workers.dev/?url="+urlstr), privacy: .public)")
@@ -193,13 +193,13 @@ struct LingeriesView: View {
                 lngrs.lingeries = []
                 
                 if selectedSize == 0 && selectedColour != "colors" {
-                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_color_families=\(selectedColour)&sortBy=price"
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?p_color_families=\(selectedColour)&sortBy=price"
                 } else if selectedColour == "colors" && selectedSize != 0 {
-                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price"
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&sortBy=price"
                 } else if selectedColour == "colors" && selectedSize == 0 {
-                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?sortBy=price"
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?sortBy=price"
                 } else {
-                    urlstr = "https://www.na-kd.com/nl/category/lingerie--nachtkleding/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&p_color_families=\(selectedColour)&sortBy=price"
+                    urlstr = "https://www.na-kd.com/nl/category/lingerie/\(self.nakdname)?p_size_clothes=p_size_clothes%3A%3AEU+\(selectedSize)&p_color_families=\(selectedColour)&sortBy=price"
                 }
                 
                 logger.log("Getting url with size: \(("https://nkd_worker.wttp.workers.dev/?url="+urlstr), privacy: .public)")
