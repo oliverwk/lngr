@@ -115,6 +115,14 @@ struct LingerieView: View {
                         .environmentObject(ImageFetcher)
 #endif
                         HStack {
+                            Button("") {
+                                ImageIndex += 1
+                                ImageFetcher.index += 1
+                                ImageFetcher.load()
+                            }
+                            .keyboardShortcut(KeyEquivalent.rightArrow, modifiers: [])
+                            .hidden()
+                            
                             Text("\(locale.currencySymbol ?? "") \(String(lingerie.prijs))")
                                 .foregroundColor(foregroundColourText)
                             ForEach(0...(ImageFetcher.TheImageUrls.count-1), id: \.self) { irs in
@@ -131,12 +139,22 @@ struct LingerieView: View {
                                         }
                                 }
                             }
+                            
                             Button {
                                 showExtraInformation = true
                             } label: {
                                 Image(systemName: "info.circle")
                             }
                             .padding(.horizontal, 10.0)
+                           
+                            Button("") {
+                                ImageIndex -= 1
+                                ImageFetcher.index -= 1
+                                ImageFetcher.load()
+                            }
+                            .keyboardShortcut(KeyEquivalent.leftArrow, modifiers: [])
+                            .hidden()
+                            
                         }
                         .padding(.bottom, 10.0)
                         .padding(.horizontal, 10.0)
